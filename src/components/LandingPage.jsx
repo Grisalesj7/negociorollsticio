@@ -27,7 +27,7 @@ const LandingPage = () => {
 
   const sendToWhatsApp = () => {
     const text = `Hola, quiero pedir: ${cart.map(i => i.name).join(", ")}. Total: ${cart.length} productos.`;
-    window.open(`https://wa.me/573000000000?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/573246727621?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const isShopOpen = new Date().getHours() >= 17 && new Date().getHours() < 23;
@@ -45,7 +45,7 @@ const LandingPage = () => {
         nav a { margin: 0 20px; text-decoration: none; color: #2b3a3c; font-weight: bold; cursor: pointer; }
         .hero-container { position: relative; width: 90%; max-width: 800px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         .hero-img { width: 100%; display: block; object-fit: cover; }
-        .promo-tag { position: absolute; top: 20px; right: 20px; background: #e95d53; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .promo-tag { positi on: absolute; top: 20px; right: 20px; background: #e95d53; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .hero-content { position: absolute; bottom: 30px; width: 100%; text-align: center; color: white; }
         .hero-title { font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
         .dots { margin-top: 10px; color: rgba(255,255,255,0.7); letter-spacing: 8px; }

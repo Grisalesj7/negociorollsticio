@@ -1,24 +1,118 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import Cart from './Cart';
 
 const LandingPage = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [message, setMessage] = useState(null);
   const [cart, setCart] = useState([]); 
-  const [showCart, setShowCart] = useState(false); 
-  const [showForm, setShowForm] = useState(false);
-  const [userData, setUserData] = useState({ name: '', address: '' });
+  const [userData, setUserData] = useState({ name: '', phone: '', address: '', notes: '' }); 
 
-  // Precios convertidos a números para poder sumar el total
-  const sushiItems = [
-    { id: 1, name: "Kansas Roll", price: 25000, image: "/img/Imagen2.jpg" },
-    { id: 2, name: "California Roll", price: 18000, image: "/img/Imagen2.jpg" },
-    { id: 3, name: "Dragon Roll", price: 28000, image: "/img/Imagen2.jpg" },
-    { id: 4, name: "Philadelphia Roll", price: 20000, image: "/img/Imagen2.jpg" }
+  const cartSectionRef = useRef(null);
+
+  const handleCartClick = () => {
+    if (cartSectionRef.current) {
+      cartSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const menuCategorias = [
+    {
+      titulo: "Tablas Variadas",
+      items: [
+        { id: 1, name: "Nigiris de salmón rosado", price: 5000, image: "/img/Niguiris.png", ingredientes: "4 unidades de niguiris de arroz con topping de salmón rosado fresco." },
+        { id: 2, name: "Sashimis de salmón rosado", price: 9000, image: "/img/Sashimis.png", ingredientes: "4 unidades de rodajas únicas de salmón rosado" },
+        { id: 3, name: "Geishas de salmón rosado", price: 7000, image: "/img/Geishas.png", ingredientes: "4 unidades rellenas de queso crema y palta" },
+        { id: 4, name: "Yagi 15 piezas", price: 13000, image: "/img/Yagi.png", ingredientes: "5 Philadelphia, 5 Osaka, 5 California. Incluye 2 sobres de soja, wasabi/jebjibre y un par de palitos" },
+        { id: 5, name: "Oke 20 piezas", price: 19000, image: "/img/Oke.png", ingredientes: "5 Philadelphia, 5 Osaka, 5 California, 5 Niguiris de salmón. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
+        { id: 6, name: "Nara 30 piezas", price: 0, image: "/img/Nara.JPG", ingredientes: "10 Philadelphia, 10 Osaka, 10 California. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
+        { id: 7, name: "Moly Premium 30 piezas", price: 30000, image: "/img/Moly.png", ingredientes: "10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
+        { id: 8, name: "Dundee 40 piezas", price: 0, image: "/img/Dundee.png", ingredientes: "10 Miami, 10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
+        { id: 9, name: "Star 60 piezas", price: 65000, image: "/img/", ingredientes: "10 Kansas Crunch, 10 New York, 10 Islandia, 10 Osaka, 10 MakiCalifornia, 4 Niguiris, 3 Sashimis, 3 Geishas" },
+        { id: 10, name: "Aruba 15 piezas", price: 15000, image: "/img/Aruba.png", ingredientes: "5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
+        { id: 11, name: "América 20 piezas", price: 22000, image: "/img/America.jpeg", ingredientes: "10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos" },
+        { id: 12, name: "Roma 30 piezas", price: 30000, image: "/img/Roma.jpeg", ingredientes: "10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 MakiCalifornia. Incluye un blíster y dos sobres de soja + dos pares de palitos" },
+        { id: 13, name: "Atlántica 60 piezas", price: 68000, image: "/img/", ingredientes: "10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 MakiCalifornia, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado" },
+        { id: 14, name: "Paraíso 40 piezas", price: 42000, image: "/img/", ingredientes: "10 New York Roll, 10 King Roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado" },
+        { id: 15, name: "Oslo 15 piezas", price: 21000, image: "/img/", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos" }
+      ]
+    },
+    {
+      titulo: "Combos Signature",
+      items: [
+        { id: 16, name: "Malmö 20 piezas", price: 25000, image: "/img/", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado." },
+        { id: 17, name: "Aurora 30 piezas", price: 37000, image: "/img/", ingredientes: "5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado." },
+        { id: 18, name: "Antártida 40 piezas", price: 48000, image: "/img/Antartida.jpeg", ingredientes: "10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis, 2 Geishas y 4 Niguiris" },
+        { id: 19, name: "Malvinas 60 piezas", price: 72000, image: "/img/Malvinas.jpeg", ingredientes: "10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll, 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris, 2 Sashimis y 2 Geishas" },
+        { id: 20, name: "Full salmón 15 piezas", price: 19000, image: "/img/fullsalmon.JPG", ingredientes: "10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha." },
+        { id: 21, name: "Full salmón 26 piezas", price: 33000, image: "/img/Fullsalmon26.JPG", ingredientes: "10 Philadelphia, 10 New York, 3 Niguiris, 2 Sashimis y 1 Geisha." },
+        { id: 22, name: "Full salmón 34 piezas", price: 40000, image: "/img/Fullsalmon34.JPG", ingredientes: "10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas." },
+        { id: 23, name: "Full salmón 46 piezas", price: 48000, image: "/img/Fullsalmon46.JPG", ingredientes: "10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas" },
+        { id: 24, name: "Full salmón 60 piezas", price: 70000, image: "/img/Fullsalmon46.JPG", ingredientes: "10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas" },
+        { id: 25, name: "Blinders Roll", price: 0, image: "/img/Blinders.HEIC", ingredientes: "10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado." },
+        { id: 26, name: "Peaky Roll", price: 0, image: "/img/Peaky.HEIC", ingredientes: "10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta." },
+        { id: 27, name: "Smoked 25 piezas", price: 0, image: "/img/Smoked.HEIC", ingredientes: "10 Peaky, 10 Blinders y 5 Niguiris Salmón Ahumado." },
+        { id: 28, name: "Tamago Protein", price: 8000, image: "/img/Tamago.JPG", ingredientes: "6 piezas envueltas en tamago + salmón rosado + queso crema." },
+        { id: 29, name: "Paraíso Roll", price: 10000, image: "/img/Paraiso.JPG", ingredientes: "6 piezas rellenas de palta, queso crema y palmito, envueltas en tamago y fetas de salmón." },
+        { id: 30, name: "New York Salad", price: 12000, image: "/img/", ingredientes: "Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo." }
+      ]
+    },
+    {
+      titulo: "Rolls Especiales & Hot Rolls",
+      items: [
+        { id: 31, name: "California Salad", price: 11000, image: "/img/", ingredientes: "Arroz, Kanikama, queso philadelphia, palta, pepinos marinados, sésamo." },
+        { id: 32, name: "Kansas Salad", price: 11000, image: "/img/", ingredientes: "Arroz, Langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo." },
+        { id: 33, name: "Aloha Poke", price: 11000, image: "/img/", ingredientes: "Base de arroz, salmón fresco, mango, queso crema, pepinos marinados." },
+        { id: 34, name: "Veggie Poke", price: 11000, image: "/img/", ingredientes: "Base a elección, garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos." },
+        { id: 35, name: "Teriyaki Poke", price: 10000, image: "/img/", ingredientes: "Base de arroz sushi, pollo teriyaki, queso crema, palta, maíz crocante, tiras de pepino." },
+        { id: 36, name: "Hawaii Poke", price: 0, image: "/img/Imagen2.jpg", ingredientes: "Pollo crocante, cheddar y panceta fundida" },
+        { id: 37, name: "Tartar Poke", price: 10000, image: "/img/Tartar.jpeg", ingredientes: "Base de arroz de sushi y tartar de salmón rosado, palta, queso crema, maíz tostado." },
+        { id: 38, name: "Paté de Salmón Jet Poke", price: 9000, image: "/img/Paté.jpeg", ingredientes: "Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados." },
+        { id: 39, name: "Queen Roll", price: 0, image: "/img/", ingredientes: "10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado." },
+        { id: 40, name: "Buenos Aires Roll", price: 10000, image: "/img/Baires.JPG", ingredientes: "10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón." },
+        { id: 41, name: "Miami Roll", price: 10000, image: "/img/Miami.JPG", ingredientes: "10 piezas rellenas de salmón, queso crema y topping de palta con sésamo." },
+        { id: 42, name: "Hanko Roll", price: 11000, image: "/img/Hanko.jpeg", ingredientes: "10 piezas rellenas de salmón rosado, queso crema." },
+        { id: 43, name: "Cali Fresh", price: 27500, image: "/img/Imagen2.jpg", ingredientes: "Kanikama, palta, pepino y sésamo mixto" },
+        { id: 44, name: "Rainbow Roll", price: 35000, image: "/img/Imagen2.jpg", ingredientes: "Relleno de kanikama, cubierto de salmón, pesca blanca y palta" },
+        { id: 45, name: "Panko Cheese Roll", price: 30500, image: "/img/Imagen2.jpg", ingredientes: "Doble queso crema, salmón y rebozado frito" }
+      ]
+    },
+    {
+      titulo: "Niguiris, Sashimis & Entradas",
+      items: [
+        { id: 46, name: "Niguiris de Salmón", price: 18000, image: "/img/Imagen2.jpg", description: "5 piezas", ingredientes: "Bolas de arroz shari moldeadas con lámina de salmón rosado" },
+        { id: 47, name: "Niguiris Flambeados", price: 20000, image: "/img/Imagen2.jpg", description: "5 piezas", ingredientes: "Salmón sellado a la llama con salsa tare y lima" },
+        { id: 48, name: "Sashimi de Salmón", price: 22000, image: "/img/Imagen2.jpg", description: "5 cortes frescos", ingredientes: "Cortes puros de salmón rosado premium" },
+        { id: 49, name: "Geishas de Salmón", price: 24000, image: "/img/Imagen2.jpg", description: "4 piezas", ingredientes: "Láminas de salmón envolviendo queso crema y palta" },
+        { id: 50, name: "Geishas Ebi", price: 25000, image: "/img/Imagen2.jpg", description: "4 piezas", ingredientes: "Láminas de salmón envolviendo langostino y queso" },
+        { id: 51, name: "Gyozas de Cerdo", price: 16000, image: "/img/Imagen2.jpg", description: "6 empanaditas japonesas", ingredientes: "Rellenas de cerdo y vegetales al vapor/doradas" },
+        { id: 52, name: "Gyozas Veggie", price: 15000, image: "/img/Imagen2.jpg", description: "6 empanaditas", ingredientes: "Rellenas de vegetales salteados y jengibre" },
+        { id: 53, name: "Harumaki (Empanadas chinas)", price: 14000, image: "/img/Imagen2.jpg", description: "4 unidades", ingredientes: "Rollitos primavera crocantes de carne y vegetales" },
+        { id: 54, name: "Ebi Tempura", price: 23000, image: "/img/Imagen2.jpg", description: "5 langostinos", ingredientes: "Langostinos rebozados en masa tempura super crocante" },
+        { id: 55, name: "Edamame", price: 12000, image: "/img/Imagen2.jpg", description: "Porción individual", ingredientes: "Vainas de soja al vapor sazonadas con sal marina" },
+        { id: 56, name: "Ceviche Nikkei", price: 28000, image: "/img/Imagen2.jpg", description: "Copa individual", ingredientes: "Pesca del día, salmón, leche de tigre, cancha y maíz" },
+        { id: 57, name: "Tiradito de Salmón", price: 26000, image: "/img/Imagen2.jpg", description: "Plato para compartir", ingredientes: "Láminas finas de salmón en maracuyá y sésamo" },
+        { id: 58, name: "Bao Buns de Cerdo", price: 19000, image: "/img/Imagen2.jpg", description: "2 panes al vapor", ingredientes: "Panes esponjosos rellenos de bondiola desmechada teriyaki" }
+      ]
+    }
   ];
+
+  const sushiItems = menuCategorias.flatMap(cat => cat.items);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = sushiItems.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(sushiItems.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  };
 
   const handleOrder = (item) => {
     const currentHour = new Date().getHours();
-    // Horario intacto: 5:00pm (17) a 11:00pm (23)
     if (currentHour >= 17 && currentHour < 23) {
       setCart([...cart, item]);
       setMessage(`✅ ¡${item.name} agregado!`);
@@ -29,14 +123,15 @@ const LandingPage = () => {
     }
   };
 
-  const calculateTotal = () => cart.reduce((acc, item) => acc + item.price, 0);
+  const calculateSubtotal = () => cart.reduce((acc, item) => acc + item.price, 0);
+  const shippingCost = 5000; 
+  const calculateTotal = () => calculateSubtotal() + (cart.length > 0 ? shippingCost : 0);
 
   const sendToWhatsApp = (e) => {
     e.preventDefault();
     const itemsText = cart.map(i => i.name).join(", ");
-    const text = `Hola, mi nombre es ${userData.name}. Dirección: ${userData.address}. Pedido: ${itemsText}. Total a pagar: $${calculateTotal().toLocaleString('es-CO')}`;
+    const text = `Hola, mi nombre es ${userData.name}. Teléfono: ${userData.phone}. Dirección: ${userData.address}. Notas: ${userData.notes || 'Ninguna'}. Pedido: ${itemsText}. Total a pagar: $${calculateTotal().toLocaleString('es-CO')}`;
     window.open(`https://wa.me/573246727621?text=${encodeURIComponent(text)}`, '_blank');
-    setShowForm(false); // Cierra el formulario después de enviar
   };
 
   const isShopOpen = new Date().getHours() >= 17 && new Date().getHours() < 23;
@@ -44,121 +139,85 @@ const LandingPage = () => {
   return (
     <>
       <style>{`
-        .landing-wrapper { background-color: #f2ede4; font-family: 'Playfair Display', serif; min-height: 100vh; padding: 20px 10px; display: flex; flex-direction: column; align-items: center; color: #2b3a3c; box-sizing: border-box; }
-        header { width: 100%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .status-box { border: 1px solid #7d967b; color: #7d967b; padding: 8px 15px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; }
-        .logo img { height: 40px; }
-        .cart-box { font-size: 1.5rem; cursor: pointer; position: relative; }
-        .cart-count { position: absolute; top: -5px; right: -10px; background: #e95d53; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; font-weight: bold; }
+        /* Configuración base global para evitar desbordamientos en móviles */
+        * { box-sizing: border-box; }
+        html, body { width: 100%; overflow-x: hidden; margin: 0; padding: 0; }
+
+        .landing-wrapper { background-color: #f2ede4; font-family: 'Playfair Display', serif; min-height: 100vh; padding: 20px 0; display: flex; flex-direction: column; align-items: center; color: #2b3a3c; width: 100%; }
         
-        nav { margin-bottom: 40px; }
+        header { width: 100%; max-width: 1400px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .status-box { border: 1px solid #7d967b; color: #7d967b; padding: 8px 15px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; white-space: nowrap; }
+        .logo img { height: 40px; max-width: 150px; object-fit: contain; }
+        .cart-box { font-size: 1.5rem; cursor: pointer; position: relative; padding: 5px; }
+        .cart-count { position: absolute; top: -5px; right: -5px; background: #e95d53; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; font-weight: bold; }
+        
+        nav { margin-bottom: 40px; width: 100%; text-align: center; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
         nav a { margin: 0 15px; text-decoration: none; color: #2b3a3c; font-weight: bold; cursor: pointer; }
         
-        .hero-container { position: relative; width: 100%; max-width: 800px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 20px; }
-        .hero-img { width: 100%; display: block; height: auto; }
+        .hero-container { position: relative; width: 92%; max-width: 1400px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 20px; }
+        .hero-img { width: 100%; display: block; height: auto; max-height: 550px; object-fit: cover; }
         .promo-tag { position: absolute; top: 20px; right: 20px; background: #e95d53; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         
         .menu-btn { margin: 20px 0; padding: 15px 40px; background: transparent; border: 1px solid #d4c1a0; border-radius: 30px; font-family: 'Playfair Display', serif; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
         .menu-btn:hover { background: #d4c1a0; color: white; }
         
-        .menu-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 900px; margin-bottom: 30px; }
-        .menu-item { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .menu-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; width: 92%; max-width: 1400px; margin-bottom: 30px; }
+        .menu-item { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; align-items: center; word-break: break-word; }
         .menu-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
-        .btn-pedir { background: #7d967b; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-family: 'Playfair Display', serif; margin-top: auto; width: 100%; transition: 0.2s; }
-        .btn-pedir:hover { background: #5d705c; transform: scale(1.02); }
+        .btn-pedir { background: #e95d53; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-family: 'Playfair Display', serif; font-weight: bold; width: 100%; transition: 0.2s; margin-top: auto; }
+        .btn-pedir:hover { background: #d44c42; }
         
-        .reviews-section { background: #0a262a; width: 100%; padding: 40px 5%; color: white; text-align: center; margin-top: 40px; box-sizing: border-box; }
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto; }
+        .reviews-section { background: #0a262a; width: 100%; padding: 40px 5%; color: white; text-align: center; margin-top: 40px; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1400px; margin: 30px auto; }
         .review-card { background: #153b40; padding: 20px; border-radius: 15px; text-align: left; }
-
-        .map-section { width: 100%; max-width: 900px; margin: 40px auto; padding: 0 5%; box-sizing: border-box; text-align: center; }
-        .map-container { width: 100%; height: 350px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-top: 20px;}
-
-        /* Estilos de Modales */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 2000; padding: 20px; box-sizing: border-box; }
-        .modal-content { background: white; padding: 25px; border-radius: 15px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .modal-content h3 { margin-top: 0; }
-        .modal-list { max-height: 200px; overflow-y: auto; margin-bottom: 15px; }
-        .form-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; box-sizing: border-box; }
-        .btn-cancel { width: 100%; background: transparent; color: #e95d53; border: 1px solid #e95d53; padding: 10px; margin-top: 10px; border-radius: 20px; cursor: pointer; font-family: inherit; }
         
-        .toast { position: fixed; bottom: 20px; background: #2b3a3c; color: white; padding: 15px 25px; border-radius: 50px; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .map-section { width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 5%; text-align: center; }
+        .map-container { width: 100%; height: 350px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-top: 20px;}
+        
+        .checkout-container { width: 92%; max-width: 1400px; display: grid; grid-template-columns: 1fr 420px; gap: 25px; margin-top: 20px; }
+        .cart-section-box, .form-section-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%; overflow-x: hidden; }
+        .form-input { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.9rem; }
+        .form-textarea { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.9rem; resize: vertical; height: 80px; }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #2b3a3c; color: white; padding: 15px 25px; border-radius: 50px; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center; width: 90%; max-width: 400px; }
+        
+        .footer { background-color: #c5a975; width: 100%; padding: 40px 5%; color: #2b3a3c; margin-top: 40px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h4 { margin-top: 0; margin-bottom: 15px; }
+        .footer-col p { margin: 5px 0; font-size: 0.9rem; }
+        
+        .address-box { background: #f2ede4; padding: 15px; border-radius: 10px; border: 1px solid #d4c1a0; display: flex; align-items: center; gap: 15px; margin-bottom: 30px; width: 92%; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .address-icon { font-size: 2rem; color: #c5a975; flex-shrink: 0; }
+        
+        .pagination { display: flex; justify-content: center; gap: 8px; margin: 25px 0; flex-wrap: wrap; padding: 0 10px; }
+        .page-btn { padding: 8px 14px; background: white; border: 1px solid #7d967b; color: #7d967b; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: bold; transition: 0.2s; }
+        .page-btn:hover { background: #7d967b; color: white; }
+        .page-btn.active { background: #7d967b; color: white; }
 
-        @media (max-width: 600px) {
-          .menu-btn { width: 100%; padding: 15px; }
-          nav a { margin: 0 10px; font-size: 0.9rem; }
-          .map-container { height: 250px; }
+        /* Media Queries optimizadas para móviles y tablets */
+        @media (max-width: 900px) { 
+          .checkout-container { grid-template-columns: 1fr; width: 95%; }
+        }
+
+        @media (max-width: 768px) { 
+          .hero-container, .menu-list, .address-box { width: 95%; }
+          header { padding: 0 10px; flex-wrap: wrap; gap: 10px; justify-content: center; }
+          .menu-btn { width: 95%; padding: 15px; } 
+          nav a { margin: 0 8px; font-size: 0.85rem; } 
+          .map-container { height: 250px; } 
+          .status-box { font-size: 0.75rem; padding: 6px 10px; }
+          .logo img { height: 32px; }
         }
       `}</style>
 
       <div className="landing-wrapper">
-        
-        {/* Header */}
         <header>
           <div className="status-box">{isShopOpen ? "🟢 Abiertos" : "🔴 Cerrados"}</div>
           <div className="logo"><img src="/img/logo_rollsticio.png" alt="Logo Rollsticio" /></div>
-          <div className="cart-box" onClick={() => setShowCart(true)}>
+          <div className="cart-box" onClick={handleCartClick}>
             🛒 {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
           </div>
         </header>
-
-        {/* Modal de Carrito */}
-        {showCart && !showForm && (
-          <div className="modal" onClick={() => setShowCart(false)}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <h3>Tu Carrito</h3>
-              {cart.length === 0 ? (
-                <p>El carrito está vacío</p>
-              ) : (
-                <>
-                  <div className="modal-list">
-                    {cart.map((item, index) => (
-                      <p key={index} style={{margin: '5px 0', fontSize: '0.9rem'}}>
-                        • {item.name} - ${item.price.toLocaleString('es-CO')}
-                      </p>
-                    ))}
-                  </div>
-                  <hr style={{borderColor: '#eee', margin: '15px 0'}} />
-                  <p style={{fontSize: '1.2rem', textAlign: 'right'}}>
-                    <b>Total: ${calculateTotal().toLocaleString('es-CO')}</b>
-                  </p>
-                  <button className="btn-pedir" onClick={() => setShowForm(true)}>Proceder al pago</button>
-                </>
-              )}
-              <button className="btn-cancel" onClick={() => setShowCart(false)}>Cerrar</button>
-            </div>
-          </div>
-        )}
-
-        {/* Modal de Formulario de Envío */}
-        {showForm && (
-          <div className="modal" onClick={() => setShowForm(false)}>
-            <form className="modal-content" onClick={(e) => e.stopPropagation()} onSubmit={sendToWhatsApp}>
-              <h3>Finalizar Pedido</h3>
-              <p style={{marginBottom: '20px'}}>Total a pagar: <b>${calculateTotal().toLocaleString('es-CO')}</b></p>
-              
-              <input 
-                className="form-input" 
-                placeholder="Tu Nombre (Ej. Juan Pérez)" 
-                required 
-                onChange={(e) => setUserData({...userData, name: e.target.value})} 
-              />
-              <input 
-                className="form-input" 
-                placeholder="Dirección de Entrega" 
-                required 
-                onChange={(e) => setUserData({...userData, address: e.target.value})} 
-              />
-              
-              <button type="submit" className="btn-pedir" style={{marginTop: '20px', backgroundColor: '#e95d53'}}>
-                Confirmar y pedir por WhatsApp 💬
-              </button>
-              <button type="button" className="btn-cancel" onClick={() => {setShowForm(false); setShowCart(true);}}>
-                Volver al carrito
-              </button>
-            </form>
-          </div>
-        )}
 
         <nav>
           <a onClick={() => setShowMenu(false)}>Menú</a>
@@ -166,7 +225,6 @@ const LandingPage = () => {
           <a href="#">Ubícanos</a>
         </nav>
 
-        {/* Hero Section (Se oculta si el menú completo está abierto) */}
         {!showMenu && (
           <section className="hero-container">
             <img src="/img/Imagen2.jpg" alt="Kansas Roll" className="hero-img" />
@@ -174,42 +232,68 @@ const LandingPage = () => {
           </section>
         )}
 
-        {/* Botón para alternar el menú */}
         <button className="menu-btn" onClick={() => setShowMenu(!showMenu)}>
           {showMenu ? "Volver al inicio" : "Ver menú completo"}
         </button>
 
-        {/* Menú Completo (Condicional) */}
         {showMenu && (
-          <div className="menu-list">
-            {sushiItems.map((item) => (
-              <div key={item.id} className="menu-item">
-                <img src={item.image} alt={item.name} />
-                <h3>{item.name}</h3>
-                <p style={{fontWeight: 'bold', color: '#7d967b'}}>${item.price.toLocaleString('es-CO')}</p>
-                <button className="btn-pedir" onClick={() => handleOrder(item)}>Agregar al carrito</button>
-              </div>
-            ))}
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h2 style={{ textAlign: 'center', margin: '20px 0', padding: '0 10px', fontSize: '1.4rem' }}>Menú Completo (Página {currentPage} de {totalPages})</h2>
+            <div className="menu-list">
+              {currentItems.map((item) => (
+                <div key={item.id} className="menu-item">
+                  <img src={item.image} alt={item.name} />
+                  <h3>{item.name}</h3>
+                  <p style={{ fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>{item.description}</p>
+                  <p style={{ fontSize: '0.75rem', color: '#555', marginBottom: '10px' }}>{item.ingredientes}</p>
+                  <p style={{fontWeight: 'bold', color: '#e95d53'}}>${item.price.toLocaleString('es-CO')}</p>
+                  <button className="btn-pedir" onClick={() => handleOrder(item)}>Agregar al carrito</button>
+                </div>
+              ))}
+            </div>
+
+            <div className="pagination">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Especialidades */}
-        <h2 style={{marginTop: '20px'}}>Nuestras especialidades</h2>
-        <div className="menu-list">
-          {sushiItems.slice(0, 3).map((item) => (
-            <div key={item.id} className="menu-item">
-              <img src={item.image} alt={item.name} />
-              <h3>{item.name}</h3>
-              <p style={{fontWeight: 'bold', color: '#7d967b'}}>${item.price.toLocaleString('es-CO')}</p>
-              {/* Opción de pedir directamente desde especialidades también */}
-              <button className="btn-pedir" style={{background: 'transparent', border: '1px solid #7d967b', color: '#7d967b'}} onClick={() => handleOrder(item)}>
-                Agregar
-              </button>
-            </div>
-          ))}
+        <div ref={cartSectionRef} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Cart 
+            cart={cart}
+            userData={userData}
+            setUserData={setUserData}
+            calculateSubtotal={calculateSubtotal}
+            shippingCost={shippingCost}
+            calculateTotal={calculateTotal}
+            sendToWhatsApp={sendToWhatsApp}
+          />
         </div>
 
-        {/* Reseñas */}
+        {!showMenu && (
+          <>
+            <h2 style={{marginTop: '40px', textAlign: 'center', padding: '0 10px'}}>Nuestras especialidades</h2>
+            <div className="menu-list">
+              {sushiItems.slice(0, 3).map((item) => (
+                <div key={item.id} className="menu-item">
+                  <img src={item.image} alt={item.name} />
+                  <h3>{item.name}</h3>
+                  <p style={{fontWeight: 'bold', color: '#e95d53'}}>${item.price.toLocaleString('es-CO')}</p>
+                  <button className="btn-pedir" style={{background: 'transparent', border: '1px solid #e95d53', color: '#e95d53'}} onClick={() => handleOrder(item)}>Agregar</button>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
         <section className="reviews-section">
           <h2>¿Qué dicen nuestros clientes?</h2>
           <div className="reviews-grid">
@@ -220,26 +304,25 @@ const LandingPage = () => {
               </div>
             ))}
           </div>
-          <button className="menu-btn" style={{borderColor: 'white', color: 'white'}}>Dejar mi reseña</button>
         </section>
 
-        {/* Mapa Interactivo (Birmingham, AL) */}
         <section className="map-section">
           <h2>¿Dónde estamos ubicados?</h2>
           <div className="map-container">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102434.7937554972!2d-86.86869408076169!3d33.52225332766326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8889142f36d4001d%3A0x2a98f158097b3989!2sBirmingham%2C%20AL!5e0!3m2!1ses-419!2sco!4v1719940000000" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen="" 
-              loading="lazy" 
-              title="Ubicación en Birmingham">
-            </iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102434.7937554972!2d-86.86869408076169!3d33.52225332766326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8889142f36d4001d%3A0x2a98f158097b3989!2sBirmingham%2C%20AL!5e0!3m2!1ses-419!2sco!4v1719940000000" width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy" title="Ubicación"></iframe>
           </div>
         </section>
 
-        {/* Notificaciones (Toast) */}
+        <footer className="footer">
+          <div className="address-box" style={{margin: '0 auto'}}>
+            <div className="address-icon">📍</div>
+            <div>
+              <p style={{fontWeight: 'bold'}}>Gorriti 3440, C1172 ACB,</p>
+              <p>Cdad. Autónoma de Buenos Aires, Argentina</p>
+            </div>
+          </div>
+        </footer>
+
         {message && <div className="toast">{message}</div>}
       </div>
     </>

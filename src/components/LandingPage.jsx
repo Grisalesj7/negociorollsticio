@@ -213,7 +213,7 @@ const LandingPage = () => {
       <div className="landing-wrapper">
         <header>
           <div className="status-box">{isShopOpen ? "🟢 Abiertos" : "🔴 Cerrados"}</div>
-          <div className="logo"><img src="/img/logo_rollsticio.png" alt="Logo Rollsticio" /></div>
+          <div className="logo"><img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" /></div>
           <div className="cart-box" onClick={handleCartClick}>
             🛒 {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
           </div>

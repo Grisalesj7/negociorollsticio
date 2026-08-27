@@ -1,18 +1,16 @@
 import { useState, useRef } from 'react';
-import Cart from './Cart';
+import { useNavigate } from 'react-router-dom';
 
-const LandingPage = () => {
+const LandingPage = ({ cart, setCart }) => {
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [message, setMessage] = useState(null);
-  const [cart, setCart] = useState([]); 
   const [userData, setUserData] = useState({ name: '', phone: '', address: '', notes: '' }); 
 
   const cartSectionRef = useRef(null);
 
   const handleCartClick = () => {
-    if (cartSectionRef.current) {
-      cartSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigate('/cart');
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,16 +32,16 @@ const LandingPage = () => {
         { id: 10, name: "Aruba 15 piezas", price: 15000, image: "/img/Aruba.png", ingredientes: "5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
         { id: 11, name: "América 20 piezas", price: 22000, image: "/img/America.jpeg", ingredientes: "10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos" },
         { id: 12, name: "Roma 30 piezas", price: 30000, image: "/img/Roma.jpeg", ingredientes: "10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 MakiCalifornia. Incluye un blíster y dos sobres de soja + dos pares de palitos" },
-        { id: 13, name: "Atlántica 60 piezas", price: 68000, image: "/img/", ingredientes: "10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 MakiCalifornia, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado" },
-        { id: 14, name: "Paraíso 40 piezas", price: 42000, image: "/img/", ingredientes: "10 New York Roll, 10 King Roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado" },
-        { id: 15, name: "Oslo 15 piezas", price: 21000, image: "/img/", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos" }
+        { id: 13, name: "Atlántica 60 piezas", price: 68000, image: "/img/Atlantica.jpeg", ingredientes: "10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 MakiCalifornia, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado" },
+        { id: 14, name: "Paraíso 40 piezas", price: 42000, image: "/img/Paraiso.jpeg", ingredientes: "10 New York Roll, 10 King Roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado" },
+        { id: 15, name: "Oslo 15 piezas", price: 21000, image: "/img/Oslo.jpeg", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos" }
       ]
     },
     {
       titulo: "Combos Signature",
       items: [
-        { id: 16, name: "Malmö 20 piezas", price: 25000, image: "/img/", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado." },
-        { id: 17, name: "Aurora 30 piezas", price: 37000, image: "/img/", ingredientes: "5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado." },
+        { id: 16, name: "Malmö 20 piezas", price: 25000, image: "/img/Malmo.jpeg", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado." },
+        { id: 17, name: "Aurora 30 piezas", price: 37000, image: "/img/Aurora.jpeg", ingredientes: "5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado." },
         { id: 18, name: "Antártida 40 piezas", price: 48000, image: "/img/Antartida.jpeg", ingredientes: "10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis, 2 Geishas y 4 Niguiris" },
         { id: 19, name: "Malvinas 60 piezas", price: 72000, image: "/img/Malvinas.jpeg", ingredientes: "10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll, 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris, 2 Sashimis y 2 Geishas" },
         { id: 20, name: "Full salmón 15 piezas", price: 19000, image: "/img/fullsalmon.JPG", ingredientes: "10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha." },
@@ -51,22 +49,22 @@ const LandingPage = () => {
         { id: 22, name: "Full salmón 34 piezas", price: 40000, image: "/img/Fullsalmon34.JPG", ingredientes: "10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas." },
         { id: 23, name: "Full salmón 46 piezas", price: 48000, image: "/img/Fullsalmon46.JPG", ingredientes: "10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas" },
         { id: 24, name: "Full salmón 60 piezas", price: 70000, image: "/img/Fullsalmon46.JPG", ingredientes: "10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas" },
-        { id: 25, name: "Blinders Roll", price: 0, image: "/img/Blinders.HEIC", ingredientes: "10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado." },
-        { id: 26, name: "Peaky Roll", price: 0, image: "/img/Peaky.HEIC", ingredientes: "10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta." },
-        { id: 27, name: "Smoked 25 piezas", price: 0, image: "/img/Smoked.HEIC", ingredientes: "10 Peaky, 10 Blinders y 5 Niguiris Salmón Ahumado." },
+        { id: 25, name: "Blinders Roll", price: 0, image: "/img/Blinders.jpeg", ingredientes: "10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado." },
+        { id: 26, name: "Peaky Roll", price: 0, image: "/img/Peaky.jpeg", ingredientes: "10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta." },
+        { id: 27, name: "Smoked 25 piezas", price: 0, image: "/img/Smokedd.jpeg", ingredientes: "10 Peaky, 10 Blinders y 5 Niguiris Salmón Ahumado." },
         { id: 28, name: "Tamago Protein", price: 8000, image: "/img/Tamago.JPG", ingredientes: "6 piezas envueltas en tamago + salmón rosado + queso crema." },
         { id: 29, name: "Paraíso Roll", price: 10000, image: "/img/Paraiso.JPG", ingredientes: "6 piezas rellenas de palta, queso crema y palmito, envueltas en tamago y fetas de salmón." },
-        { id: 30, name: "New York Salad", price: 12000, image: "/img/", ingredientes: "Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo." }
+        { id: 30, name: "New York Salad", price: 12000, image: "/img/Newyork.png", ingredientes: "Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo." }
       ]
     },
     {
       titulo: "Rolls Especiales & Hot Rolls",
       items: [
-        { id: 31, name: "California Salad", price: 11000, image: "/img/", ingredientes: "Arroz, Kanikama, queso philadelphia, palta, pepinos marinados, sésamo." },
-        { id: 32, name: "Kansas Salad", price: 11000, image: "/img/", ingredientes: "Arroz, Langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo." },
-        { id: 33, name: "Aloha Poke", price: 11000, image: "/img/", ingredientes: "Base de arroz, salmón fresco, mango, queso crema, pepinos marinados." },
-        { id: 34, name: "Veggie Poke", price: 11000, image: "/img/", ingredientes: "Base a elección, garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos." },
-        { id: 35, name: "Teriyaki Poke", price: 10000, image: "/img/", ingredientes: "Base de arroz sushi, pollo teriyaki, queso crema, palta, maíz crocante, tiras de pepino." },
+        { id: 31, name: "California Salad", price: 11000, image: "/img/California.jpeg", ingredientes: "Arroz, Kanikama, queso philadelphia, palta, pepinos marinados, sésamo." },
+        { id: 32, name: "Kansas Salad", price: 11000, image: "/img/Kansas.png", ingredientes: "Arroz, Langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo." },
+        { id: 33, name: "Aloha Poke", price: 11000, image: "/img/Aloha.jpeg", ingredientes: "Base de arroz, salmón fresco, mango, queso crema, pepinos marinados." },
+        { id: 34, name: "Veggie Poke", price: 11000, image: "/img/Veggie.jpeg", ingredientes: "Base a elección, garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos." },
+        { id: 35, name: "Teriyaki Poke", price: 10000, image: "/img/Teriyake.jpeg", ingredientes: "Base de arroz sushi, pollo teriyaki, queso crema, palta, maíz crocante, tiras de pepino." },
         { id: 36, name: "Hawaii Poke", price: 0, image: "/img/Imagen2.jpg", ingredientes: "Pollo crocante, cheddar y panceta fundida" },
         { id: 37, name: "Tartar Poke", price: 10000, image: "/img/Tartar.jpeg", ingredientes: "Base de arroz de sushi y tartar de salmón rosado, palta, queso crema, maíz tostado." },
         { id: 38, name: "Paté de Salmón Jet Poke", price: 9000, image: "/img/Paté.jpeg", ingredientes: "Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados." },
@@ -74,27 +72,42 @@ const LandingPage = () => {
         { id: 40, name: "Buenos Aires Roll", price: 10000, image: "/img/Baires.JPG", ingredientes: "10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón." },
         { id: 41, name: "Miami Roll", price: 10000, image: "/img/Miami.JPG", ingredientes: "10 piezas rellenas de salmón, queso crema y topping de palta con sésamo." },
         { id: 42, name: "Hanko Roll", price: 11000, image: "/img/Hanko.jpeg", ingredientes: "10 piezas rellenas de salmón rosado, queso crema." },
-        { id: 43, name: "Cali Fresh", price: 27500, image: "/img/Imagen2.jpg", ingredientes: "Kanikama, palta, pepino y sésamo mixto" },
-        { id: 44, name: "Rainbow Roll", price: 35000, image: "/img/Imagen2.jpg", ingredientes: "Relleno de kanikama, cubierto de salmón, pesca blanca y palta" },
-        { id: 45, name: "Panko Cheese Roll", price: 30500, image: "/img/Imagen2.jpg", ingredientes: "Doble queso crema, salmón y rebozado frito" }
+        { id: 43, name: "Islandia Roll", price: 10000, image: "/img/Islandia.JPG", ingredientes: "10 piezas rellenas de Palta, queso crema y topping de salmón con sésamo. Incluye 2 sobres de soja y un par de palitos" },
+        { id: 44, name: "Phila Hot", price: 10000, image: "/img/Philahot.JPG", ingredientes: "10 piezas tempurizadas rellenas de salmón y queso philadelphia. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 45, name: "King Roll", price: 11000, image: "/img/KingRoll.jpeg", ingredientes: "10 piezas rellenas de langostinos rebozados, queso crema y topping de palta, bañado en tartar de salmón Oh Qué y maíz crocante triturado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." }
       ]
     },
     {
-      titulo: "Niguiris, Sashimis & Entradas",
+      titulo: "Sabores individuales",
       items: [
-        { id: 46, name: "Niguiris de Salmón", price: 18000, image: "/img/Imagen2.jpg", description: "5 piezas", ingredientes: "Bolas de arroz shari moldeadas con lámina de salmón rosado" },
-        { id: 47, name: "Niguiris Flambeados", price: 20000, image: "/img/Imagen2.jpg", description: "5 piezas", ingredientes: "Salmón sellado a la llama con salsa tare y lima" },
-        { id: 48, name: "Sashimi de Salmón", price: 22000, image: "/img/Imagen2.jpg", description: "5 cortes frescos", ingredientes: "Cortes puros de salmón rosado premium" },
-        { id: 49, name: "Geishas de Salmón", price: 24000, image: "/img/Imagen2.jpg", description: "4 piezas", ingredientes: "Láminas de salmón envolviendo queso crema y palta" },
-        { id: 50, name: "Geishas Ebi", price: 25000, image: "/img/Imagen2.jpg", description: "4 piezas", ingredientes: "Láminas de salmón envolviendo langostino y queso" },
-        { id: 51, name: "Gyozas de Cerdo", price: 16000, image: "/img/Imagen2.jpg", description: "6 empanaditas japonesas", ingredientes: "Rellenas de cerdo y vegetales al vapor/doradas" },
-        { id: 52, name: "Gyozas Veggie", price: 15000, image: "/img/Imagen2.jpg", description: "6 empanaditas", ingredientes: "Rellenas de vegetales salteados y jengibre" },
-        { id: 53, name: "Harumaki (Empanadas chinas)", price: 14000, image: "/img/Imagen2.jpg", description: "4 unidades", ingredientes: "Rollitos primavera crocantes de carne y vegetales" },
-        { id: 54, name: "Ebi Tempura", price: 23000, image: "/img/Imagen2.jpg", description: "5 langostinos", ingredientes: "Langostinos rebozados en masa tempura super crocante" },
-        { id: 55, name: "Edamame", price: 12000, image: "/img/Imagen2.jpg", description: "Porción individual", ingredientes: "Vainas de soja al vapor sazonadas con sal marina" },
-        { id: 56, name: "Ceviche Nikkei", price: 28000, image: "/img/Imagen2.jpg", description: "Copa individual", ingredientes: "Pesca del día, salmón, leche de tigre, cancha y maíz" },
-        { id: 57, name: "Tiradito de Salmón", price: 26000, image: "/img/Imagen2.jpg", description: "Plato para compartir", ingredientes: "Láminas finas de salmón en maracuyá y sésamo" },
-        { id: 58, name: "Bao Buns de Cerdo", price: 19000, image: "/img/Imagen2.jpg", description: "2 panes al vapor", ingredientes: "Panes esponjosos rellenos de bondiola desmechada teriyaki" }
+        { id: 46, name: "Boston Roll", price: 10000, image: "/img/Boston.JPG", ingredientes: "10 piezas rellenas de Salmón, queso crema y topping de mango con sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 47, name: "Philadelphia roll", price: 0, image: "/img/Philadelphia.JPG", ingredientes: "10 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 48, name: "Osaka Roll", price: 9000, image: "/img/Osaka.JPG", ingredientes: "10 piezas rellenas de langostino rebozados, queso crema, topping de palta y sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 49, name: "New York Roll", price: 0, image: "/img/Imagen2.jpg", ingredientes: "10 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 50, name: "California Roll", price: 9000, image: "/img/California10.JPG", ingredientes: "10 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 51, name: "New York Hot", price: 10000, image: "/img/Newyorkhot.JPG", ingredientes: "10 piezas tempurizadas rellenas de salmón, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 52, name: "Suiza Roll", price: 11000, image: "/img/suiza.JPG", ingredientes: "10 piezas rellenas de salmón y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 53, name: "Kansas Crunch Roll", price: 11000, image: "/img/Kansascrunch.jpeg", ingredientes: "10 piezas rebozadas en panko, rellenas de langostinos rebozados, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 54, name: "Jet Roll", price: 7500, image: "/img/JETROLL.png", ingredientes: "10 piezas, rellenas de mix de pasta de salmón cocido con queso crema y ciboulette, con topping de palta y bañado en salsa teriyaki. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 55, name: "Vegan Roll", price: 9000, image: "/img/VeganRoll.jpeg", ingredientes: "10 piezas cubiertas de alga y rellenas de rúcula, palta, bastones de pepino y zanahoria marinada. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 56, name: "Veggie Roll", price: 9000, image: "/img/VeggieRoll.jpeg", ingredientes: "10 piezas rellenas de queso crema, zanahoria marinada, morrón en tiras finas y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 57, name: "Live Roll", price: 9000, image: "/img/LiveRoll.jpeg", ingredientes: "10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+      ]
+    },
+    {
+      titulo: "Promo 20 piezas y salsas",
+      items: [
+        { id: 58, name: "New York roll", price: 0, image: "/img/Newyorkroll1.JPG", ingredientes: "20 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 59, name: "Phila Hot roll", price: 19000, image: "/img/Philahot10.JPG", ingredientes: "20 piezas tempurizadas rellenas de salmón y queso crema. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 60, name: "New York Hot roll", price: 21000, image: "/img/Newyorkhotpz.JPG", ingredientes: "20 piezas tempurizadas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 61, name: "Kansas roll", price: 16000, image: "/img/Kansasroll.JPG", ingredientes: "20 piezas rellenas de langostinos rebozado en panko, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 62, name: "California Roll", price: 16000, image: "/img/Californiaroll.JPG", ingredientes: "20 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 63, name: "Suiza Roll", price: 18000, image: "/img/Suizaroll.JPG", ingredientes: "20 piezas rellenas de salmón, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 64, name: "Philadelphia roll", price: 0, image: "/img/Philadelphiaroll.JPG", ingredientes: "20 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 65, name: "Salsa Soja", price: 1500, image: "/img/SALSASOJA.png", ingredientes: "40cc de salsa de soja tradicional" },
+        { id: 66, name: "Salsa Buenos Aires", price: 1500, image: "/img/SALSABUENOSAIRES.png", ingredientes: "40cc de salsa teriyaki, hecha en casa con lluvia de sésamo " },
+        { id: 67, name: "Salsa Maracuyá", price: 1500, image: "/img/SALSAMARACUYA.png", ingredientes: "40cc de salsa dulce de maracuyá, hecha en casa" },
+        { id: 68, name: "Salsa Teriyaki", price: 1500, image: "/img/SALSASOJA.png", ingredientes: " 40 cc de salsa dulce a base de soja" }
       ]
     }
   ];
@@ -266,18 +279,6 @@ const LandingPage = () => {
           </div>
         )}
 
-        <div ref={cartSectionRef} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <Cart 
-            cart={cart}
-            userData={userData}
-            setUserData={setUserData}
-            calculateSubtotal={calculateSubtotal}
-            shippingCost={shippingCost}
-            calculateTotal={calculateTotal}
-            sendToWhatsApp={sendToWhatsApp}
-          />
-        </div>
-
         {!showMenu && (
           <>
             <h2 style={{marginTop: '40px', textAlign: 'center', padding: '0 10px'}}>Nuestras especialidades</h2>
@@ -328,5 +329,4 @@ const LandingPage = () => {
     </>
   );
 };
-
 export default LandingPage;

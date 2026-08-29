@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = ({ cart, setCart }) => {
@@ -6,6 +6,23 @@ const LandingPage = ({ cart, setCart }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [message, setMessage] = useState(null);
   const [userData, setUserData] = useState({ name: '', phone: '', address: '', notes: '' }); 
+
+  // Estado para el carrusel de imágenes del banner
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const heroSlides = [
+    { img: "/img/Aloha.jpeg", alt: "Aloha", title: "Aloha" },
+    { img: "/img/America.jpeg", alt: "América 20 piezas", title: "América 20 piezas" },
+    { img: "/img/California10.JPG", alt: "California", title: "California 10" }
+  ];
+
+  // Efecto para cambiar de imagen automáticamente cada 3.5 segundos
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [heroSlides.length]);
 
   const cartSectionRef = useRef(null);
 
@@ -91,7 +108,7 @@ const LandingPage = ({ cart, setCart }) => {
         { id: 54, name: "Jet Roll", price: 7500, image: "/img/JETROLL.png", ingredientes: "10 piezas, rellenas de mix de pasta de salmón cocido con queso crema y ciboulette, con topping de palta y bañado en salsa teriyaki. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
         { id: 55, name: "Vegan Roll", price: 9000, image: "/img/VeganRoll.jpeg", ingredientes: "10 piezas cubiertas de alga y rellenas de rúcula, palta, bastones de pepino y zanahoria marinada. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
         { id: 56, name: "Veggie Roll", price: 9000, image: "/img/VeggieRoll.jpeg", ingredientes: "10 piezas rellenas de queso crema, zanahoria marinada, morrón en tiras finas y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 57, name: "Live Roll", price: 9000, image: "/img/LiveRoll.jpeg", ingredientes: "10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
+        { id: 57, name: "Live Roll", price: 9000, image: "/img/LiveRoll.jpeg", ingredientes: "10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." }
       ]
     },
     {
@@ -161,15 +178,53 @@ const LandingPage = ({ cart, setCart }) => {
         header { width: 100%; max-width: 1400px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .status-box { border: 1px solid #7d967b; color: #7d967b; padding: 8px 15px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; white-space: nowrap; }
         .logo img { height: 40px; max-width: 150px; object-fit: contain; }
-        .cart-box { font-size: 1.5rem; cursor: pointer; position: relative; padding: 5px; }
+        .cart-box { font-size: 1.5rem; cursor: pointer; position: relative; padding: 5px; display: flex; align-items: center; }
         .cart-count { position: absolute; top: -5px; right: -5px; background: #e95d53; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; font-weight: bold; }
         
         nav { margin-bottom: 40px; width: 100%; text-align: center; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-        nav a { margin: 0 15px; text-decoration: none; color: #2b3a3c; font-weight: bold; cursor: pointer; }
+        nav a { margin: 0 15px; text-decoration: none; color: #2b3a3c; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
         
         .hero-container { position: relative; width: 92%; max-width: 1400px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 20px; }
-        .hero-img { width: 100%; display: block; height: auto; max-height: 550px; object-fit: cover; }
-        .promo-tag { position: absolute; top: 20px; right: 20px; background: #e95d53; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .hero-img { width: 100%; display: block; height: auto; max-height: 550px; object-fit: cover; transition: opacity 0.5s ease-in-out; }
+        .promo-tag { position: absolute; top: 20px; right: 20px; background: #e95d53; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; z-index: 2; }
+        
+        /* Estilos nuevos para el título flotante y puntos del carrusel */
+        .hero-title { 
+          position: absolute; 
+          bottom: 20px; 
+          left: 20px; 
+          background: rgba(0, 0, 0, 0.6); 
+          color: white; 
+          padding: 8px 16px; 
+          border-radius: 20px; 
+          font-size: 1rem; 
+          font-weight: bold; 
+          z-index: 2;
+        }
+
+        .carousel-dots {
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          display: flex;
+          gap: 6px;
+          z-index: 2;
+        }
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        .dot.active {
+          background: white;
+          width: 20px;
+          border-radius: 4px;
+        }
         
         .menu-btn { margin: 20px 0; padding: 15px 40px; background: transparent; border: 1px solid #d4c1a0; border-radius: 30px; font-family: 'Playfair Display', serif; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
         .menu-btn:hover { background: #d4c1a0; color: white; }
@@ -228,20 +283,45 @@ const LandingPage = ({ cart, setCart }) => {
           <div className="status-box">{isShopOpen ? "🟢 Abiertos" : "🔴 Cerrados"}</div>
           <div className="logo"><img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" /></div>
           <div className="cart-box" onClick={handleCartClick}>
-            🛒 {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
+            <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#2b3a3c' }}>
+              shopping_cart
+            </span>
+            {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
           </div>
         </header>
 
         <nav>
-          <a onClick={() => setShowMenu(false)}>Menú</a>
-          <a href="#">Contacto</a>
-          <a href="#">Ubícanos</a>
+          <a onClick={() => setShowMenu(false)}>
+            <span className="material-symbols-outlined" style={{ fontSize: '18px', verticalAlign: 'middle' }}>restaurant_menu</span> Menú
+          </a>
+          <a href="#">
+            <span className="material-symbols-outlined" style={{ fontSize: '18px', verticalAlign: 'middle' }}>mail</span> Contacto
+          </a>
+          <a href="#">
+            <span className="material-symbols-outlined" style={{ fontSize: '18px', verticalAlign: 'middle' }}>location_on</span> Ubícanos
+          </a>
         </nav>
 
         {!showMenu && (
           <section className="hero-container">
-            <img src="/img/Imagen2.jpg" alt="Kansas Roll" className="hero-img" />
-            <div className="promo-tag">Promo 🏷️</div>
+            <img 
+              src={heroSlides[currentSlide].img} 
+              alt={heroSlides[currentSlide].alt} 
+              className="hero-img" 
+            />
+            <div className="promo-tag">
+  Promo <span className="material-symbols-outlined" style={{ fontSize: '14px', verticalAlign: 'middle' }}>local_offer</span>
+</div>
+            <div className="hero-title">{heroSlides[currentSlide].title}</div>
+            <div className="carousel-dots">
+              {heroSlides.map((_, index) => (
+                <span 
+                  key={index} 
+                  className={`dot ${currentSlide === index ? 'active' : ''}`}
+                  onClick={() => setCurrentSlide(index)}
+                ></span>
+              ))}
+            </div>
           </section>
         )}
 

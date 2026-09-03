@@ -1028,6 +1028,10 @@ const LandingPage = ({ cart, setCart }) => {
           {showMenu ? "Volver al inicio" : "Ver menú completo"}
         </button>
 
+        <div className="status-box">
+      {isShopOpen ? "Abiertos (De 5:00pm a 11:00pm)" : "Cerrados (Abrimos a las 5:00pm)"}
+    </div>
+
         {showMenu && (
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h2 style={{ textAlign: 'center', margin: '20px 0', padding: '0 10px', fontSize: '1.4rem' }}>Menú Completo (Página {currentPage} de {totalPages})</h2>

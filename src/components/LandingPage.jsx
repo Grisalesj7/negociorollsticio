@@ -280,7 +280,7 @@ const LandingPage = ({ cart, setCart }) => {
 
       <div className="landing-wrapper">
         <header>
-          <div className="status-box">{isShopOpen ? "🟢 Abiertos" : "🔴 Cerrados"}</div>
+          <div className="status-box">{isShopOpen ? "🟢 Abiertos (De 5:00pm a 11:00pm)" : "🔴 Cerrados (Abrimos a las 5:00pm)"}</div>
           <div className="logo"><img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" /></div>
           <div className="cart-box" onClick={handleCartClick}>
             <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#2b3a3c' }}>
@@ -291,14 +291,14 @@ const LandingPage = ({ cart, setCart }) => {
         </header>
 
         <nav>
-          <a onClick={() => setShowMenu(false)}>
-            <span className="material-symbols-outlined" style={{ fontSize: '18px', verticalAlign: 'middle' }}>restaurant_menu</span> Menú
+          <a onClick={() => setShowMenu(false)}> 
+            <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Menú
           </a>
           <a href="#">
-            <span className="material-symbols-outlined" style={{ fontSize: '18px', verticalAlign: 'middle' }}>mail</span> Contacto
+            <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Contacto
           </a>
           <a href="#">
-            <span className="material-symbols-outlined" style={{ fontSize: '18px', verticalAlign: 'middle' }}>location_on</span> Ubícanos
+            <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Ubícanos
           </a>
         </nav>
 
@@ -338,14 +338,14 @@ const LandingPage = ({ cart, setCart }) => {
                   {/* Etiqueta Gluten Free */}
                   {item.glutenfree && (
                     <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#365f73', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
-                      Gluten Free 🌾
+                      Gluten Free
                   </div>
                   )}
 
                   {/* Etiqueta Vegetariano */}
                   {item.vegetariano && (
                     <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#8bcf8b', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
-                      Vegetariano 🥗
+                      Vegetariano
                     </div>
                   )}
 
@@ -382,14 +382,14 @@ const LandingPage = ({ cart, setCart }) => {
                   {/* Etiqueta Gluten Free */}
                   {item.glutenfree && (
                     <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#365f73', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
-                      Gluten Free 🌾
+                      Gluten Free 
                     </div>
                   )}
 
                   {/* Etiqueta Vegetariano */}
                   {item.vegetariano && (
                     <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#8bcf8b', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
-                      Vegetariano 🥗
+                      Vegetariano 
                     </div>
                   )}
 
@@ -422,15 +422,37 @@ const LandingPage = ({ cart, setCart }) => {
           </div>
         </section>
 
-        <footer className="footer">
-          <div className="address-box" style={{margin: '0 auto'}}>
-            <div className="address-icon">📍</div>
-            <div>
-              <p style={{fontWeight: 'bold'}}>Gorriti 3440, C1172 ACB,</p>
-              <p>Cdad. Autónoma de Buenos Aires, Argentina</p>
-            </div>
-          </div>
-        </footer>
+        <div style={{ 
+        background: '#d4af37', 
+        padding: '25px 20px', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'flex-start', 
+        flexWrap: 'wrap',
+        gap: '20px',
+        color: '#1a2b2c',
+        fontSize: '0.85rem',
+        borderTop: '1px solid #c5a030',
+        boxSizing: 'border-box'
+      }} >
+        <div style={{ flex: '1 1 180px' }}>
+          <strong>Contacto</strong><br />
+          Tlf: 0200202003<br />
+          Correo: correo@gmail.com
+        </div>
+        <div style={{ flex: '1 1 180px' }}>
+          <strong>Dirección</strong><br />
+          Lorem ipsum dolor sit amet,<br />
+          consectetur adipiscing elit.
+        </div>
+        <div style={{ flex: '1 1 180px' }}>
+          <strong>Diseñado por</strong><img src="img/logo_footer.svg" alt="" /><br />
+          <span style={{ background: '#1a2b2c', color: '#fff', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold', display: 'inline-block', marginTop: '4px'}}>
+            <img src="img/logo_footer.svg" alt=""/>
+          </span>
+        </div>
+      </div>
+
 
         {message && <div className="toast">{message}</div>}
       </div>

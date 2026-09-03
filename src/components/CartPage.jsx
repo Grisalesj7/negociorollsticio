@@ -66,7 +66,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         {/* Izquierda: Estado */}
         <div style={{ justifySelf: 'start' }}>
           <div style={{ 
-            border: '1px solid #b5c4b1', 
+            border: '1px solid #48d720', 
             padding: '5px 10px', 
             borderRadius: '6px', 
             fontSize: '0.75rem', 
@@ -75,7 +75,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             display: 'inline-block',
             whiteSpace: 'nowrap'
           }}>
-            Abiertos (De 5:00pm a 11:00 Pm)
+            Abiertos (de 5:00 PM a 11:00 PM)
           </div>
         </div>
         
@@ -84,7 +84,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           <img 
             src="/img/LOGO_rollticio.svg" 
             alt="Rollsticio Logo" 
-            style={{ height: '35px', maxWidth: '100%', objectFit: 'contain', display: 'block', margin: '0 auto' }} 
+            style={{ height: '35px', maxWidth: '60%', objectFit: 'contain', display: 'block', margin: '0 auto' }} 
           />
         </div>
 

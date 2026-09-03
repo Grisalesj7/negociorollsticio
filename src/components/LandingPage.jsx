@@ -281,17 +281,30 @@ const LandingPage = ({ cart, setCart }) => {
       `}</style>
 
       <div className="landing-wrapper">
-        <header>
-          <div className="status-box">{isShopOpen ? "Abiertos (De 5:00pm a 11:00pm)" : "Cerrados (Abrimos a las 5:00pm)"}</div>
-          <div className="logo"><img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" /></div>
-          <div className="cart-box" onClick={handleCartClick}>
-            <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#2b3c33' }}>
-              shopping_cart
-            </span>
-            {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
-          </div>
-        </header>
+        <header className="main-header">
+  <div className="header-status">
+    <div className="status-box">
+      {isShopOpen ? "Abiertos (De 5:00pm a 11:00pm)" : "Cerrados (Abrimos a las 5:00pm)"}
+    </div>
+  </div>
 
+  <div className="header-logo">
+    <div className="logo">
+      <img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" />
+    </div>
+  </div>
+
+  <div className="header-actions">
+    <nav className="header-nav">
+    </nav>
+    <div className="cart-box" onClick={handleCartClick}>
+      <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#2b3c33' }}>
+        shopping_cart
+      </span>
+      {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
+    </div>
+  </div>
+</header>
         <nav>
           <a onClick={() => setShowMenu(false)}> 
             <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Menú

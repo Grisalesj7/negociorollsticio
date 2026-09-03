@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Aca debemos de importar los estilos de la app
+
 const CartPage = ({ cart, setCart, userData, setUserData }) => {
   const navigate = useNavigate();
 
@@ -278,9 +280,9 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         </div>
         <div style={{ flex: '1 1 180px' }}>
           <strong>Diseñado por</strong><br />
-          <span style={{ background: '#1a2b2c', color: '#fff', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold', display: 'inline-block', marginTop: '4px' }}>
-            PUITO PIXEL
-          </span>
+          <span style={{ background: '#1a2b2c', color: '#fff', padding: '6px 12px', borderRadius: '4px', fontWeight: 'bold', display: 'inline-block', marginTop: '4px'}}>
+  <img src="/img/Logo_footer.svg" alt="Logo" style={{ height: '22px', width: 'auto', display: 'block' }} />
+</span>
         </div>
       </div>
 

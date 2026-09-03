@@ -11,9 +11,11 @@ const LandingPage = ({ cart, setCart }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const heroSlides = [
-    { img: "/img/Aloha.jpeg", alt: "Aloha", title: "Aloha" },
-    { img: "/img/America.jpeg", alt: "América 20 piezas", title: "América 20 piezas" },
-    { img: "/img/California10.JPG", alt: "California", title: "California 10" }
+    { img: "/img/Aloha.jpeg", alt: "Aloha", title: "Menu Completo" },
+    { img: "/img/America.jpeg", alt: "América 20 piezas", title: "Menu Completo" },
+    { img: "/img/California10.JPG", alt: "California", title: "Menu Completo" }
+
+    // Agregar la parte del menu completo
   ];
 
   // Efecto para cambiar de imagen automáticamente cada 3.5 segundos
@@ -280,10 +282,10 @@ const LandingPage = ({ cart, setCart }) => {
 
       <div className="landing-wrapper">
         <header>
-          <div className="status-box">{isShopOpen ? "🟢 Abiertos (De 5:00pm a 11:00pm)" : "🔴 Cerrados (Abrimos a las 5:00pm)"}</div>
+          <div className="status-box">{isShopOpen ? "Abiertos (De 5:00pm a 11:00pm)" : "Cerrados (Abrimos a las 5:00pm)"}</div>
           <div className="logo"><img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" /></div>
           <div className="cart-box" onClick={handleCartClick}>
-            <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#2b3a3c' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#2b3c33' }}>
               shopping_cart
             </span>
             {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
@@ -422,37 +424,38 @@ const LandingPage = ({ cart, setCart }) => {
           </div>
         </section>
 
-        <div style={{ 
-        background: '#d4af37', 
-        padding: '25px 20px', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'flex-start', 
-        flexWrap: 'wrap',
-        gap: '20px',
-        color: '#1a2b2c',
-        fontSize: '0.85rem',
-        borderTop: '1px solid #c5a030',
-        boxSizing: 'border-box'
-      }} >
-        <div style={{ flex: '1 1 180px' }}>
-          <strong>Contacto</strong><br />
-          Tlf: 0200202003<br />
-          Correo: correo@gmail.com
-        </div>
-        <div style={{ flex: '1 1 180px' }}>
-          <strong>Dirección</strong><br />
-          Lorem ipsum dolor sit amet,<br />
-          consectetur adipiscing elit.
-        </div>
-        <div style={{ flex: '1 1 180px' }}>
-          <strong>Diseñado por</strong><img src="img/logo_footer.svg" alt="" /><br />
-          <span style={{ background: '#1a2b2c', color: '#fff', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold', display: 'inline-block', marginTop: '4px'}}>
-            <img src="img/logo_footer.svg" alt=""/>
-          </span>
-        </div>
+      {/* Footer actualizado */}
+      <div style={{ 
+      width: '100%',
+      background: '#d4af37', 
+      padding: '25px 20px', 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      alignItems: 'flex-start', 
+      flexWrap: 'wrap',
+      gap: '40px',
+      color: '#1a2b2c',
+      fontSize: '0.85rem',
+      borderTop: '1px solid #c5a030',
+      boxSizing: 'border-box'
+    }} >
+      <div style={{ flex: '1 1 200px' }}>
+        <strong>Contacto</strong><br />
+        Tlf: 0200202003<br />
+        Correo: correo@gmail.com
       </div>
-
+      <div style={{ flex: '1 1 200px' }}>
+        <strong>Dirección</strong><br />
+        Lorem ipsum dolor sit amet,<br />
+        consectetur adipiscing elit.
+      </div>
+      <div style={{ flex: '1 1 200px' }}>
+        <strong>Diseñado por</strong><br />
+        <span style={{ background: '#1a2b2c', color: '#fff', padding: '6px 12px', borderRadius: '4px', fontWeight: 'bold', display: 'inline-block', marginTop: '4px'}}>
+  <img src="/img/Logo_footer.svg" alt="Logo" style={{ height: '22px', width: 'auto', display: 'block' }} />
+</span>
+      </div>
+    </div>
 
         {message && <div className="toast">{message}</div>}
       </div>
@@ -460,3 +463,7 @@ const LandingPage = ({ cart, setCart }) => {
   );
 };
 export default LandingPage;
+
+// Basicamente tenemos que actualizar el documento que sea bien documentado
+
+// Tambien acomodar la parte de lo que es el footer que quede bien actualizado

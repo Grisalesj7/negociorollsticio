@@ -185,7 +185,7 @@ const LandingPage = ({ cart, setCart }) => {
         }
 
         body {
-          background: #f2ede4;
+          background: #F2ECE3;
         }
 
         img {
@@ -197,7 +197,7 @@ const LandingPage = ({ cart, setCart }) => {
         }
 
         .landing-wrapper {
-          background-color: #f2ede4;
+          background-color: #F2ECE3;
           font-family: 'Playfair Display', serif;
           min-height: 100vh;
           width: 100%;
@@ -523,30 +523,88 @@ const LandingPage = ({ cart, setCart }) => {
         }
 
         /* =========================
-           MAPA
+           MAPA / UBICACIÓN
            ========================= */
         .map-section {
-          width: 92%;
-          max-width: 1400px;
+          width: 100%;
+          max-width: 1000px;
           margin: 40px auto;
-          text-align: center;
+          padding: 0 20px 30px;
+          text-align: left;
         }
 
         .map-section h2 {
-          margin-bottom: 20px;
+          margin: 0 auto 12px;
+          max-width: 900px;
+          font-size: 1.25rem;
+          color: #16445a;
+          font-weight: 700;
         }
 
         .map-container {
           width: 100%;
-          height: 350px;
-          border-radius: 15px;
+          max-width: 900px;
+          height: 335px;
+          margin: 0 auto;
+          background: #fff;
           overflow: hidden;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-          margin-top: 20px;
+          border-radius: 2px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .map-container iframe {
+          width: 100%;
+          height: 100%;
+          border: 0;
           display: block;
+        }
+
+        .location-card {
+          width: 100%;
+          max-width: 292px;
+          min-height: 52px;
+          margin: 18px auto 0;
+          padding: 10px 15px;
+          display: flex;
+          align-items: center;
+          background: #F2ECE3;
+          border: 1.5px solid #d2a735;
+          border-radius: 6px;
+          box-sizing: border-box;
+        }
+
+        .location-icon {
+          width: 45px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 25px;
+          flex-shrink: 0;
+        }
+
+        .location-divider {
+          width: 1px;
+          height: 30px;
+          background: #d2a735;
+          margin: 0 14px;
+          flex-shrink: 0;
+        }
+
+        .location-info {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          color: #16445a;
+          font-size: 11px;
+          line-height: 1.25;
+        }
+
+        .location-info strong {
+          font-weight: 700;
+        }
+
+        .location-info span {
+          font-weight: 400;
         }
 
         /* =========================
@@ -884,17 +942,40 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .map-section {
-            width: 94%;
+            width: 100%;
             margin: 28px auto;
+            padding: 0 18px 25px;
           }
 
           .map-section h2 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
           }
 
           .map-container {
             height: 260px;
-            border-radius: 12px;
+            border-radius: 4px;
+          }
+
+          .location-card {
+            max-width: 100%;
+            width: 100%;
+            min-height: 58px;
+            padding: 9px 12px;
+          }
+
+          .location-icon {
+            width: 38px;
+            font-size: 22px;
+          }
+
+          .location-divider {
+            margin: 0 10px;
+            height: 32px;
+          }
+
+          .location-info {
+            font-size: 10px;
           }
 
           .site-footer {
@@ -996,7 +1077,7 @@ const LandingPage = ({ cart, setCart }) => {
           <a href="#">
             <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Contacto
           </a>
-          <a href="#">
+          <a href="#ubicacion">
             <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Ubícanos
           </a>
         </nav>
@@ -1028,9 +1109,6 @@ const LandingPage = ({ cart, setCart }) => {
           {showMenu ? "Volver al inicio" : "Ver menú completo"}
         </button>
 
-        <div className="status-box">
-      {isShopOpen ? "Abiertos (De 5:00pm a 11:00pm)" : "Cerrados (Abrimos a las 5:00pm)"}
-    </div>
 
         {showMenu && (
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -1118,10 +1196,28 @@ const LandingPage = ({ cart, setCart }) => {
           </div>
         </section>
 
-        <section className="map-section">
-          <h2>¿Dónde estamos ubicados?</h2>
+        <section className="map-section" id="ubicacion">
+          <h2>📍 ¿Dónde estamos ubicados?</h2>
+
           <div className="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102434.7937554972!2d-86.86869408076169!3d33.52225332766326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8889142f36d4001d%3A0x2a98f158097b3989!2sBirmingham%2C%20AL!5e0!3m2!1ses-419!2sco!4v1719940000000" width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy" title="Ubicación"></iframe>
+            <iframe
+              src="https://www.google.com/maps?q=Gorriti+3440,+C1172+ACB,+Buenos+Aires,+Argentina&output=embed"
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Ubicación Rollsticio"
+            ></iframe>
+          </div>
+
+          <div className="location-card">
+            <div className="location-icon">📍</div>
+
+            <div className="location-divider"></div>
+
+            <div className="location-info">
+              <strong>Gorriti 3440, C1172 ACB,</strong>
+              <span>Ciudad Autónoma de Buenos Aires, Argentina</span>
+            </div>
           </div>
         </section>
 
@@ -1158,3 +1254,5 @@ export default LandingPage;
 // Basicamente tenemos que actualizar el documento que sea bien documentado
 
 // Tambien acomodar la parte de lo que es el footer que quede bien actualizado
+
+//F2ECE3 Codigo para la landing page

@@ -10,6 +10,9 @@ const LandingPage = ({ cart, setCart }) => {
   // Estado para el carrusel de imágenes del banner
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Carrusel de Nuestras especialidades
+  const [specialtyIndex, setSpecialtyIndex] = useState(0);
+
   const heroSlides = [
     { img: "/img/Aloha.jpeg", alt: "Aloha", title: "Menu Completo" },
     { img: "/img/America.jpeg", alt: "América 20 piezas", title: "Menu Completo" },
@@ -132,6 +135,20 @@ const LandingPage = ({ cart, setCart }) => {
   ];
 
   const sushiItems = menuCategorias.flatMap(cat => cat.items);
+
+  // Las primeras 10 especialidades del menú se muestran en el carrusel.
+  const specialtyItems = sushiItems.slice(0, 10);
+
+  const nextSpecialty = () => {
+    setSpecialtyIndex((prev) =>
+      Math.min(prev + 1, specialtyItems.length - 1)
+    );
+  };
+
+  const prevSpecialty = () => {
+    setSpecialtyIndex((prev) => Math.max(prev - 1, 0));
+  };
+
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -266,7 +283,10 @@ const LandingPage = ({ cart, setCart }) => {
           justify-content: center;
           min-width: 42px;
           min-height: 42px;
+          border: 1.5px solid #d4a72c;
+          background: #F2ECE3;
           border-radius: 10px;
+          box-sizing: border-box;
           transition: background 0.2s ease, transform 0.2s ease;
         }
 
@@ -488,6 +508,133 @@ const LandingPage = ({ cart, setCart }) => {
 
         .btn-pedir:hover {
           background: #d44c42;
+        }
+
+        /* =========================
+           NUESTRAS ESPECIALIDADES - CARRUSEL
+           ========================= */
+        .specialties-section {
+          width: 100%;
+          max-width: 1400px;
+          padding: 0 20px 20px;
+          margin: 0 auto;
+          box-sizing: border-box;
+        }
+
+        .specialties-section h2 {
+          margin: 40px 0 24px;
+          text-align: center;
+        }
+
+        .specialty-carousel {
+          position: relative;
+          width: 100%;
+          max-width: 1360px;
+          margin: 0 auto;
+          padding: 0 42px;
+          box-sizing: border-box;
+        }
+
+        .specialty-viewport {
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .specialty-track {
+          --specialty-step: calc(25% + 6.25px);
+          display: flex;
+          gap: 25px;
+          transition: transform 0.45s ease;
+          will-change: transform;
+        }
+
+        .specialty-slide {
+          flex: 0 0 calc((100% - 75px) / 4);
+          min-width: 0;
+          box-sizing: border-box;
+        }
+
+        .specialty-slide .menu-item {
+          width: 100%;
+          min-height: 500px;
+          box-sizing: border-box;
+        }
+
+        .specialty-slide .menu-item img {
+          height: 200px;
+        }
+
+        .specialty-description {
+          color: #555;
+          font-size: 0.78rem;
+          line-height: 1.45;
+          margin: 5px 0 12px;
+          min-height: 82px;
+          width: 100%;
+        }
+
+        .specialty-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 10;
+          width: 40px;
+          height: 40px;
+          border: 1px solid #d4a72c;
+          border-radius: 50%;
+          background: #F2ECE3;
+          color: #2b3c33;
+          font-size: 28px;
+          line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+          transition: 0.2s ease;
+        }
+
+        .specialty-arrow:hover:not(:disabled) {
+          background: #d4a72c;
+          color: white;
+        }
+
+        .specialty-arrow:disabled {
+          opacity: 0.35;
+          cursor: default;
+        }
+
+        .specialty-arrow.prev {
+          left: 0;
+        }
+
+        .specialty-arrow.next {
+          right: 0;
+        }
+
+        .specialty-dots {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 7px;
+          margin-top: 16px;
+        }
+
+        .specialty-dot {
+          width: 8px;
+          height: 8px;
+          padding: 0;
+          border: none;
+          border-radius: 50%;
+          background: #c9c0b1;
+          cursor: pointer;
+          transition: 0.2s ease;
+        }
+
+        .specialty-dot.active {
+          width: 22px;
+          border-radius: 8px;
+          background: #d4a72c;
         }
 
         /* =========================
@@ -772,6 +919,32 @@ const LandingPage = ({ cart, setCart }) => {
         }
 
         @media (max-width: 900px) {
+          .specialties-section {
+            padding-left: 12px;
+            padding-right: 12px;
+          }
+
+          .specialty-carousel {
+            padding: 0 36px;
+          }
+
+          .specialty-track {
+            --specialty-step: calc(33.333% + 6px);
+            gap: 18px;
+          }
+
+          .specialty-slide {
+            flex-basis: calc((100% - 36px) / 3);
+          }
+
+          .specialty-slide .menu-item {
+            min-height: 470px;
+          }
+
+          .specialty-slide .menu-item img {
+            height: 180px;
+          }
+
           .main-header {
             width: 95%;
           }
@@ -800,6 +973,60 @@ const LandingPage = ({ cart, setCart }) => {
            MÓVILES
            ========================= */
         @media (max-width: 600px) {
+          .specialties-section {
+            padding: 0 10px 15px;
+          }
+
+          .specialties-section h2 {
+            margin: 32px 0 18px;
+            font-size: 1.35rem;
+          }
+
+          .specialty-carousel {
+            padding: 0 30px;
+          }
+
+          .specialty-track {
+            --specialty-step: calc(50% + 6px);
+            gap: 12px;
+          }
+
+          .specialty-slide {
+            flex-basis: calc((100% - 12px) / 2);
+          }
+
+          .specialty-slide .menu-item {
+            min-height: 420px;
+            padding: 10px;
+          }
+
+          .specialty-slide .menu-item img {
+            height: 145px;
+          }
+
+          .specialty-slide .menu-item h3 {
+            font-size: 0.9rem;
+          }
+
+          .specialty-description {
+            font-size: 0.7rem;
+            min-height: 105px;
+          }
+
+          .specialty-arrow {
+            width: 32px;
+            height: 32px;
+            font-size: 23px;
+          }
+
+          .specialty-arrow.prev {
+            left: 0;
+          }
+
+          .specialty-arrow.next {
+            right: 0;
+          }
+
           .landing-wrapper {
             padding-top: 12px;
           }
@@ -845,6 +1072,7 @@ const LandingPage = ({ cart, setCart }) => {
           .cart-box {
             min-width: 40px;
             min-height: 40px;
+            border: 1.5px solid #d4a72c;
           }
 
           nav {
@@ -1012,6 +1240,31 @@ const LandingPage = ({ cart, setCart }) => {
 
         /* Móviles muy pequeños */
         @media (max-width: 380px) {
+          .specialty-carousel {
+            padding: 0 27px;
+          }
+
+          .specialty-track {
+            --specialty-step: 100%;
+          }
+
+          .specialty-slide {
+            flex-basis: 100%;
+          }
+
+          .specialty-slide .menu-item {
+            min-height: 430px;
+          }
+
+          .specialty-slide .menu-item img {
+            height: 180px;
+          }
+
+          .specialty-description {
+            min-height: 85px;
+            font-size: 0.74rem;
+          }
+
           .logo img {
             height: 34px;
             max-width: 125px;
@@ -1155,33 +1408,116 @@ const LandingPage = ({ cart, setCart }) => {
         )}
 
         {!showMenu && (
-          <>
-            <h2 style={{marginTop: '40px', textAlign: 'center', padding: '0 10px'}}>Nuestras especialidades</h2>
-            <div className="menu-list">
-              {sushiItems.slice(0, 3).map((item) => (
-                <div key={item.id} className="menu-item">
-                  {/* Etiqueta Gluten Free */}
-                  {item.glutenfree && (
-                    <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#365f73', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
-                      Gluten Free 
-                    </div>
-                  )}
+          <section className="specialties-section">
+            <h2>Nuestras especialidades</h2>
 
-                  {/* Etiqueta Vegetariano */}
-                  {item.vegetariano && (
-                    <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#8bcf8b', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
-                      Vegetariano 
-                    </div>
-                  )}
+            <div className="specialty-carousel">
+              <button
+                type="button"
+                className="specialty-arrow prev"
+                onClick={prevSpecialty}
+                disabled={specialtyIndex === 0}
+                aria-label="Productos anteriores"
+              >
+                ‹
+              </button>
 
-                  <img src={item.image} alt={item.name} />
-                  <h3>{item.name}</h3>
-                  <p style={{fontWeight: 'bold', color: '#e95d53'}}>${item.price.toLocaleString('es-CO')}</p>
-                  <button className="btn-pedir" style={{background: 'transparent', border: '1px solid #e95d53', color: '#e95d53'}} onClick={() => handleOrder(item)}>Agregar</button>
+              <div className="specialty-viewport">
+                <div
+                  className="specialty-track"
+                  style={{
+                    transform: `translateX(calc(-${specialtyIndex} * (var(--specialty-step) )))`
+                  }}
+                >
+                  {specialtyItems.map((item) => (
+                    <div className="specialty-slide" key={item.id}>
+                      <div className="menu-item">
+                        {item.glutenfree && (
+                          <div style={{
+                            position: 'absolute',
+                            top: '15px',
+                            right: '15px',
+                            background: '#365f73',
+                            color: 'white',
+                            padding: '3px 10px',
+                            borderRadius: '15px',
+                            fontSize: '0.7rem',
+                            fontWeight: 'bold',
+                            zIndex: 2
+                          }}>
+                            Gluten Free
+                          </div>
+                        )}
+
+                        {item.vegetariano && (
+                          <div style={{
+                            position: 'absolute',
+                            top: '15px',
+                            right: '15px',
+                            background: '#8bcf8b',
+                            color: 'white',
+                            padding: '3px 10px',
+                            borderRadius: '15px',
+                            fontSize: '0.7rem',
+                            fontWeight: 'bold',
+                            zIndex: 2
+                          }}>
+                            Vegetariano
+                          </div>
+                        )}
+
+                        <img src={item.image} alt={item.name} />
+
+                        <h3>{item.name}</h3>
+
+                        <p className="specialty-description">
+                          {item.ingredientes}
+                        </p>
+
+                        <button
+                          className="btn-pedir"
+                          style={{
+                            background: 'transparent',
+                            border: '1px solid #e95d53',
+                            color: '#e95d53'
+                          }}
+                          onClick={() => handleOrder(item)}
+                        >
+                          Agregar
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
+              </div>
+
+              <button
+                type="button"
+                className="specialty-arrow next"
+                onClick={nextSpecialty}
+                disabled={specialtyIndex >= specialtyItems.length - 1}
+                aria-label="Siguientes productos"
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="specialty-dots">
+              {specialtyItems.map((item, index) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  className={`specialty-dot ${
+                    specialtyIndex === index ? 'active' : ''
+                  }`}
+                  onClick={() =>
+                    setSpecialtyIndex(index)
+                  }
+                  aria-label={`Ver ${item.name}`}
+                ></button>
               ))}
             </div>
-          </>
+          </section>
         )}
 
         <section className="reviews-section">

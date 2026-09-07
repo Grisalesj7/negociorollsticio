@@ -181,8 +181,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             src="/img/LOGO_rollticio.svg"
             alt="Rollsticio Logo"
             style={{
-              height: '35px',
-              maxWidth: '100%',
+              height: '34px',
+              maxWidth: '125px',
               objectFit: 'contain',
               display: 'block',
               margin: '0 auto'

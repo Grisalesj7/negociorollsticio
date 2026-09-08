@@ -6,26 +6,35 @@ import { useNavigate } from 'react-router-dom';
 // ======================================================
 
 const CartPage = ({ cart, setCart, userData, setUserData }) => {
-
   const navigate = useNavigate();
+
+  // ======================================================
+  // HORARIO DEL RESTAURANTE
+  // Abierto todos los días de 5:00 PM a 11:00 PM
+  // ======================================================
+
+  const getRestaurantStatus = () => {
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    return currentHour >= 17 && currentHour < 23;
+  };
+
+  const isRestaurantOpen = getRestaurantStatus();
 
   // ======================================================
   // AUMENTAR O DISMINUIR CANTIDAD
   // ======================================================
 
   const updateQuantity = (item, change) => {
-
     setCart((prevCart) => {
-
       return prevCart
         .map((cartItem) => {
-
           const isMatch = cartItem.id
             ? cartItem.id === item.id
             : cartItem.name === item.name;
 
           if (isMatch) {
-
             const newQuantity =
               (cartItem.quantity || 1) + change;
 
@@ -35,22 +44,18 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           }
 
           return cartItem;
-
         })
         .filter(
-          (cartItem) =>
-            (cartItem.quantity || 1) > 0
+          (cartItem) => (cartItem.quantity || 1) > 0
         );
     });
   };
-
 
   // ======================================================
   // ELIMINAR PRODUCTO
   // ======================================================
 
   const removeFromCart = (item) => {
-
     setCart((prevCart) =>
       prevCart.filter((cartItem) =>
         cartItem.id
@@ -60,7 +65,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
     );
   };
 
-
   // ======================================================
   // CALCULAR SUBTOTAL
   // ======================================================
@@ -68,24 +72,20 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
   const calculateSubtotal = () =>
     cart.reduce(
       (acc, item) =>
-        acc +
-        item.price * (item.quantity || 1),
+        acc + item.price * (item.quantity || 1),
       0
     );
-
 
   // ======================================================
   // ENVIAR PEDIDO A WHATSAPP
   // ======================================================
 
   const sendToWhatsApp = (e) => {
-
     e.preventDefault();
 
     const itemsText = cart
       .map(
-        (i) =>
-          `${i.name} (x${i.quantity || 1})`
+        (i) => `${i.name} (x${i.quantity || 1})`
       )
       .join(', ');
 
@@ -101,13 +101,11 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
     );
   };
 
-
   // ======================================================
   // DISEÑO
   // ======================================================
 
   return (
-
     <div
       style={{
         background: '#F2ECE3',
@@ -115,7 +113,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        fontFamily: 'serif',
+        fontFamily:
+          "'Playfair Display', Georgia, 'Times New Roman', serif",
         color: '#1a2b2c',
         margin: 0,
         padding: 0,
@@ -123,9 +122,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         overflowX: 'hidden'
       }}
     >
-
       {/* ==================================================
-                          HEADER
+                            HEADER
       ================================================== */}
 
       <div
@@ -140,34 +138,35 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           gap: '10px'
         }}
       >
-
         {/* Estado */}
 
-        <div
-          style={{
-            justifySelf: 'start'
-          }}
-        >
-
+        <div style={{ justifySelf: 'start' }}>
           <div
             style={{
-              border: '1px solid #48d720',
+              border: `1px solid ${
+                isRestaurantOpen ? '#48d720' : '#48d720'
+              }`,
               padding: '5px 10px',
               borderRadius: '6px',
               fontSize: '0.75rem',
-              color: '#4a6b47',
-              background: '#eef3ed',
+              color: isRestaurantOpen ? '#4a6b47' : '#4a6b47',
+              background: isRestaurantOpen
+                ? '#eef3ed'
+                : '#f9eaea',
               display: 'inline-block',
-              whiteSpace: 'nowrap'
+              whiteSpace: 'nowrap',
+              fontWeight: '600'
             }}
           >
-            Abiertos (de 5:00 PM a 11:00 PM)
+            {isRestaurantOpen
+              ? 'Abierto (de 5:00 PM a 11:00 PM)'
+              : 'Cerrado (de 5:00 PM a 11:00 PM)'}
           </div>
-
         </div>
 
-
-        {/* Logo */}
+        {/* ==================================================
+                              LOGO
+        ================================================== */}
 
         <div
           style={{
@@ -176,30 +175,40 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             overflow: 'hidden'
           }}
         >
-
-          <img
-            src="/img/LOGO_rollticio.svg"
-            alt="Rollsticio Logo"
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            aria-label="Volver a la página principal"
+            title="Volver a la página principal"
             style={{
-              height: '35px',
-              maxWidth: '100%',
-              objectFit: 'contain',
-              display: 'block',
-              margin: '0 auto'
+              background: 'transparent',
+              border: 'none',
+              padding: 0,
+              margin: 0,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
-          />
-
+          >
+            <img
+              src="/img/LOGO_rollticio.svg"
+              alt="Rollsticio Logo"
+              style={{
+                height: '35px',
+                maxWidth: '100%',
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                margin: '0 auto'
+              }}
+            />
+          </button>
         </div>
-
 
         {/* Carrito */}
 
-        <div
-          style={{
-            justifySelf: 'end'
-          }}
-        >
-
+        <div style={{ justifySelf: 'end' }}>
           <div
             style={{
               fontSize: '1.5rem',
@@ -219,7 +228,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                 'background 0.2s ease, transform 0.2s ease'
             }}
           >
-
             <span
               className="material-symbols-outlined"
               style={{
@@ -231,7 +239,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             </span>
 
             {cart.length > 0 && (
-
               <span
                 style={{
                   position: 'absolute',
@@ -253,21 +260,17 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
               >
                 {cart.length}
               </span>
-
             )}
-
           </div>
-
         </div>
-
       </div>
-
 
       {/* ==================================================
                     CONTENEDOR DEL CARRITO
       ================================================== */}
 
       <div
+        className="cart-container"
         style={{
           padding: '35px 5%',
           display: 'flex',
@@ -277,7 +280,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           width: '100%'
         }}
       >
-
         <div
           style={{
             background: '#ffffff',
@@ -292,9 +294,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             boxSizing: 'border-box'
           }}
         >
-
-          {/* Título */}
-
           <h2
             style={{
               fontSize: '1.6rem',
@@ -306,33 +305,20 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             Carrito de compras
           </h2>
 
-
-          {/* ==================================================
-                        CARRITO VACÍO
-          ================================================== */}
-
           {cart.length === 0 ? (
-
             <div
               style={{
                 padding: '40px 15px',
                 textAlign: 'center',
                 color: '#777',
-                border:
-                  '2px dashed #e5dbcc',
+                border: '2px dashed #e5dbcc',
                 borderRadius: '12px',
                 fontSize: '0.95rem'
               }}
             >
               Tu carrito está vacío. ¡Elige tus rollos favoritos del menú!
             </div>
-
           ) : (
-
-            /* ==================================================
-                         PRODUCTOS
-            ================================================== */
-
             <div
               style={{
                 display: 'flex',
@@ -340,9 +326,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                 gap: '20px'
               }}
             >
-
               {cart.map((item, index) => (
-
                 <div
                   key={item.id || index}
                   style={{
@@ -350,15 +334,11 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     paddingBottom: '20px',
-                    borderBottom:
-                      '1px solid #eae5dc',
+                    borderBottom: '1px solid #eae5dc',
                     gap: '15px',
                     flexWrap: 'wrap'
                   }}
                 >
-
-                  {/* Producto */}
-
                   <div
                     style={{
                       display: 'flex',
@@ -368,9 +348,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                       minWidth: '0'
                     }}
                   >
-
-                    {/* Imagen */}
-
                     <img
                       src={
                         item.image ||
@@ -388,9 +365,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                       }}
                     />
 
-
-                    {/* Información */}
-
                     <div
                       style={{
                         display: 'flex',
@@ -400,9 +374,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                         flex: 1
                       }}
                     >
-
-                      {/* Nombre */}
-
                       <span
                         style={{
                           fontWeight: 'bold',
@@ -413,9 +384,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                       >
                         {item.name}
                       </span>
-
-
-                      {/* Descripción */}
 
                       <span
                         style={{
@@ -429,11 +397,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                           'Descripción del producto o ingredientes principales.'}
                       </span>
 
-
-                      {/* ==================================================
-                              CANTIDAD
-                      ================================================== */}
-
                       <div
                         style={{
                           display: 'flex',
@@ -443,7 +406,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                           flexWrap: 'wrap'
                         }}
                       >
-
                         <div
                           style={{
                             display: 'flex',
@@ -453,9 +415,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                             overflow: 'hidden'
                           }}
                         >
-
-                          {/* Menos */}
-
                           <button
                             type="button"
                             onClick={() =>
@@ -474,9 +433,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                             -
                           </button>
 
-
-                          {/* Cantidad */}
-
                           <span
                             style={{
                               padding: '0 8px',
@@ -487,9 +443,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                           >
                             {item.quantity || 1}
                           </span>
-
-
-                          {/* Más */}
 
                           <button
                             type="button"
@@ -508,11 +461,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                           >
                             +
                           </button>
-
                         </div>
-
-
-                        {/* Eliminar */}
 
                         <button
                           type="button"
@@ -531,17 +480,9 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                         >
                           🗑️
                         </button>
-
                       </div>
-
                     </div>
-
                   </div>
-
-
-                  {/* ==================================================
-                              PRECIO
-                  ================================================== */}
 
                   <div
                     style={{
@@ -552,7 +493,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                       marginLeft: 'auto'
                     }}
                   >
-
                     <span
                       style={{
                         fontWeight: 'bold',
@@ -567,17 +507,9 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                         (item.quantity || 1)
                       ).toLocaleString('es-CO')}
                     </span>
-
                   </div>
-
                 </div>
-
               ))}
-
-
-              {/* ==================================================
-                              TOTAL
-              ================================================== */}
 
               <div
                 style={{
@@ -588,14 +520,12 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                   paddingTop: '10px'
                 }}
               >
-
                 <div
                   style={{
                     display: 'flex',
                     flexDirection: 'column'
                   }}
                 >
-
                   <span
                     style={{
                       fontSize: '1.3rem',
@@ -614,9 +544,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                   >
                     Costo de envío incluido ($5.000)
                   </span>
-
                 </div>
-
 
                 <span
                   style={{
@@ -628,17 +556,11 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                   $
                   {calculateSubtotal().toLocaleString('es-CO')}
                 </span>
-
               </div>
-
             </div>
-
           )}
-
         </div>
-
       </div>
-
 
       {/* ==================================================
                     BOTONES INFERIORES
@@ -653,7 +575,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           width: '100%'
         }}
       >
-
         <div
           style={{
             display: 'flex',
@@ -663,10 +584,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             flexWrap: 'wrap'
           }}
         >
-
-          {/* Volver al menú */}
-
           <button
+            type="button"
             onClick={() => navigate('/')}
             style={{
               flex: '1 1 200px',
@@ -684,10 +603,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             Volver al menú
           </button>
 
-
-          {/* Continuar con el pago */}
-
           <button
+            type="button"
             onClick={sendToWhatsApp}
             style={{
               flex: '1 1 200px',
@@ -704,17 +621,15 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           >
             Continuar con el pago
           </button>
-
         </div>
-
       </div>
-
 
       {/* ==================================================
                             FOOTER
       ================================================== */}
 
       <div
+        className="cart-footer"
         style={{
           width: '100%',
           background: '#d4af37',
@@ -728,16 +643,12 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           boxSizing: 'border-box'
         }}
       >
-
-        {/* Contacto */}
-
         <div
           style={{
             minWidth: 0,
             lineHeight: 1.6
           }}
         >
-
           <h4
             style={{
               margin: '0 0 10px',
@@ -764,11 +675,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           >
             Correo: correo@gmail.com
           </p>
-
         </div>
-
-
-        {/* Dirección */}
 
         <div
           style={{
@@ -776,7 +683,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             lineHeight: 1.6
           }}
         >
-
           <h4
             style={{
               margin: '0 0 10px',
@@ -796,11 +702,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             <br />
             consectetur adipiscing elit.
           </p>
-
         </div>
-
-
-        {/* Diseñado por */}
 
         <div
           style={{
@@ -808,7 +710,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             lineHeight: 1.6
           }}
         >
-
           <h4
             style={{
               margin: '0 0 10px',
@@ -829,7 +730,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
               marginTop: '4px'
             }}
           >
-
             <img
               src="/img/Logo_footer.svg"
               alt="Logo"
@@ -839,13 +739,9 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                 display: 'block'
               }}
             />
-
           </span>
-
         </div>
-
       </div>
-
 
       {/* ==================================================
                     RESPONSIVE
@@ -853,27 +749,20 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
       <style>
         {`
-
           @media (max-width: 600px) {
-
             .cart-container {
               padding: 20px 15px !important;
             }
-
           }
 
           @media (max-width: 500px) {
-
             .cart-footer {
               grid-template-columns: 1fr !important;
               text-align: center;
             }
-
           }
-
         `}
       </style>
-
     </div>
   );
 };

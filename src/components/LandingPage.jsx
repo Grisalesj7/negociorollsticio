@@ -13,12 +13,11 @@ const LandingPage = ({ cart, setCart }) => {
   // Carrusel de Nuestras especialidades
   const [specialtyIndex, setSpecialtyIndex] = useState(0);
 
+  // Cambios del feedback: logo como botón, títulos en slideshow, especialidades compactas y ubicación actualizada.
   const heroSlides = [
-    { img: "/img/Aloha.jpeg", alt: "Aloha", title: "Menu Completo" },
-    { img: "/img/America.jpeg", alt: "América 20 piezas", title: "Menu Completo" },
-    { img: "/img/California10.JPG", alt: "California", title: "Menu Completo" }
-
-    // Agregar la parte del menu completo
+    { img: "/img/Aloha.jpeg", alt: "Aloha Poke", title: "Aloha Poke" },
+    { img: "/img/America.jpeg", alt: "América 20 piezas", title: "América 20 piezas" },
+    { img: "/img/California10.JPG", alt: "California Roll", title: "California Roll" }
   ];
 
   // Efecto para cambiar de imagen automáticamente cada 3.5 segundos
@@ -33,6 +32,11 @@ const LandingPage = ({ cart, setCart }) => {
 
   const handleCartClick = () => {
     navigate('/cart');
+  };
+
+  // El logo funciona como botón para volver siempre a la página principal.
+  const handleLogoClick = () => {
+    navigate('/');
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -188,6 +192,8 @@ const LandingPage = ({ cart, setCart }) => {
   return (
     <>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
         /* =========================
            RESET Y BASE RESPONSIVE
            ========================= */
@@ -203,6 +209,7 @@ const LandingPage = ({ cart, setCart }) => {
 
         body {
           background: #F2ECE3;
+          font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
         }
 
         img {
@@ -215,7 +222,7 @@ const LandingPage = ({ cart, setCart }) => {
 
         .landing-wrapper {
           background-color: #F2ECE3;
-          font-family: 'Playfair Display', serif;
+          font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
           min-height: 100vh;
           width: 100%;
           max-width: 100%;
@@ -246,6 +253,24 @@ const LandingPage = ({ cart, setCart }) => {
 
         .header-logo {
           justify-self: center;
+        }
+
+        .logo-button {
+          appearance: none;
+          border: 0;
+          padding: 0;
+          margin: 0;
+          background: transparent;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 6px;
+        }
+
+        .logo-button:focus-visible {
+          outline: 2px solid #d4a72c;
+          outline-offset: 5px;
         }
 
         .header-actions {
@@ -383,16 +408,18 @@ const LandingPage = ({ cart, setCart }) => {
 
         .hero-title {
           position: absolute;
-          bottom: 20px;
-          left: 20px;
-          background: rgba(0, 0, 0, 0.6);
+          left: 50%;
+          bottom: 22px;
+          transform: translateX(-50%);
           color: white;
-          padding: 8px 16px;
-          border-radius: 20px;
-          font-size: 1rem;
-          font-weight: bold;
+          padding: 0;
+          font-size: clamp(1.2rem, 2.2vw, 2rem);
+          font-weight: 700;
+          line-height: 1.1;
+          text-align: center;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
           z-index: 2;
-          max-width: calc(100% - 120px);
+          width: min(90%, 800px);
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -516,14 +543,18 @@ const LandingPage = ({ cart, setCart }) => {
         .specialties-section {
           width: 100%;
           max-width: 1400px;
-          padding: 0 20px 20px;
+          padding: 0 20px 28px;
           margin: 0 auto;
           box-sizing: border-box;
         }
 
         .specialties-section h2 {
-          margin: 40px 0 24px;
-          text-align: center;
+          margin: 34px 0 18px;
+          text-align: left;
+          font-size: 1.45rem;
+          line-height: 1.2;
+          color: #16445a;
+          font-weight: 700;
         }
 
         .specialty-carousel {
@@ -556,21 +587,42 @@ const LandingPage = ({ cart, setCart }) => {
 
         .specialty-slide .menu-item {
           width: 100%;
-          min-height: 500px;
+          min-height: 345px;
+          height: 345px;
+          padding: 12px;
+          border: 1px solid #d4a72c;
+          border-radius: 8px;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
           box-sizing: border-box;
         }
 
         .specialty-slide .menu-item img {
-          height: 200px;
+          height: 150px;
+          object-fit: cover;
+          border-radius: 6px;
+          margin-bottom: 8px;
+        }
+
+        .specialty-slide .menu-item h3 {
+          font-size: 0.9rem;
+          margin: 4px 0;
+          line-height: 1.2;
         }
 
         .specialty-description {
           color: #555;
-          font-size: 0.78rem;
-          line-height: 1.45;
-          margin: 5px 0 12px;
-          min-height: 82px;
+          font-size: 0.68rem;
+          line-height: 1.35;
+          margin: 5px 0 10px;
+          min-height: 62px;
           width: 100%;
+        }
+
+        .specialty-slide .btn-pedir {
+          min-height: 36px;
+          padding: 7px 12px;
+          font-size: 0.78rem;
+          margin-top: auto;
         }
 
         .specialty-arrow {
@@ -675,13 +727,13 @@ const LandingPage = ({ cart, setCart }) => {
         .map-section {
           width: 100%;
           max-width: 1000px;
-          margin: 40px auto;
-          padding: 0 20px 30px;
+          margin: 42px auto 30px;
+          padding: 0 20px 28px;
           text-align: left;
         }
 
         .map-section h2 {
-          margin: 0 auto 12px;
+          margin: 0 0 12px;
           max-width: 900px;
           font-size: 1.25rem;
           color: #16445a;
@@ -695,7 +747,7 @@ const LandingPage = ({ cart, setCart }) => {
           margin: 0 auto;
           background: #fff;
           overflow: hidden;
-          border-radius: 2px;
+          border-radius: 5px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
@@ -707,43 +759,51 @@ const LandingPage = ({ cart, setCart }) => {
         }
 
         .location-card {
-          width: 100%;
-          max-width: 292px;
-          min-height: 52px;
+          width: min(100%, 330px);
+          min-height: 49px;
           margin: 18px auto 0;
-          padding: 10px 15px;
+          padding: 8px 12px;
           display: flex;
           align-items: center;
           background: #F2ECE3;
-          border: 1.5px solid #d2a735;
+          border: 1px solid #d2a735;
           border-radius: 6px;
           box-sizing: border-box;
         }
 
         .location-icon {
-          width: 45px;
+          width: 32px;
+          height: 32px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 25px;
+          color: #d2a735;
           flex-shrink: 0;
+        }
+
+        .location-icon svg {
+          width: 24px;
+          height: 24px;
+          display: block;
         }
 
         .location-divider {
           width: 1px;
-          height: 30px;
+          height: 31px;
           background: #d2a735;
-          margin: 0 14px;
+          margin: 0 10px;
           flex-shrink: 0;
         }
 
         .location-info {
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 1px;
           color: #16445a;
-          font-size: 11px;
+          font-size: 9px;
           line-height: 1.25;
+          letter-spacing: 0.01em;
+          min-width: 0;
         }
 
         .location-info strong {
@@ -978,8 +1038,9 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialties-section h2 {
-            margin: 32px 0 18px;
-            font-size: 1.35rem;
+            margin: 28px 0 16px;
+            font-size: 1.2rem;
+            text-align: left;
           }
 
           .specialty-carousel {
@@ -996,12 +1057,13 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-slide .menu-item {
-            min-height: 420px;
+            min-height: 335px;
+            height: 335px;
             padding: 10px;
           }
 
           .specialty-slide .menu-item img {
-            height: 145px;
+            height: 135px;
           }
 
           .specialty-slide .menu-item h3 {
@@ -1009,8 +1071,8 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-description {
-            font-size: 0.7rem;
-            min-height: 105px;
+            font-size: 0.64rem;
+            min-height: 58px;
           }
 
           .specialty-arrow {
@@ -1107,11 +1169,13 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .hero-title {
-            left: 10px;
-            bottom: 10px;
-            padding: 7px 11px;
-            font-size: 0.82rem;
-            max-width: calc(100% - 85px);
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+            padding: 0;
+            font-size: 1.05rem;
+            width: 88%;
+            max-width: 88%;
           }
 
           .carousel-dots {
@@ -1186,24 +1250,29 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .location-card {
-            max-width: 100%;
+            max-width: 330px;
             width: 100%;
-            min-height: 58px;
-            padding: 9px 12px;
+            min-height: 49px;
+            padding: 8px 10px;
           }
 
           .location-icon {
-            width: 38px;
-            font-size: 22px;
+            width: 31px;
+            height: 31px;
+          }
+
+          .location-icon svg {
+            width: 23px;
+            height: 23px;
           }
 
           .location-divider {
-            margin: 0 10px;
-            height: 32px;
+            margin: 0 8px;
+            height: 30px;
           }
 
           .location-info {
-            font-size: 10px;
+            font-size: 8.5px;
           }
 
           .site-footer {
@@ -1253,16 +1322,17 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-slide .menu-item {
-            min-height: 430px;
+            min-height: 330px;
+            height: 330px;
           }
 
           .specialty-slide .menu-item img {
-            height: 180px;
+            height: 160px;
           }
 
           .specialty-description {
-            min-height: 85px;
-            font-size: 0.74rem;
+            min-height: 58px;
+            font-size: 0.68rem;
           }
 
           .logo img {
@@ -1307,9 +1377,17 @@ const LandingPage = ({ cart, setCart }) => {
   </div>
 
   <div className="header-logo">
-    <div className="logo">
-      <img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" />
-    </div>
+    <button
+      type="button"
+      className="logo-button"
+      onClick={handleLogoClick}
+      aria-label="Volver a la página principal"
+      title="Volver a la página principal"
+    >
+      <span className="logo">
+        <img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" />
+      </span>
+    </button>
   </div>
 
   <div className="header-actions">
@@ -1533,7 +1611,7 @@ const LandingPage = ({ cart, setCart }) => {
         </section>
 
         <section className="map-section" id="ubicacion">
-          <h2>📍 ¿Dónde estamos ubicados?</h2>
+          <h2>¿Dónde estamos ubicados?</h2>
 
           <div className="map-container">
             <iframe
@@ -1546,7 +1624,18 @@ const LandingPage = ({ cart, setCart }) => {
           </div>
 
           <div className="location-card">
-            <div className="location-icon">📍</div>
+            <div className="location-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 10.2C20 15.2 12 21 12 21S4 15.2 4 10.2C4 6.22 7.58 3 12 3s8 3.22 8 7.2Z"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+              </svg>
+            </div>
 
             <div className="location-divider"></div>
 

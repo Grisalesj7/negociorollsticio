@@ -1,147 +1,694 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = ({ cart, setCart }) => {
   const navigate = useNavigate();
+
+  /* =========================================================
+     ESTADOS PRINCIPALES
+     ========================================================= */
+
   const [showMenu, setShowMenu] = useState(false);
   const [message, setMessage] = useState(null);
-  const [userData, setUserData] = useState({ name: '', phone: '', address: '', notes: '' }); 
 
-  // Estado para el carrusel de imágenes del banner
+  const [userData] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    notes: '',
+  });
+
+  /* =========================================================
+     CARRUSEL PRINCIPAL
+     ========================================================= */
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Carrusel de Nuestras especialidades
-  const [specialtyIndex, setSpecialtyIndex] = useState(0);
-
-  // Cambios del feedback: logo como botón, títulos en slideshow, especialidades compactas y ubicación actualizada.
   const heroSlides = [
-    { img: "/img/Aloha.jpeg", alt: "Aloha Poke", title: "Aloha Poke" },
-    { img: "/img/America.jpeg", alt: "América 20 piezas", title: "América 20 piezas" },
-    { img: "/img/California10.JPG", alt: "California Roll", title: "California Roll" }
+    {
+      img: '/img/Aloha.jpeg',
+      alt: 'Aloha Poke',
+      title: 'Aloha Poke',
+    },
+    {
+      img: '/img/America.jpeg',
+      alt: 'América 20 piezas',
+      title: 'América 20 piezas',
+    },
+    {
+      img: '/img/California10.JPG',
+      alt: 'California Roll',
+      title: 'California Roll',
+    },
   ];
 
-  // Efecto para cambiar de imagen automáticamente cada 3.5 segundos
+  /* Cambio automático del banner cada 3.5 segundos */
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 3500);
+
     return () => clearInterval(timer);
   }, [heroSlides.length]);
 
-  const cartSectionRef = useRef(null);
+  /* =========================================================
+     NAVEGACIÓN
+     ========================================================= */
 
   const handleCartClick = () => {
     navigate('/cart');
   };
 
-  // El logo funciona como botón para volver siempre a la página principal.
   const handleLogoClick = () => {
     navigate('/');
   };
 
+  /* =========================================================
+     PAGINACIÓN
+     ========================================================= */
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  /* =========================================================
+     MENÚ COMPLETO
+     ========================================================= */
+
   const menuCategorias = [
     {
-      titulo: "Tablas Variadas",
+      titulo: 'Tablas Variadas',
       items: [
-        { id: 1, name: "Nigiris de salmón rosado", price: 5000, image: "/img/Niguiris.png", ingredientes: "4 unidades de niguiris de arroz con topping de salmón rosado fresco." },
-        { id: 2, name: "Sashimis de salmón rosado", price: 9000, image: "/img/Sashimis.png", ingredientes: "4 unidades de rodajas únicas de salmón rosado" },
-        { id: 3, name: "Geishas de salmón rosado", price: 7000, image: "/img/Geishas.png", ingredientes: "4 unidades rellenas de queso crema y palta" },
-        { id: 4, name: "Yagi 15 piezas", price: 13000, image: "/img/Yagi.png", ingredientes: "5 Philadelphia, 5 Osaka, 5 California. Incluye 2 sobres de soja, wasabi/jebjibre y un par de palitos" },
-        { id: 5, name: "Oke 20 piezas", price: 19000, image: "/img/Oke.png", ingredientes: "5 Philadelphia, 5 Osaka, 5 California, 5 Niguiris de salmón. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
-        { id: 6, name: "Nara 30 piezas", price: 0, image: "/img/Nara.JPG", ingredientes: "10 Philadelphia, 10 Osaka, 10 California. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
-        { id: 7, name: "Moly Premium 30 piezas", price: 30000, image: "/img/Moly.png", ingredientes: "10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
-        { id: 8, name: "Dundee 40 piezas", price: 0, image: "/img/Dundee.png", ingredientes: "10 Miami, 10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
-        { id: 9, name: "Star 60 piezas", price: 65000, image: "/img/", ingredientes: "10 Kansas Crunch, 10 New York, 10 Islandia, 10 Osaka, 10 MakiCalifornia, 4 Niguiris, 3 Sashimis, 3 Geishas" },
-        { id: 10, name: "Aruba 15 piezas", price: 15000, image: "/img/Aruba.png", ingredientes: "5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jebjibre y un par de palitos" },
-        { id: 11, name: "América 20 piezas", price: 22000, image: "/img/America.jpeg", ingredientes: "10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos" },
-        { id: 12, name: "Roma 30 piezas", price: 30000, image: "/img/Roma.jpeg", ingredientes: "10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 MakiCalifornia. Incluye un blíster y dos sobres de soja + dos pares de palitos" },
-        { id: 13, name: "Atlántica 60 piezas", price: 68000, image: "/img/Atlantica.jpeg", ingredientes: "10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 MakiCalifornia, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado" },
-        { id: 14, name: "Paraíso 40 piezas", price: 42000, image: "/img/Paraiso.jpeg", ingredientes: "10 New York Roll, 10 King Roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado" },
-        { id: 15, name: "Oslo 15 piezas", price: 21000, image: "/img/Oslo.jpeg", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos",  glutenfree: true }
-      ]
+        {
+          id: 1,
+          name: 'Nigiris de salmón rosado',
+          price: 5000,
+          image: '/img/Niguiris.png',
+          ingredientes:
+            '4 unidades de niguiris de arroz con topping de salmón rosado fresco.',
+        },
+        {
+          id: 2,
+          name: 'Sashimis de salmón rosado',
+          price: 9000,
+          image: '/img/Sashimis.png',
+          ingredientes: '4 unidades de rodajas únicas de salmón rosado',
+        },
+        {
+          id: 3,
+          name: 'Geishas de salmón rosado',
+          price: 7000,
+          image: '/img/Geishas.png',
+          ingredientes: '4 unidades rellenas de queso crema y palta',
+        },
+        {
+          id: 4,
+          name: 'Yagi 15 piezas',
+          price: 13000,
+          image: '/img/Yagi.png',
+          ingredientes:
+            '5 Philadelphia, 5 Osaka, 5 California. Incluye 2 sobres de soja, wasabi/jengibre y un par de palitos',
+        },
+        {
+          id: 5,
+          name: 'Oke 20 piezas',
+          price: 19000,
+          image: '/img/Oke.png',
+          ingredientes:
+            '5 Philadelphia, 5 Osaka, 5 California, 5 Niguiris de salmón. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+        },
+        {
+          id: 6,
+          name: 'Nara 30 piezas',
+          price: 0,
+          image: '/img/Nara.JPG',
+          ingredientes:
+            '10 Philadelphia, 10 Osaka, 10 California. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+        },
+        {
+          id: 7,
+          name: 'Moly Premium 30 piezas',
+          price: 30000,
+          image: '/img/Moly.png',
+          ingredientes:
+            '10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+        },
+        {
+          id: 8,
+          name: 'Dundee 40 piezas',
+          price: 0,
+          image: '/img/Dundee.png',
+          ingredientes:
+            '10 Miami, 10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+        },
+        {
+          id: 9,
+          name: 'Star 60 piezas',
+          price: 65000,
+          image: '/img/',
+          ingredientes:
+            '10 Kansas Crunch, 10 New York, 10 Islandia, 10 Osaka, 10 MakiCalifornia, 4 Niguiris, 3 Sashimis, 3 Geishas',
+        },
+        {
+          id: 10,
+          name: 'Aruba 15 piezas',
+          price: 15000,
+          image: '/img/Aruba.png',
+          ingredientes:
+            '5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+        },
+        {
+          id: 11,
+          name: 'América 20 piezas',
+          price: 22000,
+          image: '/img/America.jpeg',
+          ingredientes:
+            '10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos',
+        },
+        {
+          id: 12,
+          name: 'Roma 30 piezas',
+          price: 30000,
+          image: '/img/Roma.jpeg',
+          ingredientes:
+            '10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 MakiCalifornia. Incluye un blíster y dos sobres de soja + dos pares de palitos',
+        },
+        {
+          id: 13,
+          name: 'Atlántica 60 piezas',
+          price: 68000,
+          image: '/img/Atlantica.jpeg',
+          ingredientes:
+            '10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 MakiCalifornia, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado',
+        },
+        {
+          id: 14,
+          name: 'Paraíso 40 piezas',
+          price: 42000,
+          image: '/img/Paraiso.jpeg',
+          ingredientes:
+            '10 New York Roll, 10 King Roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado',
+        },
+        {
+          id: 15,
+          name: 'Oslo 15 piezas',
+          price: 21000,
+          image: '/img/Oslo.jpeg',
+          ingredientes:
+            '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos',
+          glutenfree: true,
+        },
+      ],
     },
+
     {
-      titulo: "Combos Signature",
+      titulo: 'Combos Signature',
       items: [
-        { id: 16, name: "Malmö 20 piezas", price: 25000, image: "/img/Malmo.jpeg", ingredientes: "3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado.", glutenfree: true },
-        { id: 17, name: "Aurora 30 piezas", price: 37000, image: "/img/Aurora.jpeg", ingredientes: "5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado.", glutenfree: true },
-        { id: 18, name: "Antártida 40 piezas", price: 48000, image: "/img/Antartida.jpeg", ingredientes: "10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis, 2 Geishas y 4 Niguiris", glutenfree: true },
-        { id: 19, name: "Malvinas 60 piezas", price: 72000, image: "/img/Malvinas.jpeg", ingredientes: "10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll, 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris, 2 Sashimis y 2 Geishas", glutenfree: true },
-        { id: 20, name: "Full salmón 15 piezas", price: 19000, image: "/img/fullsalmon.JPG", ingredientes: "10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha.", glutenfree: true },
-        { id: 21, name: "Full salmón 26 piezas", price: 33000, image: "/img/Fullsalmon26.JPG", ingredientes: "10 Philadelphia, 10 New York, 3 Niguiris, 2 Sashimis y 1 Geisha.", glutenfree: true },
-        { id: 22, name: "Full salmón 34 piezas", price: 40000, image: "/img/Fullsalmon34.JPG", ingredientes: "10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas.", glutenfree: true },
-        { id: 23, name: "Full salmón 46 piezas", price: 48000, image: "/img/Fullsalmon46.JPG", ingredientes: "10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas", glutenfree: true },
-        { id: 24, name: "Full salmón 60 piezas", price: 70000, image: "/img/Fullsalmon46.JPG", ingredientes: "10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas", glutenfree: true },
-        { id: 25, name: "Blinders Roll", price: 0, image: "/img/Blinders.jpeg", ingredientes: "10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado." },
-        { id: 26, name: "Peaky Roll", price: 0, image: "/img/Peaky.jpeg", ingredientes: "10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta.", glutenfree: true },
-        { id: 27, name: "Smoked 25 piezas", price: 0, image: "/img/Smokedd.jpeg", ingredientes: "10 Peaky, 10 Blinders y 5 Niguiris Salmón Ahumado." },
-        { id: 28, name: "Tamago Protein", price: 8000, image: "/img/Tamago.JPG", ingredientes: "6 piezas envueltas en tamago + salmón rosado + queso crema.", glutenfree: true },
-        { id: 29, name: "Paraíso Roll", price: 10000, image: "/img/Paraiso.JPG", ingredientes: "6 piezas rellenas de palta, queso crema y palmito, envueltas en tamago y fetas de salmón.", glutenfree: true },
-        { id: 30, name: "New York Salad", price: 12000, image: "/img/Newyork.png", ingredientes: "Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo.", glutenfree: true }
-      ]
+        {
+          id: 16,
+          name: 'Malmö 20 piezas',
+          price: 25000,
+          image: '/img/Malmo.jpeg',
+          ingredientes:
+            '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado.',
+          glutenfree: true,
+        },
+        {
+          id: 17,
+          name: 'Aurora 30 piezas',
+          price: 37000,
+          image: '/img/Aurora.jpeg',
+          ingredientes:
+            '5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado.',
+          glutenfree: true,
+        },
+        {
+          id: 18,
+          name: 'Antártida 40 piezas',
+          price: 48000,
+          image: '/img/Antartida.jpeg',
+          ingredientes:
+            '10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis, 2 Geishas y 4 Niguiris',
+          glutenfree: true,
+        },
+        {
+          id: 19,
+          name: 'Malvinas 60 piezas',
+          price: 72000,
+          image: '/img/Malvinas.jpeg',
+          ingredientes:
+            '10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll, 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris, 2 Sashimis y 2 Geishas',
+          glutenfree: true,
+        },
+        {
+          id: 20,
+          name: 'Full salmón 15 piezas',
+          price: 19000,
+          image: '/img/fullsalmon.JPG',
+          ingredientes: '10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha.',
+          glutenfree: true,
+        },
+        {
+          id: 21,
+          name: 'Full salmón 26 piezas',
+          price: 33000,
+          image: '/img/Fullsalmon26.JPG',
+          ingredientes:
+            '10 Philadelphia, 10 New York, 3 Niguiris, 2 Sashimis y 1 Geisha.',
+          glutenfree: true,
+        },
+        {
+          id: 22,
+          name: 'Full salmón 34 piezas',
+          price: 40000,
+          image: '/img/Fullsalmon34.JPG',
+          ingredientes:
+            '10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas.',
+          glutenfree: true,
+        },
+        {
+          id: 23,
+          name: 'Full salmón 46 piezas',
+          price: 48000,
+          image: '/img/Fullsalmon46.JPG',
+          ingredientes:
+            '10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas',
+          glutenfree: true,
+        },
+        {
+          id: 24,
+          name: 'Full salmón 60 piezas',
+          price: 70000,
+          image: '/img/Fullsalmon46.JPG',
+          ingredientes:
+            '10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas',
+          glutenfree: true,
+        },
+        {
+          id: 25,
+          name: 'Blinders Roll',
+          price: 0,
+          image: '/img/Blinders.jpeg',
+          ingredientes:
+            '10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado.',
+        },
+        {
+          id: 26,
+          name: 'Peaky Roll',
+          price: 0,
+          image: '/img/Peaky.jpeg',
+          ingredientes:
+            '10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta.',
+          glutenfree: true,
+        },
+        {
+          id: 27,
+          name: 'Smoked 25 piezas',
+          price: 0,
+          image: '/img/Smokedd.jpeg',
+          ingredientes:
+            '10 Peaky, 10 Blinders y 5 Niguiris Salmón Ahumado.',
+        },
+        {
+          id: 28,
+          name: 'Tamago Protein',
+          price: 8000,
+          image: '/img/Tamago.JPG',
+          ingredientes:
+            '6 piezas envueltas en tamago + salmón rosado + queso crema.',
+          glutenfree: true,
+        },
+        {
+          id: 29,
+          name: 'Paraíso Roll',
+          price: 10000,
+          image: '/img/Paraiso.JPG',
+          ingredientes:
+            '6 piezas rellenas de palta, queso crema y palmito, envueltas en tamago y fetas de salmón.',
+          glutenfree: true,
+        },
+        {
+          id: 30,
+          name: 'New York Salad',
+          price: 12000,
+          image: '/img/Newyork.png',
+          ingredientes:
+            'Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo.',
+          glutenfree: true,
+        },
+      ],
     },
+
     {
-      titulo: "Rolls Especiales & Hot Rolls",
+      titulo: 'Rolls Especiales & Hot Rolls',
       items: [
-        { id: 31, name: "California Salad", price: 11000, image: "/img/California.jpeg", ingredientes: "Arroz, Kanikama, queso philadelphia, palta, pepinos marinados, sésamo.", glutenfree: true },
-        { id: 32, name: "Kansas Salad", price: 11000, image: "/img/Kansas.png", ingredientes: "Arroz, Langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo." },
-        { id: 33, name: "Aloha Poke", price: 11000, image: "/img/Aloha.jpeg", ingredientes: "Base de arroz, salmón fresco, mango, queso crema, pepinos marinados.", glutenfree: true },
-        { id: 34, name: "Veggie Poke", price: 11000, image: "/img/Veggie.jpeg", ingredientes: "Base a elección, garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos.", vegetariano: true },
-        { id: 35, name: "Teriyaki Poke", price: 10000, image: "/img/Teriyake.jpeg", ingredientes: "Base de arroz sushi, pollo teriyaki, queso crema, palta, maíz crocante, tiras de pepino." },
-        { id: 36, name: "Hawaii Poke", price: 0, image: "/img/Imagen2.jpg", ingredientes: "Pollo crocante, cheddar y panceta fundida" },
-        { id: 37, name: "Tartar Poke", price: 10000, image: "/img/Tartar.jpeg", ingredientes: "Base de arroz de sushi y tartar de salmón rosado, palta, queso crema, maíz tostado.", glutenfree: true },
-        { id: 38, name: "Paté de Salmón Jet Poke", price: 9000, image: "/img/Paté.jpeg", ingredientes: "Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados." },
-        { id: 39, name: "Queen Roll", price: 0, image: "/img/", ingredientes: "10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado." },
-        { id: 40, name: "Buenos Aires Roll", price: 10000, image: "/img/Baires.JPG", ingredientes: "10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón." },
-        { id: 41, name: "Miami Roll", price: 10000, image: "/img/Miami.JPG", ingredientes: "10 piezas rellenas de salmón, queso crema y topping de palta con sésamo.", glutenfree: true },
-        { id: 42, name: "Hanko Roll", price: 11000, image: "/img/Hanko.jpeg", ingredientes: "10 piezas rellenas de salmón rosado, queso crema.", glutenfree: true },
-        { id: 43, name: "Islandia Roll", price: 10000, image: "/img/Islandia.JPG", ingredientes: "10 piezas rellenas de Palta, queso crema y topping de salmón con sésamo. Incluye 2 sobres de soja y un par de palitos", glutenfree: true },
-        { id: 44, name: "Phila Hot", price: 10000, image: "/img/Philahot.JPG", ingredientes: "10 piezas tempurizadas rellenas de salmón y queso philadelphia. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 45, name: "King Roll", price: 11000, image: "/img/KingRoll.jpeg", ingredientes: "10 piezas rellenas de langostinos rebozados, queso crema y topping de palta, bañado en tartar de salmón Oh Qué y maíz crocante triturado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." }
-      ]
+        {
+          id: 31,
+          name: 'California Salad',
+          price: 11000,
+          image: '/img/California.jpeg',
+          ingredientes:
+            'Arroz, Kanikama, queso philadelphia, palta, pepinos marinados, sésamo.',
+          glutenfree: true,
+        },
+        {
+          id: 32,
+          name: 'Kansas Salad',
+          price: 11000,
+          image: '/img/Kansas.png',
+          ingredientes:
+            'Arroz, Langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo.',
+        },
+        {
+          id: 33,
+          name: 'Aloha Poke',
+          price: 11000,
+          image: '/img/Aloha.jpeg',
+          ingredientes:
+            'Base de arroz, salmón fresco, mango, queso crema, pepinos marinados.',
+          glutenfree: true,
+        },
+        {
+          id: 34,
+          name: 'Veggie Poke',
+          price: 11000,
+          image: '/img/Veggie.jpeg',
+          ingredientes:
+            'Base a elección, garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos.',
+          vegetariano: true,
+        },
+        {
+          id: 35,
+          name: 'Teriyaki Poke',
+          price: 10000,
+          image: '/img/Teriyake.jpeg',
+          ingredientes:
+            'Base de arroz sushi, pollo teriyaki, queso crema, palta, maíz crocante, tiras de pepino.',
+        },
+        {
+          id: 36,
+          name: 'Hawaii Poke',
+          price: 0,
+          image: '/img/Imagen2.jpg',
+          ingredientes: 'Pollo crocante, cheddar y panceta fundida',
+        },
+        {
+          id: 37,
+          name: 'Tartar Poke',
+          price: 10000,
+          image: '/img/Tartar.jpeg',
+          ingredientes:
+            'Base de arroz de sushi y tartar de salmón rosado, palta, queso crema, maíz tostado.',
+          glutenfree: true,
+        },
+        {
+          id: 38,
+          name: 'Paté de Salmón Jet Poke',
+          price: 9000,
+          image: '/img/Paté.jpeg',
+          ingredientes:
+            'Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados.',
+        },
+        {
+          id: 39,
+          name: 'Queen Roll',
+          price: 0,
+          image: '/img/',
+          ingredientes:
+            '10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado.',
+        },
+        {
+          id: 40,
+          name: 'Buenos Aires Roll',
+          price: 10000,
+          image: '/img/Baires.JPG',
+          ingredientes:
+            '10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón.',
+        },
+        {
+          id: 41,
+          name: 'Miami Roll',
+          price: 10000,
+          image: '/img/Miami.JPG',
+          ingredientes:
+            '10 piezas rellenas de salmón, queso crema y topping de palta con sésamo.',
+          glutenfree: true,
+        },
+        {
+          id: 42,
+          name: 'Hanko Roll',
+          price: 11000,
+          image: '/img/Hanko.jpeg',
+          ingredientes:
+            '10 piezas rellenas de salmón rosado, queso crema.',
+          glutenfree: true,
+        },
+        {
+          id: 43,
+          name: 'Islandia Roll',
+          price: 10000,
+          image: '/img/Islandia.JPG',
+          ingredientes:
+            '10 piezas rellenas de Palta, queso crema y topping de salmón con sésamo. Incluye 2 sobres de soja y un par de palitos',
+          glutenfree: true,
+        },
+        {
+          id: 44,
+          name: 'Phila Hot',
+          price: 10000,
+          image: '/img/Philahot.JPG',
+          ingredientes:
+            '10 piezas tempurizadas rellenas de salmón y queso philadelphia. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 45,
+          name: 'King Roll',
+          price: 11000,
+          image: '/img/KingRoll.jpeg',
+          ingredientes:
+            '10 piezas rellenas de langostinos rebozados, queso crema y topping de palta, bañado en tartar de salmón Oh Qué y maíz crocante triturado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+      ],
     },
+
     {
-      titulo: "Sabores individuales",
+      titulo: 'Sabores individuales',
       items: [
-        { id: 46, name: "Boston Roll", price: 10000, image: "/img/Boston.JPG", ingredientes: "10 piezas rellenas de Salmón, queso crema y topping de mango con sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", glutenfree: true },
-        { id: 47, name: "Philadelphia roll", price: 0, image: "/img/Philadelphia.JPG", ingredientes: "10 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", glutenfree: true },
-        { id: 48, name: "Osaka Roll", price: 9000, image: "/img/Osaka.JPG", ingredientes: "10 piezas rellenas de langostino rebozados, queso crema, topping de palta y sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 49, name: "New York Roll", price: 0, image: "/img/Imagen2.jpg", ingredientes: "10 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", glutenfree: true },
-        { id: 50, name: "California Roll", price: 9000, image: "/img/California10.JPG", ingredientes: "10 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", glutenfree: true },
-        { id: 51, name: "New York Hot", price: 10000, image: "/img/Newyorkhot.JPG", ingredientes: "10 piezas tempurizadas rellenas de salmón, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 52, name: "Suiza Roll", price: 11000, image: "/img/suiza.JPG", ingredientes: "10 piezas rellenas de salmón y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", glutenfree: true },
-        { id: 53, name: "Kansas Crunch Roll", price: 11000, image: "/img/Kansascrunch.jpeg", ingredientes: "10 piezas rebozadas en panko, rellenas de langostinos rebozados, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 54, name: "Jet Roll", price: 7500, image: "/img/JETROLL.png", ingredientes: "10 piezas, rellenas de mix de pasta de salmón cocido con queso crema y ciboulette, con topping de palta y bañado en salsa teriyaki. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 55, name: "Vegan Roll", price: 9000, image: "/img/VeganRoll.jpeg", ingredientes: "10 piezas cubiertas de alga y rellenas de rúcula, palta, bastones de pepino y zanahoria marinada. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", vegetariano: true },
-        { id: 56, name: "Veggie Roll", price: 9000, image: "/img/VeggieRoll.jpeg", ingredientes: "10 piezas rellenas de queso crema, zanahoria marinada, morrón en tiras finas y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", vegetariano: true },
-        { id: 57, name: "Live Roll", price: 9000, image: "/img/LiveRoll.jpeg", ingredientes: "10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).", vegetariano: true }
-      ]
+        {
+          id: 46,
+          name: 'Boston Roll',
+          price: 10000,
+          image: '/img/Boston.JPG',
+          ingredientes:
+            '10 piezas rellenas de Salmón, queso crema y topping de mango con sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          glutenfree: true,
+        },
+        {
+          id: 47,
+          name: 'Philadelphia roll',
+          price: 0,
+          image: '/img/Philadelphia.JPG',
+          ingredientes:
+            '10 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          glutenfree: true,
+        },
+        {
+          id: 48,
+          name: 'Osaka Roll',
+          price: 9000,
+          image: '/img/Osaka.JPG',
+          ingredientes:
+            '10 piezas rellenas de langostino rebozados, queso crema, topping de palta y sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 49,
+          name: 'New York Roll',
+          price: 0,
+          image: '/img/Imagen2.jpg',
+          ingredientes:
+            '10 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          glutenfree: true,
+        },
+        {
+          id: 50,
+          name: 'California Roll',
+          price: 9000,
+          image: '/img/California10.JPG',
+          ingredientes:
+            '10 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          glutenfree: true,
+        },
+        {
+          id: 51,
+          name: 'New York Hot',
+          price: 10000,
+          image: '/img/Newyorkhot.JPG',
+          ingredientes:
+            '10 piezas tempurizadas rellenas de salmón, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 52,
+          name: 'Suiza Roll',
+          price: 11000,
+          image: '/img/suiza.JPG',
+          ingredientes:
+            '10 piezas rellenas de salmón y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          glutenfree: true,
+        },
+        {
+          id: 53,
+          name: 'Kansas Crunch Roll',
+          price: 11000,
+          image: '/img/Kansascrunch.jpeg',
+          ingredientes:
+            '10 piezas rebozadas en panko, rellenas de langostinos rebozados, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 54,
+          name: 'Jet Roll',
+          price: 7500,
+          image: '/img/JETROLL.png',
+          ingredientes:
+            '10 piezas, rellenas de mix de pasta de salmón cocido con queso crema y ciboulette, con topping de palta y bañado en salsa teriyaki. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 55,
+          name: 'Vegan Roll',
+          price: 9000,
+          image: '/img/VeganRoll.jpeg',
+          ingredientes:
+            '10 piezas cubiertas de alga y rellenas de rúcula, palta, bastones de pepino y zanahoria marinada. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          vegetariano: true,
+        },
+        {
+          id: 56,
+          name: 'Veggie Roll',
+          price: 9000,
+          image: '/img/VeggieRoll.jpeg',
+          ingredientes:
+            '10 piezas rellenas de queso crema, zanahoria marinada, morrón en tiras finas y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          vegetariano: true,
+        },
+        {
+          id: 57,
+          name: 'Live Roll',
+          price: 9000,
+          image: '/img/LiveRoll.jpeg',
+          ingredientes:
+            '10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          vegetariano: true,
+        },
+      ],
     },
+
     {
-      titulo: "Promo 20 piezas y salsas",
+      titulo: 'Promo 20 piezas y salsas',
       items: [
-        { id: 58, name: "New York roll", price: 0, image: "/img/Newyorkroll1.JPG", ingredientes: "20 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 59, name: "Phila Hot roll", price: 19000, image: "/img/Philahot10.JPG", ingredientes: "20 piezas tempurizadas rellenas de salmón y queso crema. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 60, name: "New York Hot roll", price: 21000, image: "/img/Newyorkhotpz.JPG", ingredientes: "20 piezas tempurizadas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 61, name: "Kansas roll", price: 16000, image: "/img/Kansasroll.JPG", ingredientes: "20 piezas rellenas de langostinos rebozado en panko, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 62, name: "California Roll", price: 16000, image: "/img/Californiaroll.JPG", ingredientes: "20 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).", glutenfree: true },
-        { id: 63, name: "Suiza Roll", price: 18000, image: "/img/Suizaroll.JPG", ingredientes: "20 piezas rellenas de salmón, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).", glutenfree: true },
-        { id: 64, name: "Philadelphia roll", price: 0, image: "/img/Philadelphiaroll.JPG", ingredientes: "20 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado)." },
-        { id: 65, name: "Salsa Soja", price: 1500, image: "/img/SALSASOJA.png", ingredientes: "40cc de salsa de soja tradicional" },
-        { id: 66, name: "Salsa Buenos Aires", price: 1500, image: "/img/SALSABUENOSAIRES.png", ingredientes: "40cc de salsa teriyaki, hecha en casa con lluvia de sésamo " },
-        { id: 67, name: "Salsa Maracuyá", price: 1500, image: "/img/SALSAMARACUYA.png", ingredientes: "40cc de salsa dulce de maracuyá, hecha en casa" },
-        { id: 68, name: "Salsa Teriyaki", price: 1500, image: "/img/SALSASOJA.png", ingredientes: " 40 cc de salsa dulce a base de soja" }
-      ]
-    }
+        {
+          id: 58,
+          name: 'New York roll',
+          price: 0,
+          image: '/img/Newyorkroll1.JPG',
+          ingredientes:
+            '20 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 59,
+          name: 'Phila Hot roll',
+          price: 19000,
+          image: '/img/Philahot10.JPG',
+          ingredientes:
+            '20 piezas tempurizadas rellenas de salmón y queso crema. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 60,
+          name: 'New York Hot roll',
+          price: 21000,
+          image: '/img/Newyorkhotpz.JPG',
+          ingredientes:
+            '20 piezas tempurizadas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 61,
+          name: 'Kansas roll',
+          price: 16000,
+          image: '/img/Kansasroll.JPG',
+          ingredientes:
+            '20 piezas rellenas de langostinos rebozado en panko, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 62,
+          name: 'California Roll',
+          price: 16000,
+          image: '/img/Californiaroll.JPG',
+          ingredientes:
+            '20 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          glutenfree: true,
+        },
+        {
+          id: 63,
+          name: 'Suiza Roll',
+          price: 18000,
+          image: '/img/Suizaroll.JPG',
+          ingredientes:
+            '20 piezas rellenas de salmón, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+          glutenfree: true,
+        },
+        {
+          id: 64,
+          name: 'Philadelphia roll',
+          price: 0,
+          image: '/img/Philadelphiaroll.JPG',
+          ingredientes:
+            '20 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
+        },
+        {
+          id: 65,
+          name: 'Salsa Soja',
+          price: 1500,
+          image: '/img/SALSASOJA.png',
+          ingredientes: '40cc de salsa de soja tradicional',
+        },
+        {
+          id: 66,
+          name: 'Salsa Buenos Aires',
+          price: 1500,
+          image: '/img/SALSABUENOSAIRES.png',
+          ingredientes:
+            '40cc de salsa teriyaki, hecha en casa con lluvia de sésamo',
+        },
+        {
+          id: 67,
+          name: 'Salsa Maracuyá',
+          price: 1500,
+          image: '/img/SALSAMARACUYA.png',
+          ingredientes:
+            '40cc de salsa dulce de maracuyá, hecha en casa',
+        },
+        {
+          id: 68,
+          name: 'Salsa Teriyaki',
+          price: 1500,
+          image: '/img/SALSASOJA.png',
+          ingredientes: '40 cc de salsa dulce a base de soja',
+        },
+      ],
+    },
   ];
 
-  const sushiItems = menuCategorias.flatMap(cat => cat.items);
+  /* =========================================================
+     PREPARACIÓN DEL MENÚ
+     ========================================================= */
 
-  // Las primeras 10 especialidades del menú se muestran en el carrusel.
+  const sushiItems = menuCategorias.flatMap((cat) => cat.items);
+
+  /* Primeros 10 productos para especialidades */
   const specialtyItems = sushiItems.slice(0, 10);
+
+  /* =========================================================
+     CARRUSEL DE ESPECIALIDADES
+     ========================================================= */
+
+  const [specialtyIndex, setSpecialtyIndex] = useState(0);
 
   const nextSpecialty = () => {
     setSpecialtyIndex((prev) =>
@@ -153,53 +700,132 @@ const LandingPage = ({ cart, setCart }) => {
     setSpecialtyIndex((prev) => Math.max(prev - 1, 0));
   };
 
+  /* =========================================================
+     PAGINACIÓN DEL MENÚ
+     ========================================================= */
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = sushiItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  const currentItems = sushiItems.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
   const totalPages = Math.ceil(sushiItems.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 300, behavior: 'smooth' });
+
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth',
+    });
   };
+
+  /* =========================================================
+     CARRITO
+     ========================================================= */
 
   const handleOrder = (item) => {
     const currentHour = new Date().getHours();
+
     if (currentHour >= 17 && currentHour < 23) {
       setCart([...cart, item]);
+
       setMessage(`✅ ¡${item.name} agregado!`);
-      setTimeout(() => setMessage(null), 3000);
+
+      setTimeout(() => {
+        setMessage(null);
+      }, 3000);
     } else {
-      setMessage("❌ Estamos cerrados. Horario: 5:00pm - 11:00pm.");
-      setTimeout(() => setMessage(null), 4000);
+      setMessage(
+        '❌ Estamos cerrados. Horario: 5:00pm - 11:00pm.'
+      );
+
+      setTimeout(() => {
+        setMessage(null);
+      }, 4000);
     }
   };
 
-  const calculateSubtotal = () => cart.reduce((acc, item) => acc + item.price, 0);
-  const shippingCost = 5000; 
-  const calculateTotal = () => calculateSubtotal() + (cart.length > 0 ? shippingCost : 0);
+  const calculateSubtotal = () =>
+    cart.reduce((acc, item) => acc + item.price, 0);
+
+  const shippingCost = 5000;
+
+  const calculateTotal = () =>
+    calculateSubtotal() + (cart.length > 0 ? shippingCost : 0);
+
+  /* =========================================================
+     WHATSAPP
+     ========================================================= */
 
   const sendToWhatsApp = (e) => {
     e.preventDefault();
-    const itemsText = cart.map(i => i.name).join(", ");
+
+    const itemsText = cart.map((i) => i.name).join(', ');
+
     const text = `Hola, mi nombre es ${userData.name}. Teléfono: ${userData.phone}. Dirección: ${userData.address}. Notas: ${userData.notes || 'Ninguna'}. Pedido: ${itemsText}. Total a pagar: $${calculateTotal().toLocaleString('es-CO')}`;
-    window.open(`https://wa.me/573246727621?text=${encodeURIComponent(text)}`, '_blank');
+
+    window.open(
+      `https://wa.me/573246727621?text=${encodeURIComponent(text)}`,
+      '_blank'
+    );
   };
 
-  const isShopOpen = new Date().getHours() >= 17 && new Date().getHours() < 23;
+  /* =========================================================
+     HORARIO
+     ========================================================= */
+
+  const currentHour = new Date().getHours();
+
+  const isShopOpen =
+    currentHour >= 17 && currentHour < 23;
+
+  /* =========================================================
+     RENDER
+     ========================================================= */
 
   return (
     <>
       <style>{`
+
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-        /* =========================
-           RESET Y BASE RESPONSIVE
-           ========================= */
-        * { box-sizing: border-box; }
+        /* =====================================================
+           VARIABLES GENERALES
+           Figma: 1440px de ancho
+           Contenido: 1360px
+           Margen: 40px aproximadamente por lado
+           ===================================================== */
 
-        html, body, #root {
+        :root {
+          --page-max-width: 1360px;
+          --page-side-space: 40px;
+
+          --background-main: #F2ECE3;
+          --color-text: #2b3a3c;
+          --color-gold: #d4af37;
+          --color-coral: #e95d53;
+
+          /* Verde claro del horario */
+          --color-green: #7d967b;
+          --color-green-light: #e7f6e7;
+          --color-green-border: #8bcf8b;
+        }
+
+        /* =====================================================
+           RESET GENERAL
+           ===================================================== */
+
+        * {
+          box-sizing: border-box;
+        }
+
+        html,
+        body,
+        #root {
           width: 100%;
           min-width: 0;
           margin: 0;
@@ -208,43 +834,66 @@ const LandingPage = ({ cart, setCart }) => {
         }
 
         body {
-          background: #F2ECE3;
-          font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+          background: var(--background-main);
+          font-family:
+            'Playfair Display',
+            Georgia,
+            'Times New Roman',
+            serif;
         }
 
         img {
           max-width: 100%;
         }
 
-        button, input, textarea {
+        button,
+        input,
+        textarea {
           font: inherit;
         }
 
+        /* =====================================================
+           CONTENEDOR PRINCIPAL
+           ===================================================== */
+
         .landing-wrapper {
-          background-color: #F2ECE3;
-          font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-          min-height: 100vh;
           width: 100%;
-          max-width: 100%;
+          min-height: 100vh;
+
+          margin: 0 auto;
           padding: 20px 0 0;
+
           display: flex;
           flex-direction: column;
           align-items: center;
-          color: #2b3a3c;
-          overflow: hidden;
+
+          background-color: var(--background-main);
+
+          color: var(--color-text);
+
+          overflow-x: hidden;
         }
 
-        /* =========================
+        /* =====================================================
            HEADER
-           ========================= */
+           ===================================================== */
+
         .main-header {
-          width: min(1400px, 94%);
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
           padding: 0;
+
           display: grid;
           grid-template-columns: 1fr auto 1fr;
+
           align-items: center;
+
           gap: 20px;
-          margin-bottom: 24px;
+
+          margin: 0 auto 24px;
         }
 
         .header-status {
@@ -257,14 +906,20 @@ const LandingPage = ({ cart, setCart }) => {
 
         .logo-button {
           appearance: none;
+
           border: 0;
           padding: 0;
           margin: 0;
+
           background: transparent;
+
           cursor: pointer;
+
           display: inline-flex;
+
           align-items: center;
           justify-content: center;
+
           border-radius: 6px;
         }
 
@@ -275,261 +930,454 @@ const LandingPage = ({ cart, setCart }) => {
 
         .header-actions {
           justify-self: end;
+
           display: flex;
+
           align-items: center;
+
           gap: 15px;
         }
 
+        /* =====================================================
+           HORARIO - VERDE CLARITO
+           ===================================================== */
+
         .status-box {
-          border: 1px solid #7d967b;
-          color: #7d967b;
+          border: 1px solid var(--color-green-border);
+
+          color: #3f7143;
+
+          background: var(--color-green-light);
+
           padding: 8px 15px;
+
           border-radius: 8px;
+
           font-size: 0.85rem;
+
           font-weight: bold;
+
           white-space: nowrap;
+
+          box-shadow:
+            0 2px 6px rgba(91, 145, 91, 0.08);
         }
+
+        /* =====================================================
+           LOGO
+           ===================================================== */
 
         .logo img {
           height: 48px;
+
           width: auto;
+
           max-width: 180px;
+
           object-fit: contain;
+
           display: block;
         }
 
+        /* =====================================================
+           CARRITO
+           ===================================================== */
+
         .cart-box {
           font-size: 1.5rem;
+
           cursor: pointer;
+
           position: relative;
+
           padding: 7px;
+
           display: flex;
+
           align-items: center;
           justify-content: center;
+
           min-width: 42px;
           min-height: 42px;
+
           border: 1.5px solid #d4a72c;
-          background: #F2ECE3;
+
+          background: var(--background-main);
+
           border-radius: 10px;
-          box-sizing: border-box;
-          transition: background 0.2s ease, transform 0.2s ease;
+
+          transition:
+            background 0.2s ease,
+            transform 0.2s ease;
         }
 
         .cart-box:hover {
           background: rgba(43, 58, 60, 0.08);
+
           transform: translateY(-1px);
         }
 
         .cart-count {
           position: absolute;
+
           top: -2px;
           right: -2px;
-          background: #e95d53;
+
+          background: var(--color-coral);
+
           color: white;
+
           font-size: 0.7rem;
+
           min-width: 20px;
           height: 20px;
+
           padding: 2px 5px;
+
           border-radius: 50%;
+
           font-weight: bold;
+
           display: flex;
+
           align-items: center;
           justify-content: center;
         }
 
-        /* =========================
+        /* =====================================================
            NAVEGACIÓN
-           ========================= */
+           ===================================================== */
+
         nav {
-          margin-bottom: 30px;
-          width: 94%;
-          max-width: 1400px;
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
+          margin: 0 auto 30px;
+
           text-align: center;
+
           display: flex;
+
           justify-content: center;
           align-items: center;
+
           flex-wrap: wrap;
+
           gap: 8px 28px;
         }
 
         nav a {
           margin: 0;
+
           padding: 7px 4px;
+
           text-decoration: none;
-          color: #2b3a3c;
+
+          color: var(--color-text);
+
           font-weight: bold;
+
           cursor: pointer;
+
           display: inline-flex;
+
           align-items: center;
+
           gap: 5px;
+
           transition: color 0.2s ease;
         }
 
         nav a:hover {
-          color: #e95d53;
+          color: var(--color-coral);
         }
 
-        /* =========================
-           HERO / CARRUSEL
-           ========================= */
+        /* =====================================================
+           HERO / PROMOCIÓN
+           ===================================================== */
+
         .hero-container {
           position: relative;
-          width: 92%;
-          max-width: 1400px;
+
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
           aspect-ratio: 16 / 6.5;
+
           min-height: 280px;
+
+          margin: 0 auto 20px;
+
           border-radius: 15px;
+
           overflow: hidden;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-          margin-bottom: 20px;
+
+          box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.2);
+
           background: #ddd;
         }
 
         .hero-img {
           width: 100%;
           height: 100%;
+
           display: block;
+
           object-fit: cover;
-          transition: opacity 0.5s ease-in-out;
+
+          transition:
+            opacity 0.5s ease-in-out;
         }
 
         .promo-tag {
           position: absolute;
+
           top: 20px;
           right: 20px;
-          background: #e95d53;
+
+          background: var(--color-coral);
+
           color: white;
+
           padding: 5px 15px;
+
           border-radius: 20px;
+
           font-size: 0.8rem;
+
           font-weight: bold;
+
           z-index: 2;
         }
 
         .hero-title {
           position: absolute;
+
           left: 50%;
           bottom: 22px;
+
           transform: translateX(-50%);
+
           color: white;
+
           padding: 0;
-          font-size: clamp(1.2rem, 2.2vw, 2rem);
+
+          font-size:
+            clamp(1.2rem, 2.2vw, 2rem);
+
           font-weight: 700;
+
           line-height: 1.1;
+
           text-align: center;
-          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+
+          text-shadow:
+            0 2px 8px rgba(0, 0, 0, 0.85);
+
           z-index: 2;
+
           width: min(90%, 800px);
+
           overflow: hidden;
+
           text-overflow: ellipsis;
+
           white-space: nowrap;
         }
 
         .carousel-dots {
           position: absolute;
+
           bottom: 20px;
           right: 20px;
+
           display: flex;
+
           align-items: center;
+
           gap: 6px;
+
           z-index: 2;
         }
 
         .dot {
           width: 8px;
           height: 8px;
-          background: rgba(255, 255, 255, 0.5);
+
+          background:
+            rgba(255, 255, 255, 0.5);
+
           border-radius: 50%;
+
           cursor: pointer;
+
           transition: all 0.3s;
         }
 
         .dot.active {
           background: white;
+
           width: 20px;
+
           border-radius: 4px;
         }
 
-        /* =========================
+        /* =====================================================
            BOTÓN MENÚ
-           ========================= */
+           ===================================================== */
+
         .menu-btn {
-          margin: 20px 0;
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
+          margin: 20px auto;
+
           padding: 13px 40px;
+
           background: transparent;
+
           border: 1px solid #d4c1a0;
+
           border-radius: 30px;
-          font-family: 'Playfair Display', serif;
+
+          font-family:
+            'Playfair Display',
+            serif;
+
           font-size: 1.1rem;
+
           cursor: pointer;
+
           transition: 0.3s;
-          max-width: 92%;
+
+          box-sizing: border-box;
         }
 
         .menu-btn:hover {
           background: #d4c1a0;
+
           color: white;
         }
 
-        /* =========================
-           TARJETAS DEL MENÚ
-           ========================= */
+        /* =====================================================
+           MENÚ COMPLETO
+           ===================================================== */
+
         .menu-list {
           display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+
+          grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
           gap: 25px;
-          width: 92%;
-          max-width: 1400px;
-          margin-bottom: 30px;
+
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
+          margin: 0 auto 30px;
         }
 
         .menu-item {
           background: white;
+
           padding: 15px;
+
           border-radius: 15px;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+          box-shadow:
+            0 4px 10px rgba(0, 0, 0, 0.1);
+
           text-align: center;
+
           display: flex;
+
           flex-direction: column;
+
           align-items: center;
+
           min-width: 0;
+
           word-break: break-word;
+
           position: relative;
+
           overflow: hidden;
         }
 
         .menu-item img {
           width: 100%;
+
           height: 200px;
+
           object-fit: cover;
+
           border-radius: 10px;
+
           margin-bottom: 10px;
+
           display: block;
         }
 
         .menu-item h3 {
           width: 100%;
+
           margin: 6px 0;
+
           line-height: 1.25;
         }
 
         .menu-item p {
           max-width: 100%;
+
           line-height: 1.45;
         }
 
+        /* =====================================================
+           BOTÓN AGREGAR
+           ===================================================== */
+
         .btn-pedir {
-          background: #e95d53;
+          background: var(--color-coral);
+
           color: white;
+
           border: none;
+
           padding: 12px 20px;
+
           border-radius: 8px;
+
           cursor: pointer;
-          font-family: 'Playfair Display', serif;
+
+          font-family:
+            'Playfair Display',
+            serif;
+
           font-weight: bold;
+
           width: 100%;
+
           transition: 0.2s;
+
           margin-top: auto;
+
           min-height: 44px;
         }
 
@@ -537,122 +1385,194 @@ const LandingPage = ({ cart, setCart }) => {
           background: #d44c42;
         }
 
-        /* =========================
-           NUESTRAS ESPECIALIDADES - CARRUSEL
-           ========================= */
+        /* =====================================================
+           ESPECIALIDADES
+           ===================================================== */
+
         .specialties-section {
-          width: 100%;
-          max-width: 1400px;
-          padding: 0 20px 28px;
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
+          padding: 0 0 28px;
+
           margin: 0 auto;
+
           box-sizing: border-box;
         }
 
         .specialties-section h2 {
           margin: 34px 0 18px;
+
           text-align: left;
+
           font-size: 1.45rem;
+
           line-height: 1.2;
+
           color: #16445a;
+
           font-weight: 700;
         }
 
         .specialty-carousel {
           position: relative;
+
           width: 100%;
-          max-width: 1360px;
+
+          max-width: 100%;
+
           margin: 0 auto;
+
           padding: 0 42px;
+
           box-sizing: border-box;
         }
 
         .specialty-viewport {
           width: 100%;
+
           overflow: hidden;
         }
 
         .specialty-track {
-          --specialty-step: calc(25% + 6.25px);
+          --specialty-step:
+            calc(25% + 6.25px);
+
           display: flex;
+
           gap: 25px;
-          transition: transform 0.45s ease;
+
+          transition:
+            transform 0.45s ease;
+
           will-change: transform;
         }
 
         .specialty-slide {
-          flex: 0 0 calc((100% - 75px) / 4);
+          flex: 0 0
+            calc((100% - 75px) / 4);
+
           min-width: 0;
+
           box-sizing: border-box;
         }
 
         .specialty-slide .menu-item {
           width: 100%;
+
           min-height: 345px;
           height: 345px;
+
           padding: 12px;
-          border: 1px solid #d4a72c;
+
+          border:
+            1px solid #d4a72c;
+
           border-radius: 8px;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+
+          box-shadow:
+            0 3px 10px rgba(0, 0, 0, 0.08);
+
           box-sizing: border-box;
         }
 
         .specialty-slide .menu-item img {
           height: 150px;
+
           object-fit: cover;
+
           border-radius: 6px;
+
           margin-bottom: 8px;
         }
 
         .specialty-slide .menu-item h3 {
           font-size: 0.9rem;
+
           margin: 4px 0;
+
           line-height: 1.2;
         }
 
         .specialty-description {
           color: #555;
+
           font-size: 0.68rem;
+
           line-height: 1.35;
+
           margin: 5px 0 10px;
+
           min-height: 62px;
+
           width: 100%;
         }
 
         .specialty-slide .btn-pedir {
           min-height: 36px;
+
           padding: 7px 12px;
+
           font-size: 0.78rem;
+
           margin-top: auto;
         }
 
+        /* =====================================================
+           FLECHAS ESPECIALIDADES
+           ===================================================== */
+
         .specialty-arrow {
           position: absolute;
+
           top: 50%;
+
           transform: translateY(-50%);
+
           z-index: 10;
+
           width: 40px;
           height: 40px;
-          border: 1px solid #d4a72c;
+
+          border:
+            1px solid #d4a72c;
+
           border-radius: 50%;
-          background: #F2ECE3;
+
+          background: var(--background-main);
+
           color: #2b3c33;
+
           font-size: 28px;
+
           line-height: 1;
+
           display: flex;
+
           align-items: center;
           justify-content: center;
+
           cursor: pointer;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+
+          box-shadow:
+            0 3px 10px rgba(0, 0, 0, 0.12);
+
           transition: 0.2s ease;
         }
 
         .specialty-arrow:hover:not(:disabled) {
           background: #d4a72c;
+
           color: white;
         }
 
         .specialty-arrow:disabled {
           opacity: 0.35;
+
           cursor: default;
         }
 
@@ -666,38 +1586,55 @@ const LandingPage = ({ cart, setCart }) => {
 
         .specialty-dots {
           display: flex;
+
           justify-content: center;
           align-items: center;
+
           gap: 7px;
+
           margin-top: 16px;
         }
 
         .specialty-dot {
           width: 8px;
           height: 8px;
+
           padding: 0;
+
           border: none;
+
           border-radius: 50%;
+
           background: #c9c0b1;
+
           cursor: pointer;
+
           transition: 0.2s ease;
         }
 
         .specialty-dot.active {
           width: 22px;
+
           border-radius: 8px;
+
           background: #d4a72c;
         }
 
-        /* =========================
+        /* =====================================================
            RESEÑAS
-           ========================= */
+           ===================================================== */
+
         .reviews-section {
-          background: #0a262a;
           width: 100%;
-          padding: 45px 5%;
+
+          background: #0a262a;
+
+          padding: 45px 0;
+
           color: white;
+
           text-align: center;
+
           margin-top: 40px;
         }
 
@@ -707,102 +1644,167 @@ const LandingPage = ({ cart, setCart }) => {
 
         .reviews-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+
+          grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
           gap: 20px;
-          max-width: 1400px;
+
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
           margin: 30px auto 0;
         }
 
         .review-card {
           background: #153b40;
+
           padding: 20px;
+
           border-radius: 15px;
+
           text-align: left;
+
           min-width: 0;
         }
 
-        /* =========================
-           MAPA / UBICACIÓN
-           ========================= */
+        /* =====================================================
+           UBICACIÓN
+           ===================================================== */
+
         .map-section {
-          width: 100%;
-          max-width: 1000px;
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
           margin: 42px auto 30px;
-          padding: 0 20px 28px;
+
+          padding: 0 0 28px;
+
           text-align: left;
+
+          box-sizing: border-box;
         }
 
         .map-section h2 {
           margin: 0 0 12px;
-          max-width: 900px;
+
           font-size: 1.25rem;
+
           color: #16445a;
+
           font-weight: 700;
         }
 
         .map-container {
           width: 100%;
-          max-width: 900px;
+
+          max-width: 100%;
+
           height: 335px;
+
           margin: 0 auto;
+
           background: #fff;
+
           overflow: hidden;
+
           border-radius: 5px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+          box-shadow:
+            0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .map-container iframe {
           width: 100%;
           height: 100%;
+
           border: 0;
+
           display: block;
         }
 
+        /* =====================================================
+           TARJETA DE UBICACIÓN
+           ===================================================== */
+
         .location-card {
           width: min(100%, 330px);
+
           min-height: 49px;
+
           margin: 18px auto 0;
+
           padding: 8px 12px;
+
           display: flex;
+
           align-items: center;
-          background: #F2ECE3;
-          border: 1px solid #d2a735;
+
+          background: var(--background-main);
+
+          border:
+            1px solid #d2a735;
+
           border-radius: 6px;
+
           box-sizing: border-box;
         }
 
         .location-icon {
           width: 32px;
           height: 32px;
+
           display: flex;
+
           align-items: center;
           justify-content: center;
+
           color: #d2a735;
+
           flex-shrink: 0;
         }
 
         .location-icon svg {
           width: 24px;
           height: 24px;
+
           display: block;
         }
 
         .location-divider {
           width: 1px;
           height: 31px;
+
           background: #d2a735;
+
           margin: 0 10px;
+
           flex-shrink: 0;
         }
 
         .location-info {
           display: flex;
+
           flex-direction: column;
+
           gap: 1px;
+
           color: #16445a;
+
           font-size: 9px;
+
           line-height: 1.25;
+
           letter-spacing: 0.01em;
+
           min-width: 0;
         }
 
@@ -814,174 +1816,291 @@ const LandingPage = ({ cart, setCart }) => {
           font-weight: 400;
         }
 
-        /* =========================
+        /* =====================================================
            CHECKOUT
-           ========================= */
+           ===================================================== */
+
         .checkout-container {
-          width: 92%;
-          max-width: 1400px;
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
           display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+
+          grid-template-columns:
+            minmax(0, 1fr)
+            minmax(300px, 420px);
+
           gap: 25px;
-          margin-top: 20px;
+
+          margin: 20px auto 0;
         }
 
         .cart-section-box,
         .form-section-box {
           background: white;
+
           padding: 25px;
+
           border-radius: 15px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+          box-shadow:
+            0 4px 15px rgba(0, 0, 0, 0.08);
+
           width: 100%;
+
           min-width: 0;
+
           overflow-x: hidden;
         }
 
         .form-input,
         .form-textarea {
           width: 100%;
+
           max-width: 100%;
+
           padding: 12px;
+
           margin: 8px 0 15px;
-          border: 1px solid #ddd;
+
+          border:
+            1px solid #ddd;
+
           border-radius: 8px;
+
           font-family: inherit;
+
           font-size: 0.9rem;
         }
 
         .form-textarea {
           resize: vertical;
+
           min-height: 80px;
         }
 
-        /* =========================
+        /* =====================================================
            PAGINACIÓN
-           ========================= */
+           ===================================================== */
+
         .pagination {
           display: flex;
+
           justify-content: center;
           align-items: center;
+
           gap: 8px;
+
           margin: 25px 0;
+
           flex-wrap: wrap;
+
           padding: 0 10px;
         }
 
         .page-btn {
           padding: 8px 14px;
+
           min-width: 40px;
+
           background: white;
-          border: 1px solid #0e7806;
-          color: #7d967b;
+
+          border:
+            1px solid #0e7806;
+
+          color: var(--color-green);
+
           border-radius: 8px;
+
           cursor: pointer;
+
           font-family: inherit;
+
           font-weight: bold;
+
           transition: 0.2s;
         }
 
         .page-btn:hover {
           background: #7b7f96;
+
           color: white;
         }
 
         .page-btn.active {
           background: #77db70;
+
           color: white;
         }
 
-        /* =========================
-           FOOTER RESPONSIVE
-           ========================= */
+        /* =====================================================
+           FOOTER
+           
+           IMPORTANTE:
+           El fondo del footer tiene el mismo ancho que el
+           contenido principal. Ya no se extiende más que
+           la promoción/especialidades.
+           ===================================================== */
+
         .site-footer {
-          width: 100%;
-          background: #d4af37;
-          padding: 38px 5%;
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
+
+          max-width: var(--page-max-width);
+
+          background: var(--color-gold);
+
+          padding: 38px 40px;
+
           color: #1a2b2c;
-          border-top: 1px solid #c5a030;
+
+          border-top:
+            1px solid #c5a030;
+
+          margin: 0 auto;
+
+          box-sizing: border-box;
+
+          border-radius: 8px 8px 0 0;
         }
 
         .footer-content {
           width: 100%;
-          max-width: 1400px;
+
+          max-width: 100%;
+
           margin: 0 auto;
+
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+
+          grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
           gap: 35px;
+
           align-items: start;
         }
 
         .footer-col {
           min-width: 0;
+
           line-height: 1.6;
         }
 
         .footer-col h4 {
           margin: 0 0 10px;
+
           font-size: 1rem;
         }
 
         .footer-col p {
           margin: 5px 0;
+
           font-size: 0.9rem;
         }
 
         .footer-brand {
           display: inline-flex;
+
           align-items: center;
           justify-content: center;
+
           background: #1a2b2c;
+
           color: #fff;
+
           padding: 6px 12px;
+
           border-radius: 4px;
+
           margin-top: 4px;
         }
 
         .footer-brand img {
           height: 22px;
+
           width: auto;
+
           display: block;
         }
 
-        /* =========================
-           TOAST
-           ========================= */
+        /* =====================================================
+           MENSAJE / TOAST
+           ===================================================== */
+
         .toast {
           position: fixed;
+
           bottom: 20px;
+
           left: 50%;
+
           transform: translateX(-50%);
+
           background: #2b3a3c;
+
           color: white;
+
           padding: 15px 25px;
+
           border-radius: 50px;
+
           z-index: 1000;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
+          box-shadow:
+            0 5px 15px rgba(0, 0, 0, 0.3);
+
           text-align: center;
+
           width: min(90%, 400px);
         }
 
-        /* =========================
+        /* =====================================================
            TABLETS
-           ========================= */
+           ===================================================== */
+
         @media (max-width: 1100px) {
+
+          :root {
+            --page-side-space: 30px;
+          }
+
           .menu-list {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns:
+              repeat(3, minmax(0, 1fr));
           }
 
           .reviews-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns:
+              repeat(2, minmax(0, 1fr));
           }
 
           .checkout-container {
-            grid-template-columns: minmax(0, 1fr) 360px;
+            grid-template-columns:
+              minmax(0, 1fr)
+              360px;
           }
         }
 
+        /* =====================================================
+           TABLETAS PEQUEÑAS
+           ===================================================== */
+
         @media (max-width: 900px) {
+
+          :root {
+            --page-side-space: 24px;
+          }
+
           .specialties-section {
-            padding-left: 12px;
-            padding-right: 12px;
+            padding-left: 0;
+            padding-right: 0;
           }
 
           .specialty-carousel {
@@ -989,12 +2108,15 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-track {
-            --specialty-step: calc(33.333% + 6px);
+            --specialty-step:
+              calc(33.333% + 6px);
+
             gap: 18px;
           }
 
           .specialty-slide {
-            flex-basis: calc((100% - 36px) / 3);
+            flex-basis:
+              calc((100% - 36px) / 3);
           }
 
           .specialty-slide .menu-item {
@@ -1005,23 +2127,18 @@ const LandingPage = ({ cart, setCart }) => {
             height: 180px;
           }
 
-          .main-header {
-            width: 95%;
-          }
-
           .checkout-container {
             grid-template-columns: 1fr;
-            width: 95%;
           }
 
           .menu-list {
-            width: 95%;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns:
+              repeat(2, minmax(0, 1fr));
           }
 
-          .map-section,
-          .hero-container {
-            width: 95%;
+          .reviews-grid {
+            grid-template-columns:
+              repeat(2, minmax(0, 1fr));
           }
 
           .hero-container {
@@ -1029,131 +2146,120 @@ const LandingPage = ({ cart, setCart }) => {
           }
         }
 
-        /* =========================
+        /* =====================================================
            MÓVILES
-           ========================= */
+           ===================================================== */
+
         @media (max-width: 600px) {
-          .specialties-section {
-            padding: 0 10px 15px;
-          }
 
-          .specialties-section h2 {
-            margin: 28px 0 16px;
-            font-size: 1.2rem;
-            text-align: left;
-          }
-
-          .specialty-carousel {
-            padding: 0 30px;
-          }
-
-          .specialty-track {
-            --specialty-step: calc(50% + 6px);
-            gap: 12px;
-          }
-
-          .specialty-slide {
-            flex-basis: calc((100% - 12px) / 2);
-          }
-
-          .specialty-slide .menu-item {
-            min-height: 335px;
-            height: 335px;
-            padding: 10px;
-          }
-
-          .specialty-slide .menu-item img {
-            height: 135px;
-          }
-
-          .specialty-slide .menu-item h3 {
-            font-size: 0.9rem;
-          }
-
-          .specialty-description {
-            font-size: 0.64rem;
-            min-height: 58px;
-          }
-
-          .specialty-arrow {
-            width: 32px;
-            height: 32px;
-            font-size: 23px;
-          }
-
-          .specialty-arrow.prev {
-            left: 0;
-          }
-
-          .specialty-arrow.next {
-            right: 0;
+          :root {
+            --page-side-space: 15px;
           }
 
           .landing-wrapper {
             padding-top: 12px;
           }
 
+          /* ------------------------------
+             HEADER
+             ------------------------------ */
+
           .main-header {
-            width: 94%;
-            grid-template-columns: 1fr auto;
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
+            grid-template-columns:
+              1fr auto;
+
             grid-template-areas:
               "logo cart"
               "status status";
+
             gap: 12px;
+
             margin-bottom: 18px;
           }
 
           .header-logo {
             grid-area: logo;
+
             justify-self: start;
           }
 
           .header-actions {
             grid-area: cart;
+
             justify-self: end;
           }
 
           .header-status {
             grid-area: status;
+
             justify-self: stretch;
           }
 
           .status-box {
             width: 100%;
+
             text-align: center;
+
             font-size: 0.75rem;
+
             padding: 7px 8px;
+
             white-space: normal;
           }
 
           .logo img {
             height: 38px;
+
             max-width: 145px;
           }
 
           .cart-box {
             min-width: 40px;
+
             min-height: 40px;
-            border: 1.5px solid #d4a72c;
           }
 
+          /* ------------------------------
+             NAVEGACIÓN
+             ------------------------------ */
+
           nav {
-            width: 94%;
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
             gap: 4px;
+
             margin-bottom: 20px;
           }
 
           nav a {
             flex: 1 1 auto;
+
             justify-content: center;
+
             font-size: 0.82rem;
+
             padding: 8px 5px;
           }
 
+          /* ------------------------------
+             HERO
+             ------------------------------ */
+
           .hero-container {
-            width: 94%;
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
             aspect-ratio: 4 / 3;
+
             min-height: 230px;
+
             border-radius: 12px;
           }
 
@@ -1163,42 +2269,63 @@ const LandingPage = ({ cart, setCart }) => {
 
           .promo-tag {
             top: 10px;
+
             right: 10px;
+
             padding: 5px 10px;
+
             font-size: 0.7rem;
           }
 
           .hero-title {
-            left: 50%;
             bottom: 14px;
-            transform: translateX(-50%);
-            padding: 0;
+
             font-size: 1.05rem;
+
             width: 88%;
+
             max-width: 88%;
           }
 
           .carousel-dots {
             bottom: 13px;
+
             right: 10px;
           }
 
+          /* ------------------------------
+             BOTÓN MENÚ
+             ------------------------------ */
+
           .menu-btn {
-            width: 94%;
-            max-width: none;
-            margin: 15px 0;
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
+            margin: 15px auto;
+
             padding: 12px 15px;
+
             font-size: 0.95rem;
           }
 
+          /* ------------------------------
+             MENÚ
+             ------------------------------ */
+
           .menu-list {
-            width: 94%;
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
             grid-template-columns: 1fr;
+
             gap: 16px;
           }
 
           .menu-item {
             padding: 12px;
+
             border-radius: 12px;
           }
 
@@ -1214,60 +2341,163 @@ const LandingPage = ({ cart, setCart }) => {
             font-size: 0.8rem !important;
           }
 
+          /* ------------------------------
+             ESPECIALIDADES
+             ------------------------------ */
+
+          .specialties-section {
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
+            padding: 0 0 15px;
+          }
+
+          .specialties-section h2 {
+            margin: 28px 0 16px;
+
+            font-size: 1.2rem;
+
+            text-align: left;
+          }
+
+          .specialty-carousel {
+            padding: 0 30px;
+          }
+
+          .specialty-track {
+            --specialty-step:
+              calc(50% + 6px);
+
+            gap: 12px;
+          }
+
+          .specialty-slide {
+            flex-basis:
+              calc((100% - 12px) / 2);
+          }
+
+          .specialty-slide .menu-item {
+            min-height: 335px;
+
+            height: 335px;
+
+            padding: 10px;
+          }
+
+          .specialty-slide .menu-item img {
+            height: 135px;
+          }
+
+          .specialty-slide .menu-item h3 {
+            font-size: 0.9rem;
+          }
+
+          .specialty-description {
+            font-size: 0.64rem;
+
+            min-height: 58px;
+          }
+
+          .specialty-arrow {
+            width: 32px;
+
+            height: 32px;
+
+            font-size: 23px;
+          }
+
+          .specialty-arrow.prev {
+            left: 0;
+          }
+
+          .specialty-arrow.next {
+            right: 0;
+          }
+
+          /* ------------------------------
+             RESEÑAS
+             ------------------------------ */
+
           .reviews-section {
-            padding: 32px 5%;
+            padding: 32px 0;
+
             margin-top: 25px;
+          }
+
+          .reviews-grid {
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
+            grid-template-columns: 1fr;
+
+            gap: 14px;
+
+            margin-top: 20px;
           }
 
           .reviews-section h2 {
             font-size: 1.35rem;
-          }
 
-          .reviews-grid {
-            grid-template-columns: 1fr;
-            gap: 14px;
-            margin-top: 20px;
+            padding: 0 15px;
           }
 
           .review-card {
             padding: 16px;
           }
 
+          /* ------------------------------
+             UBICACIÓN
+             ------------------------------ */
+
           .map-section {
-            width: 100%;
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
             margin: 28px auto;
-            padding: 0 18px 25px;
+
+            padding: 0 0 25px;
           }
 
           .map-section h2 {
             font-size: 1.1rem;
+
             margin-bottom: 10px;
           }
 
           .map-container {
             height: 260px;
+
             border-radius: 4px;
           }
 
           .location-card {
             max-width: 330px;
+
             width: 100%;
+
             min-height: 49px;
+
             padding: 8px 10px;
           }
 
           .location-icon {
             width: 31px;
+
             height: 31px;
           }
 
           .location-icon svg {
             width: 23px;
+
             height: 23px;
           }
 
           .location-divider {
             margin: 0 8px;
+
             height: 30px;
           }
 
@@ -1275,13 +2505,25 @@ const LandingPage = ({ cart, setCart }) => {
             font-size: 8.5px;
           }
 
+          /* ------------------------------
+             FOOTER
+             ------------------------------ */
+
           .site-footer {
-            padding: 30px 6%;
+            width: calc(
+              100% - (var(--page-side-space) * 2)
+            );
+
+            padding: 30px 20px;
+
+            border-radius: 8px 8px 0 0;
           }
 
           .footer-content {
             grid-template-columns: 1fr;
+
             gap: 24px;
+
             text-align: center;
           }
 
@@ -1289,26 +2531,47 @@ const LandingPage = ({ cart, setCart }) => {
             width: 100%;
           }
 
+          /* ------------------------------
+             PAGINACIÓN
+             ------------------------------ */
+
           .pagination {
             gap: 5px;
+
             padding: 0;
           }
 
           .page-btn {
             padding: 7px 11px;
+
             min-width: 36px;
           }
 
+          /* ------------------------------
+             TOAST
+             ------------------------------ */
+
           .toast {
             bottom: 12px;
+
             padding: 12px 18px;
+
             font-size: 0.85rem;
+
             border-radius: 14px;
           }
         }
 
-        /* Móviles muy pequeños */
+        /* =====================================================
+           MÓVILES MUY PEQUEÑOS
+           ===================================================== */
+
         @media (max-width: 380px) {
+
+          :root {
+            --page-side-space: 12px;
+          }
+
           .specialty-carousel {
             padding: 0 27px;
           }
@@ -1323,6 +2586,7 @@ const LandingPage = ({ cart, setCart }) => {
 
           .specialty-slide .menu-item {
             min-height: 330px;
+
             height: 330px;
           }
 
@@ -1332,11 +2596,13 @@ const LandingPage = ({ cart, setCart }) => {
 
           .specialty-description {
             min-height: 58px;
+
             font-size: 0.68rem;
           }
 
           .logo img {
             height: 34px;
+
             max-width: 125px;
           }
 
@@ -1362,134 +2628,344 @@ const LandingPage = ({ cart, setCart }) => {
 
           .page-btn {
             min-width: 33px;
+
             padding: 6px 9px;
+
             font-size: 0.8rem;
           }
         }
+
       `}</style>
 
+      {/* =====================================================
+          CONTENEDOR PRINCIPAL
+          ===================================================== */}
+
       <div className="landing-wrapper">
+
+        {/* ===================================================
+            HEADER
+            =================================================== */}
+
         <header className="main-header">
-  <div className="header-status">
-    <div className="status-box">
-      {isShopOpen ? "Abiertos (De 5:00pm a 11:00pm)" : "Cerrados (Abrimos a las 5:00pm)"}
-    </div>
-  </div>
 
-  <div className="header-logo">
-    <button
-      type="button"
-      className="logo-button"
-      onClick={handleLogoClick}
-      aria-label="Volver a la página principal"
-      title="Volver a la página principal"
-    >
-      <span className="logo">
-        <img src="/img/LOGO_rollticio.svg" alt="Logo Rollsticio" />
-      </span>
-    </button>
-  </div>
+          <div className="header-status">
+            <div className="status-box">
+              {isShopOpen
+                ? 'Abiertos (De 5:00pm a 11:00pm)'
+                : 'Cerrados (Abrimos a las 5:00pm)'}
+            </div>
+          </div>
 
-  <div className="header-actions">
-    <nav className="header-nav">
-    </nav>
-    <div className="cart-box" onClick={handleCartClick}>
-      <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#2b3c33' }}>
-        shopping_cart
-      </span>
-      {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
-    </div>
-  </div>
-</header>
+          <div className="header-logo">
+            <button
+              type="button"
+              className="logo-button"
+              onClick={handleLogoClick}
+              aria-label="Volver a la página principal"
+              title="Volver a la página principal"
+            >
+              <span className="logo">
+                <img
+                  src="/img/LOGO_rollticio.svg"
+                  alt="Logo Rollsticio"
+                />
+              </span>
+            </button>
+          </div>
+
+          <div className="header-actions">
+
+            <nav className="header-nav">
+            </nav>
+
+            <div
+              className="cart-box"
+              onClick={handleCartClick}
+              role="button"
+              tabIndex={0}
+              aria-label="Abrir carrito"
+            >
+              <span
+                className="material-symbols-outlined"
+                style={{
+                  fontSize: '28px',
+                  color: '#2b3c33',
+                }}
+              >
+                shopping_cart
+              </span>
+
+              {cart.length > 0 && (
+                <span className="cart-count">
+                  {cart.length}
+                </span>
+              )}
+            </div>
+
+          </div>
+
+        </header>
+
+        {/* ===================================================
+            NAVEGACIÓN
+            =================================================== */}
+
         <nav>
-          <a onClick={() => setShowMenu(false)}> 
-            <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Menú
+
+          <a onClick={() => setShowMenu(false)}>
+            Menú
           </a>
+
           <a href="#">
-            <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Contacto
+            Contacto
           </a>
+
           <a href="#ubicacion">
-            <span className="" style={{ fontSize: '18px', verticalAlign: 'middle' }}></span> Ubícanos
+            Ubícanos
           </a>
+
         </nav>
+
+        {/* ===================================================
+            HERO / PROMOCIÓN
+            =================================================== */}
 
         {!showMenu && (
           <section className="hero-container">
-            <img 
-              src={heroSlides[currentSlide].img} 
-              alt={heroSlides[currentSlide].alt} 
-              className="hero-img" 
+
+            <img
+              src={heroSlides[currentSlide].img}
+              alt={heroSlides[currentSlide].alt}
+              className="hero-img"
             />
+
             <div className="promo-tag">
-  Promo <span className="material-symbols-outlined" style={{ fontSize: '14px', verticalAlign: 'middle' }}>local_offer</span>
-</div>
-            <div className="hero-title">{heroSlides[currentSlide].title}</div>
-            <div className="carousel-dots">
-              {heroSlides.map((_, index) => (
-                <span 
-                  key={index} 
-                  className={`dot ${currentSlide === index ? 'active' : ''}`}
-                  onClick={() => setCurrentSlide(index)}
-                ></span>
-              ))}
+              Promo{' '}
+              <span
+                className="material-symbols-outlined"
+                style={{
+                  fontSize: '14px',
+                  verticalAlign: 'middle',
+                }}
+              >
+                local_offer
+              </span>
             </div>
+
+            <div className="hero-title">
+              {heroSlides[currentSlide].title}
+            </div>
+
+            <div className="carousel-dots">
+
+              {heroSlides.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${
+                    currentSlide === index
+                      ? 'active'
+                      : ''
+                  }`}
+                  onClick={() =>
+                    setCurrentSlide(index)
+                  }
+                />
+              ))}
+
+            </div>
+
           </section>
         )}
 
-        <button className="menu-btn" onClick={() => setShowMenu(!showMenu)}>
-          {showMenu ? "Volver al inicio" : "Ver menú completo"}
+        {/* ===================================================
+            BOTÓN MENÚ
+            =================================================== */}
+
+        <button
+          className="menu-btn"
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          {showMenu
+            ? 'Volver al inicio'
+            : 'Ver menú completo'}
         </button>
 
+        {/* ===================================================
+            MENÚ COMPLETO
+            =================================================== */}
 
         {showMenu && (
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2 style={{ textAlign: 'center', margin: '20px 0', padding: '0 10px', fontSize: '1.4rem' }}>Menú Completo</h2>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+
+            <h2
+              style={{
+                textAlign: 'center',
+                margin: '20px 0',
+                padding: '0 10px',
+                fontSize: '1.4rem',
+              }}
+            >
+              Menú Completo
+            </h2>
+
             <div className="menu-list">
+
               {currentItems.map((item) => (
-                <div key={item.id} className="menu-item">
+
+                <div
+                  key={item.id}
+                  className="menu-item"
+                >
+
                   {/* Etiqueta Gluten Free */}
                   {item.glutenfree && (
-                    <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#365f73', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '15px',
+                        right: '15px',
+                        background: '#365f73',
+                        color: 'white',
+                        padding: '3px 10px',
+                        borderRadius: '15px',
+                        fontSize: '0.7rem',
+                        fontWeight: 'bold',
+                        zIndex: 2,
+                      }}
+                    >
                       Gluten Free
-                  </div>
+                    </div>
                   )}
 
                   {/* Etiqueta Vegetariano */}
                   {item.vegetariano && (
-                    <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#8bcf8b', color: 'white', padding: '3px 10px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 'bold', zIndex: 2 }}>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '15px',
+                        right: '15px',
+                        background: '#8bcf8b',
+                        color: 'white',
+                        padding: '3px 10px',
+                        borderRadius: '15px',
+                        fontSize: '0.7rem',
+                        fontWeight: 'bold',
+                        zIndex: 2,
+                      }}
+                    >
                       Vegetariano
                     </div>
                   )}
 
-                  <img src={item.image} alt={item.name} />
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                  />
+
                   <h3>{item.name}</h3>
-                  <p style={{ fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>{item.description}</p>
-                  <p style={{ fontSize: '0.75rem', color: '#555', marginBottom: '10px' }}>{item.ingredientes}</p>
-                  <p style={{fontWeight: 'bold', color: '#e95d53'}}>${item.price.toLocaleString('es-CO')}</p>
-                  <button className="btn-pedir" onClick={() => handleOrder(item)}>Agregar al carrito</button>
+
+                  {item.description && (
+                    <p
+                      style={{
+                        fontSize: '0.8rem',
+                        color: '#666',
+                        marginBottom: '5px',
+                      }}
+                    >
+                      {item.description}
+                    </p>
+                  )}
+
+                  <p
+                    style={{
+                      fontSize: '0.75rem',
+                      color: '#555',
+                      marginBottom: '10px',
+                    }}
+                  >
+                    {item.ingredientes}
+                  </p>
+
+                  <p
+                    style={{
+                      fontWeight: 'bold',
+                      color: '#e95d53',
+                    }}
+                  >
+                    $
+                    {item.price.toLocaleString(
+                      'es-CO'
+                    )}
+                  </p>
+
+                  <button
+                    className="btn-pedir"
+                    onClick={() =>
+                      handleOrder(item)
+                    }
+                  >
+                    Agregar al carrito
+                  </button>
+
                 </div>
+
               ))}
+
             </div>
 
+            {/* =================================================
+                PAGINACIÓN
+                ================================================= */}
+
             <div className="pagination">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index + 1}
-                  className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              ))}
+
+              {Array.from(
+                { length: totalPages },
+                (_, index) => (
+                  <button
+                    key={index + 1}
+                    className={`page-btn ${
+                      currentPage === index + 1
+                        ? 'active'
+                        : ''
+                    }`}
+                    onClick={() =>
+                      handlePageChange(
+                        index + 1
+                      )
+                    }
+                  >
+                    {index + 1}
+                  </button>
+                )
+              )}
+
             </div>
+
           </div>
         )}
 
+        {/* ===================================================
+            ESPECIALIDADES
+            =================================================== */}
+
         {!showMenu && (
           <section className="specialties-section">
-            <h2>Nuestras especialidades</h2>
+
+            <h2>
+              Nuestras especialidades
+            </h2>
 
             <div className="specialty-carousel">
+
               <button
                 type="button"
                 className="specialty-arrow prev"
@@ -1501,50 +2977,65 @@ const LandingPage = ({ cart, setCart }) => {
               </button>
 
               <div className="specialty-viewport">
+
                 <div
                   className="specialty-track"
                   style={{
-                    transform: `translateX(calc(-${specialtyIndex} * (var(--specialty-step) )))`
+                    transform: `translateX(calc(-${specialtyIndex} * (var(--specialty-step))))`,
                   }}
                 >
+
                   {specialtyItems.map((item) => (
-                    <div className="specialty-slide" key={item.id}>
+
+                    <div
+                      className="specialty-slide"
+                      key={item.id}
+                    >
+
                       <div className="menu-item">
+
                         {item.glutenfree && (
-                          <div style={{
-                            position: 'absolute',
-                            top: '15px',
-                            right: '15px',
-                            background: '#365f73',
-                            color: 'white',
-                            padding: '3px 10px',
-                            borderRadius: '15px',
-                            fontSize: '0.7rem',
-                            fontWeight: 'bold',
-                            zIndex: 2
-                          }}>
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '15px',
+                              right: '15px',
+                              background: '#365f73',
+                              color: 'white',
+                              padding: '3px 10px',
+                              borderRadius: '15px',
+                              fontSize: '0.7rem',
+                              fontWeight: 'bold',
+                              zIndex: 2,
+                            }}
+                          >
                             Gluten Free
                           </div>
                         )}
 
                         {item.vegetariano && (
-                          <div style={{
-                            position: 'absolute',
-                            top: '15px',
-                            right: '15px',
-                            background: '#8bcf8b',
-                            color: 'white',
-                            padding: '3px 10px',
-                            borderRadius: '15px',
-                            fontSize: '0.7rem',
-                            fontWeight: 'bold',
-                            zIndex: 2
-                          }}>
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '15px',
+                              right: '15px',
+                              background: '#8bcf8b',
+                              color: 'white',
+                              padding: '3px 10px',
+                              borderRadius: '15px',
+                              fontSize: '0.7rem',
+                              fontWeight: 'bold',
+                              zIndex: 2,
+                            }}
+                          >
                             Vegetariano
                           </div>
                         )}
 
-                        <img src={item.image} alt={item.name} />
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                        />
 
                         <h3>{item.name}</h3>
 
@@ -1555,77 +3046,150 @@ const LandingPage = ({ cart, setCart }) => {
                         <button
                           className="btn-pedir"
                           style={{
-                            background: 'transparent',
-                            border: '1px solid #e95d53',
-                            color: '#e95d53'
+                            background:
+                              'transparent',
+                            border:
+                              '1px solid #e95d53',
+                            color: '#e95d53',
                           }}
-                          onClick={() => handleOrder(item)}
+                          onClick={() =>
+                            handleOrder(item)
+                          }
                         >
                           Agregar
                         </button>
+
                       </div>
+
                     </div>
+
                   ))}
+
                 </div>
+
               </div>
 
               <button
                 type="button"
                 className="specialty-arrow next"
                 onClick={nextSpecialty}
-                disabled={specialtyIndex >= specialtyItems.length - 1}
+                disabled={
+                  specialtyIndex >=
+                  specialtyItems.length - 1
+                }
                 aria-label="Siguientes productos"
               >
                 ›
               </button>
+
             </div>
 
             <div className="specialty-dots">
-              {specialtyItems.map((item, index) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  className={`specialty-dot ${
-                    specialtyIndex === index ? 'active' : ''
-                  }`}
-                  onClick={() =>
-                    setSpecialtyIndex(index)
-                  }
-                  aria-label={`Ver ${item.name}`}
-                ></button>
-              ))}
+
+              {specialtyItems.map(
+                (item, index) => (
+                  <button
+                    type="button"
+                    key={item.id}
+                    className={`specialty-dot ${
+                      specialtyIndex === index
+                        ? 'active'
+                        : ''
+                    }`}
+                    onClick={() =>
+                      setSpecialtyIndex(index)
+                    }
+                    aria-label={`Ver ${item.name}`}
+                  />
+                )
+              )}
+
             </div>
+
           </section>
         )}
 
+        {/* ===================================================
+            RESEÑAS
+            =================================================== */}
+
         <section className="reviews-section">
-          <h2>¿Qué dicen nuestros clientes?</h2>
+
+          <h2>
+            ¿Qué dicen nuestros clientes?
+          </h2>
+
           <div className="reviews-grid">
+
             {[1, 2, 3].map((i) => (
-              <div key={i} className="review-card">
-                <p>"¡El mejor sushi que he probado! La calidad es increíble y siempre llega fresco."</p>
-                <p style={{fontWeight: 'bold', marginTop: '15px'}}>Rafael Gonzales 5.0 ⭐</p>
+
+              <div
+                key={i}
+                className="review-card"
+              >
+
+                <p>
+                  "¡El mejor sushi que he
+                  probado! La calidad es
+                  increíble y siempre llega
+                  fresco."
+                </p>
+
+                <p
+                  style={{
+                    fontWeight: 'bold',
+                    marginTop: '15px',
+                  }}
+                >
+                  Rafael Gonzales 5.0 ⭐
+                </p>
+
               </div>
+
             ))}
+
           </div>
+
         </section>
 
-        <section className="map-section" id="ubicacion">
-          <h2>¿Dónde estamos ubicados?</h2>
+        {/* ===================================================
+            UBICACIÓN
+            =================================================== */}
+
+        <section
+          className="map-section"
+          id="ubicacion"
+        >
+
+          <h2>
+            ¿Dónde estamos ubicados?
+          </h2>
 
           <div className="map-container">
+
             <iframe
               src="https://www.google.com/maps?q=Gorriti+3440,+C1172+ACB,+Buenos+Aires,+Argentina&output=embed"
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
               title="Ubicación Rollsticio"
-            ></iframe>
+            />
+
           </div>
 
           <div className="location-card">
-            <div className="location-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <div
+              className="location-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+
                 <path
                   d="M20 10.2C20 15.2 12 21 12 21S4 15.2 4 10.2C4 6.22 7.58 3 12 3s8 3.22 8 7.2Z"
                   stroke="currentColor"
@@ -1633,51 +3197,105 @@ const LandingPage = ({ cart, setCart }) => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="2.5"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+
               </svg>
+
             </div>
 
-            <div className="location-divider"></div>
+            <div className="location-divider" />
 
             <div className="location-info">
-              <strong>Gorriti 3440, C1172 ACB,</strong>
-              <span>Ciudad Autónoma de Buenos Aires, Argentina</span>
+
+              <strong>
+                Gorriti 3440, C1172 ACB,
+              </strong>
+
+              <span>
+                Ciudad Autónoma de Buenos Aires,
+                Argentina
+              </span>
+
             </div>
+
           </div>
+
         </section>
 
-      {/* Footer actualizado */}
-      <footer className="site-footer">
-        <div className="footer-content">
-          <div className="footer-col">
-            <h4>Contacto</h4>
-            <p>Tlf: 0200202003</p>
-            <p>Correo: correo@gmail.com</p>
+        {/* ===================================================
+            FOOTER
+            =================================================== */}
+
+        <footer className="site-footer">
+
+          <div className="footer-content">
+
+            <div className="footer-col">
+
+              <h4>Contacto</h4>
+
+              <p>
+                Tlf: 0200202003
+              </p>
+
+              <p>
+                Correo: correo@gmail.com
+              </p>
+
+            </div>
+
+            <div className="footer-col">
+
+              <h4>Dirección</h4>
+
+              <p>
+                Gorriti 3440, C1172 ACB,
+                <br />
+                Ciudad Autónoma de Buenos Aires,
+                Argentina.
+              </p>
+
+            </div>
+
+            <div className="footer-col">
+
+              <h4>Diseñado por</h4>
+
+              <span className="footer-brand">
+
+                <img
+                  src="/img/Logo_footer.svg"
+                  alt="Logo Rollsticio"
+                />
+
+              </span>
+
+            </div>
+
           </div>
 
-          <div className="footer-col">
-            <h4>Dirección</h4>
-            <p>Lorem ipsum dolor sit amet,<br />consectetur adipiscing elit.</p>
-          </div>
+        </footer>
 
-          <div className="footer-col">
-            <h4>Diseñado por</h4>
-            <span className="footer-brand">
-              <img src="/img/Logo_footer.svg" alt="Logo" />
-            </span>
-          </div>
-        </div>
-      </footer>
+        {/* ===================================================
+            MENSAJE TEMPORAL
+            =================================================== */}
 
-        {message && <div className="toast">{message}</div>}
+        {message && (
+          <div className="toast">
+            {message}
+          </div>
+        )}
+
       </div>
     </>
   );
 };
+
 export default LandingPage;
-
-// Basicamente tenemos que actualizar el documento que sea bien documentado
-
-// Tambien acomodar la parte de lo que es el footer que quede bien actualizado
-
-//F2ECE3 Codigo para la landing page

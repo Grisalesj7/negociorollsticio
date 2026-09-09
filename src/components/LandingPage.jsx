@@ -1625,19 +1625,28 @@ const LandingPage = ({ cart, setCart }) => {
            ===================================================== */
 
         .reviews-section {
-          width: 100%;
+  width: min(
+    var(--page-max-width),
+    calc(100% - (var(--page-side-space) * 2))
+  );
 
-          background: #0a262a;
+  max-width: var(--page-max-width);
 
-          padding: 45px 0;
+  background: #0a262a;
 
-          color: white;
+  padding: 45px 0;
 
-          text-align: center;
+  color: white;
 
-          margin-top: 40px;
-        }
+  text-align: center;
 
+  margin: 40px auto 0;
+
+  box-sizing: border-box;
+
+  border-radius: 8px 8px 0 0;
+}
+  
         .reviews-section h2 {
           margin-top: 0;
         }

@@ -402,7 +402,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
                 fontSize: '28px',
 
-                color: '#2b3c33'
+                color: '#d4af37'
 
               }}
 

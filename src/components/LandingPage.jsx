@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react'; // Lo que hacemos aqui es que se importa react
+import { useNavigate } from 'react-router-dom'; // Aca hacemos el use navigate, que es lo que pasa con esto, es que podemos hacer la parte de navegar entre las paginas
 
-const LandingPage = ({ cart, setCart }) => {
-  const navigate = useNavigate();
+const LandingPage = ({ cart, setCart }) => { // Teenemos la constante de lo que se acabo de crear, en este caso ese nombre se le puede dar de cualquier manera
+  const navigate = useNavigate(); // Y aca llamamos el use navigate, que es el que nos permite importar la navegacion entre paginas
 
   /* =========================================================
      ESTADOS PRINCIPALES
      ========================================================= */
 
-  const [showMenu, setShowMenu] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [showMenu, setShowMenu] = useState(false); // Tenemos el showmenu, en este caso cambia de estado,lo que se hace es que cada que seleccionemos la parte del menu y se pueda abrir o cerrar, por eso siempre sale el menu cerrado aca que ingresamos a la pagina 
+  const [message, setMessage] = useState(null); // Tenemos la parte de lo que es el mensaje, este mensaje lo que hace es que nos dice si esta abierto o cerrado el negocio
 
-  const [userData] = useState({
-    name: '',
+  const [userData] = useState({ // Aca le pedimos los datos al cliente para que pueda hacer el pedido
+    name: '', 
     phone: '',
     address: '',
     notes: '',
@@ -22,9 +22,9 @@ const LandingPage = ({ cart, setCart }) => {
      CARRUSEL PRINCIPAL
      ========================================================= */
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0); // Tenemos la parte del slide, en este caso ese slide es el que nos deja poner la parte de lo que es la promocion
 
-  const heroSlides = [
+  const heroSlides = [ // Esta parte es la parte de la promocion, lo que hace esto, es que en la parte del primer slide, se maneja un carrusel,en este caso esa parte lo que hace es que va pasando de 1 en 1, de imagen en imagen, el tienpo de esta se hace por medio de segundos,o como ya queramos definirlo
     {
       img: '/img/Aloha.jpeg',
       alt: 'Aloha Poke',
@@ -55,26 +55,31 @@ const LandingPage = ({ cart, setCart }) => {
      NAVEGACIÓN
      ========================================================= */
 
-  const handleCartClick = () => {
-    navigate('/cart');
+  const handleCartClick = () => { // En esta linea de codigo lo que hacemos es que le decimos donde queremos navegar, en este caso, nos va a redigir al carrito de compras
+    navigate('/cart'); // Y aqui tenemos la parte de la navegacion del carro
   };
 
-  const handleLogoClick = () => {
-    navigate('/');
+  const handleLogoClick = () => { // El logo vuelve a la página inicial
+    setShowMenu(false); // Cierra el menú completo si está abierto
+    navigate('/'); // Navega a la LandingPage
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Lleva la página al inicio
   };
+
+  // Reemplaza este valor por el enlace que te entreguen para "Dejar mi reseña".
+  const reviewLink = '#';
 
   /* =========================================================
      PAGINACIÓN
      ========================================================= */
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1); // Tenemos la parte de la paginacion, en este caso vamos de pagina en pagina
   const itemsPerPage = 10;
 
   /* =========================================================
      MENÚ COMPLETO
      ========================================================= */
 
-  const menuCategorias = [
+  const menuCategorias = [ // Aqui tenemos el menu de todas las categorias
     {
       titulo: 'Tablas Variadas',
       items: [
@@ -884,7 +889,9 @@ const LandingPage = ({ cart, setCart }) => {
             calc(100% - (var(--page-side-space) * 2))
           );
 
-          padding: 0;
+          padding: 0 0 12px;
+
+          border-bottom: 1px solid #d2a735;
 
           display: grid;
           grid-template-columns: 1fr auto 1fr;
@@ -1002,19 +1009,24 @@ const LandingPage = ({ cart, setCart }) => {
 
           border: 1.5px solid #d4a72c;
 
-          background: var(--background-main);
+          background: white;
 
-          border-radius: 10px;
+          border-radius: 8px;
+
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 
           transition:
             background 0.2s ease,
-            transform 0.2s ease;
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
         }
 
         .cart-box:hover {
-          background: rgba(43, 58, 60, 0.08);
+          background: #fffdf8;
 
           transform: translateY(-1px);
+
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
         }
 
         .cart-count {
@@ -1236,22 +1248,21 @@ const LandingPage = ({ cart, setCart }) => {
            ===================================================== */
 
         .menu-btn {
-          width: min(
-            var(--page-max-width),
-            calc(100% - (var(--page-side-space) * 2))
-          );
+          width: min(360px, calc(100% - (var(--page-side-space) * 2)));
 
-          max-width: var(--page-max-width);
+          max-width: 360px;
 
           margin: 20px auto;
 
-          padding: 13px 40px;
+          padding: 11px 28px;
 
-          background: transparent;
+          background: white;
 
-          border: 1px solid #d4c1a0;
+          border: 1px solid #d4a72c;
 
-          border-radius: 30px;
+          border-radius: 24px;
+
+          box-shadow: 0 2px 7px rgba(0, 0, 0, 0.10);
 
           font-family:
             'Playfair Display',
@@ -1464,8 +1475,8 @@ const LandingPage = ({ cart, setCart }) => {
         .specialty-slide .menu-item {
           width: 100%;
 
-          min-height: 345px;
-          height: 345px;
+          min-height: 0;
+          height: auto;
 
           padding: 12px;
 
@@ -1507,7 +1518,7 @@ const LandingPage = ({ cart, setCart }) => {
 
           margin: 5px 0 10px;
 
-          min-height: 62px;
+          min-height: 0;
 
           width: 100%;
         }
@@ -1520,6 +1531,22 @@ const LandingPage = ({ cart, setCart }) => {
           font-size: 0.78rem;
 
           margin-top: auto;
+        }
+
+        .specialty-add-btn {
+          background: #153b40;
+
+          color: white;
+
+          border: none;
+
+          border-radius: 20px;
+
+          box-shadow: none;
+        }
+
+        .specialty-add-btn:hover {
+          background: #1c4a50;
         }
 
         /* =====================================================
@@ -1625,30 +1652,36 @@ const LandingPage = ({ cart, setCart }) => {
            ===================================================== */
 
         .reviews-section {
-  width: min(
-    var(--page-max-width),
-    calc(100% - (var(--page-side-space) * 2))
-  );
+          width: min(
+            var(--page-max-width),
+            calc(100% - (var(--page-side-space) * 2))
+          );
 
-  max-width: var(--page-max-width);
+          max-width: var(--page-max-width);
 
-  background: #0a262a;
+          background: #193c46;
 
-  padding: 45px 0;
+          padding: 32px 52px 31px;
 
-  color: white;
+          color: white;
 
-  text-align: center;
+          text-align: left;
 
-  margin: 40px auto 0;
+          margin: 40px auto 0;
 
-  box-sizing: border-box;
+          box-sizing: border-box;
 
-  border-radius: 8px 8px 0 0;
-}
-  
+          border-radius: 0;
+        }
+
         .reviews-section h2 {
-          margin-top: 0;
+          margin: 0 0 20px;
+
+          font-size: 1.15rem;
+
+          font-weight: 700;
+
+          line-height: 1.2;
         }
 
         .reviews-grid {
@@ -1657,28 +1690,109 @@ const LandingPage = ({ cart, setCart }) => {
           grid-template-columns:
             repeat(3, minmax(0, 1fr));
 
-          gap: 20px;
+          gap: 16px;
 
-          width: min(
-            var(--page-max-width),
-            calc(100% - (var(--page-side-space) * 2))
-          );
+          width: 100%;
 
-          max-width: var(--page-max-width);
+          max-width: none;
 
-          margin: 30px auto 0;
+          margin: 0 auto;
         }
 
         .review-card {
-          background: #153b40;
+          background: #193c46;
 
-          padding: 20px;
+          padding: 10px 9px 9px;
 
-          border-radius: 15px;
+          border-radius: 5px;
 
           text-align: left;
 
           min-width: 0;
+
+          min-height: 180px;
+
+          box-sizing: border-box;
+
+          border: 1px solid #2b5964;
+
+          display: flex;
+
+          flex-direction: column;
+
+          justify-content: space-between;
+        }
+
+        .review-card p:first-child {
+          margin: 0;
+
+          font-size: 0.72rem;
+
+          line-height: 1.16;
+
+          color: white;
+        }
+
+        .review-card p:last-child {
+          margin: 10px 0 0 !important;
+
+          padding-top: 7px;
+
+          border-top: 1px solid #2b5964;
+
+          font-size: 0.72rem;
+
+          line-height: 1;
+
+          color: white;
+        }
+
+        .review-star {
+          color: #d4a72c;
+
+          font-size: 0.78rem;
+
+          margin-left: 3px;
+        }
+
+        .reviews-button {
+          display: flex;
+
+          align-items: center;
+
+          justify-content: center;
+
+          width: 161px;
+
+          height: 32px;
+
+          box-sizing: border-box;
+
+          margin: 23px auto 0;
+
+          padding: 0 16px;
+
+          background: #315d6b;
+
+          color: white;
+
+          border: none;
+
+          border-radius: 18px;
+
+          text-decoration: none;
+
+          font-size: 0.78rem;
+
+          font-weight: 500;
+
+          transition: 0.2s ease;
+        }
+
+        .reviews-button:hover {
+          background: #3a6c7b;
+
+          transform: translateY(-1px);
         }
 
         /* =====================================================
@@ -1745,9 +1859,9 @@ const LandingPage = ({ cart, setCart }) => {
            ===================================================== */
 
         .location-card {
-          width: min(100%, 330px);
+          width: min(100%, 500px);
 
-          min-height: 49px;
+          min-height: 58px;
 
           margin: 18px auto 0;
 
@@ -1804,11 +1918,11 @@ const LandingPage = ({ cart, setCart }) => {
 
           flex-direction: column;
 
-          gap: 1px;
+          gap: 2px;
 
           color: #16445a;
 
-          font-size: 9px;
+          font-size: 10px;
 
           line-height: 1.25;
 
@@ -2129,7 +2243,7 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-slide .menu-item {
-            min-height: 470px;
+            min-height: 0;
           }
 
           .specialty-slide .menu-item img {
@@ -2307,9 +2421,9 @@ const LandingPage = ({ cart, setCart }) => {
              ------------------------------ */
 
           .menu-btn {
-            width: calc(
-              100% - (var(--page-side-space) * 2)
-            );
+            width: min(360px, calc(100% - (var(--page-side-space) * 2)));
+
+            max-width: 360px;
 
             margin: 15px auto;
 
@@ -2387,9 +2501,9 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-slide .menu-item {
-            min-height: 335px;
+            min-height: 0;
 
-            height: 335px;
+            height: auto;
 
             padding: 10px;
           }
@@ -2405,7 +2519,7 @@ const LandingPage = ({ cart, setCart }) => {
           .specialty-description {
             font-size: 0.64rem;
 
-            min-height: 58px;
+            min-height: 0;
           }
 
           .specialty-arrow {
@@ -2429,31 +2543,39 @@ const LandingPage = ({ cart, setCart }) => {
              ------------------------------ */
 
           .reviews-section {
-            padding: 32px 0;
+            padding: 28px 18px 26px;
 
             margin-top: 25px;
           }
 
           .reviews-grid {
-            width: calc(
-              100% - (var(--page-side-space) * 2)
-            );
+            width: 100%;
 
             grid-template-columns: 1fr;
 
-            gap: 14px;
+            gap: 12px;
 
-            margin-top: 20px;
+            margin-top: 0;
           }
 
           .reviews-section h2 {
-            font-size: 1.35rem;
+            font-size: 1.15rem;
 
-            padding: 0 15px;
+            padding: 0;
           }
 
           .review-card {
-            padding: 16px;
+            min-height: 160px;
+
+            padding: 10px;
+          }
+
+          .reviews-button {
+            width: 161px;
+
+            height: 32px;
+
+            margin-top: 20px;
           }
 
           /* ------------------------------
@@ -2483,11 +2605,11 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .location-card {
-            max-width: 330px;
+            max-width: 500px;
 
             width: 100%;
 
-            min-height: 49px;
+            min-height: 58px;
 
             padding: 8px 10px;
           }
@@ -2594,9 +2716,9 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-slide .menu-item {
-            min-height: 330px;
+            min-height: 0;
 
-            height: 330px;
+            height: auto;
           }
 
           .specialty-slide .menu-item img {
@@ -2604,7 +2726,7 @@ const LandingPage = ({ cart, setCart }) => {
           }
 
           .specialty-description {
-            min-height: 58px;
+            min-height: 0;
 
             font-size: 0.68rem;
           }
@@ -2699,7 +2821,7 @@ const LandingPage = ({ cart, setCart }) => {
                 className="material-symbols-outlined"
                 style={{
                   fontSize: '28px',
-                  color: '#2b3c33',
+                  color: '#d4a72c',
                 }}
               >
                 shopping_cart
@@ -3053,14 +3175,7 @@ const LandingPage = ({ cart, setCart }) => {
                         </p>
 
                         <button
-                          className="btn-pedir"
-                          style={{
-                            background:
-                              'transparent',
-                            border:
-                              '1px solid #e95d53',
-                            color: '#e95d53',
-                          }}
+                          className="btn-pedir specialty-add-btn"
                           onClick={() =>
                             handleOrder(item)
                           }
@@ -3138,19 +3253,26 @@ const LandingPage = ({ cart, setCart }) => {
               >
 
                 <p>
-                  "¡El mejor sushi que he
-                  probado! La calidad es
-                  increíble y siempre llega
-                  fresco."
+                  Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt
+                  ut labore et dolore magna
+                  aliqua. Ut enim ad minim
+                  veniam, quis nostrud
+                  exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo
+                  consequat.
                 </p>
 
                 <p
                   style={{
-                    fontWeight: 'bold',
-                    marginTop: '15px',
+                    fontWeight: 'normal',
                   }}
                 >
-                  Rafael Gonzales 5.0 ⭐
+                  Rafael Gonzales
+                  <span style={{ float: 'right' }}>
+                    5.0 <span className="review-star">★</span>
+                  </span>
                 </p>
 
               </div>
@@ -3158,6 +3280,20 @@ const LandingPage = ({ cart, setCart }) => {
             ))}
 
           </div>
+
+          <a
+            className="reviews-button"
+            href={reviewLink}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => {
+              if (reviewLink === '#') {
+                e.preventDefault();
+              }
+            }}
+          >
+            Dejar mi reseña
+          </a>
 
         </section>
 
@@ -3175,16 +3311,14 @@ const LandingPage = ({ cart, setCart }) => {
           </h2>
 
           <div className="map-container">
-
-            <iframe
-              src="https://www.google.com/maps?q=Gorriti+3440,+C1172+ACB,+Buenos+Aires,+Argentina&output=embed"
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Ubicación Rollsticio"
-            />
-
-          </div>
+  <iframe
+    src="https://www.google.com/maps?q=Gorriti+3440,+C1172+ACB,+Buenos+Aires,+Argentina&output=embed"
+    loading="lazy"
+    allowFullScreen
+    referrerPolicy="no-referrer-when-downgrade"
+    title="Ubicación Rollsticio"
+  />
+</div>
 
           <div className="location-card">
 
@@ -3293,7 +3427,7 @@ const LandingPage = ({ cart, setCart }) => {
         </footer>
 
         {/* ===================================================
-            MENSAJE TEMPORAL
+            MENSAJE TEMPORAL - SI EL NEGOCIO ESTÁ ABIERTO O CERRADO
             =================================================== */}
 
         {message && (
@@ -3307,4 +3441,9 @@ const LandingPage = ({ cart, setCart }) => {
   );
 };
 
-export default LandingPage;
+export default LandingPage;  // Lo que se hace aqui es que se exporta la landingpage
+
+// Ya la parte de la landingpage, lo que hace es que es que se tiene que hacer toda la documentacion del codigo
+// Ya lo que se hace es que se tiene que acomodar el movil 
+
+// Ya lo unico que quedaria pendiente es la parte de la documentacion del codigo, en este caso despues de hacer eso ya nos quedaria la landing bien puesta

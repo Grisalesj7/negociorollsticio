@@ -381,7 +381,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
               border:
                 '1.5px solid #d4a72c',
 
-              background: '#F2ECE3',
+              background: '#fafafa',
 
               borderRadius: '10px',
 

@@ -116,7 +116,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
       `Total a pagar: $${totalFinal.toLocaleString('es-CO')}`;
 
     window.open(
-      `https://wa.me/573246727621?text=${encodeURIComponent(text)}`,
+      `https://wa.me/573002070981?text=${encodeURIComponent(text)}`,
       '_blank'
     );
 

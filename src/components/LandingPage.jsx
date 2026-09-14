@@ -727,20 +727,17 @@ const LandingPage = ({ cart, setCart }) => {
 
   /* =========================================================
      CARRITO
-     
-     CAMBIO REALIZADO:
-     Ya no se verifica el horario para agregar productos.
      ========================================================= */
 
   const handleOrder = (item) => {
-  setCart([...cart, item]);
+    setCart([...cart, item]);
 
-  setMessage(`✅ ¡${item.name} agregado!`);
+    setMessage(`✅ ¡${item.name} agregado!`);
 
-  setTimeout(() => {
-    setMessage(null);
-  }, 3000);
-};
+    setTimeout(() => {
+      setMessage(null);
+    }, 3000);
+  };
 
   const calculateSubtotal = () =>
     cart.reduce((acc, item) => acc + item.price, 0);
@@ -836,43 +833,42 @@ const LandingPage = ({ cart, setCart }) => {
 
   /* =========================================================
      CONTENEDOR PRINCIPAL
-     1200px + 20px laterales
      ========================================================= */
 
   .landing-wrapper {
     width: 100%;
     max-width: var(--page-max-width);
-
     min-height: 100vh;
-
     margin: 0 auto;
-
-    padding:
-      20px
-      var(--page-side-space)
-      0;
-
+    padding: 20px 0 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-
     background-color: var(--background-main);
-
     color: var(--color-text);
-
     overflow-x: hidden;
   }
 
   /* =========================================================
-     GRID GENERAL DE 12 COLUMNAS
+     CONTROL DE ANCHO DE SECCIONES
      ========================================================= */
 
+  /* Secciones contenidas con margen lateral */
   .main-header,
   .landing-wrapper > nav,
   .hero-container,
+  .menu-list,
+  .checkout-container,
+  .map-section {
+    width: calc(100% - (var(--page-side-space) * 2));
+    max-width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Secciones de ancho completo (borde a borde) */
   .specialties-section,
   .reviews-section,
-  .map-section,
   .site-footer {
     width: 100%;
     max-width: 100%;
@@ -880,68 +876,46 @@ const LandingPage = ({ cart, setCart }) => {
 
   /* =========================================================
      HEADER
-     Logo = columnas 5 a 8
-     Status = columnas 1 a 4
-     Acciones = columnas 9 a 12
      ========================================================= */
 
   .main-header {
     display: grid;
-
-    grid-template-columns:
-      repeat(12, minmax(0, 1fr));
-
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--grid-gap);
-
     align-items: center;
-
     padding: 0 0 12px;
-
     border-bottom: 1px solid #d2a735;
-
     margin: 0 auto 24px;
   }
 
   .header-status {
     grid-column: 1 / span 4;
-
     justify-self: start;
   }
 
   .header-logo {
     grid-column: 5 / span 4;
-
     justify-self: center;
   }
 
   .header-actions {
     grid-column: 9 / span 4;
-
     justify-self: end;
-
     display: flex;
-
     align-items: center;
-
     gap: 15px;
   }
 
   .logo-button {
     appearance: none;
-
     border: 0;
     padding: 0;
     margin: 0;
-
     background: transparent;
-
     cursor: pointer;
-
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     border-radius: 6px;
   }
 
@@ -952,144 +926,88 @@ const LandingPage = ({ cart, setCart }) => {
 
   .status-box {
     border: 1px solid var(--color-green-border);
-
     color: #3f7143;
-
     background: var(--color-green-light);
-
     padding: 8px 15px;
-
     border-radius: 8px;
-
     font-size: 0.85rem;
-
     font-weight: bold;
-
     white-space: nowrap;
-
-    box-shadow:
-      0 2px 6px rgba(91, 145, 91, 0.08);
+    box-shadow: 0 2px 6px rgba(91, 145, 91, 0.08);
   }
 
   .logo img {
     height: 48px;
-
     width: auto;
-
     max-width: 180px;
-
     object-fit: contain;
-
     display: block;
   }
 
   .cart-box {
     font-size: 1.5rem;
-
     cursor: pointer;
-
     position: relative;
-
     padding: 7px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     min-width: 42px;
     min-height: 42px;
-
     border: 1.5px solid #d4a72c;
-
     background: white;
-
     border-radius: 8px;
-
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-
-    transition:
-      background 0.2s ease,
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .cart-box:hover {
     background: #fffdf8;
-
     transform: translateY(-1px);
-
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   }
 
   .cart-count {
     position: absolute;
-
     top: -2px;
     right: -2px;
-
     background: var(--color-coral);
-
     color: white;
-
     font-size: 0.7rem;
-
     min-width: 20px;
     height: 20px;
-
     padding: 2px 5px;
-
     border-radius: 50%;
-
     font-weight: bold;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
   }
 
   /* =========================================================
      NAVEGACIÓN
-     12 COLUMNAS COMPLETAS
      ========================================================= */
 
   .landing-wrapper > nav {
-    grid-column: 1 / -1;
-
     margin: 0 auto 30px;
-
     text-align: center;
-
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     flex-wrap: wrap;
-
     gap: 8px 28px;
   }
 
   nav a {
     margin: 0;
-
     padding: 7px 4px;
-
     text-decoration: none;
-
     color: var(--color-text);
-
     font-weight: bold;
-
     cursor: pointer;
-
     display: inline-flex;
-
     align-items: center;
-
     gap: 5px;
-
     transition: color 0.2s ease;
   }
 
@@ -1099,132 +1017,81 @@ const LandingPage = ({ cart, setCart }) => {
 
   /* =========================================================
      HERO
-     12 COLUMNAS COMPLETAS
      ========================================================= */
 
   .hero-container {
-    grid-column: 1 / -1;
-
     position: relative;
-
     aspect-ratio: 16 / 6.5;
-
     min-height: 280px;
-
     margin: 0 auto 20px;
-
     border-radius: 15px;
-
     overflow: hidden;
-
-    box-shadow:
-      0 10px 25px rgba(0, 0, 0, 0.2);
-
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     background: #ddd;
   }
 
   .hero-img {
     width: 100%;
     height: 100%;
-
     display: block;
-
     object-fit: cover;
-
-    transition:
-      opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
   }
 
   .promo-tag {
     position: absolute;
-
     top: 20px;
     right: 20px;
-
     background: var(--color-coral);
-
     color: white;
-
     padding: 5px 15px;
-
     border-radius: 20px;
-
     font-size: 0.8rem;
-
     font-weight: bold;
-
     z-index: 2;
   }
 
   .hero-title {
     position: absolute;
-
     left: 50%;
     bottom: 22px;
-
     transform: translateX(-50%);
-
     color: white;
-
     padding: 0;
-
-    font-size:
-      clamp(1.2rem, 2.2vw, 2rem);
-
+    font-size: clamp(1.2rem, 2.2vw, 2rem);
     font-weight: 700;
-
     line-height: 1.1;
-
     text-align: center;
-
-    text-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.85);
-
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
     z-index: 2;
-
     width: min(90%, 800px);
-
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
   }
 
   .carousel-dots {
     position: absolute;
-
     bottom: 20px;
     right: 20px;
-
     display: flex;
-
     align-items: center;
-
     gap: 6px;
-
     z-index: 2;
   }
 
   .dot {
     width: 8px;
     height: 8px;
-
-    background:
-      rgba(255, 255, 255, 0.5);
-
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
-
     cursor: pointer;
-
     transition: all 0.3s;
   }
 
   .dot.active {
     background: white;
-
     width: 20px;
-
     border-radius: 4px;
   }
 
@@ -1234,139 +1101,83 @@ const LandingPage = ({ cart, setCart }) => {
 
   .menu-btn {
     width: min(360px, 100%);
-
     max-width: 360px;
-
     margin: 20px auto;
-
     padding: 11px 28px;
-
     background: white;
-
     border: 1px solid #d4a72c;
-
     border-radius: 24px;
-
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.10);
-
-    font-family:
-      'Playfair Display',
-      serif;
-
+    font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
-
     cursor: pointer;
-
     transition: 0.3s;
-
     box-sizing: border-box;
   }
 
   .menu-btn:hover {
     background: #d4c1a0;
-
     color: white;
   }
 
   /* =========================================================
      MENÚ COMPLETO
-     12 COLUMNAS
      ========================================================= */
 
   .menu-list {
-    width: 100%;
-    max-width: 100%;
-
     margin: 0 auto 30px;
-
     display: grid;
-
-    grid-template-columns:
-      repeat(4, minmax(0, 1fr));
-
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--grid-gap);
   }
 
   .menu-item {
     background: white;
-
     padding: 15px;
-
     border-radius: 15px;
-
-    box-shadow:
-      0 4px 10px rgba(0, 0, 0, 0.1);
-
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     min-width: 0;
-
     word-break: break-word;
-
     position: relative;
-
     overflow: hidden;
   }
 
   .menu-item img {
     width: 100%;
-
     height: 200px;
-
     object-fit: cover;
-
     border-radius: 10px;
-
     margin-bottom: 10px;
-
     display: block;
   }
 
   .menu-item h3 {
     width: 100%;
-
     margin: 6px 0;
-
     line-height: 1.25;
   }
 
   .menu-item p {
     max-width: 100%;
-
     line-height: 1.45;
   }
 
   .btn-pedir {
     background: var(--color-coral);
-
     color: white;
-
     border: none;
-
     padding: 12px 20px;
-
     border-radius: 8px;
-
     cursor: pointer;
-
-    font-family:
-      'Playfair Display',
-      serif;
-
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
-
     width: 100%;
-
     transition: 0.2s;
-
     margin-top: auto;
-
     min-height: 44px;
   }
 
@@ -1375,149 +1186,99 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   /* =========================================================
-     NUESTRAS ESPECIALIDADES
-     12 COLUMNAS
-     3 TARJETAS = 4 COLUMNAS CADA UNA
+     NUESTRAS ESPECIALIDADES (Fondo Ancho Completo Blanco)
      ========================================================= */
 
   .specialties-section {
-    grid-column: 1 / -1;
-
-    padding: 0 0 28px;
-
-    margin: 0 auto;
-
+    padding: 40px var(--page-side-space);
+    background-color: #ffffff;
+    border-radius: 0;
     box-sizing: border-box;
+    margin: 40px 0;
   }
-
+  
   .specialties-section h2 {
-    margin: 34px 0 18px;
-
+    margin: 0 0 18px;
     text-align: left;
-
     font-size: 1.45rem;
-
     line-height: 1.2;
-
     color: #16445a;
-
     font-weight: 700;
   }
 
   .specialty-carousel {
     position: relative;
-
     width: 100%;
-
     max-width: 100%;
-
     margin: 0 auto;
-
     padding: 0 42px;
-
     box-sizing: border-box;
   }
 
   .specialty-viewport {
     width: 100%;
-
     overflow: hidden;
   }
 
   .specialty-track {
-    --specialty-step:
-      calc((100% + var(--grid-gap)) / 3);
-
+    --specialty-step: calc((100% + var(--grid-gap)) / 3);
     display: flex;
-
     gap: var(--grid-gap);
-
-    transition:
-      transform 0.45s ease;
-
+    transition: transform 0.45s ease;
     will-change: transform;
   }
 
   .specialty-slide {
-    flex:
-      0 0
-      calc((100% - (var(--grid-gap) * 2)) / 3);
-
+    flex: 0 0 calc((100% - (var(--grid-gap) * 2)) / 3);
     min-width: 0;
-
     box-sizing: border-box;
   }
 
   .specialty-slide .menu-item {
     width: 100%;
-
     min-height: 0;
     height: auto;
-
     padding: 12px;
-
-    border:
-      1px solid #d4a72c;
-
+    border: 1px solid #d4a72c;
     border-radius: 8px;
-
-    box-shadow:
-      0 3px 10px rgba(0, 0, 0, 0.08);
-
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
   }
 
   .specialty-slide .menu-item img {
     height: 150px;
-
     object-fit: cover;
-
     border-radius: 6px;
-
     margin-bottom: 8px;
   }
 
   .specialty-slide .menu-item h3 {
     font-size: 0.9rem;
-
     margin: 4px 0;
-
     line-height: 1.2;
   }
 
   .specialty-description {
     color: #555;
-
     font-size: 0.68rem;
-
     line-height: 1.35;
-
     margin: 5px 0 10px;
-
     min-height: 0;
-
     width: 100%;
   }
 
   .specialty-slide .btn-pedir {
     min-height: 36px;
-
     padding: 7px 12px;
-
     font-size: 0.78rem;
-
     margin-top: auto;
   }
 
   .specialty-add-btn {
     background: #153b40;
-
     color: white;
-
     border: none;
-
     border-radius: 20px;
-
     box-shadow: none;
   }
 
@@ -1527,51 +1288,32 @@ const LandingPage = ({ cart, setCart }) => {
 
   .specialty-arrow {
     position: absolute;
-
     top: 50%;
-
     transform: translateY(-50%);
-
     z-index: 10;
-
     width: 40px;
     height: 40px;
-
-    border:
-      1px solid #d4a72c;
-
+    border: 1px solid #d4a72c;
     border-radius: 50%;
-
     background: var(--background-main);
-
     color: #2b3c33;
-
     font-size: 28px;
-
     line-height: 1;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
-
-    box-shadow:
-      0 3px 10px rgba(0, 0, 0, 0.12);
-
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     transition: 0.2s ease;
   }
 
   .specialty-arrow:hover:not(:disabled) {
     background: #d4a72c;
-
     color: white;
   }
 
   .specialty-arrow:disabled {
     opacity: 0.35;
-
     cursor: default;
   }
 
@@ -1585,329 +1327,210 @@ const LandingPage = ({ cart, setCart }) => {
 
   .specialty-dots {
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     gap: 7px;
-
     margin-top: 16px;
   }
 
   .specialty-dot {
     width: 8px;
     height: 8px;
-
     padding: 0;
-
     border: none;
-
     border-radius: 50%;
-
     background: #c9c0b1;
-
     cursor: pointer;
-
     transition: 0.2s ease;
   }
 
   .specialty-dot.active {
     width: 22px;
-
     border-radius: 8px;
-
     background: #d4a72c;
   }
 
   /* =========================================================
-     RESEÑAS
-     3 TESTIMONIOS = 4 COLUMNAS CADA UNO
-     BOTÓN = COLUMNAS 5 A 8
+     RESEÑAS (Fondo Ancho Completo)
      ========================================================= */
 
   .reviews-section {
-    grid-column: 1 / -1;
-
-    width: 100%;
-
     background: #193c46;
-
-    padding: 32px 52px 31px;
-
+    padding: 32px var(--page-side-space) 31px;
     color: white;
-
     text-align: left;
-
-    margin: 40px auto 0;
-
+    margin: 0 auto;
     box-sizing: border-box;
-
-    border-radius: 0;
-
     display: grid;
-
-    grid-template-columns:
-      repeat(12, minmax(0, 1fr));
-
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--grid-gap);
   }
 
   .reviews-section h2 {
     grid-column: 1 / -1;
-
     margin: 0 0 20px;
-
     font-size: 1.15rem;
-
     font-weight: 700;
-
     line-height: 1.2;
   }
 
   .reviews-grid {
     grid-column: 1 / -1;
-
     display: grid;
-
-    grid-template-columns:
-      repeat(12, minmax(0, 1fr));
-
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: var(--grid-gap);
-
     width: 100%;
-
     max-width: none;
-
     margin: 0 auto;
   }
 
   .review-card {
     grid-column: span 4;
-
     background: #193c46;
-
     padding: 10px 9px 9px;
-
     border-radius: 5px;
-
     text-align: left;
-
     min-width: 0;
-
     min-height: 180px;
-
     box-sizing: border-box;
-
     border: 1px solid #2b5964;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
   }
 
   .review-card p:first-child {
     margin: 0;
-
     font-size: 0.72rem;
-
     line-height: 1.16;
-
     color: white;
   }
 
   .review-card p:last-child {
     margin: 10px 0 0 !important;
-
     padding-top: 7px;
-
     border-top: 1px solid #2b5964;
-
     font-size: 0.72rem;
-
     line-height: 1;
-
     color: white;
   }
 
   .review-star {
     color: #d4a72c;
-
     font-size: 0.78rem;
-
     margin-left: 3px;
   }
 
   .reviews-button {
     grid-column: 5 / span 4;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     width: 161px;
-
     height: 32px;
-
     box-sizing: border-box;
-
     margin: 23px auto 0;
-
     padding: 0 16px;
-
     background: #315d6b;
-
     color: white;
-
     border: none;
-
     border-radius: 18px;
-
     text-decoration: none;
-
     font-size: 0.78rem;
-
     font-weight: 500;
-
     transition: 0.2s ease;
   }
 
   .reviews-button:hover {
     background: #3a6c7b;
-
     transform: translateY(-1px);
   }
 
   /* =========================================================
-     UBICACIÓN
-     MAPA = COLUMNAS 4 A 9
+     UBICACIÓN (Con borde blanco y Tarjeta Ajustada)
      ========================================================= */
 
   .map-section {
-    grid-column: 4 / span 6;
-
-    width: 100%;
-
     margin: 42px auto 30px;
-
     padding: 0 0 28px;
-
     text-align: left;
-
     box-sizing: border-box;
   }
 
   .map-section h2 {
-    margin: 0 0 12px;
-
-    font-size: 1.25rem;
-
+    margin: 0 0 20px;
+    font-size: 1.45rem;
     color: #16445a;
-
     font-weight: 700;
   }
 
   .map-container {
     width: 100%;
-
     max-width: 100%;
-
-    height: 335px;
-
+    height: 480px;
     margin: 0 auto;
-
-    background: #fff;
-
-    overflow: hidden;
-
-    border-radius: 5px;
-
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
   }
 
   .map-container iframe {
     width: 100%;
     height: 100%;
-
     border: 0;
-
     display: block;
   }
 
   .location-card {
-    width: min(100%, 500px);
-
-    min-height: 58px;
-
-    margin: 18px auto 0;
-
-    padding: 8px 12px;
-
+    width: fit-content;
+    min-width: 580px; /* <-- Esto la hace más extendida a los lados */
+    max-width: 100%;
+    margin: 25px auto 0;
+    padding: 22px 50px; /* <-- Más espacio interno (arriba/abajo y lados) */
     display: flex;
-
     align-items: center;
-
+    justify-content: center; /* Centra el contenido en el nuevo ancho */
     background: var(--background-main);
-
-    border:
-      1px solid #d2a735;
-
-    border-radius: 6px;
-
+    border: 1px solid #d2a735;
+    border-radius: 8px;
     box-sizing: border-box;
+    text-align: left;
   }
 
   .location-icon {
-    width: 32px;
-    height: 32px;
-
+    width: 48px; /* <-- Contenedor del icono más grande */
+    height: 48px;
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     color: #d2a735;
-
     flex-shrink: 0;
   }
 
   .location-icon svg {
-    width: 24px;
-    height: 24px;
-
+    width: 38px; /* <-- Icono más grande */
+    height: 38px;
     display: block;
   }
 
   .location-divider {
-    width: 1px;
-    height: 31px;
-
+    width: 1.5px;
+    height: 52px; /* <-- Línea divisoria más alta */
     background: #d2a735;
-
-    margin: 0 10px;
-
+    margin: 0 25px; /* <-- Más separación entre icono y texto */
     flex-shrink: 0;
   }
 
   .location-info {
     display: flex;
-
     flex-direction: column;
-
-    gap: 2px;
-
+    gap: 6px;
     color: #16445a;
-
-    font-size: 10px;
-
-    line-height: 1.25;
-
+    font-size: 1.15rem; /* <-- Texto más grande */
+    line-height: 1.3;
     letter-spacing: 0.01em;
-
     min-width: 0;
   }
 
@@ -1924,16 +1547,9 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   .checkout-container {
-    width: 100%;
-    max-width: 100%;
-
     display: grid;
-
-    grid-template-columns:
-      repeat(12, minmax(0, 1fr));
-
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: var(--grid-gap);
-
     margin: 20px auto 0;
   }
 
@@ -1948,44 +1564,28 @@ const LandingPage = ({ cart, setCart }) => {
   .cart-section-box,
   .form-section-box {
     background: white;
-
     padding: 25px;
-
     border-radius: 15px;
-
-    box-shadow:
-      0 4px 15px rgba(0, 0, 0, 0.08);
-
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     width: 100%;
-
     min-width: 0;
-
     overflow-x: hidden;
   }
 
   .form-input,
   .form-textarea {
     width: 100%;
-
     max-width: 100%;
-
     padding: 12px;
-
     margin: 8px 0 15px;
-
-    border:
-      1px solid #ddd;
-
+    border: 1px solid #ddd;
     border-radius: 8px;
-
     font-family: inherit;
-
     font-size: 0.9rem;
   }
 
   .form-textarea {
     resize: vertical;
-
     min-height: 80px;
   }
 
@@ -1995,140 +1595,91 @@ const LandingPage = ({ cart, setCart }) => {
 
   .pagination {
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     gap: 8px;
-
     margin: 25px 0;
-
     flex-wrap: wrap;
-
     padding: 0 10px;
   }
 
   .page-btn {
     padding: 8px 14px;
-
     min-width: 40px;
-
     background: white;
-
-    border:
-      1px solid #0e7806;
-
+    border: 1px solid #0e7806;
     color: var(--color-green);
-
     border-radius: 8px;
-
     cursor: pointer;
-
     font-family: inherit;
-
     font-weight: bold;
-
     transition: 0.2s;
   }
 
   .page-btn:hover {
     background: #7b7f96;
-
     color: white;
   }
 
   .page-btn.active {
     background: #77db70;
-
     color: white;
   }
 
   /* =========================================================
      FOOTER
-     12 COLUMNAS
-     CADA BLOQUE = 4 COLUMNAS
      ========================================================= */
 
   .site-footer {
-    grid-column: 1 / -1;
-
-    width: 100%;
-
     background: var(--color-gold);
-
-    padding: 38px 40px;
-
+    padding: 38px var(--page-side-space);
     color: #1a2b2c;
-
-    border-top:
-      1px solid #c5a030;
-
+    border-top: 1px solid #c5a030;
     margin: 0 auto;
-
     box-sizing: border-box;
-
-    border-radius: 8px 8px 0 0;
+    border-radius: 0;
   }
 
   .footer-content {
     width: 100%;
-
     max-width: 100%;
-
     margin: 0 auto;
-
     display: grid;
-
-    grid-template-columns:
-      repeat(12, minmax(0, 1fr));
-
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: var(--grid-gap);
-
     align-items: start;
   }
 
   .footer-col {
     grid-column: span 4;
-
     min-width: 0;
-
     line-height: 1.6;
   }
 
   .footer-col h4 {
     margin: 0 0 10px;
-
     font-size: 1rem;
   }
 
   .footer-col p {
     margin: 5px 0;
-
     font-size: 0.9rem;
   }
 
   .footer-brand {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     background: #1a2b2c;
-
     color: #fff;
-
     padding: 6px 12px;
-
     border-radius: 4px;
-
     margin-top: 4px;
   }
 
   .footer-brand img {
     height: 22px;
-
     width: auto;
-
     display: block;
   }
 
@@ -2138,28 +1689,16 @@ const LandingPage = ({ cart, setCart }) => {
 
   .toast {
     position: fixed;
-
     bottom: 20px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     background: #2b3a3c;
-
     color: white;
-
     padding: 15px 25px;
-
     border-radius: 50px;
-
     z-index: 1000;
-
-    box-shadow:
-      0 5px 15px rgba(0, 0, 0, 0.3);
-
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     text-align: center;
-
     width: min(90%, 400px);
   }
 
@@ -2168,185 +1707,131 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   @media (max-width: 1100px) {
-
+    :root {
+      --page-side-space: 40px;
+      --grid-gap: 24px;
+    }
     .menu-list {
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-
     .specialty-track {
-      --specialty-step:
-        calc((100% + var(--grid-gap)) / 3);
+      --specialty-step: calc((100% + var(--grid-gap)) / 3);
     }
-
     .specialty-slide {
-      flex-basis:
-        calc((100% - (var(--grid-gap) * 2)) / 3);
+      flex-basis: calc((100% - (var(--grid-gap) * 2)) / 3);
     }
-
     .checkout-container {
-      grid-template-columns:
-        repeat(12, minmax(0, 1fr));
+      grid-template-columns: repeat(12, minmax(0, 1fr));
     }
-
     .cart-section-box {
       grid-column: span 7;
     }
-
     .form-section-box {
       grid-column: span 5;
     }
   }
 
-  @media (max-width: 1100px) {
-
-    :root {
-      --page-side-space: 40px;
-      --grid-gap: 24px;
-    }
-  }
-
   @media (max-width: 900px) {
-
     .specialty-carousel {
       padding: 0 36px;
     }
-
     .specialty-track {
-      --specialty-step:
-        calc((100% + 18px) / 2);
-
+      --specialty-step: calc((100% + 18px) / 2);
       gap: 18px;
     }
-
     .specialty-slide {
-      flex-basis:
-        calc((100% - 18px) / 2);
+      flex-basis: calc((100% - 18px) / 2);
     }
-
     .checkout-container {
       grid-template-columns: 1fr;
     }
-
     .cart-section-box,
     .form-section-box {
       grid-column: 1 / -1;
     }
-
     .menu-list {
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
     .reviews-grid {
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
     .review-card {
       grid-column: span 6;
     }
-
-    .map-section {
-      grid-column: 2 / span 10;
-    }
-
     .hero-container {
       aspect-ratio: 16 / 8;
     }
   }
 
   @media (max-width: 600px) {
+    :root {
+      --page-side-space: 15px;
+    }
 
     .landing-wrapper {
-      padding:
-        12px
-        15px
-        0;
+      padding: 12px 0 0;
     }
 
     .main-header {
-      grid-template-columns:
-        1fr auto;
-
+      grid-template-columns: 1fr auto;
       grid-template-areas:
         "logo cart"
         "status status";
-
       gap: 12px;
-
       margin-bottom: 18px;
     }
 
     .header-logo {
       grid-area: logo;
-
       grid-column: auto;
-
       justify-self: start;
     }
 
     .header-actions {
       grid-area: cart;
-
       grid-column: auto;
-
       justify-self: end;
     }
 
     .header-status {
       grid-area: status;
-
       grid-column: 1 / -1;
-
       justify-self: stretch;
     }
 
     .status-box {
       width: 100%;
-
       text-align: center;
-
       font-size: 0.75rem;
-
       padding: 7px 8px;
-
       white-space: normal;
     }
 
     .logo img {
       height: 38px;
-
       max-width: 145px;
     }
 
     .cart-box {
       min-width: 40px;
-
       min-height: 40px;
     }
 
     .landing-wrapper > nav {
       gap: 4px;
-
       margin-bottom: 20px;
     }
 
     nav a {
       flex: 1 1 auto;
-
       justify-content: center;
-
       font-size: 0.82rem;
-
       padding: 8px 5px;
     }
 
     .hero-container {
       aspect-ratio: 4 / 3;
-
       min-height: 230px;
-
       border-radius: 12px;
     }
 
@@ -2356,51 +1841,38 @@ const LandingPage = ({ cart, setCart }) => {
 
     .promo-tag {
       top: 10px;
-
       right: 10px;
-
       padding: 5px 10px;
-
       font-size: 0.7rem;
     }
 
     .hero-title {
       bottom: 14px;
-
       font-size: 1.05rem;
-
       width: 88%;
-
       max-width: 88%;
     }
 
     .carousel-dots {
       bottom: 13px;
-
       right: 10px;
     }
 
     .menu-btn {
       width: min(360px, 100%);
-
       max-width: 360px;
-
       margin: 15px auto;
-
       padding: 12px 15px;
-
       font-size: 0.95rem;
     }
 
     .menu-list {
       grid-template-columns: 1fr;
-
       gap: 16px;
     }
 
     .menu-item {
       padding: 12px;
-
       border-radius: 12px;
     }
 
@@ -2416,16 +1888,15 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.8rem !important;
     }
 
-    /* Especialidades: 2 tarjetas */
+    /* Especialidades: 2 tarjetas en movil */
     .specialties-section {
-      padding: 0 0 15px;
+      padding: 25px var(--page-side-space);
+      margin: 25px 0;
     }
 
     .specialties-section h2 {
-      margin: 28px 0 16px;
-
+      margin: 0 0 16px;
       font-size: 1.2rem;
-
       text-align: left;
     }
 
@@ -2434,22 +1905,17 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-track {
-      --specialty-step:
-        calc((100% + 12px) / 2);
-
+      --specialty-step: calc((100% + 12px) / 2);
       gap: 12px;
     }
 
     .specialty-slide {
-      flex-basis:
-        calc((100% - 12px) / 2);
+      flex-basis: calc((100% - 12px) / 2);
     }
 
     .specialty-slide .menu-item {
       min-height: 0;
-
       height: auto;
-
       padding: 10px;
     }
 
@@ -2463,15 +1929,12 @@ const LandingPage = ({ cart, setCart }) => {
 
     .specialty-description {
       font-size: 0.64rem;
-
       min-height: 0;
     }
 
     .specialty-arrow {
       width: 32px;
-
       height: 32px;
-
       font-size: 23px;
     }
 
@@ -2483,144 +1946,115 @@ const LandingPage = ({ cart, setCart }) => {
       right: 0;
     }
 
-    /* Reseñas: una columna */
+    /* Reseñas */
     .reviews-section {
-      padding: 28px 18px 26px;
-
-      margin-top: 25px;
-
+      padding: 28px var(--page-side-space) 26px;
       grid-template-columns: 1fr;
     }
 
     .reviews-grid {
       grid-column: 1 / -1;
-
       grid-template-columns: 1fr;
-
       gap: 12px;
-
       margin-top: 0;
     }
 
     .review-card {
       grid-column: 1 / -1;
-
       min-height: 160px;
-
       padding: 10px;
     }
 
     .reviews-section h2 {
       grid-column: 1 / -1;
-
       font-size: 1.15rem;
-
       padding: 0;
     }
 
     .reviews-button {
       grid-column: 1 / -1;
-
       width: 161px;
-
       height: 32px;
-
       margin-top: 20px;
     }
 
-    /* Ubicación completa en móvil */
+    /* Ubicación en móvil */
     .map-section {
-      grid-column: 1 / -1;
-
       margin: 28px auto;
-
       padding: 0 0 25px;
     }
 
     .map-section h2 {
       font-size: 1.1rem;
-
       margin-bottom: 10px;
     }
 
     .map-container {
-      height: 260px;
-
+      height: 320px;
+      padding: 10px;
       border-radius: 4px;
     }
 
     .location-card {
-      max-width: 500px;
-
+      max-width: 100%;
       width: 100%;
-
+      min-width: auto; /* Anula el ancho extendido en móviles */
       min-height: 58px;
-
-      padding: 8px 10px;
+      padding: 15px 15px;
+      margin: 20px auto 0;
+      justify-content: flex-start;
     }
 
     .location-icon {
-      width: 31px;
-
-      height: 31px;
+      width: 36px;
+      height: 36px;
     }
 
     .location-icon svg {
-      width: 23px;
-
-      height: 23px;
+      width: 28px;
+      height: 28px;
     }
 
     .location-divider {
-      margin: 0 8px;
-
-      height: 30px;
+      margin: 0 15px;
+      height: 40px;
     }
 
     .location-info {
-      font-size: 8.5px;
+      font-size: 0.95rem; /* Ajusta el texto para que quepa en móviles */
     }
 
-    /* Footer: una columna en móvil */
+    /* Footer */
     .site-footer {
-      padding: 30px 20px;
-
-      border-radius: 8px 8px 0 0;
+      padding: 30px var(--page-side-space);
+      border-radius: 0;
     }
 
     .footer-content {
       grid-template-columns: 1fr;
-
       gap: 24px;
-
       text-align: center;
     }
 
     .footer-col {
       grid-column: 1 / -1;
-
       width: 100%;
     }
 
     .pagination {
       gap: 5px;
-
       padding: 0;
     }
 
     .page-btn {
       padding: 7px 11px;
-
       min-width: 36px;
     }
 
     .toast {
       bottom: 12px;
-
       padding: 12px 18px;
-
       font-size: 0.85rem;
-
       border-radius: 14px;
     }
   }
@@ -2641,7 +2075,6 @@ const LandingPage = ({ cart, setCart }) => {
 
     .specialty-slide .menu-item {
       min-height: 0;
-
       height: auto;
     }
 
@@ -2651,13 +2084,11 @@ const LandingPage = ({ cart, setCart }) => {
 
     .specialty-description {
       min-height: 0;
-
       font-size: 0.68rem;
     }
 
     .logo img {
       height: 34px;
-
       max-width: 125px;
     }
 
@@ -2683,16 +2114,12 @@ const LandingPage = ({ cart, setCart }) => {
 
     .page-btn {
       min-width: 33px;
-
       padding: 6px 9px;
-
       font-size: 0.8rem;
     }
   }
 
 `}</style>
-
-
 
       <div className="landing-wrapper">
 
@@ -3282,8 +2709,7 @@ const LandingPage = ({ cart, setCart }) => {
               </strong>
 
               <span>
-                Ciudad Autónoma de Buenos Aires,
-                Argentina
+                Cdad. Autónoma de Buenos Aires, Argentina
               </span>
 
             </div>
@@ -3362,4 +2788,3 @@ const LandingPage = ({ cart, setCart }) => {
 };
 
 export default LandingPage;
-

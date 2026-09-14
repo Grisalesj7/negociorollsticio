@@ -1491,13 +1491,13 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.8rem !important;
     }
 
-    /* Especialidades - Fondo hereda color beige, textos azules */
+    /* Especialidades - Fondo blanco en móvil */
     .specialties-section {
       width: 100% !important;
       max-width: 100% !important;
-      background-color: transparent !important;
-      padding: 0 15px 25px !important;
-      margin: 5px 0 0 !important;
+      background-color: #ffffff !important;
+      padding: 25px 15px 25px !important; /* Añadí un poco de padding top para que se vea bien el cuadro blanco */
+      margin: 15px 0 0 !important;
       border-radius: 0;
     }
 

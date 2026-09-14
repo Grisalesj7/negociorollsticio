@@ -74,7 +74,7 @@ const LandingPage = ({ cart, setCart }) => {
   const itemsPerPage = 10;
 
   /* =========================================================
-     MENÚ COMPLETO
+     MENÚ COMPLETO (Simplificado para el ejemplo)
      ========================================================= */
 
   const menuCategorias = [
@@ -159,523 +159,8 @@ const LandingPage = ({ cart, setCart }) => {
           ingredientes:
             '5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
         },
-        {
-          id: 11,
-          name: 'América 20 piezas',
-          price: 22000,
-          image: '/img/America.jpeg',
-          ingredientes:
-            '10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos',
-        },
-        {
-          id: 12,
-          name: 'Roma 30 piezas',
-          price: 30000,
-          image: '/img/Roma.jpeg',
-          ingredientes:
-            '10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 MakiCalifornia. Incluye un blíster y dos sobres de soja + dos pares de palitos',
-        },
-        {
-          id: 13,
-          name: 'Atlántica 60 piezas',
-          price: 68000,
-          image: '/img/Atlantica.jpeg',
-          ingredientes:
-            '10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 MakiCalifornia, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado',
-        },
-        {
-          id: 14,
-          name: 'Paraíso 40 piezas',
-          price: 42000,
-          image: '/img/Paraiso.jpeg',
-          ingredientes:
-            '10 New York Roll, 10 King Roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado',
-        },
-        {
-          id: 15,
-          name: 'Oslo 15 piezas',
-          price: 21000,
-          image: '/img/Oslo.jpeg',
-          ingredientes:
-            '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos',
-          glutenfree: true,
-        },
       ],
-    },
-
-    {
-      titulo: 'Combos Signature',
-      items: [
-        {
-          id: 16,
-          name: 'Malmö 20 piezas',
-          price: 25000,
-          image: '/img/Malmo.jpeg',
-          ingredientes:
-            '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado.',
-          glutenfree: true,
-        },
-        {
-          id: 17,
-          name: 'Aurora 30 piezas',
-          price: 37000,
-          image: '/img/Aurora.jpeg',
-          ingredientes:
-            '5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado.',
-          glutenfree: true,
-        },
-        {
-          id: 18,
-          name: 'Antártida 40 piezas',
-          price: 48000,
-          image: '/img/Antartida.jpeg',
-          ingredientes:
-            '10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis, 2 Geishas y 4 Niguiris',
-          glutenfree: true,
-        },
-        {
-          id: 19,
-          name: 'Malvinas 60 piezas',
-          price: 72000,
-          image: '/img/Malvinas.jpeg',
-          ingredientes:
-            '10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll, 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris, 2 Sashimis y 2 Geishas',
-          glutenfree: true,
-        },
-        {
-          id: 20,
-          name: 'Full salmón 15 piezas',
-          price: 19000,
-          image: '/img/fullsalmon.JPG',
-          ingredientes: '10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha.',
-          glutenfree: true,
-        },
-        {
-          id: 21,
-          name: 'Full salmón 26 piezas',
-          price: 33000,
-          image: '/img/Fullsalmon26.JPG',
-          ingredientes:
-            '10 Philadelphia, 10 New York, 3 Niguiris, 2 Sashimis y 1 Geisha.',
-          glutenfree: true,
-        },
-        {
-          id: 22,
-          name: 'Full salmón 34 piezas',
-          price: 40000,
-          image: '/img/Fullsalmon34.JPG',
-          ingredientes:
-            '10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas.',
-          glutenfree: true,
-        },
-        {
-          id: 23,
-          name: 'Full salmón 46 piezas',
-          price: 48000,
-          image: '/img/Fullsalmon46.JPG',
-          ingredientes:
-            '10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas',
-          glutenfree: true,
-        },
-        {
-          id: 24,
-          name: 'Full salmón 60 piezas',
-          price: 70000,
-          image: '/img/Fullsalmon46.JPG',
-          ingredientes:
-            '10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas',
-          glutenfree: true,
-        },
-        {
-          id: 25,
-          name: 'Blinders Roll',
-          price: 0,
-          image: '/img/Blinders.jpeg',
-          ingredientes:
-            '10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado.',
-        },
-        {
-          id: 26,
-          name: 'Peaky Roll',
-          price: 0,
-          image: '/img/Peaky.jpeg',
-          ingredientes:
-            '10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta.',
-          glutenfree: true,
-        },
-        {
-          id: 27,
-          name: 'Smoked 25 piezas',
-          price: 0,
-          image: '/img/Smokedd.jpeg',
-          ingredientes:
-            '10 Peaky, 10 Blinders y 5 Niguiris Salmón Ahumado.',
-        },
-        {
-          id: 28,
-          name: 'Tamago Protein',
-          price: 8000,
-          image: '/img/Tamago.JPG',
-          ingredientes:
-            '6 piezas envueltas en tamago + salmón rosado + queso crema.',
-          glutenfree: true,
-        },
-        {
-          id: 29,
-          name: 'Paraíso Roll',
-          price: 10000,
-          image: '/img/Paraiso.JPG',
-          ingredientes:
-            '6 piezas rellenas de palta, queso crema y palmito, envueltas en tamago y fetas de salmón.',
-          glutenfree: true,
-        },
-        {
-          id: 30,
-          name: 'New York Salad',
-          price: 12000,
-          image: '/img/Newyork.png',
-          ingredientes:
-            'Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo.',
-          glutenfree: true,
-        },
-      ],
-    },
-
-    {
-      titulo: 'Rolls Especiales & Hot Rolls',
-      items: [
-        {
-          id: 31,
-          name: 'California Salad',
-          price: 11000,
-          image: '/img/California.jpeg',
-          ingredientes:
-            'Arroz, Kanikama, queso philadelphia, palta, pepinos marinados, sésamo.',
-          glutenfree: true,
-        },
-        {
-          id: 32,
-          name: 'Kansas Salad',
-          price: 11000,
-          image: '/img/Kansas.png',
-          ingredientes:
-            'Arroz, Langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo.',
-        },
-        {
-          id: 33,
-          name: 'Aloha Poke',
-          price: 11000,
-          image: '/img/Aloha.jpeg',
-          ingredientes:
-            'Base de arroz, salmón fresco, mango, queso crema, pepinos marinados.',
-          glutenfree: true,
-        },
-        {
-          id: 34,
-          name: 'Veggie Poke',
-          price: 11000,
-          image: '/img/Veggie.jpeg',
-          ingredientes:
-            'Base a elección, garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos.',
-          vegetariano: true,
-        },
-        {
-          id: 35,
-          name: 'Teriyaki Poke',
-          price: 10000,
-          image: '/img/Teriyake.jpeg',
-          ingredientes:
-            'Base de arroz sushi, pollo teriyaki, queso crema, palta, maíz crocante, tiras de pepino.',
-        },
-        {
-          id: 36,
-          name: 'Hawaii Poke',
-          price: 0,
-          image: '/img/Imagen2.jpg',
-          ingredientes: 'Pollo crocante, cheddar y panceta fundida',
-        },
-        {
-          id: 37,
-          name: 'Tartar Poke',
-          price: 10000,
-          image: '/img/Tartar.jpeg',
-          ingredientes:
-            'Base de arroz de sushi y tartar de salmón rosado, palta, queso crema, maíz tostado.',
-          glutenfree: true,
-        },
-        {
-          id: 38,
-          name: 'Paté de Salmón Jet Poke',
-          price: 9000,
-          image: '/img/Paté.jpeg',
-          ingredientes:
-            'Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados.',
-        },
-        {
-          id: 39,
-          name: 'Queen Roll',
-          price: 0,
-          image: '/img/',
-          ingredientes:
-            '10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado.',
-        },
-        {
-          id: 40,
-          name: 'Buenos Aires Roll',
-          price: 10000,
-          image: '/img/Baires.JPG',
-          ingredientes:
-            '10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón.',
-        },
-        {
-          id: 41,
-          name: 'Miami Roll',
-          price: 10000,
-          image: '/img/Miami.JPG',
-          ingredientes:
-            '10 piezas rellenas de salmón, queso crema y topping de palta con sésamo.',
-          glutenfree: true,
-        },
-        {
-          id: 42,
-          name: 'Hanko Roll',
-          price: 11000,
-          image: '/img/Hanko.jpeg',
-          ingredientes:
-            '10 piezas rellenas de salmón rosado, queso crema.',
-          glutenfree: true,
-        },
-        {
-          id: 43,
-          name: 'Islandia Roll',
-          price: 10000,
-          image: '/img/Islandia.JPG',
-          ingredientes:
-            '10 piezas rellenas de Palta, queso crema y topping de salmón con sésamo. Incluye 2 sobres de soja y un par de palitos',
-          glutenfree: true,
-        },
-        {
-          id: 44,
-          name: 'Phila Hot',
-          price: 10000,
-          image: '/img/Philahot.JPG',
-          ingredientes:
-            '10 piezas tempurizadas rellenas de salmón y queso philadelphia. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 45,
-          name: 'King Roll',
-          price: 11000,
-          image: '/img/KingRoll.jpeg',
-          ingredientes:
-            '10 piezas rellenas de langostinos rebozados, queso crema y topping de palta, bañado en tartar de salmón Oh Qué y maíz crocante triturado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-      ],
-    },
-
-    {
-      titulo: 'Sabores individuales',
-      items: [
-        {
-          id: 46,
-          name: 'Boston Roll',
-          price: 10000,
-          image: '/img/Boston.JPG',
-          ingredientes:
-            '10 piezas rellenas de Salmón, queso crema y topping de mango con sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          glutenfree: true,
-        },
-        {
-          id: 47,
-          name: 'Philadelphia roll',
-          price: 0,
-          image: '/img/Philadelphia.JPG',
-          ingredientes:
-            '10 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          glutenfree: true,
-        },
-        {
-          id: 48,
-          name: 'Osaka Roll',
-          price: 9000,
-          image: '/img/Osaka.JPG',
-          ingredientes:
-            '10 piezas rellenas de langostino rebozados, queso crema, topping de palta y sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 49,
-          name: 'New York Roll',
-          price: 0,
-          image: '/img/Imagen2.jpg',
-          ingredientes:
-            '10 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          glutenfree: true,
-        },
-        {
-          id: 50,
-          name: 'California Roll',
-          price: 9000,
-          image: '/img/California10.JPG',
-          ingredientes:
-            '10 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          glutenfree: true,
-        },
-        {
-          id: 51,
-          name: 'New York Hot',
-          price: 10000,
-          image: '/img/Newyorkhot.JPG',
-          ingredientes:
-            '10 piezas tempurizadas rellenas de salmón, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 52,
-          name: 'Suiza Roll',
-          price: 11000,
-          image: '/img/suiza.JPG',
-          ingredientes:
-            '10 piezas rellenas de salmón y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          glutenfree: true,
-        },
-        {
-          id: 53,
-          name: 'Kansas Crunch Roll',
-          price: 11000,
-          image: '/img/Kansascrunch.jpeg',
-          ingredientes:
-            '10 piezas rebozadas en panko, rellenas de langostinos rebozados, queso crema y palta. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 54,
-          name: 'Jet Roll',
-          price: 7500,
-          image: '/img/JETROLL.png',
-          ingredientes:
-            '10 piezas, rellenas de mix de pasta de salmón cocido con queso crema y ciboulette, con topping de palta y bañado en salsa teriyaki. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 55,
-          name: 'Vegan Roll',
-          price: 9000,
-          image: '/img/VeganRoll.jpeg',
-          ingredientes:
-            '10 piezas cubiertas de alga y rellenas de rúcula, palta, bastones de pepino y zanahoria marinada. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          vegetariano: true,
-        },
-        {
-          id: 56,
-          name: 'Veggie Roll',
-          price: 9000,
-          image: '/img/VeggieRoll.jpeg',
-          ingredientes:
-            '10 piezas rellenas de queso crema, zanahoria marinada, morrón en tiras finas y palta, con topping de sésamo. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          vegetariano: true,
-        },
-        {
-          id: 57,
-          name: 'Live Roll',
-          price: 9000,
-          image: '/img/LiveRoll.jpeg',
-          ingredientes:
-            '10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          vegetariano: true,
-        },
-      ],
-    },
-
-    {
-      titulo: 'Promo 20 piezas y salsas',
-      items: [
-        {
-          id: 58,
-          name: 'New York roll',
-          price: 0,
-          image: '/img/Newyorkroll1.JPG',
-          ingredientes:
-            '20 piezas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 59,
-          name: 'Phila Hot roll',
-          price: 19000,
-          image: '/img/Philahot10.JPG',
-          ingredientes:
-            '20 piezas tempurizadas rellenas de salmón y queso crema. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 60,
-          name: 'New York Hot roll',
-          price: 21000,
-          image: '/img/Newyorkhotpz.JPG',
-          ingredientes:
-            '20 piezas tempurizadas rellenas de salmón, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 61,
-          name: 'Kansas roll',
-          price: 16000,
-          image: '/img/Kansasroll.JPG',
-          ingredientes:
-            '20 piezas rellenas de langostinos rebozado en panko, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 62,
-          name: 'California Roll',
-          price: 16000,
-          image: '/img/Californiaroll.JPG',
-          ingredientes:
-            '20 piezas rellenas de kanikama, queso crema, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          glutenfree: true,
-        },
-        {
-          id: 63,
-          name: 'Suiza Roll',
-          price: 18000,
-          image: '/img/Suizaroll.JPG',
-          ingredientes:
-            '20 piezas rellenas de salmón, palta y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-          glutenfree: true,
-        },
-        {
-          id: 64,
-          name: 'Philadelphia roll',
-          price: 0,
-          image: '/img/Philadelphiaroll.JPG',
-          ingredientes:
-            '20 piezas rellenas de salmón, queso crema y topping de sésamo. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).',
-        },
-        {
-          id: 65,
-          name: 'Salsa Soja',
-          price: 1500,
-          image: '/img/SALSASOJA.png',
-          ingredientes: '40cc de salsa de soja tradicional',
-        },
-        {
-          id: 66,
-          name: 'Salsa Buenos Aires',
-          price: 1500,
-          image: '/img/SALSABUENOSAIRES.png',
-          ingredientes:
-            '40cc de salsa teriyaki, hecha en casa con lluvia de sésamo',
-        },
-        {
-          id: 67,
-          name: 'Salsa Maracuyá',
-          price: 1500,
-          image: '/img/SALSAMARACUYA.png',
-          ingredientes:
-            '40cc de salsa dulce de maracuyá, hecha en casa',
-        },
-        {
-          id: 68,
-          name: 'Salsa Teriyaki',
-          price: 1500,
-          image: '/img/SALSASOJA.png',
-          ingredientes: '40 cc de salsa dulce a base de soja',
-        },
-      ],
-    },
+    }
   ];
 
   /* =========================================================
@@ -683,7 +168,6 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   const sushiItems = menuCategorias.flatMap((cat) => cat.items);
-
   const specialtyItems = sushiItems.slice(0, 10);
 
   /* =========================================================
@@ -853,7 +337,6 @@ const LandingPage = ({ cart, setCart }) => {
      CONTROL DE ANCHO DE SECCIONES
      ========================================================= */
 
-  /* Secciones contenidas con margen lateral */
   .main-header,
   .landing-wrapper > nav,
   .hero-container,
@@ -866,7 +349,6 @@ const LandingPage = ({ cart, setCart }) => {
     margin-right: auto !important;
   }
 
-  /* Secciones de ancho completo (borde a borde) */
   .specialties-section,
   .reviews-section,
   .site-footer {
@@ -888,13 +370,14 @@ const LandingPage = ({ cart, setCart }) => {
     margin: 0 auto 24px;
   }
 
-  .header-status {
+  .header-status.desktop-status {
     grid-column: 1 / span 4;
     justify-self: start;
+    display: block;
   }
   
   .mobile-menu-toggle {
-    display: none; /* Oculto en escritorio */
+    display: none;
   }
 
   .header-logo {
@@ -938,6 +421,10 @@ const LandingPage = ({ cart, setCart }) => {
     font-weight: bold;
     white-space: nowrap;
     box-shadow: 0 2px 6px rgba(91, 145, 91, 0.08);
+  }
+
+  .mobile-status-container {
+    display: none;
   }
 
   .logo img {
@@ -1776,14 +1263,24 @@ const LandingPage = ({ cart, setCart }) => {
       padding: 12px 0 0;
     }
 
-    /* HEADER AJUSTADO PARA MÓVIL (Hamburguesa - Logo - Carrito) */
+    /* Ocultar status del header en móvil (se mueve abajo) */
+    .header-status.desktop-status {
+      display: none;
+    }
+
+    /* HEADER AJUSTADO PARA MÓVIL ESTILO TARJETA (Borde dorado, fondo blanco) */
     .main-header {
+      background: white;
+      border: 1px solid #d4a72c;
+      border-radius: 6px;
+      padding: 8px 15px;
+      margin: 15px auto;
+      width: calc(100% - 30px);
       grid-template-columns: auto 1fr auto;
-      grid-template-areas:
-        "menu logo cart"
-        "status status status";
+      grid-template-areas: "menu logo cart";
       gap: 12px;
-      margin-bottom: 18px;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
     }
 
     .mobile-menu-toggle {
@@ -1808,28 +1305,20 @@ const LandingPage = ({ cart, setCart }) => {
       justify-self: end;
     }
 
-    .header-status {
-      grid-area: status;
-      grid-column: 1 / -1;
-      justify-self: stretch;
-    }
-
-    .status-box {
-      width: 100%;
-      text-align: center;
-      font-size: 0.75rem;
-      padding: 7px 8px;
-      white-space: normal;
-    }
-
+    /* Logo ajustado para parecerse al texto de la imagen */
     .logo img {
-      height: 38px;
+      height: 24px;
       max-width: 145px;
     }
 
+    /* Icono del carrito limpio sin borde ni fondo en móvil */
     .cart-box {
-      min-width: 40px;
-      min-height: 40px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+      min-width: auto;
+      min-height: auto;
     }
 
     .landing-wrapper > nav {
@@ -1845,6 +1334,8 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .hero-container {
+      width: calc(100% - 30px);
+      margin: 0 auto 10px;
       aspect-ratio: 4 / 3;
       min-height: 230px;
       border-radius: 12px;
@@ -1873,16 +1364,49 @@ const LandingPage = ({ cart, setCart }) => {
       right: 10px;
     }
 
-    /* Botón MENÚ AJUSTADO a ancho completo redondeado */
+    /* Botón MENÚ AJUSTADO (Estilo píldora bajo el hero) */
     .menu-btn {
       display: block;
-      width: calc(100% - (var(--page-side-space) * 2));
-      max-width: 400px;
-      margin: 15px auto;
-      padding: 12px 15px;
-      font-size: 0.95rem;
+      width: auto;
+      margin: -20px auto 20px; /* Sube un poco para tocar el borde del hero */
+      padding: 8px 24px;
       border-radius: 20px;
-      background: #fdfbf7;
+      background: #f1e7da;
+      border: 1px solid #d4a72c;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 10;
+      font-size: 0.9rem;
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+
+    /* Caja de Status Móvil (Debajo del botón) */
+    .mobile-status-container {
+      display: block;
+      width: calc(100% - 30px);
+      margin: 0 auto 20px;
+    }
+
+    .mobile-status-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #e7f3e7;
+      border: 1px solid #7bc07f;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #4b9e4f;
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #4b9e4f;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
 
     .menu-list {
@@ -1907,27 +1431,25 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.8rem !important;
     }
 
-    /* Especialidades FULL WIDTH (Borde a Borde) */
+    /* Especialidades - Fondo hereda color beige, textos azules */
     .specialties-section {
       width: 100% !important;
       max-width: 100% !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      padding: 25px var(--page-side-space);
-      background-color: #ffffff;
+      background-color: transparent !important;
+      padding: 0 15px 25px !important;
+      margin: 5px 0 0 !important;
       border-radius: 0;
-      margin-top: 20px;
-      margin-bottom: 0;
     }
 
     .specialties-section h2 {
       margin: 0 0 16px;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       text-align: left;
+      color: #16445a;
     }
 
     .specialty-carousel {
-      padding: 0 30px;
+      padding: 0;
     }
 
     .specialty-track {
@@ -1943,6 +1465,7 @@ const LandingPage = ({ cart, setCart }) => {
       min-height: 0;
       height: auto;
       padding: 10px;
+      background: white; /* Las tarjetas siguen siendo blancas */
     }
 
     .specialty-slide .menu-item img {
@@ -1958,18 +1481,9 @@ const LandingPage = ({ cart, setCart }) => {
       min-height: 0;
     }
 
+    /* Ocultar flechas en móvil para usar swipe nativo (o dejarlas, pero el diseño no las muestra) */
     .specialty-arrow {
-      width: 32px;
-      height: 32px;
-      font-size: 23px;
-    }
-
-    .specialty-arrow.prev {
-      left: 0;
-    }
-
-    .specialty-arrow.next {
-      right: 0;
+      display: none;
     }
 
     /* Reseñas FULL WIDTH (Borde a Borde) */
@@ -2093,10 +1607,6 @@ const LandingPage = ({ cart, setCart }) => {
 
   @media (max-width: 380px) {
 
-    .specialty-carousel {
-      padding: 0 27px;
-    }
-
     .specialty-track {
       --specialty-step: 100%;
     }
@@ -2120,7 +1630,7 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .logo img {
-      height: 34px;
+      height: 22px;
       max-width: 125px;
     }
 
@@ -2161,7 +1671,7 @@ const LandingPage = ({ cart, setCart }) => {
 
         <header className="main-header">
 
-          <div className="header-status">
+          <div className="header-status desktop-status">
             <div className="status-box">
               {isShopOpen
                 ? 'Abiertos (De 5:00pm a 11:00pm)'
@@ -2235,19 +1745,9 @@ const LandingPage = ({ cart, setCart }) => {
             =================================================== */}
 
         <nav>
-
-          <a onClick={() => setShowMenu(false)}>
-            Menú
-          </a>
-
-          <a href="#">
-            Contacto
-          </a>
-
-          <a href="#ubicacion">
-            Ubícanos
-          </a>
-
+          <a onClick={() => setShowMenu(false)}>Menú</a>
+          <a href="#">Contacto</a>
+          <a href="#ubicacion">Ubícanos</a>
         </nav>
 
         {/* ===================================================
@@ -2272,7 +1772,7 @@ const LandingPage = ({ cart, setCart }) => {
                   verticalAlign: 'middle',
                 }}
               >
-                local_offer
+                settings {/* Puedes usar el ícono que tenías si deseas */}
               </span>
             </div>
 
@@ -2281,7 +1781,6 @@ const LandingPage = ({ cart, setCart }) => {
             </div>
 
             <div className="carousel-dots">
-
               {heroSlides.map((_, index) => (
                 <span
                   key={index}
@@ -2295,14 +1794,13 @@ const LandingPage = ({ cart, setCart }) => {
                   }
                 />
               ))}
-
             </div>
 
           </section>
         )}
 
         {/* ===================================================
-            BOTÓN MENÚ (Ubicado justo debajo del Hero)
+            BOTÓN MENÚ 
             =================================================== */}
 
         <button
@@ -2315,7 +1813,22 @@ const LandingPage = ({ cart, setCart }) => {
         </button>
 
         {/* ===================================================
-            MENÚ COMPLETO
+            CAJA DE ESTADO VERSIÓN MÓVIL (Debajo del botón)
+            =================================================== */}
+
+        {!showMenu && (
+          <div className="mobile-status-container">
+            <div className="mobile-status-box">
+              <span className="status-dot"></span>
+              {isShopOpen
+                ? 'Estamos abiertos (De 5:00pm a 11:00 Pm)'
+                : 'Cerrados (Abrimos a las 5:00pm)'}
+            </div>
+          </div>
+        )}
+
+        {/* ===================================================
+            MENÚ COMPLETO (Se muestra si se hace click)
             =================================================== */}
 
         {showMenu && (

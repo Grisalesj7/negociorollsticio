@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -788,9 +787,9 @@ const LandingPage = ({ cart, setCart }) => {
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
   :root {
-    --page-max-width: 1200px;
-    --page-side-space: 20px;
-    --grid-gap: 24px;
+    --page-max-width: 100%;
+    --page-side-space: 125px;
+    --grid-gap: 40px;
 
     --background-main: #F2ECE3;
     --color-text: #2b3a3c;
@@ -1427,7 +1426,7 @@ const LandingPage = ({ cart, setCart }) => {
 
   .specialty-track {
     --specialty-step:
-      calc((100% + 24px) / 3);
+      calc((100% + var(--grid-gap)) / 3);
 
     display: flex;
 
@@ -1442,7 +1441,7 @@ const LandingPage = ({ cart, setCart }) => {
   .specialty-slide {
     flex:
       0 0
-      calc((100% - 48px) / 3);
+      calc((100% - (var(--grid-gap) * 2)) / 3);
 
     min-width: 0;
 
@@ -2177,12 +2176,12 @@ const LandingPage = ({ cart, setCart }) => {
 
     .specialty-track {
       --specialty-step:
-        calc((100% + 24px) / 3);
+        calc((100% + var(--grid-gap)) / 3);
     }
 
     .specialty-slide {
       flex-basis:
-        calc((100% - 48px) / 3);
+        calc((100% - (var(--grid-gap) * 2)) / 3);
     }
 
     .checkout-container {
@@ -2196,6 +2195,14 @@ const LandingPage = ({ cart, setCart }) => {
 
     .form-section-box {
       grid-column: span 5;
+    }
+  }
+
+  @media (max-width: 1100px) {
+
+    :root {
+      --page-side-space: 40px;
+      --grid-gap: 24px;
     }
   }
 
@@ -3355,3 +3362,4 @@ const LandingPage = ({ cart, setCart }) => {
 };
 
 export default LandingPage;
+

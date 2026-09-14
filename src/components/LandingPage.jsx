@@ -1190,11 +1190,11 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   .specialties-section {
-    padding: 40px var(--page-side-space);
+    padding: 70px var(--page-side-space);
     background-color: #ffffff;
     border-radius: 0;
     box-sizing: border-box;
-    margin: 40px 0;
+    margin: 2px 0;
   }
   
   .specialties-section h2 {

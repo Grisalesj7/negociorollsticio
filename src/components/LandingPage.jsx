@@ -892,6 +892,10 @@ const LandingPage = ({ cart, setCart }) => {
     grid-column: 1 / span 4;
     justify-self: start;
   }
+  
+  .mobile-menu-toggle {
+    display: none; /* Oculto en escritorio */
+  }
 
   .header-logo {
     grid-column: 5 / span 4;
@@ -1186,7 +1190,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   /* =========================================================
-     NUESTRAS ESPECIALIDADES (Fondo Ancho Completo Blanco)
+     NUESTRAS ESPECIALIDADES
      ========================================================= */
 
   .specialties-section {
@@ -1351,7 +1355,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   /* =========================================================
-     RESEÑAS (Fondo Ancho Completo)
+     RESEÑAS
      ========================================================= */
 
   .reviews-section {
@@ -1447,7 +1451,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   /* =========================================================
-     UBICACIÓN (Con borde blanco y Tarjeta Ajustada)
+     UBICACIÓN
      ========================================================= */
 
   .map-section {
@@ -1485,13 +1489,13 @@ const LandingPage = ({ cart, setCart }) => {
 
   .location-card {
     width: fit-content;
-    min-width: 580px; /* <-- Esto la hace más extendida a los lados */
+    min-width: 580px;
     max-width: 100%;
     margin: 25px auto 0;
-    padding: 22px 50px; /* <-- Más espacio interno (arriba/abajo y lados) */
+    padding: 22px 50px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centra el contenido en el nuevo ancho */
+    justify-content: center;
     background: var(--background-main);
     border: 1px solid #d2a735;
     border-radius: 8px;
@@ -1500,7 +1504,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .location-icon {
-    width: 48px; /* <-- Contenedor del icono más grande */
+    width: 48px;
     height: 48px;
     display: flex;
     align-items: center;
@@ -1510,16 +1514,16 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .location-icon svg {
-    width: 38px; /* <-- Icono más grande */
+    width: 38px;
     height: 38px;
     display: block;
   }
 
   .location-divider {
     width: 1.5px;
-    height: 52px; /* <-- Línea divisoria más alta */
+    height: 52px;
     background: #d2a735;
-    margin: 0 25px; /* <-- Más separación entre icono y texto */
+    margin: 0 25px;
     flex-shrink: 0;
   }
 
@@ -1528,7 +1532,7 @@ const LandingPage = ({ cart, setCart }) => {
     flex-direction: column;
     gap: 6px;
     color: #16445a;
-    font-size: 1.15rem; /* <-- Texto más grande */
+    font-size: 1.15rem;
     line-height: 1.3;
     letter-spacing: 0.01em;
     min-width: 0;
@@ -1772,24 +1776,35 @@ const LandingPage = ({ cart, setCart }) => {
       padding: 12px 0 0;
     }
 
+    /* HEADER AJUSTADO PARA MÓVIL (Hamburguesa - Logo - Carrito) */
     .main-header {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: auto 1fr auto;
       grid-template-areas:
-        "logo cart"
-        "status status";
+        "menu logo cart"
+        "status status status";
       gap: 12px;
       margin-bottom: 18px;
     }
 
+    .mobile-menu-toggle {
+      display: flex;
+      grid-area: menu;
+      background: transparent;
+      border: none;
+      color: #d4a72c;
+      cursor: pointer;
+      padding: 0;
+      justify-self: start;
+      align-items: center;
+    }
+
     .header-logo {
       grid-area: logo;
-      grid-column: auto;
-      justify-self: start;
+      justify-self: center; /* Logo centrado */
     }
 
     .header-actions {
       grid-area: cart;
-      grid-column: auto;
       justify-self: end;
     }
 
@@ -1858,12 +1873,16 @@ const LandingPage = ({ cart, setCart }) => {
       right: 10px;
     }
 
+    /* Botón MENÚ AJUSTADO a ancho completo redondeado */
     .menu-btn {
-      width: min(360px, 100%);
-      max-width: 360px;
+      display: block;
+      width: calc(100% - (var(--page-side-space) * 2));
+      max-width: 400px;
       margin: 15px auto;
       padding: 12px 15px;
       font-size: 0.95rem;
+      border-radius: 20px;
+      background: #fdfbf7;
     }
 
     .menu-list {
@@ -1888,10 +1907,17 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.8rem !important;
     }
 
-    /* Especialidades: 2 tarjetas en movil */
+    /* Especialidades FULL WIDTH (Borde a Borde) */
     .specialties-section {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
       padding: 25px var(--page-side-space);
-      margin: 25px 0;
+      background-color: #ffffff;
+      border-radius: 0;
+      margin-top: 20px;
+      margin-bottom: 0;
     }
 
     .specialties-section h2 {
@@ -1946,8 +1972,11 @@ const LandingPage = ({ cart, setCart }) => {
       right: 0;
     }
 
-    /* Reseñas */
+    /* Reseñas FULL WIDTH (Borde a Borde) */
     .reviews-section {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
       padding: 28px var(--page-side-space) 26px;
       grid-template-columns: 1fr;
     }
@@ -1998,7 +2027,7 @@ const LandingPage = ({ cart, setCart }) => {
     .location-card {
       max-width: 100%;
       width: 100%;
-      min-width: auto; /* Anula el ancho extendido en móviles */
+      min-width: auto; 
       min-height: 58px;
       padding: 15px 15px;
       margin: 20px auto 0;
@@ -2021,11 +2050,14 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .location-info {
-      font-size: 0.95rem; /* Ajusta el texto para que quepa en móviles */
+      font-size: 0.95rem; 
     }
 
-    /* Footer */
+    /* Footer FULL WIDTH (Borde a Borde) */
     .site-footer {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
       padding: 30px var(--page-side-space);
       border-radius: 0;
     }
@@ -2136,6 +2168,17 @@ const LandingPage = ({ cart, setCart }) => {
                 : 'Cerrados (Abrimos a las 5:00pm)'}
             </div>
           </div>
+          
+          {/* BOTÓN HAMBURGUESA PARA VERSIÓN MÓVIL */}
+          <button 
+            className="mobile-menu-toggle"
+            onClick={() => setShowMenu(!showMenu)}
+            aria-label="Abrir menú"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
+              menu
+            </span>
+          </button>
 
           <div className="header-logo">
             <button
@@ -2259,7 +2302,7 @@ const LandingPage = ({ cart, setCart }) => {
         )}
 
         {/* ===================================================
-            BOTÓN MENÚ
+            BOTÓN MENÚ (Ubicado justo debajo del Hero)
             =================================================== */}
 
         <button

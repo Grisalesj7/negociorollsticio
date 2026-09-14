@@ -9,6 +9,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   const [showMenu, setShowMenu] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Estado para el Sidebar móvil
   const [message, setMessage] = useState(null);
 
   const [userData] = useState({
@@ -338,7 +339,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   .main-header,
-  .landing-wrapper > nav,
+  .desktop-nav,
   .hero-container,
   .menu-list,
   .checkout-container,
@@ -476,10 +477,10 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   /* =========================================================
-     NAVEGACIÓN
+     NAVEGACIÓN ESCRITORIO
      ========================================================= */
 
-  .landing-wrapper > nav {
+  .desktop-nav {
     margin: 0 auto 30px;
     text-align: center;
     display: flex;
@@ -489,7 +490,7 @@ const LandingPage = ({ cart, setCart }) => {
     gap: 8px 28px;
   }
 
-  nav a {
+  .desktop-nav a {
     margin: 0;
     padding: 7px 4px;
     text-decoration: none;
@@ -502,8 +503,53 @@ const LandingPage = ({ cart, setCart }) => {
     transition: color 0.2s ease;
   }
 
-  nav a:hover {
+  .desktop-nav a:hover {
     color: var(--color-coral);
+  }
+
+  /* =========================================================
+     SIDEBAR MÓVIL
+     ========================================================= */
+  
+  .sidebar-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    display: flex;
+  }
+  .sidebar-menu {
+    background: var(--background-main);
+    width: 250px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    transform: translateX(-100%);
+    animation: slideIn 0.3s forwards;
+  }
+  @keyframes slideIn {
+    to { transform: translateX(0); }
+  }
+  .sidebar-close {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    padding: 5px;
+    cursor: pointer;
+  }
+  .sidebar-menu a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #d4c1a0;
+    padding-bottom: 12px;
+    padding-left: 5px;
+    cursor: pointer;
   }
 
   /* =========================================================
@@ -702,7 +748,7 @@ const LandingPage = ({ cart, setCart }) => {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 42px;
+    padding: 0 55px; /* Ampliado para que no pise el contenedor principal */
     box-sizing: border-box;
   }
 
@@ -711,29 +757,36 @@ const LandingPage = ({ cart, setCart }) => {
     overflow: hidden;
   }
 
+  /* FLEXBOX para emparejar alturas */
   .specialty-track {
     --specialty-step: calc((100% + var(--grid-gap)) / 3);
     display: flex;
     gap: var(--grid-gap);
     transition: transform 0.45s ease;
     will-change: transform;
+    align-items: stretch; /* Estira las tarjetas para tener la misma altura */
   }
 
   .specialty-slide {
     flex: 0 0 calc((100% - (var(--grid-gap) * 2)) / 3);
     min-width: 0;
     box-sizing: border-box;
+    display: flex; 
+    height: auto; /* Permite que tome la altura del contenedor padre flex */
   }
 
   .specialty-slide .menu-item {
     width: 100%;
     min-height: 0;
-    height: auto;
     padding: 12px;
     border: 1px solid #d4a72c;
     border-radius: 8px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
+    
+    flex: 1; /* Rellena el alto del slide */
+    display: flex;
+    flex-direction: column;
   }
 
   .specialty-slide .menu-item img {
@@ -747,6 +800,7 @@ const LandingPage = ({ cart, setCart }) => {
     font-size: 0.9rem;
     margin: 4px 0;
     line-height: 1.2;
+    flex: none; /* No se estira */
   }
 
   .specialty-description {
@@ -756,13 +810,22 @@ const LandingPage = ({ cart, setCart }) => {
     margin: 5px 0 10px;
     min-height: 0;
     width: 100%;
+    
+    /* TRUNCADO CON PUNTOS SUSPENSIVOS (...) Y RELLENO FLEX */
+    flex: 1; 
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .specialty-slide .btn-pedir {
     min-height: 36px;
     padding: 7px 12px;
     font-size: 0.78rem;
-    margin-top: auto;
+    margin-top: auto; /* Asegura que el botón siempre baje al final de la tarjeta */
+    flex: none;
   }
 
   .specialty-add-btn {
@@ -777,30 +840,32 @@ const LandingPage = ({ cart, setCart }) => {
     background: #1c4a50;
   }
 
+  /* FLECHAS PERSONALIZADAS SVG */
   .specialty-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    width: 40px;
-    height: 40px;
-    border: 1px solid #d4a72c;
-    border-radius: 50%;
-    background: var(--background-main);
-    color: #2b3c33;
-    font-size: 28px;
-    line-height: 1;
+    background: transparent;
+    border: none; /* Quitamos bordes */
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     transition: 0.2s ease;
   }
 
+  .specialty-arrow img {
+    width: 38px;
+    height: 38px;
+    display: block;
+    filter: brightness(0); /* ESTO HACE LAS FLECHAS NEGRAS */
+  }
+
   .specialty-arrow:hover:not(:disabled) {
-    background: #d4a72c;
-    color: white;
+    background: transparent;
+    transform: translateY(-50%) scale(1.1); /* Efecto zoom ligero */
   }
 
   .specialty-arrow:disabled {
@@ -1224,7 +1289,7 @@ const LandingPage = ({ cart, setCart }) => {
 
   @media (max-width: 900px) {
     .specialty-carousel {
-      padding: 0 36px;
+      padding: 0 45px; /* Modificado para dar más espacio a las flechas */
     }
     .specialty-track {
       --specialty-step: calc((100% + 18px) / 2);
@@ -1266,6 +1331,11 @@ const LandingPage = ({ cart, setCart }) => {
     /* Ocultar status del header en móvil (se mueve abajo) */
     .header-status.desktop-status {
       display: none;
+    }
+    
+    /* ESCONDER LA BARRA NAVEGACIÓN EN MÓVIL (para usar Sidebar) */
+    .desktop-nav {
+      display: none !important;
     }
 
     /* HEADER AJUSTADO PARA MÓVIL ESTILO TARJETA (Borde dorado, fondo blanco) */
@@ -1319,18 +1389,6 @@ const LandingPage = ({ cart, setCart }) => {
       padding: 0;
       min-width: auto;
       min-height: auto;
-    }
-
-    .landing-wrapper > nav {
-      gap: 4px;
-      margin-bottom: 20px;
-    }
-
-    nav a {
-      flex: 1 1 auto;
-      justify-content: center;
-      font-size: 0.82rem;
-      padding: 8px 5px;
     }
 
     .hero-container {
@@ -1391,6 +1449,8 @@ const LandingPage = ({ cart, setCart }) => {
     .mobile-status-box {
       display: flex;
       align-items: center;
+      justify-content: center; /* Texto centrado en celular */
+      text-align: center;
       gap: 10px;
       background: #e7f3e7;
       border: 1px solid #7bc07f;
@@ -1449,7 +1509,7 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-carousel {
-      padding: 0;
+      padding: 0 40px !important; /* Espacio exacto para las flechas en móvil */
     }
 
     .specialty-track {
@@ -1462,8 +1522,6 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-slide .menu-item {
-      min-height: 0;
-      height: auto;
       padding: 10px;
       background: white; /* Las tarjetas siguen siendo blancas */
     }
@@ -1478,12 +1536,16 @@ const LandingPage = ({ cart, setCart }) => {
 
     .specialty-description {
       font-size: 0.64rem;
-      min-height: 0;
     }
 
-    /* Ocultar flechas en móvil para usar swipe nativo (o dejarlas, pero el diseño no las muestra) */
+    /* Flechas en móvil restauradas */
     .specialty-arrow {
-      display: none;
+      display: flex; /* Muestra las flechas que estaban ocultas */
+    }
+
+    .specialty-arrow img {
+      width: 30px; /* Un poco mas chicas para el celular */
+      height: 30px;
     }
 
     /* Reseñas FULL WIDTH (Borde a Borde) */
@@ -1615,17 +1677,11 @@ const LandingPage = ({ cart, setCart }) => {
       flex-basis: 100%;
     }
 
-    .specialty-slide .menu-item {
-      min-height: 0;
-      height: auto;
-    }
-
     .specialty-slide .menu-item img {
       height: 160px;
     }
 
     .specialty-description {
-      min-height: 0;
       font-size: 0.68rem;
     }
 
@@ -1636,10 +1692,6 @@ const LandingPage = ({ cart, setCart }) => {
 
     .status-box {
       font-size: 0.7rem;
-    }
-
-    nav a {
-      font-size: 0.76rem;
     }
 
     .hero-container {
@@ -1682,8 +1734,8 @@ const LandingPage = ({ cart, setCart }) => {
           {/* BOTÓN HAMBURGUESA PARA VERSIÓN MÓVIL */}
           <button 
             className="mobile-menu-toggle"
-            onClick={() => setShowMenu(!showMenu)}
-            aria-label="Abrir menú"
+            onClick={() => setIsSidebarOpen(true)}
+            aria-label="Abrir menú lateral"
           >
             <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
               menu
@@ -1708,9 +1760,6 @@ const LandingPage = ({ cart, setCart }) => {
           </div>
 
           <div className="header-actions">
-
-            <nav className="header-nav">
-            </nav>
 
             <div
               className="cart-box"
@@ -1741,10 +1790,42 @@ const LandingPage = ({ cart, setCart }) => {
         </header>
 
         {/* ===================================================
-            NAVEGACIÓN
+            SIDEBAR MÓVIL (Menú de Hamburguesa)
+            =================================================== */}
+        
+        {isSidebarOpen && (
+          <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)}>
+            <div className="sidebar-menu" onClick={(e) => e.stopPropagation()}>
+              
+              <button 
+                className="sidebar-close" 
+                onClick={() => setIsSidebarOpen(false)}
+                aria-label="Cerrar menú"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
+                  close
+                </span>
+              </button>
+
+              <a onClick={() => { setShowMenu(false); setIsSidebarOpen(false); }}>
+                Menú
+              </a>
+              <a href="#" onClick={() => setIsSidebarOpen(false)}>
+                Contacto
+              </a>
+              <a href="#ubicacion" onClick={() => setIsSidebarOpen(false)}>
+                Ubícanos
+              </a>
+
+            </div>
+          </div>
+        )}
+
+        {/* ===================================================
+            NAVEGACIÓN ESCRITORIO
             =================================================== */}
 
-        <nav>
+        <nav className="desktop-nav">
           <a onClick={() => setShowMenu(false)}>Menú</a>
           <a href="#">Contacto</a>
           <a href="#ubicacion">Ubícanos</a>
@@ -1772,7 +1853,7 @@ const LandingPage = ({ cart, setCart }) => {
                   verticalAlign: 'middle',
                 }}
               >
-                settings {/* Puedes usar el ícono que tenías si deseas */}
+                settings
               </span>
             </div>
 
@@ -1813,7 +1894,7 @@ const LandingPage = ({ cart, setCart }) => {
         </button>
 
         {/* ===================================================
-            CAJA DE ESTADO VERSIÓN MÓVIL (Debajo del botón)
+            CAJA DE ESTADO VERSIÓN MÓVIL (Debajo del botón, centrada)
             =================================================== */}
 
         {!showMenu && (
@@ -2007,7 +2088,7 @@ const LandingPage = ({ cart, setCart }) => {
                 disabled={specialtyIndex === 0}
                 aria-label="Productos anteriores"
               >
-                ‹
+                <img src="/img/Back.svg" alt="Atrás" />
               </button>
 
               <div className="specialty-viewport">
@@ -2106,7 +2187,7 @@ const LandingPage = ({ cart, setCart }) => {
                 }
                 aria-label="Siguientes productos"
               >
-                ›
+                <img src="/img/Next.svg" alt="Siguiente" />
               </button>
 
             </div>

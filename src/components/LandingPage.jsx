@@ -267,6 +267,7 @@ const LandingPage = ({ cart, setCart }) => {
 <style>{`
 
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
   :root {
     --page-max-width: 100%;
@@ -727,6 +728,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   .specialties-section {
+    font-family: 'Lato', sans-serif;
     padding: 70px var(--page-side-space);
     background-color: #ffffff;
     border-radius: 0;
@@ -821,6 +823,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .specialty-slide .btn-pedir {
+    font-family: 'Lato', sans-serif;
     min-height: 36px;
     padding: 7px 12px;
     font-size: 0.78rem;
@@ -911,6 +914,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   .reviews-section {
+    font-family: 'Lato', sans-serif;
     background: #193c46;
     padding: 32px var(--page-side-space) 31px;
     color: white;
@@ -1007,6 +1011,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   .map-section {
+    font-family: 'Lato', sans-serif;
     margin: 42px auto 30px;
     padding: 0 0 28px;
     text-align: left;
@@ -1187,6 +1192,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   .site-footer {
+    font-family: 'Lato', sans-serif;
     background: var(--color-gold);
     padding: 38px var(--page-side-space);
     color: #1a2b2c;
@@ -1715,513 +1721,513 @@ const LandingPage = ({ cart, setCart }) => {
 
 `}</style>
 
-      <div className="landing-wrapper">
+        <div className="landing-wrapper">
 
-        {/* ===================================================
-            HEADER
-            =================================================== */}
+          {/* ===================================================
+              HEADER
+              =================================================== */}
 
-        <header className="main-header">
+          <header className="main-header">
 
-          <div className="header-status desktop-status">
-            <div className="status-box">
-              {isShopOpen
-                ? 'Abiertos (De 5:00pm a 11:00pm)'
-                : 'Cerrados (Abrimos a las 5:00pm)'}
+            <div className="header-status desktop-status">
+              <div className="status-box">
+                {isShopOpen
+                  ? 'Abiertos (De 5:00pm a 11:00pm)'
+                  : 'Cerrados (Abrimos a las 5:00pm)'}
+              </div>
             </div>
-          </div>
-          
-          {/* BOTÓN HAMBURGUESA PARA VERSIÓN MÓVIL */}
-          <button 
-            className="mobile-menu-toggle"
-            onClick={() => setIsSidebarOpen(true)}
-            aria-label="Abrir menú lateral"
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
-              menu
-            </span>
-          </button>
-
-          <div className="header-logo">
-            <button
-              type="button"
-              className="logo-button"
-              onClick={handleLogoClick}
-              aria-label="Volver a la página principal"
-              title="Volver a la página principal"
+            
+            {/* BOTÓN HAMBURGUESA PARA VERSIÓN MÓVIL */}
+            <button 
+              className="mobile-menu-toggle"
+              onClick={() => setIsSidebarOpen(true)}
+              aria-label="Abrir menú lateral"
             >
-              <span className="logo">
-                <img
-                  src="/img/LOGO_rollticio.svg"
-                  alt="Logo Rollsticio"
-                />
+              <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
+                menu
               </span>
             </button>
-          </div>
 
-          <div className="header-actions">
-
-            <div
-              className="cart-box"
-              onClick={handleCartClick}
-              role="button"
-              tabIndex={0}
-              aria-label="Abrir carrito"
-            >
-              <span
-                className="material-symbols-outlined"
-                style={{
-                  fontSize: '28px',
-                  color: '#d4a72c',
-                }}
+            <div className="header-logo">
+              <button
+                type="button"
+                className="logo-button"
+                onClick={handleLogoClick}
+                aria-label="Volver a la página principal"
+                title="Volver a la página principal"
               >
-                shopping_cart
-              </span>
-
-              {cart.length > 0 && (
-                <span className="cart-count">
-                  {cart.length}
-                </span>
-              )}
-            </div>
-
-          </div>
-
-        </header>
-
-        {/* ===================================================
-            SIDEBAR MÓVIL (Menú de Hamburguesa)
-            =================================================== */}
-        
-        {isSidebarOpen && (
-          <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)}>
-            <div className="sidebar-menu" onClick={(e) => e.stopPropagation()}>
-              
-              <button 
-                className="sidebar-close" 
-                onClick={() => setIsSidebarOpen(false)}
-                aria-label="Cerrar menú"
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
-                  close
+                <span className="logo">
+                  <img
+                    src="/img/LOGO_rollticio.svg"
+                    alt="Logo Rollsticio"
+                  />
                 </span>
               </button>
-
-              <a onClick={() => { setShowMenu(false); setIsSidebarOpen(false); }}>
-                Menú
-              </a>
-              <a href="#" onClick={() => setIsSidebarOpen(false)}>
-                Contacto
-              </a>
-              <a href="#ubicacion" onClick={() => setIsSidebarOpen(false)}>
-                Ubícanos
-              </a>
-
             </div>
-          </div>
-        )}
 
-        {/* ===================================================
-            NAVEGACIÓN ESCRITORIO
-            =================================================== */}
+            <div className="header-actions">
 
-        <nav className="desktop-nav">
-          <a onClick={() => setShowMenu(false)}>Menú</a>
-          <a href="#">Contacto</a>
-          <a href="#ubicacion">Ubícanos</a>
-        </nav>
-
-        {/* ===================================================
-            HERO / PROMOCIÓN
-            =================================================== */}
-
-        {!showMenu && (
-          <section className="hero-container">
-
-            <img
-              src={heroSlides[currentSlide].img}
-              alt={heroSlides[currentSlide].alt}
-              className="hero-img"
-            />
-
-            <div className="promo-tag">
-              Promo{' '}
-              <span
-                className="material-symbols-outlined"
-                style={{
-                  fontSize: '14px',
-                  verticalAlign: 'middle',
-                }}
+              <div
+                className="cart-box"
+                onClick={handleCartClick}
+                role="button"
+                tabIndex={0}
+                aria-label="Abrir carrito"
               >
-                settings
-              </span>
-            </div>
-
-            <div className="hero-title">
-              {heroSlides[currentSlide].title}
-            </div>
-
-            <div className="carousel-dots">
-              {heroSlides.map((_, index) => (
                 <span
-                  key={index}
-                  className={`dot ${
-                    currentSlide === index
-                      ? 'active'
-                      : ''
-                  }`}
-                  onClick={() =>
-                    setCurrentSlide(index)
-                  }
-                />
-              ))}
-            </div>
-
-          </section>
-        )}
-
-        {/* ===================================================
-            BOTÓN MENÚ 
-            =================================================== */}
-
-        <button
-          className="menu-btn"
-          onClick={() => setShowMenu(!showMenu)}
-        >
-          {showMenu
-            ? 'Volver al inicio'
-            : 'Ver menú completo'}
-        </button>
-
-        {/* ===================================================
-            CAJA DE ESTADO VERSIÓN MÓVIL (Debajo del botón, centrada)
-            =================================================== */}
-
-        {!showMenu && (
-          <div className="mobile-status-container">
-            <div className="mobile-status-box">
-              <span className="status-dot"></span>
-              {isShopOpen
-                ? 'Estamos abiertos (De 5:00pm a 11:00 Pm)'
-                : 'Cerrados (Abrimos a las 5:00pm)'}
-            </div>
-          </div>
-        )}
-
-        {/* ===================================================
-            MENÚ COMPLETO (Se muestra si se hace click)
-            =================================================== */}
-
-        {showMenu && (
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-
-            <h2
-              style={{
-                textAlign: 'center',
-                margin: '20px 0',
-                padding: '0 10px',
-                fontSize: '1.4rem',
-              }}
-            >
-              Menú Completo
-            </h2>
-
-            <div className="menu-list">
-
-              {currentItems.map((item) => (
-
-                <div
-                  key={item.id}
-                  className="menu-item"
+                  className="material-symbols-outlined"
+                  style={{
+                    fontSize: '28px',
+                    color: '#d4a72c',
+                  }}
                 >
+                  shopping_cart
+                </span>
 
-                  {item.glutenfree && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '15px',
-                        right: '15px',
-                        background: '#365f73',
-                        color: 'white',
-                        padding: '3px 10px',
-                        borderRadius: '15px',
-                        fontSize: '0.7rem',
-                        fontWeight: 'bold',
-                        zIndex: 2,
-                      }}
-                    >
-                      Gluten Free
-                    </div>
-                  )}
-
-                  {item.vegetariano && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '15px',
-                        right: '15px',
-                        background: '#8bcf8b',
-                        color: 'white',
-                        padding: '3px 10px',
-                        borderRadius: '15px',
-                        fontSize: '0.7rem',
-                        fontWeight: 'bold',
-                        zIndex: 2,
-                      }}
-                    >
-                      Vegetariano
-                    </div>
-                  )}
-
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                  />
-
-                  <h3>{item.name}</h3>
-
-                  {item.description && (
-                    <p
-                      style={{
-                        fontSize: '0.8rem',
-                        color: '#666',
-                        marginBottom: '5px',
-                      }}
-                    >
-                      {item.description}
-                    </p>
-                  )}
-
-                  <p
-                    style={{
-                      fontSize: '0.75rem',
-                      color: '#555',
-                      marginBottom: '10px',
-                    }}
-                  >
-                    {item.ingredientes}
-                  </p>
-
-                  <p
-                    style={{
-                      fontWeight: 'bold',
-                      color: '#e95d53',
-                    }}
-                  >
-                    $
-                    {item.price.toLocaleString(
-                      'es-CO'
-                    )}
-                  </p>
-
-                  <button
-                    className="btn-pedir"
-                    onClick={() =>
-                      handleOrder(item)
-                    }
-                  >
-                    Agregar al carrito
-                  </button>
-
-                </div>
-
-              ))}
+                {cart.length > 0 && (
+                  <span className="cart-count">
+                    {cart.length}
+                  </span>
+                )}
+              </div>
 
             </div>
 
-            {/* =================================================
-                PAGINACIÓN
-                ================================================= */}
+          </header>
 
-            <div className="pagination">
+          {/* ===================================================
+              SIDEBAR MÓVIL (Menú de Hamburguesa)
+              =================================================== */}
+          
+          {isSidebarOpen && (
+            <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)}>
+              <div className="sidebar-menu" onClick={(e) => e.stopPropagation()}>
+                
+                <button 
+                  className="sidebar-close" 
+                  onClick={() => setIsSidebarOpen(false)}
+                  aria-label="Cerrar menú"
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
+                    close
+                  </span>
+                </button>
 
-              {Array.from(
-                { length: totalPages },
-                (_, index) => (
-                  <button
-                    key={index + 1}
-                    className={`page-btn ${
-                      currentPage === index + 1
+                <a onClick={() => { setShowMenu(false); setIsSidebarOpen(false); }}>
+                  Menú
+                </a>
+                <a href="#" onClick={() => setIsSidebarOpen(false)}>
+                  Contacto
+                </a>
+                <a href="#ubicacion" onClick={() => setIsSidebarOpen(false)}>
+                  Ubícanos
+                </a>
+
+              </div>
+            </div>
+          )}
+
+          {/* ===================================================
+              NAVEGACIÓN ESCRITORIO
+              =================================================== */}
+
+          <nav className="desktop-nav">
+            <a onClick={() => setShowMenu(false)}>Menú</a>
+            <a href="#">Contacto</a>
+            <a href="#ubicacion">Ubícanos</a>
+          </nav>
+
+          {/* ===================================================
+              HERO / PROMOCIÓN
+              =================================================== */}
+
+          {!showMenu && (
+            <section className="hero-container">
+
+              <img
+                src={heroSlides[currentSlide].img}
+                alt={heroSlides[currentSlide].alt}
+                className="hero-img"
+              />
+
+              <div className="promo-tag">
+                Promo{' '}
+                <span
+                  className="material-symbols-outlined"
+                  style={{
+                    fontSize: '14px',
+                    verticalAlign: 'middle',
+                  }}
+                >
+                  settings
+                </span>
+              </div>
+
+              <div className="hero-title">
+                {heroSlides[currentSlide].title}
+              </div>
+
+              <div className="carousel-dots">
+                {heroSlides.map((_, index) => (
+                  <span
+                    key={index}
+                    className={`dot ${
+                      currentSlide === index
                         ? 'active'
                         : ''
                     }`}
                     onClick={() =>
-                      handlePageChange(
-                        index + 1
-                      )
+                      setCurrentSlide(index)
                     }
-                  >
-                    {index + 1}
-                  </button>
-                )
-              )}
+                  />
+                ))}
+              </div>
 
+            </section>
+          )}
+
+          {/* ===================================================
+              BOTÓN MENÚ 
+              =================================================== */}
+
+          <button
+            className="menu-btn"
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            {showMenu
+              ? 'Volver al inicio'
+              : 'Ver menú completo'}
+          </button>
+
+          {/* ===================================================
+              CAJA DE ESTADO VERSIÓN MÓVIL (Debajo del botón, centrada)
+              =================================================== */}
+
+          {!showMenu && (
+            <div className="mobile-status-container">
+              <div className="mobile-status-box">
+                <span className="status-dot"></span>
+                {isShopOpen
+                  ? 'Estamos abiertos (De 5:00pm a 11:00 Pm)'
+                  : 'Cerrados (Abrimos a las 5:00pm)'}
+              </div>
             </div>
+          )}
 
-          </div>
-        )}
+          {/* ===================================================
+              MENÚ COMPLETO (Se muestra si se hace click)
+              =================================================== */}
 
-        {/* ===================================================
-            ESPECIALIDADES
-            =================================================== */}
+          {showMenu && (
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
 
-        {!showMenu && (
-          <section className="specialties-section">
-
-            <h2>
-              Nuestras especialidades
-            </h2>
-
-            <div className="specialty-carousel">
-
-              <button
-                type="button"
-                className="specialty-arrow prev"
-                onClick={prevSpecialty}
-                disabled={specialtyIndex === 0}
-                aria-label="Productos anteriores"
+              <h2
+                style={{
+                  textAlign: 'center',
+                  margin: '20px 0',
+                  padding: '0 10px',
+                  fontSize: '1.4rem',
+                }}
               >
-                <img src="/img/Back.svg" alt="Atrás" />
-              </button>
+                Menú Completo
+              </h2>
 
-              <div className="specialty-viewport">
+              <div className="menu-list">
 
-                <div
-                  className="specialty-track"
-                  style={{
-                    transform: `translateX(calc(-${specialtyIndex} * (var(--specialty-step))))`,
-                  }}
-                >
+                {currentItems.map((item) => (
 
-                  {specialtyItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="menu-item"
+                  >
 
-                    <div
-                      className="specialty-slide"
-                      key={item.id}
-                    >
-
-                      <div className="menu-item">
-
-                        {item.glutenfree && (
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: '15px',
-                              right: '15px',
-                              background: '#365f73',
-                              color: 'white',
-                              padding: '3px 10px',
-                              borderRadius: '15px',
-                              fontSize: '0.7rem',
-                              fontWeight: 'bold',
-                              zIndex: 2,
-                            }}
-                          >
-                            Gluten Free
-                          </div>
-                        )}
-
-                        {item.vegetariano && (
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: '15px',
-                              right: '15px',
-                              background: '#8bcf8b',
-                              color: 'white',
-                              padding: '3px 10px',
-                              borderRadius: '15px',
-                              fontSize: '0.7rem',
-                              fontWeight: 'bold',
-                              zIndex: 2,
-                            }}
-                          >
-                            Vegetariano
-                          </div>
-                        )}
-
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                        />
-
-                        <h3>{item.name}</h3>
-
-                        <p className="specialty-description">
-                          {item.ingredientes}
-                        </p>
-
-                        <button
-                          className="btn-pedir specialty-add-btn"
-                          onClick={() =>
-                            handleOrder(item)
-                          }
-                        >
-                          Agregar
-                        </button>
-
+                    {item.glutenfree && (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '15px',
+                          right: '15px',
+                          background: '#365f73',
+                          color: 'white',
+                          padding: '3px 10px',
+                          borderRadius: '15px',
+                          fontSize: '0.7rem',
+                          fontWeight: 'bold',
+                          zIndex: 2,
+                        }}
+                      >
+                        Gluten Free
                       </div>
+                    )}
 
-                    </div>
+                    {item.vegetariano && (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '15px',
+                          right: '15px',
+                          background: '#8bcf8b',
+                          color: 'white',
+                          padding: '3px 10px',
+                          borderRadius: '15px',
+                          fontSize: '0.7rem',
+                          fontWeight: 'bold',
+                          zIndex: 2,
+                        }}
+                      >
+                        Vegetariano
+                      </div>
+                    )}
 
-                  ))}
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                    />
 
-                </div>
+                    <h3>{item.name}</h3>
+
+                    {item.description && (
+                      <p
+                        style={{
+                          fontSize: '0.8rem',
+                          color: '#666',
+                          marginBottom: '5px',
+                        }}
+                      >
+                        {item.description}
+                      </p>
+                    )}
+
+                    <p
+                      style={{
+                        fontSize: '0.75rem',
+                        color: '#555',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      {item.ingredientes}
+                    </p>
+
+                    <p
+                      style={{
+                        fontWeight: 'bold',
+                        color: '#e95d53',
+                      }}
+                    >
+                      $
+                      {item.price.toLocaleString(
+                        'es-CO'
+                      )}
+                    </p>
+
+                    <button
+                      className="btn-pedir"
+                      onClick={() =>
+                        handleOrder(item)
+                      }
+                    >
+                      Agregar al carrito
+                    </button>
+
+                  </div>
+
+                ))}
 
               </div>
 
-              <button
-                type="button"
-                className="specialty-arrow next"
-                onClick={nextSpecialty}
-                disabled={
-                  specialtyIndex >=
-                  specialtyItems.length - 1
-                }
-                aria-label="Siguientes productos"
-              >
-                <img src="/img/Next.svg" alt="Siguiente" />
-              </button>
+              {/* =================================================
+                  PAGINACIÓN
+                  ================================================= */}
+
+              <div className="pagination">
+
+                {Array.from(
+                  { length: totalPages },
+                  (_, index) => (
+                    <button
+                      key={index + 1}
+                      className={`page-btn ${
+                        currentPage === index + 1
+                          ? 'active'
+                          : ''
+                      }`}
+                      onClick={() =>
+                        handlePageChange(
+                          index + 1
+                        )
+                      }
+                    >
+                      {index + 1}
+                    </button>
+                  )
+                )}
+
+              </div>
 
             </div>
+          )}
 
-            <div className="specialty-dots">
+          {/* ===================================================
+              ESPECIALIDADES
+              =================================================== */}
 
-              {specialtyItems.map(
-                (item, index) => (
-                  <button
-                    type="button"
-                    key={item.id}
-                    className={`specialty-dot ${
-                      specialtyIndex === index
-                        ? 'active'
-                        : ''
-                    }`}
-                    onClick={() =>
-                      setSpecialtyIndex(index)
-                    }
-                    aria-label={`Ver ${item.name}`}
-                  />
-                )
-              )}
+          {!showMenu && (
+            <section className="specialties-section">
 
-            </div>
+              <h2>
+                Nuestras especialidades
+              </h2>
 
-          </section>
-        )}
+              <div className="specialty-carousel">
 
-        {/* ===================================================
-            RESEÑAS
-            =================================================== */}
+                <button
+                  type="button"
+                  className="specialty-arrow prev"
+                  onClick={prevSpecialty}
+                  disabled={specialtyIndex === 0}
+                  aria-label="Productos anteriores"
+                >
+                  <img src="/img/Back.svg" alt="Atrás" />
+                </button>
 
-        <section className="reviews-section">
+                <div className="specialty-viewport">
+
+                  <div
+                    className="specialty-track"
+                    style={{
+                      transform: `translateX(calc(-${specialtyIndex} * (var(--specialty-step))))`,
+                    }}
+                  >
+
+                    {specialtyItems.map((item) => (
+
+                      <div
+                        className="specialty-slide"
+                        key={item.id}
+                      >
+
+                        <div className="menu-item">
+
+                          {item.glutenfree && (
+                            <div
+                              style={{
+                                position: 'absolute',
+                                top: '15px',
+                                right: '15px',
+                                background: '#365f73',
+                                color: 'white',
+                                padding: '3px 10px',
+                                borderRadius: '15px',
+                                fontSize: '0.7rem',
+                                fontWeight: 'bold',
+                                zIndex: 2,
+                              }}
+                            >
+                              Gluten Free
+                            </div>
+                          )}
+
+                          {item.vegetariano && (
+                            <div
+                              style={{
+                                position: 'absolute',
+                                top: '15px',
+                                right: '15px',
+                                background: '#8bcf8b',
+                                color: 'white',
+                                padding: '3px 10px',
+                                borderRadius: '15px',
+                                fontSize: '0.7rem',
+                                fontWeight: 'bold',
+                                zIndex: 2,
+                              }}
+                            >
+                              Vegetariano
+                            </div>
+                          )}
+
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                          />
+
+                          <h3>{item.name}</h3>
+
+                          <p className="specialty-description">
+                            {item.ingredientes}
+                          </p>
+
+                          <button
+                            className="btn-pedir specialty-add-btn"
+                            onClick={() =>
+                              handleOrder(item)
+                            }
+                          >
+                            Agregar
+                          </button>
+
+                        </div>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+                <button
+                  type="button"
+                  className="specialty-arrow next"
+                  onClick={nextSpecialty}
+                  disabled={
+                    specialtyIndex >=
+                    specialtyItems.length - 1
+                  }
+                  aria-label="Siguientes productos"
+                >
+                  <img src="/img/Next.svg" alt="Siguiente" />
+                </button>
+
+              </div>
+
+              <div className="specialty-dots">
+
+                {specialtyItems.map(
+                  (item, index) => (
+                    <button
+                      type="button"
+                      key={item.id}
+                      className={`specialty-dot ${
+                        specialtyIndex === index
+                          ? 'active'
+                          : ''
+                      }`}
+                      onClick={() =>
+                        setSpecialtyIndex(index)
+                      }
+                      aria-label={`Ver ${item.name}`}
+                    />
+                  )
+                )}
+
+              </div>
+
+            </section>
+          )}
+
+          {/* ===================================================
+              RESEÑAS
+              =================================================== */}
+
+          <section className="reviews-section">
 
   <h2>
     ¿Qué dicen nuestros clientes?
@@ -2311,145 +2317,145 @@ Consumo y realmente recomiendo
 
 </section>
 
-        {/* ===================================================
-            UBICACIÓN
-            =================================================== */}
+          {/* ===================================================
+              UBICACIÓN
+              =================================================== */}
 
-        <section
-          className="map-section"
-          id="ubicacion"
-        >
+          <section
+            className="map-section"
+            id="ubicacion"
+          >
 
-          <h2>
-            ¿Dónde estamos ubicados?
-          </h2>
+            <h2>
+              ¿Dónde estamos ubicados?
+            </h2>
 
-          <div className="map-container">
-            <iframe
-              src="https://www.google.com/maps?q=Gorriti+3440,+C1172+ACB,+Buenos+Aires,+Argentina&output=embed"
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Ubicación Rollsticio"
-            />
-          </div>
+            <div className="map-container">
+              <iframe
+                src="https://www.google.com/maps?q=Gorriti+3440,+C1172+ACB,+Buenos+Aires,+Argentina&output=embed"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Ubicación Rollsticio"
+              />
+            </div>
 
-          <div className="location-card">
+            <div className="location-card">
 
-            <div
-              className="location-icon"
-              aria-hidden="true"
-            >
-
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <div
+                className="location-icon"
+                aria-hidden="true"
               >
 
-                <path
-                  d="M20 10.2C20 15.2 12 21 12 21S4 15.2 4 10.2C4 6.22 7.58 3 12 3s8 3.22 8 7.2Z"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
 
-                <circle
-                  cx="12"
-                  cy="10"
-                  r="2.5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                />
+                  <path
+                    d="M20 10.2C20 15.2 12 21 12 21S4 15.2 4 10.2C4 6.22 7.58 3 12 3s8 3.22 8 7.2Z"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
 
-              </svg>
+                  <circle
+                    cx="12"
+                    cy="10"
+                    r="2.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
 
-            </div>
+                </svg>
 
-            <div className="location-divider" />
+              </div>
 
-            <div className="location-info">
+              <div className="location-divider" />
 
-              <strong>
-                Gorriti 3440, C1172 ACB,
-              </strong>
+              <div className="location-info">
 
-              <span>
-                Cdad. Autónoma de Buenos Aires, Argentina
-              </span>
+                <strong>
+                  Gorriti 3440, C1172 ACB,
+                </strong>
 
-            </div>
+                <span>
+                  Cdad. Autónoma de Buenos Aires, Argentina
+                </span>
 
-          </div>
-
-        </section>
-
-        {/* ===================================================
-            FOOTER
-            =================================================== */}
-
-        <footer className="site-footer">
-
-          <div className="footer-content">
-
-            <div className="footer-col">
-
-              <h4>Contacto</h4>
-
-              <p>
-                Tlf: 0200202003
-              </p>
-
-              <p>
-                Correo: correo@gmail.com
-              </p>
+              </div>
 
             </div>
 
-            <div className="footer-col">
+          </section>
 
-              <h4>Dirección</h4>
+          {/* ===================================================
+              FOOTER
+              =================================================== */}
 
-              <p>
-                Gorriti 3440, C1172 ACB,
-                <br />
-                Ciudad Autónoma de Buenos Aires,
-                Argentina.
-              </p>
+          <footer className="site-footer">
+
+            <div className="footer-content">
+
+              <div className="footer-col">
+
+                <h4>Contacto</h4>
+
+                <p>
+                  Tlf: 0200202003
+                </p>
+
+                <p>
+                  Correo: correo@gmail.com
+                </p>
+
+              </div>
+
+              <div className="footer-col">
+
+                <h4>Dirección</h4>
+
+                <p>
+                  Gorriti 3440, C1172 ACB,
+                  <br />
+                  Ciudad Autónoma de Buenos Aires,
+                  Argentina.
+                </p>
+
+              </div>
+
+              <div className="footer-col">
+
+                <h4>Diseñado por</h4>
+
+                <span className="footer-brand">
+
+                  <img
+                    src="/img/Logo_footer.svg"
+                    alt="Logo Rollsticio"
+                  />
+
+                </span>
+
+              </div>
 
             </div>
 
-            <div className="footer-col">
+          </footer>
 
-              <h4>Diseñado por</h4>
+          {/* ===================================================
+              MENSAJE TEMPORAL
+              =================================================== */}
 
-              <span className="footer-brand">
-
-                <img
-                  src="/img/Logo_footer.svg"
-                  alt="Logo Rollsticio"
-                />
-
-              </span>
-
+          {message && (
+            <div className="toast">
+              {message}
             </div>
+          )}
 
-          </div>
-
-        </footer>
-
-        {/* ===================================================
-            MENSAJE TEMPORAL
-            =================================================== */}
-
-        {message && (
-          <div className="toast">
-            {message}
-          </div>
-        )}
-
-      </div>
+        </div>
     </>
   );
 };

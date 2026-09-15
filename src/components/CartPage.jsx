@@ -1,6 +1,5 @@
 
 import React from 'react';
-
 import { useNavigate } from 'react-router-dom';
 
 // ======================================================
@@ -164,8 +163,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
         justifyContent: 'space-between',
 
-        fontFamily:
-          "'Playfair Display', Georgia, 'Times New Roman', serif",
+        fontFamily: "'Lato', sans-serif",
 
         color: '#1a2b2c',
 
@@ -223,34 +221,25 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
             style={{
 
-              border:
-                `1px solid ${
-                  isRestaurantOpen
-                    ? '#48d720'
-                    : '#48d720'
-                }`,
+              border: '1px solid #8bcf8b',
 
-              padding: '5px 10px',
+              padding: '8px 15px',
 
-              borderRadius: '6px',
+              borderRadius: '8px',
 
-              fontSize: '0.75rem',
+              fontSize: '0.85rem',
 
-              color:
-                isRestaurantOpen
-                  ? '#4a6b47'
-                  : '#4a6b47',
+              color: '#3f7143',
 
-              background:
-                isRestaurantOpen
-                  ? '#eef3ed'
-                  : '#f9eaea',
+              background: '#e7f6e7',
 
               display: 'inline-block',
 
               whiteSpace: 'nowrap',
 
-              fontWeight: '600'
+              fontWeight: 'bold',
+
+              boxShadow: '0 2px 6px rgba(91, 145, 91, 0.08)'
 
             }}
 
@@ -1360,12 +1349,13 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
       </div>
 
       {/* ==================================================
-          RESPONSIVE
+          RESPONSIVE Y ESTILOS GLOBALES
       ================================================== */}
 
       <style>
 
         {`
+          @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
           @media (max-width: 600px) {
 

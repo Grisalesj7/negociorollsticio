@@ -2223,63 +2223,93 @@ const LandingPage = ({ cart, setCart }) => {
 
         <section className="reviews-section">
 
-          <h2>
-            ¿Qué dicen nuestros clientes?
-          </h2>
+  <h2>
+    ¿Qué dicen nuestros clientes?
+  </h2>
 
-          <div className="reviews-grid">
+  <div className="reviews-grid">
 
-            {[1, 2, 3].map((i) => (
+    {/* RESEÑA 1 */}
+    <div className="review-card">
+      <p>
+        Pedí por primera vez hoy y la verdad es que está muy rico y fresco. 
+        Me olvidé de sacar foto, pero las piezas tienen un buen tamaño y vienen con una buena cantidad de salmón. 
+        Recomiendo
+      </p>
 
-              <div
-                key={i}
-                className="review-card"
-              >
+      <p
+        style={{
+          fontWeight: 'normal',
+        }}
+      >
+        Vitória Monteiro
 
-                <p>
-                  Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt
-                  ut labore et dolore magna
-                  aliqua. Ut enim ad minim
-                  veniam, quis nostrud
-                  exercitation ullamco laboris
-                  nisi ut aliquip ex ea commodo
-                  consequat.
-                </p>
+        <span style={{ float: 'right' }}>
+          5.0 <span className="review-star">★</span>
+        </span>
+      </p>
+    </div>
 
-                <p
-                  style={{
-                    fontWeight: 'normal',
-                  }}
-                >
-                  Rafael Gonzales
-                  <span style={{ float: 'right' }}>
-                    5.0 <span className="review-star">★</span>
-                  </span>
-                </p>
 
-              </div>
+    {/* RESEÑA 2 */}
+    <div className="review-card">
+      <p>
+        Siempre pido a domicilio, es el sushi más rico y más económico de Buenos Aires. 
+        Siempre todo impecable!
+      </p>
 
-            ))}
+      <p
+        style={{
+          fontWeight: 'normal',
+        }}
+      >
+        Fabiana Mata
 
-          </div>
+        <span style={{ float: 'right' }}>
+          5.0 <span className="review-star">★</span>
+        </span>
+      </p>
+    </div>
 
-          <a
-            className="reviews-button"
-            href={reviewLink}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(e) => {
-              if (reviewLink === '#') {
-                e.preventDefault();
-              }
-            }}
-          >
-            Dejar mi reseña
-          </a>
 
-        </section>
+    {/* RESEÑA 3 */}
+    <div className="review-card">
+      <p>
+        Es EXCELENTE. Porque combina buena calidad, buen precio y entrega rápida y prolija.
+Lo vengo pidiendo todos los domingos con mis compañeros de guardia hace ya tres meses y han cambiado de nombre pero nunca de calidad. Yo pido combos premium selection y full salmon y la verdad es que le ponen muy buena cantidad de salmón.
+Consumo y realmente recomiendo
+      </p>
+
+      <p
+        style={{
+          fontWeight: 'normal',
+        }}
+      >
+        Juli Perin
+
+        <span style={{ float: 'right' }}>
+          5.0 <span className="review-star">★</span>
+        </span>
+      </p>
+    </div>
+
+  </div>
+
+  <a
+    className="reviews-button"
+    href={reviewLink}
+    target="_blank"
+    rel="noreferrer"
+    onClick={(e) => {
+      if (reviewLink === '#') {
+        e.preventDefault();
+      }
+    }}
+  >
+    Dejar mi reseña
+  </a>
+
+</section>
 
         {/* ===================================================
             UBICACIÓN

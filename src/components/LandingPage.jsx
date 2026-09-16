@@ -866,14 +866,9 @@ const LandingPage = ({ cart, setCart }) => {
     filter: brightness(0); /* ESTO HACE LAS FLECHAS NEGRAS */
   }
 
-  .specialty-arrow:hover:not(:disabled) {
+  .specialty-arrow:hover {
     background: transparent;
     transform: translateY(-50%) scale(1.1); /* Efecto zoom ligero */
-  }
-
-  .specialty-arrow:disabled {
-    opacity: 0.35;
-    cursor: default;
   }
 
   .specialty-arrow.prev {
@@ -2087,15 +2082,16 @@ const LandingPage = ({ cart, setCart }) => {
 
               <div className="specialty-carousel">
 
-                <button
-                  type="button"
-                  className="specialty-arrow prev"
-                  onClick={prevSpecialty}
-                  disabled={specialtyIndex === 0}
-                  aria-label="Productos anteriores"
-                >
-                  <img src="/img/Back.svg" alt="Atrás" />
-                </button>
+                {specialtyIndex > 0 && (
+                  <button
+                    type="button"
+                    className="specialty-arrow prev"
+                    onClick={prevSpecialty}
+                    aria-label="Productos anteriores"
+                  >
+                    <img src="/img/Back.svg" alt="Atrás" />
+                  </button>
+                )}
 
                 <div className="specialty-viewport">
 
@@ -2183,18 +2179,16 @@ const LandingPage = ({ cart, setCart }) => {
 
                 </div>
 
-                <button
-                  type="button"
-                  className="specialty-arrow next"
-                  onClick={nextSpecialty}
-                  disabled={
-                    specialtyIndex >=
-                    specialtyItems.length - 1
-                  }
-                  aria-label="Siguientes productos"
-                >
-                  <img src="/img/Next.svg" alt="Siguiente" />
-                </button>
+                {specialtyIndex < specialtyItems.length - 1 && (
+                  <button
+                    type="button"
+                    className="specialty-arrow next"
+                    onClick={nextSpecialty}
+                    aria-label="Siguientes productos"
+                  >
+                    <img src="/img/Next.svg" alt="Siguiente" />
+                  </button>
+                )}
 
               </div>
 
@@ -2356,7 +2350,7 @@ Consumo y realmente recomiendo
                   <path
                     d="M20 10.2C20 15.2 12 21 12 21S4 15.2 4 10.2C4 6.22 7.58 3 12 3s8 3.22 8 7.2Z"
                     stroke="currentColor"
-                    strokeWidth="1.8"
+                    strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -2364,9 +2358,8 @@ Consumo y realmente recomiendo
                   <circle
                     cx="12"
                     cy="10"
-                    r="2.5"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
+                    r="3"
+                    fill="currentColor"
                   />
 
                 </svg>

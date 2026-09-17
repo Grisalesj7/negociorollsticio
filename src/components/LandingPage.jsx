@@ -9,7 +9,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   const [showMenu, setShowMenu] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Estado para el Sidebar móvil
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [message, setMessage] = useState(null);
 
   const [userData] = useState({
@@ -75,92 +75,155 @@ const LandingPage = ({ cart, setCart }) => {
   const itemsPerPage = 10;
 
   /* =========================================================
-     MENÚ COMPLETO (Simplificado para el ejemplo)
+     MENÚ COMPLETO (68 Productos Manuales)
      ========================================================= */
+
+  const baseItems = [
+    // 1-10: TUS PRODUCTOS ORIGINALES
+    {
+      id: 1,
+      name: 'Nigiris de salmón rosado',
+      price: 5000,
+      image: '/img/Niguiris.png',
+      ingredientes: '4 unidades de niguiris de arroz con topping de salmón rosado fresco.',
+    },
+    {
+      id: 2,
+      name: 'Sashimis de salmón rosado',
+      price: 9000,
+      image: '/img/Sashimis.png',
+      ingredientes: '4 unidades de rodajas únicas de salmón rosado',
+    },
+    {
+      id: 3,
+      name: 'Geishas de salmón rosado',
+      price: 7000,
+      image: '/img/Geishas.png',
+      ingredientes: '4 unidades rellenas de queso crema y palta',
+    },
+    {
+      id: 4,
+      name: 'Yagi 15 piezas',
+      price: 13000,
+      image: '/img/Yagi.png',
+      ingredientes: '5 Philadelphia, 5 Osaka, 5 California. Incluye 2 sobres de soja, wasabi/jengibre y un par de palitos',
+    },
+    {
+      id: 5,
+      name: 'Oke 20 piezas',
+      price: 19000,
+      image: '/img/Oke.png',
+      ingredientes: '5 Philadelphia, 5 Osaka, 5 California, 5 Niguiris de salmón. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+    },
+    {
+      id: 6,
+      name: 'Nara 30 piezas',
+      price: 0,
+      image: '/img/Nara.JPG',
+      ingredientes: '10 Philadelphia, 10 Osaka, 10 California. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+    },
+    {
+      id: 7,
+      name: 'Moly Premium 30 piezas',
+      price: 30000,
+      image: '/img/Moly.png',
+      ingredientes: '10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+    },
+    {
+      id: 8,
+      name: 'Dundee 40 piezas',
+      price: 0,
+      image: '/img/Dundee.png',
+      ingredientes: '10 Miami, 10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+    },
+    {
+      id: 9,
+      name: 'Star 60 piezas',
+      price: 65000,
+      image: '/img/Aloha.jpeg', // Ajustar imagen
+      ingredientes: '10 Kansas Crunch, 10 New York, 10 Islandia, 10 Osaka, 10 MakiCalifornia, 4 Niguiris, 3 Sashimis, 3 Geishas',
+    },
+    {
+      id: 10,
+      name: 'Aruba 15 piezas',
+      price: 15000,
+      image: '/img/Aruba.png',
+      ingredientes: '5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
+    },
+
+    // 11-30: MÁS ROLLS Y TABLAS
+    { id: 11, name: 'América 20 piezas', price: 22000, image: '/img/America.jpeg', ingredientes: '10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos' },
+    { id: 12, name: 'Roma 30 piezas', price: 30000, image: '/img/Roma.jpeg', ingredientes: '10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 Maki California. Incluye un blíster y dos sobres de soja + dos pares de palitos' },
+    { id: 13, name: 'Atlántica 60 piezas', price: 68000, image: '/img/Atlantica.jpeg', ingredientes: '10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll,10 Maki California, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado.' },
+    { id: 14, name: 'Paraíso 40 Piezas', price: 42000, image: '/img/Paraiso.jpeg', ingredientes: '10 New York Roll, 10 king roll, 10 Queen Roll, 3 Tamago Roll,3 Paraíso Roll, 4 Niguiris de salmón rosado.' },
+    { id: 15, name: 'Oslo 15 piezas', price: 21000, image: '/img/Oslo.jpeg', ingredientes: '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmónrosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).',  glutenfree: true },
+    { id: 16, name: 'Malmö 20 piezas', price: 25000, image: '/img/Malmo.jpeg', ingredientes: '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll,2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 3 sobres de soja y un par de palitos (otras salsas se venden por separado).', glutenfree: true },
+    { id: 17, name: 'Aurora 30 piezas', price: 37000, image: '/img/Aurora.jpeg', ingredientes: '5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll,3 Tamago Roll, 2 Geishas de salmón rosado y 2 Niguiris de salmón rosado. Incluye un blíster y dos sobres de soja + dos pares de palitos ', glutenfree: true },
+    { id: 18, name: 'Antártida 40 piezas', price: 48000, image: '/img/Antartida.jpeg', ingredientes: '10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis de salmón rosado, 2 Geishas de salmón rosado y 4 Niguiris de salmón rosado.', glutenfree: true },
+    { id: 19, name: 'Malvinas 60 piezas', price: 72000, image: '/img/Malvinas.jpeg', ingredientes: '10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris de salmón rosado, 2 Sashimis de salmón rosado y 2 Geishas de salmón rosado.', glutenfree: true },
+    { id: 20, name: 'Full Salmón 15 piezas', price: 19000, image: '/img/fullsalmon.JPG', ingredientes: '10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).', glutenfree: true },
+    { id: 21, name: 'Full Salmón 26 piezas', price: 33000, image: '/img/Fullsalmon26.JPG', ingredientes: '10 Philadelphia, 10 New York, 3 Niguiris, 2 Sashimis y 1 Geishas. Incluye un blíster y un sobre de soja + dos pares de palitos (otras salsas se venden por separado).', glutenfree: true },
+    { id: 22, name: 'Full Salmón 34 piezas', price: 40000, image: '/img/Fullsalmon34.JPG', ingredientes: '10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas. Incluye un blíster y dos sobres de soja + dos pares de palitos (otras salsas se venden por separado).', glutenfree: true },
+    { id: 23, name: 'Full Salmón 46 piezas', price: 48000, image: '/img/Fullsalmon46.JPG', ingredientes: '10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas.', glutenfree: true },
+    { id: 24, name: 'Full Salmón 60 piezas', price: 70000, image: '/img/Aloha.jpeg', ingredientes: '10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas.', glutenfree: true },
+    { id: 25, name: 'Blinders Roll', price: 0, image: '/img/Blinders.jpeg', ingredientes: '10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado. Incluye 2 sobres de soja y un par de palitos' },
+    { id: 26, name: 'Peaky Roll', price: 0, image: '/img/Peaky.jpeg', ingredientes: '10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta. Incluye 2 sobres de soja y un par de palitos', glutenfree: true },
+    { id: 27, name: 'Smoked 25 Piezas', price: 0, image: '/img/Smokedd.jpeg', ingredientes: '10 Peaky, 10 Blinders y 5 Niguiris Salmon Ahumado. Incluye un blíster y un sobre de soja + dos pares de palitos' },
+    { id: 28, name: 'Tamago Protein', price: 8000, image: '/img/Tamago.JPG', ingredientes: '6 piezas envueltas en tamago (lámina de tortilla japonesa) + salmón rosado + queso crema. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).', glutenfree: true },
+    { id: 29, name: 'Paraíso Roll', price: 10000, image: '/img/Paraiso.JPG', ingredientes: '6 piezas rellenas de palta, queso crema y palmito, envueltas en láminas de tamago y fetas de salmón rosado con topping de crocante de batata y un hilo de salsa casera de maracuyá. Incluye 2 sobres de soja y un par de palitos (otras salsas se venden por separado).', glutenfree: true },
+    { id: 30, name: 'New York Salad', price: 12000, image: '/img/Newyork.PNG', ingredientes: 'Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo. Incluye 2 sobres de soja y un tenedor (otras salsas se venden por separado).', glutenfree: true },
+
+    // 31-40: VEGETARIANOS Y GLUTEN FREE
+    { id: 31, name: 'Veggie Roll Clásico 10u', price: 7500, image: '/img/Aloha.jpeg', ingredientes: 'Palta, pepino y zanahoria.', vegetariano: true },
+    { id: 32, name: 'Green Roll 10u', price: 8000, image: '/img/Aloha.jpeg', ingredientes: 'Queso crema, tomates secos, rúcula y palta.', vegetariano: true },
+    { id: 33, name: 'Mushroom Roll 10u', price: 8500, image: '/img/Aloha.jpeg', ingredientes: 'Champiñones salteados, queso crema y ciboulette.', vegetariano: true },
+    { id: 34, name: 'Tabla Veggie 15 piezas', price: 11000, image: '/img/Aloha.jpeg', ingredientes: '5 Veggie Clásico, 5 Green, 5 Maki Pepino.', vegetariano: true },
+    { id: 35, name: 'Tabla Veggie 30 piezas', price: 21000, image: '/img/Aloha.jpeg', ingredientes: 'Mix de nuestros mejores rolls vegetarianos.', vegetariano: true },
+    { id: 36, name: 'Nigiris de Palta 4u', price: 4000, image: '/img/Aloha.jpeg', ingredientes: 'Arroz de sushi cubierto con fina lámina de palta fresca.', vegetariano: true, glutenfree: true },
+    { id: 37, name: 'Sashimi Pez Blanco 4u', price: 8000, image: '/img/Aloha.jpeg', ingredientes: 'Rodajas de pez blanco de temporada fresco.', glutenfree: true },
+    { id: 38, name: 'Sashimi Atún Rojo 4u', price: 11000, image: '/img/Aloha.jpeg', ingredientes: 'Rodajas premium de atún rojo.', glutenfree: true },
+    { id: 39, name: 'Nigiris de Langostino 4u', price: 6000, image: '/img/Aloha.jpeg', ingredientes: 'Arroz de sushi con langostino cocido encima.', glutenfree: true },
+    { id: 40, name: 'Nigiris de Atún Rojo 4u', price: 6500, image: '/img/Aloha.jpeg', ingredientes: 'Arroz de sushi con topping de atún rojo.', glutenfree: true },
+
+    // 41-50: ENTRADAS Y CALIENTES
+    { id: 41, name: 'Gyozas de Cerdo 5u', price: 6500, image: '/img/Aloha.jpeg', ingredientes: 'Empanaditas japonesas al vapor y selladas, rellenas de cerdo y repollo.' },
+    { id: 42, name: 'Gyozas Vegetarianas 5u', price: 6000, image: '/img/Aloha.jpeg', ingredientes: 'Empanaditas japonesas rellenas de vegetales.', vegetariano: true },
+    { id: 43, name: 'Harumaki de Carne 2u', price: 4500, image: '/img/Aloha.jpeg', ingredientes: 'Arrolladitos primavera de carne fritos, acompañados de salsa agridulce.' },
+    { id: 44, name: 'Harumaki de Verdura 2u', price: 4000, image: '/img/Aloha.jpeg', ingredientes: 'Arrolladitos primavera de vegetales fritos.', vegetariano: true },
+    { id: 45, name: 'Langostinos Panko 5u', price: 8500, image: '/img/Aloha.jpeg', ingredientes: 'Langostinos rebozados en panko fritos con salsa de mostaza y miel.' },
+    { id: 46, name: 'Rabas a la Romana', price: 9000, image: '/img/Aloha.jpeg', ingredientes: 'Anillos de calamar rebozados y fritos, con gajos de limón.' },
+    { id: 47, name: 'Bolas de Salmón Fritas 4u', price: 5500, image: '/img/Aloha.jpeg', ingredientes: 'Bolitas de salmón y queso crema empanizadas y fritas.' },
+    { id: 48, name: 'Sopa Miso', price: 4500, image: '/img/Aloha.jpeg', ingredientes: 'Clásica sopa japonesa de pasta de soja, con tofu y verdeo.', vegetariano: true },
+    { id: 49, name: 'Edamame', price: 5000, image: '/img/Aloha.jpeg', ingredientes: 'Vainas de soja cocidas al vapor con un toque de sal marina.', vegetariano: true, glutenfree: true },
+    { id: 50, name: 'Ensalada Wakame', price: 6500, image: '/img/Aloha.jpeg', ingredientes: 'Ensalada tradicional de algas marinas condimentada con sésamo.', vegetariano: true },
+
+    // 51-60: PLATOS PRINCIPALES Y WOKS
+    { id: 51, name: 'Wok de Pollo', price: 11000, image: '/img/Aloha.jpeg', ingredientes: 'Fideos o arroz salteados al wok con pollo, vegetales y salsa de soja.' },
+    { id: 52, name: 'Wok de Lomo', price: 12500, image: '/img/Aloha.jpeg', ingredientes: 'Fideos o arroz salteados al wok con tiras de lomo y vegetales.' },
+    { id: 53, name: 'Wok de Langostinos', price: 13500, image: '/img/Aloha.jpeg', ingredientes: 'Fideos o arroz salteados con langostinos, vegetales y salsa de ostras.' },
+    { id: 54, name: 'Wok Vegetariano', price: 9500, image: '/img/Aloha.jpeg', ingredientes: 'Vegetales de estación salteados al wok con fideos de arroz.', vegetariano: true },
+    { id: 55, name: 'Yakisoba de Cerdo', price: 11500, image: '/img/Aloha.jpeg', ingredientes: 'Fideos japoneses salteados con vegetales, cerdo y salsa yakisoba.' },
+    { id: 56, name: 'Yakimeshi Mixto', price: 12000, image: '/img/Aloha.jpeg', ingredientes: 'Clásico arroz frito japonés salteado con pollo, carne, huevo y vegetales.' },
+    { id: 57, name: 'Curry Japonés con Pollo', price: 13000, image: '/img/Aloha.jpeg', ingredientes: 'Estofado de curry espeso con verduras y pollo, servido con arroz blanco.' },
+    { id: 58, name: 'Cerdo Agridulce', price: 12500, image: '/img/Aloha.jpeg', ingredientes: 'Trozos de cerdo rebozados bañados en salsa agridulce, acompañado de arroz.' },
+    { id: 59, name: 'Pollo Teriyaki', price: 11500, image: '/img/Aloha.jpeg', ingredientes: 'Pechuga de pollo glaseada con salsa teriyaki dulce sobre colchón de arroz.' },
+    { id: 60, name: 'Salmón Teriyaki', price: 16000, image: '/img/Aloha.jpeg', ingredientes: 'Filet de salmón rosado con salsa teriyaki acompañado de vegetales salteados.' },
+
+    // 61-68: BEBIDAS Y POSTRES
+    { id: 61, name: 'Coca Cola 500ml', price: 1500, image: '/img/Aloha.jpeg', ingredientes: 'Línea regular o zero.' },
+    { id: 62, name: 'Sprite 500ml', price: 1500, image: '/img/Aloha.jpeg', ingredientes: 'Línea regular o zero.' },
+    { id: 63, name: 'Agua Mineral 500ml', price: 1200, image: '/img/Aloha.jpeg', ingredientes: 'Agua sin gas o con gas.' },
+    { id: 64, name: 'Cerveza Stella Artois 1L', price: 3500, image: '/img/Aloha.jpeg', ingredientes: 'Cerveza rubia fría.' },
+    { id: 65, name: 'Cerveza Patagonia 730ml', price: 4000, image: '/img/Aloha.jpeg', ingredientes: 'Amber Lager o Bohemian Pilsener.' },
+    { id: 66, name: 'Dorayaki', price: 3500, image: '/img/Aloha.jpeg', ingredientes: 'Dulce tradicional japonés, dos bizcochos rellenos de anko (pasta de judías dulces).' },
+    { id: 67, name: 'Mochi de Helado 2u', price: 4500, image: '/img/Aloha.jpeg', ingredientes: 'Masa de arroz glutinoso rellena de helado (consultar sabores).' },
+    { id: 68, name: 'Helado de Matcha', price: 4000, image: '/img/Aloha.jpeg', ingredientes: 'Copa de helado artesanal sabor té verde.' },
+  ];
 
   const menuCategorias = [
     {
-      titulo: 'Tablas Variadas',
-      items: [
-        {
-          id: 1,
-          name: 'Nigiris de salmón rosado',
-          price: 5000,
-          image: '/img/Niguiris.png',
-          ingredientes:
-            '4 unidades de niguiris de arroz con topping de salmón rosado fresco.',
-        },
-        {
-          id: 2,
-          name: 'Sashimis de salmón rosado',
-          price: 9000,
-          image: '/img/Sashimis.png',
-          ingredientes: '4 unidades de rodajas únicas de salmón rosado',
-        },
-        {
-          id: 3,
-          name: 'Geishas de salmón rosado',
-          price: 7000,
-          image: '/img/Geishas.png',
-          ingredientes: '4 unidades rellenas de queso crema y palta',
-        },
-        {
-          id: 4,
-          name: 'Yagi 15 piezas',
-          price: 13000,
-          image: '/img/Yagi.png',
-          ingredientes:
-            '5 Philadelphia, 5 Osaka, 5 California. Incluye 2 sobres de soja, wasabi/jengibre y un par de palitos',
-        },
-        {
-          id: 5,
-          name: 'Oke 20 piezas',
-          price: 19000,
-          image: '/img/Oke.png',
-          ingredientes:
-            '5 Philadelphia, 5 Osaka, 5 California, 5 Niguiris de salmón. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
-        },
-        {
-          id: 6,
-          name: 'Nara 30 piezas',
-          price: 0,
-          image: '/img/Nara.JPG',
-          ingredientes:
-            '10 Philadelphia, 10 Osaka, 10 California. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
-        },
-        {
-          id: 7,
-          name: 'Moly Premium 30 piezas',
-          price: 30000,
-          image: '/img/Moly.png',
-          ingredientes:
-            '10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
-        },
-        {
-          id: 8,
-          name: 'Dundee 40 piezas',
-          price: 0,
-          image: '/img/Dundee.png',
-          ingredientes:
-            '10 Miami, 10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
-        },
-        {
-          id: 9,
-          name: 'Star 60 piezas',
-          price: 65000,
-          image: '/img/',
-          ingredientes:
-            '10 Kansas Crunch, 10 New York, 10 Islandia, 10 Osaka, 10 MakiCalifornia, 4 Niguiris, 3 Sashimis, 3 Geishas',
-        },
-        {
-          id: 10,
-          name: 'Aruba 15 piezas',
-          price: 15000,
-          image: '/img/Aruba.png',
-          ingredientes:
-            '5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jengibre y un par de palitos',
-        },
-      ],
+      titulo: 'Menú Completo',
+      items: baseItems,
     }
   ];
 
@@ -169,7 +232,7 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   const sushiItems = menuCategorias.flatMap((cat) => cat.items);
-  const specialtyItems = sushiItems.slice(0, 10);
+  const specialtyItems = sushiItems.slice(0, 10); // Las especialidades siguen siendo las 10 primeras
 
   /* =========================================================
      CARRUSEL DE ESPECIALIDADES
@@ -258,6 +321,20 @@ const LandingPage = ({ cart, setCart }) => {
   const isShopOpen =
     currentHour >= 17 && currentHour < 23;
 
+
+  /* =========================================================
+     FUNCIONES AUXILIARES PARA EL RENDER
+     ========================================================= */
+
+  // Función para obtener si el nombre dice X piezas o X unidades (Para la etiqueta inferior de la tarjeta)
+  const getPillText = (name) => {
+    const match = name.match(/(\d+)\s*(piezas|u)/i);
+    if (match) {
+      return `${match[1]} ${match[2].toLowerCase() === 'u' ? 'Roles' : 'Piezas'}`;
+    }
+    return 'Porción';
+  };
+
   /* =========================================================
      RENDER
      ========================================================= */
@@ -276,7 +353,7 @@ const LandingPage = ({ cart, setCart }) => {
 
     --background-main: #F2ECE3;
     --color-text: #2b3a3c;
-    --color-gold: #d4af37;
+    --color-gold: #d4a72c;
     --color-coral: #e95d53;
 
     --color-green: #7d967b;
@@ -409,7 +486,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .logo-button:focus-visible {
-    outline: 2px solid #d4a72c;
+    outline: 2px solid var(--color-gold);
     outline-offset: 5px;
   }
 
@@ -447,7 +524,7 @@ const LandingPage = ({ cart, setCart }) => {
     justify-content: center;
     min-width: 42px;
     min-height: 42px;
-    border: 1.5px solid #d4a72c;
+    border: 1.5px solid var(--color-gold);
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -643,7 +720,7 @@ const LandingPage = ({ cart, setCart }) => {
     margin: 20px auto;
     padding: 11px 28px;
     background: white;
-    border: 1px solid #d4a72c;
+    border: 1px solid var(--color-gold);
     border-radius: 24px;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.10);
     font-family: 'Playfair Display', serif;
@@ -659,7 +736,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   /* =========================================================
-     MENÚ COMPLETO
+     ESTILOS COMUNES DE TARJETAS (MENÚ COMPLETO Y ESPECIALIDADES)
      ========================================================= */
 
   .menu-list {
@@ -671,37 +748,111 @@ const LandingPage = ({ cart, setCart }) => {
 
   .menu-item {
     background: white;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid var(--color-gold);
+    text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     min-width: 0;
     word-break: break-word;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   }
 
-  .menu-item img {
+  .menu-image-container {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .menu-image-container img {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    border-radius: 4px;
     display: block;
+    margin: 0;
+  }
+
+  .badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 2;
+  }
+
+  .badge-blue {
+    background: #4a90e2; 
+  }
+
+  .badge-green {
+    background: #8bcf8b;
   }
 
   .menu-item h3 {
     width: 100%;
-    margin: 6px 0;
+    margin: 0 0 6px 0;
+    font-size: 1.15rem;
+    color: #000;
     line-height: 1.25;
+    text-align: left;
   }
 
-  .menu-item p {
-    max-width: 100%;
-    line-height: 1.45;
+  .menu-item-desc {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0 0 5px 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .menu-item-ing {
+    width: 100%;
+    font-size: 0.8rem;
+    color: #222;
+    line-height: 1.4;
+    margin: 0 0 10px 0;
+    text-align: left;
+    flex-grow: 1; /* Empuja el botón y los precios hacia abajo */
+  }
+
+  .menu-item-divider {
+    width: 100%;
+    height: 1.5px;
+    background-color: #d4c1a0;
+    border: none;
+    margin: 10px 0;
+  }
+
+  .menu-item-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .menu-item-pill {
+    background-color: #d4c1a0;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
+  .menu-item-price {
+    font-weight: 900;
+    font-size: 1.15rem;
+    color: #000;
   }
 
   .btn-pedir {
@@ -779,42 +930,16 @@ const LandingPage = ({ cart, setCart }) => {
 
   .specialty-slide .menu-item {
     width: 100%;
-    min-height: 0;
-    padding: 12px;
-    border: 1px solid #d4a72c;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
-    
     flex: 1; /* Rellena el alto del slide */
     display: flex;
     flex-direction: column;
   }
 
-  .specialty-slide .menu-item img {
+  .specialty-slide .menu-image-container img {
     height: 150px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 8px;
   }
 
-  .specialty-slide .menu-item h3 {
-    font-size: 0.9rem;
-    margin: 4px 0;
-    line-height: 1.2;
-    flex: none; /* No se estira */
-  }
-
-  .specialty-description {
-    color: #555;
-    font-size: 0.68rem;
-    line-height: 1.35;
-    margin: 5px 0 10px;
-    min-height: 0;
-    width: 100%;
-    
-    /* TRUNCADO CON PUNTOS SUSPENSIVOS (...) Y RELLENO FLEX */
-    flex: 1; 
+  .specialty-slide .menu-item-ing {
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Limita a 3 líneas */
     -webkit-box-orient: vertical;
@@ -827,8 +952,7 @@ const LandingPage = ({ cart, setCart }) => {
     min-height: 36px;
     padding: 7px 12px;
     font-size: 0.78rem;
-    margin-top: auto; /* Asegura que el botón siempre baje al final de la tarjeta */
-    flex: none;
+    margin-top: auto; 
   }
 
   .specialty-add-btn {
@@ -901,7 +1025,7 @@ const LandingPage = ({ cart, setCart }) => {
   .specialty-dot.active {
     width: 22px;
     border-radius: 8px;
-    background: #d4a72c;
+    background: var(--color-gold);
   }
 
   /* =========================================================
@@ -971,7 +1095,7 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .review-star {
-    color: #d4a72c;
+    color: var(--color-gold);
     font-size: 0.78rem;
     margin-left: 3px;
   }
@@ -1290,7 +1414,7 @@ const LandingPage = ({ cart, setCart }) => {
 
   @media (max-width: 900px) {
     .specialty-carousel {
-      padding: 0 45px; /* Modificado para dar más espacio a las flechas */
+      padding: 0 45px; 
     }
     .specialty-track {
       --specialty-step: calc((100% + 18px) / 2);
@@ -1329,20 +1453,17 @@ const LandingPage = ({ cart, setCart }) => {
       padding: 12px 0 0;
     }
 
-    /* Ocultar status del header en móvil (se mueve abajo) */
     .header-status.desktop-status {
       display: none;
     }
     
-    /* ESCONDER LA BARRA NAVEGACIÓN EN MÓVIL (para usar Sidebar) */
     .desktop-nav {
       display: none !important;
     }
 
-    /* HEADER AJUSTADO PARA MÓVIL ESTILO TARJETA (Borde dorado, fondo blanco) */
     .main-header {
       background: white;
-      border: 1px solid #d4a72c;
+      border: 1px solid var(--color-gold);
       border-radius: 6px;
       padding: 8px 15px;
       margin: 15px auto;
@@ -1359,7 +1480,7 @@ const LandingPage = ({ cart, setCart }) => {
       grid-area: menu;
       background: transparent;
       border: none;
-      color: #d4a72c;
+      color: var(--color-gold);
       cursor: pointer;
       padding: 0;
       justify-self: start;
@@ -1368,7 +1489,7 @@ const LandingPage = ({ cart, setCart }) => {
 
     .header-logo {
       grid-area: logo;
-      justify-self: center; /* Logo centrado */
+      justify-self: center; 
     }
 
     .header-actions {
@@ -1376,13 +1497,11 @@ const LandingPage = ({ cart, setCart }) => {
       justify-self: end;
     }
 
-    /* Logo ajustado para parecerse al texto de la imagen */
     .logo img {
       height: 24px;
       max-width: 145px;
     }
 
-    /* Icono del carrito limpio sin borde ni fondo en móvil */
     .cart-box {
       border: none;
       background: transparent;
@@ -1423,15 +1542,14 @@ const LandingPage = ({ cart, setCart }) => {
       right: 10px;
     }
 
-    /* Botón MENÚ AJUSTADO (Estilo píldora bajo el hero) */
     .menu-btn {
       display: block;
       width: auto;
-      margin: -20px auto 20px; /* Sube un poco para tocar el borde del hero */
+      margin: -20px auto 20px; 
       padding: 8px 24px;
       border-radius: 20px;
       background: #f1e7da;
-      border: 1px solid #d4a72c;
+      border: 1px solid var(--color-gold);
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       position: relative;
       z-index: 10;
@@ -1440,7 +1558,6 @@ const LandingPage = ({ cart, setCart }) => {
       font-weight: 500;
     }
 
-    /* Caja de Status Móvil (Debajo del botón) */
     .mobile-status-container {
       display: block;
       width: calc(100% - 30px);
@@ -1450,7 +1567,7 @@ const LandingPage = ({ cart, setCart }) => {
     .mobile-status-box {
       display: flex;
       align-items: center;
-      justify-content: center; /* Texto centrado en celular */
+      justify-content: center; 
       text-align: center;
       gap: 10px;
       background: #e7f3e7;
@@ -1475,29 +1592,19 @@ const LandingPage = ({ cart, setCart }) => {
       gap: 16px;
     }
 
-    .menu-item {
-      padding: 12px;
-      border-radius: 12px;
-    }
-
-    .menu-item img {
-      height: 220px;
-    }
-
     .menu-item h3 {
       font-size: 1.05rem;
     }
 
-    .menu-item p {
-      font-size: 0.8rem !important;
+    .menu-item-ing {
+      font-size: 0.75rem; 
     }
 
-    /* Especialidades - Fondo blanco en móvil */
     .specialties-section {
       width: 100% !important;
       max-width: 100% !important;
       background-color: #ffffff !important;
-      padding: 25px 15px 25px !important; /* Añadí un poco de padding top para que se vea bien el cuadro blanco */
+      padding: 25px 15px 25px !important; 
       margin: 15px 0 0 !important;
       border-radius: 0;
     }
@@ -1510,7 +1617,7 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-carousel {
-      padding: 0 40px !important; /* Espacio exacto para las flechas en móvil */
+      padding: 0 40px !important; 
     }
 
     .specialty-track {
@@ -1522,12 +1629,7 @@ const LandingPage = ({ cart, setCart }) => {
       flex-basis: calc((100% - 12px) / 2);
     }
 
-    .specialty-slide .menu-item {
-      padding: 10px;
-      background: white; /* Las tarjetas siguen siendo blancas */
-    }
-
-    .specialty-slide .menu-item img {
+    .specialty-slide .menu-image-container img {
       height: 135px;
     }
 
@@ -1535,21 +1637,15 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.9rem;
     }
 
-    .specialty-description {
-      font-size: 0.64rem;
-    }
-
-    /* Flechas en móvil restauradas */
     .specialty-arrow {
-      display: flex; /* Muestra las flechas que estaban ocultas */
+      display: flex; 
     }
 
     .specialty-arrow img {
-      width: 30px; /* Un poco mas chicas para el celular */
+      width: 30px; 
       height: 30px;
     }
 
-    /* Reseñas FULL WIDTH (Borde a Borde) */
     .reviews-section {
       width: 100% !important;
       max-width: 100% !important;
@@ -1584,7 +1680,6 @@ const LandingPage = ({ cart, setCart }) => {
       margin-top: 20px;
     }
 
-    /* Ubicación en móvil */
     .map-section {
       margin: 28px auto;
       padding: 0 0 25px;
@@ -1630,7 +1725,6 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.95rem; 
     }
 
-    /* Footer FULL WIDTH (Borde a Borde) */
     .site-footer {
       width: 100% !important;
       max-width: 100% !important;
@@ -1678,12 +1772,8 @@ const LandingPage = ({ cart, setCart }) => {
       flex-basis: 100%;
     }
 
-    .specialty-slide .menu-item img {
+    .specialty-slide .menu-image-container img {
       height: 160px;
-    }
-
-    .specialty-description {
-      font-size: 0.68rem;
     }
 
     .logo img {
@@ -1699,7 +1789,7 @@ const LandingPage = ({ cart, setCart }) => {
       min-height: 205px;
     }
 
-    .menu-item img {
+    .menu-image-container img {
       height: 190px;
     }
 
@@ -1943,84 +2033,47 @@ const LandingPage = ({ cart, setCart }) => {
                     className="menu-item"
                   >
 
-                    {item.glutenfree && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '15px',
-                          right: '15px',
-                          background: '#365f73',
-                          color: 'white',
-                          padding: '3px 10px',
-                          borderRadius: '15px',
-                          fontSize: '0.7rem',
-                          fontWeight: 'bold',
-                          zIndex: 2,
-                        }}
-                      >
-                        Gluten Free
-                      </div>
-                    )}
+                    <div className="menu-image-container">
+                      {item.glutenfree && (
+                        <span className="badge badge-blue">
+                          Gluten Free
+                        </span>
+                      )}
 
-                    {item.vegetariano && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '15px',
-                          right: '15px',
-                          background: '#8bcf8b',
-                          color: 'white',
-                          padding: '3px 10px',
-                          borderRadius: '15px',
-                          fontSize: '0.7rem',
-                          fontWeight: 'bold',
-                          zIndex: 2,
-                        }}
-                      >
-                        Vegetariano
-                      </div>
-                    )}
+                      {item.vegetariano && (
+                        <span className="badge badge-green">
+                          Vegetariano
+                        </span>
+                      )}
 
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                    />
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                      />
+                    </div>
 
                     <h3>{item.name}</h3>
 
                     {item.description && (
-                      <p
-                        style={{
-                          fontSize: '0.8rem',
-                          color: '#666',
-                          marginBottom: '5px',
-                        }}
-                      >
+                      <p className="menu-item-desc">
                         {item.description}
                       </p>
                     )}
 
-                    <p
-                      style={{
-                        fontSize: '0.75rem',
-                        color: '#555',
-                        marginBottom: '10px',
-                      }}
-                    >
+                    <p className="menu-item-ing">
                       {item.ingredientes}
                     </p>
+                    
+                    <hr className="menu-item-divider" />
 
-                    <p
-                      style={{
-                        fontWeight: 'bold',
-                        color: '#e95d53',
-                      }}
-                    >
-                      $
-                      {item.price.toLocaleString(
-                        'es-CO'
-                      )}
-                    </p>
+                    <div className="menu-item-bottom">
+                      <span className="menu-item-pill">
+                        {getPillText(item.name)}
+                      </span>
+                      <span className="menu-item-price">
+                        ${item.price.toLocaleString('es-CO')}
+                      </span>
+                    </div>
 
                     <button
                       className="btn-pedir"
@@ -2111,54 +2164,41 @@ const LandingPage = ({ cart, setCart }) => {
 
                         <div className="menu-item">
 
-                          {item.glutenfree && (
-                            <div
-                              style={{
-                                position: 'absolute',
-                                top: '15px',
-                                right: '15px',
-                                background: '#365f73',
-                                color: 'white',
-                                padding: '3px 10px',
-                                borderRadius: '15px',
-                                fontSize: '0.7rem',
-                                fontWeight: 'bold',
-                                zIndex: 2,
-                              }}
-                            >
-                              Gluten Free
-                            </div>
-                          )}
+                          <div className="menu-image-container">
+                            {item.glutenfree && (
+                              <span className="badge badge-blue">
+                                Gluten Free
+                              </span>
+                            )}
 
-                          {item.vegetariano && (
-                            <div
-                              style={{
-                                position: 'absolute',
-                                top: '15px',
-                                right: '15px',
-                                background: '#8bcf8b',
-                                color: 'white',
-                                padding: '3px 10px',
-                                borderRadius: '15px',
-                                fontSize: '0.7rem',
-                                fontWeight: 'bold',
-                                zIndex: 2,
-                              }}
-                            >
-                              Vegetariano
-                            </div>
-                          )}
+                            {item.vegetariano && (
+                              <span className="badge badge-green">
+                                Vegetariano
+                              </span>
+                            )}
 
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                          />
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                            />
+                          </div>
 
                           <h3>{item.name}</h3>
 
-                          <p className="specialty-description">
+                          <p className="menu-item-ing">
                             {item.ingredientes}
                           </p>
+                          
+                          <hr className="menu-item-divider" />
+                          
+                          <div className="menu-item-bottom">
+                            <span className="menu-item-pill">
+                              {getPillText(item.name)}
+                            </span>
+                            <span className="menu-item-price">
+                              ${item.price.toLocaleString('es-CO')}
+                            </span>
+                          </div>
 
                           <button
                             className="btn-pedir specialty-add-btn"

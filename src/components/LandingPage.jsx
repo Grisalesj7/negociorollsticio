@@ -98,96 +98,96 @@ const LandingPage = ({ cart, setCart }) => {
 
   const baseItems = [
     // ---------------- ENTRADAS ----------------
-    { id: 1, categoria: 'Entradas', name: 'Nigiris de salmón rosado', price: 5000, image: '/img/placeholder.jpg', ingredientes: '4 unidades de niguiris de arroz con topping de salmón rosado fresco.' },
-    { id: 2, categoria: 'Entradas', name: 'Sashimis de salmón rosado', price: 9000, image: '/img/placeholder.jpg', ingredientes: '4 unidades de rodajas únicas de salmón rosado.' },
-    { id: 3, categoria: 'Entradas', name: 'Geishas de salmón rosado', price: 7000, image: '/img/placeholder.jpg', ingredientes: '4 unidades rellenas de queso crema y palta.' },
+    { id: 1, categoria: 'Entradas', name: 'Nigiris de salmón rosado', price: 5000, image: '/img/Niguiris.png', ingredientes: '4 unidades de niguiris de arroz con topping de salmón rosado fresco.' },
+    { id: 2, categoria: 'Entradas', name: 'Sashimis de salmón rosado', price: 9000, image: '/img/Sashimis.png', ingredientes: '4 unidades de rodajas únicas de salmón rosado.' },
+    { id: 3, categoria: 'Entradas', name: 'Geishas de salmón rosado', price: 7000, image: '/img/Geishas.png', ingredientes: '4 unidades rellenas de queso crema y palta.' },
 
     // ---------------- TABLAS VARIADAS ----------------
-    { id: 4, categoria: 'Tablas Variadas', name: 'Yagi 15 piezas', price: 13000, image: '/img/placeholder.jpg', ingredientes: '5 Philadelphia, 5 Osaka, 5 California. Incluye 2 sobres de soja, wasabi/jengibre y un par de palitos.' },
-    { id: 5, categoria: 'Tablas Variadas', name: 'Oke 20 piezas', price: 19000, image: '/img/placeholder.jpg', ingredientes: '5 Philadelphia, 5 Osaka, 5 California, 5 Niguiris de salmón. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
-    { id: 6, categoria: 'Tablas Variadas', name: 'Nara 30 piezas', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 Philadelphia, 10 Osaka, 10 California. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
-    { id: 7, categoria: 'Tablas Variadas', name: 'Moly Premium 30 piezas', price: 30000, image: '/img/placeholder.jpg', ingredientes: '10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
-    { id: 8, categoria: 'Tablas Variadas', name: 'Dundee 40 piezas', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 Miami, 10 Boston, 10 Buenos Aires, 10 Makicalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
-    { id: 9, categoria: 'Tablas Variadas', name: 'Star 60 piezas', price: 65000, image: '/img/placeholder.jpg', ingredientes: '10 Kansas Crunch, 10 New York, 10 Islandia, 10 Osaka, 10 Makicalifornia, 4 Niguiris, 3 Sashimis, 3 Geishas.' },
+    { id: 4, categoria: 'Tablas Variadas', name: 'Yagi 15 piezas', price: 13000, image: '/img/Yagi.png', ingredientes: '5 Philadelphia, 5 Osaka, 5 California. Incluye 2 sobres de soja, wasabi/jengibre y un par de palitos.' },
+    { id: 5, categoria: 'Tablas Variadas', name: 'Oke 20 piezas', price: 19000, image: '/img/Oke.png', ingredientes: '5 Philadelphia, 5 Osaka, 5 California, 5 Niguiris de salmón. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
+    { id: 6, categoria: 'Tablas Variadas', name: 'Nara 30 piezas', price: 0, image: '/img/Nara.JPG', ingredientes: '10 Philadelphia, 10 Osaka, 10 California. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
+    { id: 7, categoria: 'Tablas Variadas', name: 'Moly Premium 30 piezas', price: 30000, image: '/img/Moly.png', ingredientes: '10 Boston, 10 Buenos Aires, 10 MakiCalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
+    { id: 8, categoria: 'Tablas Variadas', name: 'Dundee 40 piezas', price: 0, image: '/img/Dundee.png', ingredientes: '10 Miami, 10 Boston, 10 Buenos Aires, 10 Makicalifornia. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
+    { id: 9, categoria: 'Tablas Variadas', name: 'Star 60 piezas', price: 65000, image: '/img/faltaaqui', ingredientes: '10 Kansas Crunch, 10 New York, 10 Islandia, 10 Osaka, 10 Makicalifornia, 4 Niguiris, 3 Sashimis, 3 Geishas.' },
 
     // ---------------- COMBOS SIGNATURE ----------------
-    { id: 10, categoria: 'Combos Signature', name: 'Aruba 15 piezas', price: 15000, image: '/img/placeholder.jpg', ingredientes: '5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
-    { id: 11, categoria: 'Combos Signature', name: 'América 20 piezas', price: 22000, image: '/img/placeholder.jpg', ingredientes: '10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos.' },
-    { id: 12, categoria: 'Combos Signature', name: 'Roma 30 piezas', price: 30000, image: '/img/placeholder.jpg', ingredientes: '10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 Maki California. Incluye un blíster y dos sobres de soja + dos pares de palitos.' },
-    { id: 13, categoria: 'Combos Signature', name: 'Atlántica 60 piezas', price: 68000, image: '/img/placeholder.jpg', ingredientes: '10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 Maki California, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado.' },
-    { id: 14, categoria: 'Combos Signature', name: 'Paraíso 40 Piezas', price: 42000, image: '/img/placeholder.jpg', ingredientes: '10 New York Roll, 10 king roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado.' },
+    { id: 10, categoria: 'Combos Signature', name: 'Aruba 15 piezas', price: 15000, image: '/img/Aruba.png', ingredientes: '5 Queen Roll, 5 Hanko Roll, 5 King Roll. Incluye sobres de soja, wasabi/jengibre y un par de palitos.' },
+    { id: 11, categoria: 'Combos Signature', name: 'América 20 piezas', price: 22000, image: '/img/America.jpeg', ingredientes: '10 New York Roll, 10 King Roll. Incluye sobres de soja y un par de palitos.' },
+    { id: 12, categoria: 'Combos Signature', name: 'Roma 30 piezas', price: 30000, image: '/img/Roma.jpeg', ingredientes: '10 Queen Roll, 5 Miami Roll, 5 Hanko Roll, 10 Maki California. Incluye un blíster y dos sobres de soja + dos pares de palitos.' },
+    { id: 13, categoria: 'Combos Signature', name: 'Atlántica 60 piezas', price: 68000, image: '/img/Atlantica.jpeg', ingredientes: '10 New York Roll, 10 Hanko Roll, 10 King Roll, 10 Queen Roll, 10 Maki California, 3 Tamago Roll, 3 Tokyo Roll, 4 Niguiris de salmón rosado.' },
+    { id: 14, categoria: 'Combos Signature', name: 'Paraíso 40 Piezas', price: 42000, image: '/img/Paraiso.jpeg', ingredientes: '10 New York Roll, 10 king roll, 10 Queen Roll, 3 Tamago Roll, 3 Paraíso Roll, 4 Niguiris de salmón rosado.' },
 
     // ---------------- FULL SALMÓN SIGNATURE ----------------
-    { id: 15, categoria: 'Full Salmón Signature', name: 'Oslo 15 piezas', price: 21000, image: '/img/placeholder.jpg', ingredientes: '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
-    { id: 16, categoria: 'Full Salmón Signature', name: 'Malmö 20 piezas', price: 25000, image: '/img/placeholder.jpg', ingredientes: '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 3 sobres de soja y un par de palitos.', glutenfree: true },
-    { id: 17, categoria: 'Full Salmón Signature', name: 'Aurora 30 piezas', price: 37000, image: '/img/placeholder.jpg', ingredientes: '5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado y 2 Niguiris de salmón rosado. Incluye un blíster y dos sobres de soja + dos pares de palitos.', glutenfree: true },
-    { id: 18, categoria: 'Full Salmón Signature', name: 'Antártida 40 piezas', price: 48000, image: '/img/placeholder.jpg', ingredientes: '10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis de salmón rosado, 2 Geishas de salmón rosado y 4 Niguiris de salmón rosado.', glutenfree: true },
-    { id: 19, categoria: 'Full Salmón Signature', name: 'Malvinas 60 piezas', price: 72000, image: '/img/placeholder.jpg', ingredientes: '10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris de salmón rosado, 2 Sashimis de salmón rosado y 2 Geishas de salmón rosado.', glutenfree: true },
+    { id: 15, categoria: 'Full Salmón Signature', name: 'Oslo 15 piezas', price: 21000, image: '/img/Oslo.jpeg', ingredientes: '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
+    { id: 16, categoria: 'Full Salmón Signature', name: 'Malmö 20 piezas', price: 25000, image: '/img/Malmo.jpeg', ingredientes: '3 Tokyo Roll, 3 Tamago Roll, 5 Miami Roll, 5 Hanko Roll, 2 Niguiris de salmón rosado y 2 Sashimis de salmón rosado. Incluye 3 sobres de soja y un par de palitos.', glutenfree: true },
+    { id: 17, categoria: 'Full Salmón Signature', name: 'Aurora 30 piezas', price: 37000, image: '/img/Aurora.jpeg', ingredientes: '5 Miami Roll, 5 Hanko Roll, 10 Islandia Roll, 3 Tokyo Roll, 3 Tamago Roll, 2 Geishas de salmón rosado y 2 Niguiris de salmón rosado. Incluye un blíster y dos sobres de soja + dos pares de palitos.', glutenfree: true },
+    { id: 18, categoria: 'Full Salmón Signature', name: 'Antártida 40 piezas', price: 48000, image: '/img/Antartida.jpeg', ingredientes: '10 Islandia Roll, 5 Miami Roll, 5 Hanko Roll, 6 Tokyo Roll, 6 Tamago Roll, 2 Sashimis de salmón rosado, 2 Geishas de salmón rosado y 4 Niguiris de salmón rosado.', glutenfree: true },
+    { id: 19, categoria: 'Full Salmón Signature', name: 'Malvinas 60 piezas', price: 72000, image: '/img/Malvinas.jpeg', ingredientes: '10 New York Roll, 10 Hanko Roll, 10 Islandia Roll, 10 Miami Roll 6 Paraíso Roll, 6 Tamago Roll, 4 Niguiris de salmón rosado, 2 Sashimis de salmón rosado y 2 Geishas de salmón rosado.', glutenfree: true },
 
     // ---------------- FULL SALMÓN CLÁSICAS ----------------
-    { id: 20, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 15 piezas', price: 19000, image: '/img/placeholder.jpg', ingredientes: '10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
-    { id: 21, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 26 piezas', price: 33000, image: '/img/placeholder.jpg', ingredientes: '10 Philadelphia, 10 New York, 3 Niguiris, 2 Sashimis y 1 Geishas. Incluye un blíster y un sobre de soja + dos pares de palitos.', glutenfree: true },
-    { id: 22, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 34 piezas', price: 40000, image: '/img/placeholder.jpg', ingredientes: '10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas. Incluye un blíster y dos sobres de soja + dos pares de palitos.', glutenfree: true },
-    { id: 23, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 46 piezas', price: 48000, image: '/img/placeholder.jpg', ingredientes: '10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas.', glutenfree: true },
-    { id: 24, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 60 piezas', price: 70000, image: '/img/placeholder.jpg', ingredientes: '10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas.', glutenfree: true },
+    { id: 20, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 15 piezas', price: 19000, image: '/img/fullsalmon.JPG', ingredientes: '10 Philadelphia, 2 Niguiris, 2 Sashimis y 1 Geisha. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
+    { id: 21, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 26 piezas', price: 33000, image: '/img/Fullsalmon26.JPG', ingredientes: '10 Philadelphia, 10 New York, 3 Niguiris, 2 Sashimis y 1 Geishas. Incluye un blíster y un sobre de soja + dos pares de palitos.', glutenfree: true },
+    { id: 22, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 34 piezas', price: 40000, image: '/img/Fullsalmon34.JPG', ingredientes: '10 Islandia, 10 New York, 5 Philadelphia, 4 Niguiris, 3 Sashimis y 2 Geishas. Incluye un blíster y dos sobres de soja + dos pares de palitos.', glutenfree: true },
+    { id: 23, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 46 piezas', price: 48000, image: '/img/Fullsalmon46.JPG', ingredientes: '10 Miami, 10 Islandia, 10 Suiza, 5 Philadelphia, 5 Niguiris, 3 Sashimis y 3 Geishas.', glutenfree: true },
+    { id: 24, categoria: 'Full Salmón Clásicas', name: 'Full Salmón 60 piezas', price: 70000, image: '/img/fullsalmon.JPG', ingredientes: '10 Miami, 10 Islandia, 10 Philadelphia, 10 Suiza, 10 Niguiris, 5 Sashimis y 5 Geishas.', glutenfree: true },
 
     // ---------------- SALMÓN AHUMADO ----------------
-    { id: 25, categoria: 'Salmón Ahumado', name: 'Blinders Roll', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado. Incluye 2 sobres de soja y un par de palitos.' },
-    { id: 26, categoria: 'Salmón Ahumado', name: 'Peaky Roll', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
-    { id: 27, categoria: 'Salmón Ahumado', name: 'Smoked 25 Piezas', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 Peaky, 10 Blinders y 5 Niguiris Salmon Ahumado. Incluye un blíster y un sobre de soja + dos pares de palitos.' },
+    { id: 25, categoria: 'Salmón Ahumado', name: 'Blinders Roll', price: 0, image: '/img/Blinders.jpeg', ingredientes: '10 piezas rellenas de langostinos rebozados en panko, queso philadelphia y topping de salmón ahumado. Incluye 2 sobres de soja y un par de palitos.' },
+    { id: 26, categoria: 'Salmón Ahumado', name: 'Peaky Roll', price: 0, image: '/img/Peaky.jpeg', ingredientes: '10 piezas rellenas de salmón ahumado, queso philadelphia y topping de palta. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
+    { id: 27, categoria: 'Salmón Ahumado', name: 'Smoked 25 Piezas', price: 0, image: '/img/Smokedd.jpeg', ingredientes: '10 Peaky, 10 Blinders y 5 Niguiris Salmon Ahumado. Incluye un blíster y un sobre de soja + dos pares de palitos.' },
 
     // ---------------- ROLLS SIN ALGAS ----------------
-    { id: 28, categoria: 'Rolls Sin Algas', name: 'Tamago Protein', price: 8000, image: '/img/placeholder.jpg', ingredientes: '6 piezas envueltas en tamago (lámina de tortilla japonesa) + salmón rosado + queso crema. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
-    { id: 29, categoria: 'Rolls Sin Algas', name: 'Paraíso Roll', price: 10000, image: '/img/placeholder.jpg', ingredientes: '6 piezas rellenas de palta, queso crema y palmito, envueltas en láminas de tamago y fetas de salmón rosado con topping de crocante de batata y un hilo de salsa casera de maracuyá.', glutenfree: true },
+    { id: 28, categoria: 'Rolls Sin Algas', name: 'Tamago Protein', price: 8000, image: '/img/Tamago.JPG', ingredientes: '6 piezas envueltas en tamago (lámina de tortilla japonesa) + salmón rosado + queso crema. Incluye 2 sobres de soja y un par de palitos.', glutenfree: true },
+    { id: 29, categoria: 'Rolls Sin Algas', name: 'Paraíso Roll', price: 10000, image: '/img/Paraiso.jpeg', ingredientes: '6 piezas rellenas de palta, queso crema y palmito, envueltas en láminas de tamago y fetas de salmón rosado con topping de crocante de batata y un hilo de salsa casera de maracuyá.', glutenfree: true },
 
     // ---------------- SALADS & POKES ----------------
-    { id: 30, categoria: 'Salads & Pokes', name: 'New York Salad', price: 12000, image: '/img/placeholder.jpg', ingredientes: 'Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo. Incluye 2 sobres de soja y un tenedor.', glutenfree: true },
-    { id: 31, categoria: 'Salads & Pokes', name: 'California Salad', price: 11000, image: '/img/placeholder.jpg', ingredientes: 'Arroz, kanikama, queso philadelphia, palta, pepinos marinados, sésamo. Incluye 2 sobres de soja y un tenedor.', glutenfree: true },
-    { id: 32, categoria: 'Salads & Pokes', name: 'Kansas Salad', price: 11000, image: '/img/placeholder.jpg', ingredientes: 'Arroz, langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo. Incluye 2 sobres de soja y un tenedor.' },
-    { id: 33, categoria: 'Salads & Pokes', name: 'Aloha Poke', price: 11000, image: '/img/placeholder.jpg', ingredientes: 'Base de arroz, salmón fresco, mango, queso crema, pepinos marinados. Incluye 2 sobres de soja y un tenedor.', glutenfree: true },
-    { id: 34, categoria: 'Salads & Pokes', name: 'Veggie Poke', price: 11000, image: '/img/placeholder.jpg', ingredientes: 'Base a elección (Arroz sushi, rúcula o lechuga), garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos marinados.', vegetariano: true },
-    { id: 35, categoria: 'Salads & Pokes', name: 'Teriyaki Poke', price: 10000, image: '/img/placeholder.jpg', ingredientes: 'Base de arroz sushi, pollo teriyaki de la casa, queso crema, palta, maíz crocante, tiras de pepino marinado en aceite de sésamo.' },
-    { id: 36, categoria: 'Salads & Pokes', name: 'Hawaii Poke', price: 0, image: '/img/placeholder.jpg', ingredientes: 'Base de arroz sushi, queso crema, salmón ahumado, mango en cubos y maíz crocante, bañado en semillas de sésamo.', glutenfree: true },
-    { id: 37, categoria: 'Salads & Pokes', name: 'Tartar Poke', price: 10000, image: '/img/placeholder.jpg', ingredientes: 'Base de arroz de sushi y tartar de salmón rosado con ingredientes especiales de la casa, palta, queso crema, maíz tostado, tiras de pepino.' },
-    { id: 38, categoria: 'Salads & Pokes', name: 'Paté de Salmón Jet Poke', price: 9000, image: '/img/placeholder.jpg', ingredientes: 'Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados y bañado en semillas de sésamo, con base de arroz.' },
+    { id: 30, categoria: 'Salads & Pokes', name: 'New York Salad', price: 12000, image: '/img/Newyork.png', ingredientes: 'Arroz, salmón, queso philadelphia, palta, pepinos marinados y sésamo. Incluye 2 sobres de soja y un tenedor.', glutenfree: true },
+    { id: 31, categoria: 'Salads & Pokes', name: 'California Salad', price: 11000, image: '/img/California.jpeg', ingredientes: 'Arroz, kanikama, queso philadelphia, palta, pepinos marinados, sésamo. Incluye 2 sobres de soja y un tenedor.', glutenfree: true },
+    { id: 32, categoria: 'Salads & Pokes', name: 'Kansas Salad', price: 11000, image: '/img/Kansas.png', ingredientes: 'Arroz, langostinos rebozados, queso philadelphia, palta, pepinos marinados y sésamo. Incluye 2 sobres de soja y un tenedor.' },
+    { id: 33, categoria: 'Salads & Pokes', name: 'Aloha Poke', price: 11000, image: '/img/Aloha.jpeg', ingredientes: 'Base de arroz, salmón fresco, mango, queso crema, pepinos marinados. Incluye 2 sobres de soja y un tenedor.', glutenfree: true },
+    { id: 34, categoria: 'Salads & Pokes', name: 'Veggie Poke', price: 11000, image: '/img/Veggie.jpeg', ingredientes: 'Base a elección (Arroz sushi, rúcula o lechuga), garbanzos cocidos, maíz crocante, bastones de zanahorias marinadas, rúcula, palta y pepinos marinados.', vegetariano: true },
+    { id: 35, categoria: 'Salads & Pokes', name: 'Teriyaki Poke', price: 10000, image: '/img/Teriyake.jpeg', ingredientes: 'Base de arroz sushi, pollo teriyaki de la casa, queso crema, palta, maíz crocante, tiras de pepino marinado en aceite de sésamo.' },
+    { id: 36, categoria: 'Salads & Pokes', name: 'Hawaii Poke', price: 0, image: '/img/Hawai.png', ingredientes: 'Base de arroz sushi, queso crema, salmón ahumado, mango en cubos y maíz crocante, bañado en semillas de sésamo.', glutenfree: true },
+    { id: 37, categoria: 'Salads & Pokes', name: 'Tartar Poke', price: 10000, image: '/img/Tartar.jpeg', ingredientes: 'Base de arroz de sushi y tartar de salmón rosado con ingredientes especiales de la casa, palta, queso crema, maíz tostado, tiras de pepino.' },
+    { id: 38, categoria: 'Salads & Pokes', name: 'Paté de Salmón Jet Poke', price: 9000, image: '/img/Paté.jpeg', ingredientes: 'Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados y bañado en semillas de sésamo, con base de arroz.' },
 
     // ---------------- NUESTROS ROLLS ----------------
-    { id: 39, categoria: 'Nuestros Rolls', name: 'Queen Roll', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado, bañado en crocante de batata, sésamo tostado y salsa delimiel.' },
-    { id: 40, categoria: 'Nuestros Rolls', name: 'Buenos Aires Roll', price: 10000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón con sésamo.' },
-    { id: 41, categoria: 'Nuestros Rolls', name: 'Miami Roll', price: 10000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de salmón, queso crema y topping de palta con sésamo.', glutenfree: true },
-    { id: 42, categoria: 'Nuestros Rolls', name: 'Hanko Roll', price: 11000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de salmón rosado, queso crema, topping de mango y tiras de pepino marinadas en aceite de sésamo, bañado en sésamo tostado.', glutenfree: true },
-    { id: 43, categoria: 'Nuestros Rolls', name: 'Islandia Roll', price: 10000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de Palta, queso crema y topping de salmón con sésamo.', glutenfree: true },
-    { id: 44, categoria: 'Nuestros Rolls', name: 'Phila Hot', price: 10000, image: '/img/placeholder.jpg', ingredientes: '10 piezas tempurizadas rellenas de salmón y queso philadelphia.' },
-    { id: 45, categoria: 'Nuestros Rolls', name: 'King Roll', price: 11000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de langostinos rebozados, queso crema y topping de palta, bañado en tartar de salmón Oh Qué y maíz crocante triturado.' },
-    { id: 46, categoria: 'Nuestros Rolls', name: 'Boston Roll', price: 10000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de Salmón, queso crema y topping de mango con sésamo.', glutenfree: true },
-    { id: 47, categoria: 'Nuestros Rolls', name: 'Philadelphia roll', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de salmón, queso crema y topping de sésamo.', glutenfree: true },
-    { id: 48, categoria: 'Nuestros Rolls', name: 'Osaka roll', price: 9000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de langostino rebozados, queso crema, topping de palta y sésamo.' },
-    { id: 49, categoria: 'Nuestros Rolls', name: 'New York roll', price: 0, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de salmón, queso crema, palta y topping de sésamo.', glutenfree: true },
-    { id: 50, categoria: 'Nuestros Rolls', name: 'California Roll', price: 9000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de kanikama, queso crema, palta y topping de sésamo.', glutenfree: true },
-    { id: 51, categoria: 'Nuestros Rolls', name: 'New York Hot', price: 10000, image: '/img/placeholder.jpg', ingredientes: '10 piezas tempurizadas rellenas de salmón, queso crema y palta.' },
-    { id: 52, categoria: 'Nuestros Rolls', name: 'Suiza roll', price: 11000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de salmón y palta, con topping de sésamo.', glutenfree: true },
-    { id: 53, categoria: 'Nuestros Rolls', name: 'Kansas Crunch Roll', price: 11000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rebozadas en panko, rellenas de langostinos rebozados, queso crema y palta.' },
-    { id: 54, categoria: 'Nuestros Rolls', name: 'Jet Roll', price: 7500, image: '/img/placeholder.jpg', ingredientes: '10 piezas, rellenas de mix de pasta de salmón cocido con queso crema y ciboulette, con topping de palta y bañado en salsa teriyaki.' },
+    { id: 39, categoria: 'Nuestros Rolls', name: 'Queen Roll', price: 0, image: '/img/faltante', ingredientes: '10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado, bañado en crocante de batata, sésamo tostado y salsa delimiel.' },
+    { id: 40, categoria: 'Nuestros Rolls', name: 'Buenos Aires Roll', price: 10000, image: '/img/Buenosaires.JPG', ingredientes: '10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón con sésamo.' },
+    { id: 41, categoria: 'Nuestros Rolls', name: 'Miami Roll', price: 10000, image: '/img/Miami.JPG', ingredientes: '10 piezas rellenas de salmón, queso crema y topping de palta con sésamo.', glutenfree: true },
+    { id: 42, categoria: 'Nuestros Rolls', name: 'Hanko Roll', price: 11000, image: '/img/Hanko.jpeg', ingredientes: '10 piezas rellenas de salmón rosado, queso crema, topping de mango y tiras de pepino marinadas en aceite de sésamo, bañado en sésamo tostado.', glutenfree: true },
+    { id: 43, categoria: 'Nuestros Rolls', name: 'Islandia Roll', price: 10000, image: '/img/Islandia.JPG', ingredientes: '10 piezas rellenas de Palta, queso crema y topping de salmón con sésamo.', glutenfree: true },
+    { id: 44, categoria: 'Nuestros Rolls', name: 'Phila Hot', price: 10000, image: '/img/Philahot.JPG', ingredientes: '10 piezas tempurizadas rellenas de salmón y queso philadelphia.' },
+    { id: 45, categoria: 'Nuestros Rolls', name: 'King Roll', price: 11000, image: '/img/KingRoll.jpeg', ingredientes: '10 piezas rellenas de langostinos rebozados, queso crema y topping de palta, bañado en tartar de salmón Oh Qué y maíz crocante triturado.' },
+    { id: 46, categoria: 'Nuestros Rolls', name: 'Boston Roll', price: 10000, image: '/img/Boston.JPG', ingredientes: '10 piezas rellenas de Salmón, queso crema y topping de mango con sésamo.', glutenfree: true },
+    { id: 47, categoria: 'Nuestros Rolls', name: 'Philadelphia roll', price: 0, image: '/img/Philadelphiaroll.JPG', ingredientes: '10 piezas rellenas de salmón, queso crema y topping de sésamo.', glutenfree: true },
+    { id: 48, categoria: 'Nuestros Rolls', name: 'Osaka roll', price: 9000, image: '/img/Osaka.JPG', ingredientes: '10 piezas rellenas de langostino rebozados, queso crema, topping de palta y sésamo.' },
+    { id: 49, categoria: 'Nuestros Rolls', name: 'New York roll', price: 0, image: '/img/Newyorkroll1.JPG', ingredientes: '10 piezas rellenas de salmón, queso crema, palta y topping de sésamo.', glutenfree: true },
+    { id: 50, categoria: 'Nuestros Rolls', name: 'California Roll', price: 9000, image: '/img/California10.JPG', ingredientes: '10 piezas rellenas de kanikama, queso crema, palta y topping de sésamo.', glutenfree: true },
+    { id: 51, categoria: 'Nuestros Rolls', name: 'New York Hot', price: 10000, image: '/img/Newyorkhot.JPG', ingredientes: '10 piezas tempurizadas rellenas de salmón, queso crema y palta.' },
+    { id: 52, categoria: 'Nuestros Rolls', name: 'Suiza roll', price: 11000, image: '/img/Suizaroll.JPG', ingredientes: '10 piezas rellenas de salmón y palta, con topping de sésamo.', glutenfree: true },
+    { id: 53, categoria: 'Nuestros Rolls', name: 'Kansas Crunch Roll', price: 11000, image: '/img/Kansascrunch.jpeg', ingredientes: '10 piezas rebozadas en panko, rellenas de langostinos rebozados, queso crema y palta.' },
+    { id: 54, categoria: 'Nuestros Rolls', name: 'Jet Roll', price: 7500, image: '/img/JETROLL.png', ingredientes: '10 piezas, rellenas de mix de pasta de salmón cocido con queso crema y ciboulette, con topping de palta y bañado en salsa teriyaki.' },
 
     // ---------------- VEGGIE & VEGAN ----------------
-    { id: 55, categoria: 'Veggie & Vegan', name: 'Vegan roll', price: 9000, image: '/img/placeholder.jpg', ingredientes: '10 piezas cubiertas de alga y rellenas de rúcula, palta, bastones de pepino y zanahoria marinada.', vegetariano: true },
-    { id: 56, categoria: 'Veggie & Vegan', name: 'Veggie roll', price: 9000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de queso crema, zanahoria marinada, morrón en tiras finas y palta, con topping de sésamo.', vegetariano: true },
-    { id: 57, categoria: 'Veggie & Vegan', name: 'Live Roll', price: 9000, image: '/img/placeholder.jpg', ingredientes: '10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado.', vegetariano: true },
+    { id: 55, categoria: 'Veggie & Vegan', name: 'Vegan roll', price: 9000, image: '/img/VeggieRoll.jpeg', ingredientes: '10 piezas cubiertas de alga y rellenas de rúcula, palta, bastones de pepino y zanahoria marinada.', vegetariano: true },
+    { id: 56, categoria: 'Veggie & Vegan', name: 'Veggie roll', price: 9000, image: '/img/VeggieRoll.jpeg', ingredientes: '10 piezas rellenas de queso crema, zanahoria marinada, morrón en tiras finas y palta, con topping de sésamo.', vegetariano: true },
+    { id: 57, categoria: 'Veggie & Vegan', name: 'Live Roll', price: 9000, image: '/img/VeganRoll.jpeg', ingredientes: '10 piezas rellenas de zanahoria marinada, palta y rúcula, con topping de mango y tiras de pepino marinado.', vegetariano: true },
 
     // ---------------- PROMOS 20 PIEZAS ----------------
-    { id: 58, categoria: 'Promos 20 Piezas', name: 'New York roll 20p', price: 0, image: '/img/placeholder.jpg', ingredientes: '20 piezas rellenas de salmón, queso crema, palta y topping de sésamo.' },
-    { id: 59, categoria: 'Promos 20 Piezas', name: 'Phila Hot roll 20p', price: 19000, image: '/img/placeholder.jpg', ingredientes: '20 piezas tempurizadas rellenas de salmón y queso crema.' },
-    { id: 60, categoria: 'Promos 20 Piezas', name: 'New York Hot roll 20p', price: 21000, image: '/img/placeholder.jpg', ingredientes: '20 piezas tempurizadas rellenas de salmón, queso crema, palta y topping de sésamo.' },
-    { id: 61, categoria: 'Promos 20 Piezas', name: 'Kansas roll 20p', price: 16000, image: '/img/placeholder.jpg', ingredientes: '20 piezas rellenas de langostinos rebozado en panko, queso crema, palta y topping de sésamo.' },
-    { id: 62, categoria: 'Promos 20 Piezas', name: 'California roll 20p', price: 16000, image: '/img/placeholder.jpg', ingredientes: '20 piezas rellenas de kanikama, queso crema, palta y topping de sésamo.', glutenfree: true },
-    { id: 63, categoria: 'Promos 20 Piezas', name: 'Suiza roll 20p', price: 18000, image: '/img/placeholder.jpg', ingredientes: '20 piezas rellenas de salmón, palta y topping de sésamo.', glutenfree: true },
-    { id: 64, categoria: 'Promos 20 Piezas', name: 'Philadelphia roll 20p', price: 0, image: '/img/placeholder.jpg', ingredientes: '20 piezas rellenas de salmón, queso crema y topping de sésamo.' },
+    { id: 58, categoria: 'Promos 20 Piezas', name: 'New York roll 20p', price: 0, image: '/img/Newyork.png', ingredientes: '20 piezas rellenas de salmón, queso crema, palta y topping de sésamo.' },
+    { id: 59, categoria: 'Promos 20 Piezas', name: 'Phila Hot roll 20p', price: 19000, image: '/img/Philahot.JPG', ingredientes: '20 piezas tempurizadas rellenas de salmón y queso crema.' },
+    { id: 60, categoria: 'Promos 20 Piezas', name: 'New York Hot roll 20p', price: 21000, image: '/img/Newyorkhot.JPG', ingredientes: '20 piezas tempurizadas rellenas de salmón, queso crema, palta y topping de sésamo.' },
+    { id: 61, categoria: 'Promos 20 Piezas', name: 'Kansas roll 20p', price: 16000, image: '/img/Kansasroll.JPG', ingredientes: '20 piezas rellenas de langostinos rebozado en panko, queso crema, palta y topping de sésamo.' },
+    { id: 62, categoria: 'Promos 20 Piezas', name: 'California roll 20p', price: 16000, image: '/img/California.jpeg', ingredientes: '20 piezas rellenas de kanikama, queso crema, palta y topping de sésamo.', glutenfree: true },
+    { id: 63, categoria: 'Promos 20 Piezas', name: 'Suiza roll 20p', price: 18000, image: '/img/Suizaroll.JPG', ingredientes: '20 piezas rellenas de salmón, palta y topping de sésamo.', glutenfree: true },
+    { id: 64, categoria: 'Promos 20 Piezas', name: 'Philadelphia roll 20p', price: 0, image: '/img/Philadelphiaroll.JPG', ingredientes: '20 piezas rellenas de salmón, queso crema y topping de sésamo.' },
 
     // ---------------- SALSAS & EXTRAS ----------------
-    { id: 65, categoria: 'Salsas & Extras', name: 'Salsa Soja', price: 1500, image: '/img/placeholder.jpg', ingredientes: '40cc de salsa de soja tradicional.' },
-    { id: 66, categoria: 'Salsas & Extras', name: 'Salsa Buenos Aires', price: 1500, image: '/img/placeholder.jpg', ingredientes: '40cc de salsa teriyaki, hecha en casa con lluvia de sésamo.' },
-    { id: 67, categoria: 'Salsas & Extras', name: 'Salsa Maracuyá', price: 1500, image: '/img/placeholder.jpg', ingredientes: '40cc de salsa dulce de maracuyá, hecha en casa.' },
-    { id: 68, categoria: 'Salsas & Extras', name: 'Salsa Teriyaki', price: 1500, image: '/img/placeholder.jpg', ingredientes: '40 cc de salsa dulce a base de soja.' },
+    { id: 65, categoria: 'Salsas & Extras', name: 'Salsa Soja', price: 1500, image: '/img/SALSASOJA.png', ingredientes: '40cc de salsa de soja tradicional.' },
+    { id: 66, categoria: 'Salsas & Extras', name: 'Salsa Buenos Aires', price: 1500, image: '/img/SALSABUENOSAIRES.png', ingredientes: '40cc de salsa teriyaki, hecha en casa con lluvia de sésamo.' },
+    { id: 67, categoria: 'Salsas & Extras', name: 'Salsa Maracuyá', price: 1500, image: '/img/SALSAMARACUYA.png', ingredientes: '40cc de salsa dulce de maracuyá, hecha en casa.' },
+    { id: 68, categoria: 'Salsas & Extras', name: 'Salsa Teriyaki', price: 1500, image: '/img/SALSASOJA.png', ingredientes: '40 cc de salsa dulce a base de soja.' },
   ];
 
   const menuCategorias = [
@@ -391,14 +391,14 @@ const LandingPage = ({ cart, setCart }) => {
   .hero-container,
   .menu-list,
   .checkout-container,
-  .map-section {
+  .map-section,
+  .specialties-section {
     width: calc(100% - (var(--page-side-space) * 2));
     max-width: 100%;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  .specialties-section,
   .reviews-section,
   .site-footer {
     width: 100%;
@@ -470,6 +470,7 @@ const LandingPage = ({ cart, setCart }) => {
     font-weight: bold;
     white-space: nowrap;
     box-shadow: 0 2px 6px rgba(91, 145, 91, 0.08);
+    font-family: 'Lato', sans-serif;
   }
 
   .mobile-status-container {
@@ -730,6 +731,7 @@ const LandingPage = ({ cart, setCart }) => {
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Lato', sans-serif;
   }
 
   .menu-image-container {
@@ -832,7 +834,7 @@ const LandingPage = ({ cart, setCart }) => {
     padding: 12px 20px;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lato', sans-serif;
     font-weight: bold;
     width: 100%;
     transition: 0.2s;
@@ -887,11 +889,11 @@ const LandingPage = ({ cart, setCart }) => {
 
   .specialties-section {
     font-family: 'Lato', sans-serif;
-    padding: 70px var(--page-side-space);
+    padding: 40px 30px;
     background-color: #ffffff;
-    border-radius: 0;
+    border-radius: 15px; 
     box-sizing: border-box;
-    margin: 2px 0;
+    margin: 20px auto 40px; 
   }
   
   .specialties-section h2 {
@@ -1292,7 +1294,7 @@ const LandingPage = ({ cart, setCart }) => {
     padding: 8px 14px;
     min-width: 40px;
     background: white;
-    border: 1px solid #0e7806;
+    border: 1px solid  #d4a72c;
     color: var(--color-green);
     border-radius: 8px;
     cursor: pointer;
@@ -1302,12 +1304,12 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .page-btn:hover {
-    background: #7b7f96;
+    background: #1c4a50;
     color: white;
   }
 
   .page-btn.active {
-    background: #77db70;
+    background: #153b40;
     color: white;
   }
 
@@ -1582,6 +1584,7 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.85rem;
       color: #4b9e4f;
       font-weight: 500;
+      font-family: 'Lato', sans-serif;
     }
 
     .status-dot {
@@ -1615,12 +1618,12 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialties-section {
-      width: 100% !important;
+      width: calc(100% - 30px) !important;
       max-width: 100% !important;
       background-color: #ffffff !important;
-      padding: 25px 15px 25px !important; 
-      margin: 15px 0 0 !important;
-      border-radius: 0;
+      padding: 25px 15px !important; 
+      margin: 15px auto 25px !important;
+      border-radius: 12px;
     }
 
     .specialties-section h2 {
@@ -2013,6 +2016,7 @@ const LandingPage = ({ cart, setCart }) => {
                   margin: '20px 0 10px',
                   padding: '0 10px',
                   fontSize: '1.4rem',
+                  fontFamily: "'Lato', sans-serif",
                 }}
               >
                 Menú Completo

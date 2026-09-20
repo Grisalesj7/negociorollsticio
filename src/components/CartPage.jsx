@@ -144,7 +144,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
         body {
           background: var(--background-main);
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Lato', sans-serif;
         }
 
         .landing-wrapper {

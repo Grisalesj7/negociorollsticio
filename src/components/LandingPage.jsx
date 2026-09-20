@@ -263,7 +263,7 @@ const LandingPage = ({ cart, setCart }) => {
     const text = `Hola, mi nombre es ${userData.name}. Teléfono: ${userData.phone}. Dirección: ${userData.address}. Notas: ${userData.notes || 'Ninguna'}. Pedido: ${itemsText}. Total a pagar: $${calculateTotal().toLocaleString('es-CO')}`;
 
     window.open(
-      `https://wa.me/573246727621?text=${encodeURIComponent(text)}`,
+      `https://wa.me/573002070981?text=${encodeURIComponent(text)}`,
       '_blank'
     );
   };
@@ -470,6 +470,7 @@ const LandingPage = ({ cart, setCart }) => {
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Lato', sans-serif !important;
   }
 
   .cart-box:hover {
@@ -1218,7 +1219,7 @@ const LandingPage = ({ cart, setCart }) => {
     margin: 25px 0;
     flex-wrap: wrap;
     padding: 0 10px;
-    font-family: 'Lato', sans-serif; /* <-- Añadido opcional para asegurar en el contenedor */
+    font-family: 'Lato', sans-serif;
   }
 
   .page-btn {
@@ -1229,7 +1230,7 @@ const LandingPage = ({ cart, setCart }) => {
     color: var(--color-green);
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Lato', sans-serif; /* <-- Modificado aquí para forzar la tipografía */
+    font-family: 'Lato', sans-serif;
     font-weight: bold;
     transition: 0.2s;
   }
@@ -1311,6 +1312,7 @@ const LandingPage = ({ cart, setCart }) => {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: min(90%, 400px);
+    font-family: 'Lato', sans-serif;
   }
 
   @media (max-width: 1100px) {
@@ -1541,57 +1543,96 @@ const LandingPage = ({ cart, setCart }) => {
       font-size: 0.75rem; 
     }
 
+    /* =========================================================
+       CORRECCIÓN ESPECIALIDADES MÓVIL (Alineación y Contenedores)
+       ========================================================= */
     .specialties-section {
       width: calc(100% - 30px) !important;
       max-width: 100% !important;
       background-color: #ffffff !important;
-      padding: 25px 12px !important; 
+      padding: 20px 10px !important; 
       margin: 15px auto 25px !important;
       border-radius: 12px;
     }
 
     .specialties-section h2 {
-      margin: 0 0 16px;
-      font-size: 1.25rem;
+      margin: 0 0 14px;
+      font-size: 1.15rem;
       text-align: left;
       color: #16445a;
+      padding-left: 5px;
     }
 
     .specialty-carousel {
-      padding: 0 35px !important; 
+      padding: 0 32px !important; 
     }
 
     .specialty-track {
       --specialty-step: 100%;
-      gap: 12px;
+      gap: 0;
     }
 
     .specialty-slide {
       flex-basis: 100%;
-    }
-
-    .specialty-slide .menu-image-container img {
-      height: 180px;
+      padding: 0;
     }
 
     .specialty-slide .menu-item {
       padding: 12px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      height: 100%;
+      justify-content: space-between;
     }
 
-    .specialty-slide .menu-item h3 {
-      font-size: 1rem;
-      min-height: auto;
-    }
-
-    .specialty-slide .menu-item-ing {
-      font-size: 0.78rem;
-      min-height: auto;
+    .specialty-slide .menu-image-container {
       margin-bottom: 8px;
     }
 
+    .specialty-slide .menu-image-container img {
+      height: 160px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .specialty-slide .menu-item h3 {
+      font-size: 0.98rem;
+      min-height: auto;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .specialty-slide .menu-item-ing {
+      font-size: 0.75rem;
+      min-height: auto;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .specialty-slide .menu-item-divider {
+      margin: 6px 0;
+    }
+
     .specialty-slide .menu-item-bottom {
-      margin-top: auto;
-      margin-bottom: 10px;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .specialty-slide .menu-item-pill {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+    }
+
+    .specialty-slide .menu-item-price {
+      font-size: 1.05rem;
+    }
+
+    .specialty-slide .btn-pedir {
+      font-family: 'Lato', sans-serif;
+      min-height: 36px;
+      padding: 8px 10px;
+      font-size: 0.8rem;
+      margin-top: 0;
     }
 
     .specialty-arrow {
@@ -1599,8 +1640,8 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-arrow img {
-      width: 26px; 
-      height: 26px;
+      width: 24px; 
+      height: 24px;
     }
 
     .reviews-section {
@@ -1729,7 +1770,7 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-slide .menu-image-container img {
-      height: 160px;
+      height: 150px;
     }
 
     .logo img {

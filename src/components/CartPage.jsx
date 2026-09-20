@@ -224,7 +224,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           font-family: 'Lato', sans-serif;
         }
 
-        .mobile-status-container {
+        .mobile-status-badge {
           display: none;
         }
 
@@ -350,14 +350,37 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             background: white;
             border: 1px solid var(--color-gold);
             border-radius: 6px;
-            padding: 8px 15px;
+            padding: 8px 12px;
             margin: 15px auto;
             width: calc(100% - 30px);
-            grid-template-columns: 46px 1fr 46px;
-            grid-template-areas: "spacer logo cart";
-            gap: 12px;
+            grid-template-columns: auto 1fr auto;
+            grid-template-areas: "status logo cart";
+            gap: 8px;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+          }
+
+          .mobile-status-badge {
+            display: flex;
+            grid-area: status;
+            align-items: center;
+            gap: 4px;
+            background: #e7f6e7;
+            border: 1px solid #8bcf8b;
+            color: #3f7143;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            white-space: nowrap;
+          }
+
+          .mobile-status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #3f7143;
+            border-radius: 50%;
+            display: inline-block;
           }
 
           .header-logo {
@@ -371,8 +394,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           }
 
           .logo img {
-            height: 24px;
-            max-width: 145px;
+            height: 22px;
+            max-width: 110px;
           }
 
           .cart-box {
@@ -382,36 +405,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             padding: 0;
             min-width: auto;
             min-height: auto;
-          }
-
-          .mobile-status-container {
-            display: block;
-            width: calc(100% - 30px);
-            margin: 0 auto 15px;
-          }
-
-          .mobile-status-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 10px;
-            background: #e7f3e7;
-            border: 1px solid #7bc07f;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: #4b9e4f;
-            font-weight: 500;
-            font-family: 'Lato', sans-serif;
-          }
-
-          .status-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #4b9e4f;
-            border-radius: 50%;
-            flex-shrink: 0;
           }
 
           .site-footer {
@@ -445,6 +438,11 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                 ? 'Abiertos (De 5:00pm a 11:00pm)'
                 : 'Cerrados (Abrimos a las 5:00pm)'}
             </div>
+          </div>
+
+          <div className="mobile-status-badge">
+            <span className="mobile-status-dot"></span>
+            {isRestaurantOpen ? 'Abiertos' : 'Cerrados'}
           </div>
 
           <div className="header-logo">
@@ -491,18 +489,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             </div>
           </div>
         </header>
-
-        {/* ===================================================
-            CAJA DE ESTADO VERSIÓN MÓVIL
-        =================================================== */}
-        <div className="mobile-status-container">
-          <div className="mobile-status-box">
-            <span className="status-dot"></span>
-            {isRestaurantOpen
-              ? 'Estamos abiertos (De 5:00pm a 11:00 Pm)'
-              : 'Cerrados (Abrimos a las 5:00pm)'}
-          </div>
-        </div>
 
         {/* ==================================================
             CONTENEDOR DEL CARRITO

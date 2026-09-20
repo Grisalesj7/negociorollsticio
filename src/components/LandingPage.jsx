@@ -190,27 +190,17 @@ const LandingPage = ({ cart, setCart }) => {
     { id: 68, categoria: 'Salsas & Extras', name: 'Salsa Teriyaki', price: 1500, image: '/img/SALSASOJA.png', ingredientes: '40 cc de salsa dulce a base de soja.' },
   ];
 
-  const menuCategorias = [
-    {
-      titulo: 'Menú Completo',
-      items: baseItems,
-    }
-  ];
-
   /* =========================================================
      PREPARACIÓN DEL MENÚ Y FILTRADO
      ========================================================= */
 
-  // Obtener especialidades (los primeros 10)
   const specialtyItems = baseItems.slice(0, 10);
 
-  // Filtrado directo por la propiedad 'categoria' de cada item
   const itemsFiltrados = baseItems.filter((item) => {
     if (categoriaActiva === 'Todos') return true;
     return item.categoria === categoriaActiva;
   });
 
-  // Paginación sobre los items filtrados
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = itemsFiltrados.slice(indexOfFirstItem, indexOfLastItem);
@@ -242,14 +232,12 @@ const LandingPage = ({ cart, setCart }) => {
     setSpecialtyIndex((prev) => Math.max(prev - 1, 0));
   };
 
-
   /* =========================================================
      CARRITO
      ========================================================= */
 
   const handleOrder = (item) => {
     setCart([...cart, item]);
-
     setMessage(`✅ ¡${item.name} agregado!`);
 
     setTimeout(() => {
@@ -271,9 +259,7 @@ const LandingPage = ({ cart, setCart }) => {
 
   const sendToWhatsApp = (e) => {
     e.preventDefault();
-
     const itemsText = cart.map((i) => i.name).join(', ');
-
     const text = `Hola, mi nombre es ${userData.name}. Teléfono: ${userData.phone}. Dirección: ${userData.address}. Notas: ${userData.notes || 'Ninguna'}. Pedido: ${itemsText}. Total a pagar: $${calculateTotal().toLocaleString('es-CO')}`;
 
     window.open(
@@ -287,16 +273,12 @@ const LandingPage = ({ cart, setCart }) => {
      ========================================================= */
 
   const currentHour = new Date().getHours();
-
-  const isShopOpen =
-    currentHour >= 17 && currentHour < 23;
-
+  const isShopOpen = currentHour >= 17 && currentHour < 23;
 
   /* =========================================================
      FUNCIONES AUXILIARES PARA EL RENDER
      ========================================================= */
 
-  // Función para obtener si el nombre dice X piezas o X unidades (Para la etiqueta inferior de la tarjeta)
   const getPillText = (name) => {
     const match = name.match(/(\d+)\s*(piezas|u|p)/i);
     if (match) {
@@ -364,10 +346,6 @@ const LandingPage = ({ cart, setCart }) => {
     font: inherit;
   }
 
-  /* =========================================================
-     CONTENEDOR PRINCIPAL
-     ========================================================= */
-
   .landing-wrapper {
     width: 100%;
     max-width: var(--page-max-width);
@@ -381,10 +359,6 @@ const LandingPage = ({ cart, setCart }) => {
     color: var(--color-text);
     overflow-x: hidden;
   }
-
-  /* =========================================================
-     CONTROL DE ANCHO DE SECCIONES
-     ========================================================= */
 
   .main-header,
   .desktop-nav,
@@ -404,10 +378,6 @@ const LandingPage = ({ cart, setCart }) => {
     width: 100%;
     max-width: 100%;
   }
-
-  /* =========================================================
-     HEADER
-     ========================================================= */
 
   .main-header {
     display: grid;
@@ -525,10 +495,6 @@ const LandingPage = ({ cart, setCart }) => {
     justify-content: center;
   }
 
-  /* =========================================================
-     NAVEGACIÓN ESCRITORIO
-     ========================================================= */
-
   .desktop-nav {
     margin: 0 auto 30px;
     text-align: center;
@@ -555,10 +521,6 @@ const LandingPage = ({ cart, setCart }) => {
   .desktop-nav a:hover {
     color: var(--color-coral);
   }
-
-  /* =========================================================
-     SIDEBAR MÓVIL
-     ========================================================= */
   
   .sidebar-overlay {
     position: fixed;
@@ -600,10 +562,6 @@ const LandingPage = ({ cart, setCart }) => {
     padding-left: 5px;
     cursor: pointer;
   }
-
-  /* =========================================================
-     HERO
-     ========================================================= */
 
   .hero-container {
     position: relative;
@@ -681,10 +639,6 @@ const LandingPage = ({ cart, setCart }) => {
     border-radius: 4px;
   }
 
-  /* =========================================================
-     BOTÓN MENÚ
-     ========================================================= */
-
   .menu-btn {
     width: min(360px, 100%);
     max-width: 360px;
@@ -705,10 +659,6 @@ const LandingPage = ({ cart, setCart }) => {
     background: #d4c1a0;
     color: white;
   }
-
-  /* =========================================================
-     ESTILOS COMUNES DE TARJETAS (MENÚ COMPLETO Y ESPECIALIDADES)
-     ========================================================= */
 
   .menu-list {
     margin: 0 auto 30px;
@@ -846,10 +796,6 @@ const LandingPage = ({ cart, setCart }) => {
     background: #1c4a50;
   }
 
-  /* =========================================================
-     BARRA DE FILTROS
-     ========================================================= */
-
   .filtros-container {
     display: flex;
     flex-wrap: wrap;
@@ -882,10 +828,6 @@ const LandingPage = ({ cart, setCart }) => {
     color: white;
     border-color: var(--color-gold);
   }
-
-  /* =========================================================
-     NUESTRAS ESPECIALIDADES
-     ========================================================= */
 
   .specialties-section {
     font-family: 'Lato', sans-serif;
@@ -1035,10 +977,6 @@ const LandingPage = ({ cart, setCart }) => {
     background: var(--color-gold);
   }
 
-  /* =========================================================
-     RESEÑAS
-     ========================================================= */
-
   .reviews-section {
     font-family: 'Lato', sans-serif;
     background: #193c46;
@@ -1131,10 +1069,6 @@ const LandingPage = ({ cart, setCart }) => {
     background: #3a6c7b;
     transform: translateY(-1px);
   }
-
-  /* =========================================================
-     UBICACIÓN
-     ========================================================= */
 
   .map-section {
     font-family: 'Lato', sans-serif;
@@ -1229,10 +1163,6 @@ const LandingPage = ({ cart, setCart }) => {
     font-weight: 400;
   }
 
-  /* =========================================================
-     CHECKOUT
-     ========================================================= */
-
   .checkout-container {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -1288,6 +1218,7 @@ const LandingPage = ({ cart, setCart }) => {
     margin: 25px 0;
     flex-wrap: wrap;
     padding: 0 10px;
+    font-family: 'Lato', sans-serif; /* <-- Añadido opcional para asegurar en el contenedor */
   }
 
   .page-btn {
@@ -1298,7 +1229,7 @@ const LandingPage = ({ cart, setCart }) => {
     color: var(--color-green);
     border-radius: 8px;
     cursor: pointer;
-    font-family: inherit;
+    font-family: 'Lato', sans-serif; /* <-- Modificado aquí para forzar la tipografía */
     font-weight: bold;
     transition: 0.2s;
   }
@@ -1312,10 +1243,6 @@ const LandingPage = ({ cart, setCart }) => {
     background: #153b40;
     color: white;
   }
-
-  /* =========================================================
-     FOOTER
-     ========================================================= */
 
   .site-footer {
     font-family: 'Lato', sans-serif;
@@ -1371,10 +1298,6 @@ const LandingPage = ({ cart, setCart }) => {
     display: block;
   }
 
-  /* =========================================================
-     MENSAJE
-     ========================================================= */
-
   .toast {
     position: fixed;
     bottom: 20px;
@@ -1389,10 +1312,6 @@ const LandingPage = ({ cart, setCart }) => {
     text-align: center;
     width: min(90%, 400px);
   }
-
-  /* =========================================================
-     RESPONSIVE
-     ========================================================= */
 
   @media (max-width: 1100px) {
     :root {
@@ -1485,13 +1404,18 @@ const LandingPage = ({ cart, setCart }) => {
     .mobile-menu-toggle {
       display: flex;
       grid-area: menu;
-      background: transparent;
-      border: none;
+      background: white;
+      border: 1.5px solid var(--color-gold);
       color: var(--color-gold);
       cursor: pointer;
       padding: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       justify-self: start;
       align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
     .header-logo {
@@ -1621,7 +1545,7 @@ const LandingPage = ({ cart, setCart }) => {
       width: calc(100% - 30px) !important;
       max-width: 100% !important;
       background-color: #ffffff !important;
-      padding: 25px 15px !important; 
+      padding: 25px 12px !important; 
       margin: 15px auto 25px !important;
       border-radius: 12px;
     }
@@ -1634,24 +1558,40 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-carousel {
-      padding: 0 40px !important; 
+      padding: 0 35px !important; 
     }
 
     .specialty-track {
-      --specialty-step: calc((100% + 12px) / 2);
+      --specialty-step: 100%;
       gap: 12px;
     }
 
     .specialty-slide {
-      flex-basis: calc((100% - 12px) / 2);
+      flex-basis: 100%;
     }
 
     .specialty-slide .menu-image-container img {
-      height: 135px;
+      height: 180px;
+    }
+
+    .specialty-slide .menu-item {
+      padding: 12px;
     }
 
     .specialty-slide .menu-item h3 {
-      font-size: 0.9rem;
+      font-size: 1rem;
+      min-height: auto;
+    }
+
+    .specialty-slide .menu-item-ing {
+      font-size: 0.78rem;
+      min-height: auto;
+      margin-bottom: 8px;
+    }
+
+    .specialty-slide .menu-item-bottom {
+      margin-top: auto;
+      margin-bottom: 10px;
     }
 
     .specialty-arrow {
@@ -1659,8 +1599,8 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .specialty-arrow img {
-      width: 30px; 
-      height: 30px;
+      width: 26px; 
+      height: 26px;
     }
 
     .reviews-section {
@@ -1780,7 +1720,6 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   @media (max-width: 380px) {
-
     .specialty-track {
       --specialty-step: 100%;
     }
@@ -1839,15 +1778,15 @@ const LandingPage = ({ cart, setCart }) => {
               </div>
             </div>
             
-            {/* BOTÓN HAMBURGUESA PARA VERSIÓN MÓVIL */}
+            {/* BOTÓN HAMBURGUESA MÓVIL ESTILIZADO */}
             <button 
               className="mobile-menu-toggle"
               onClick={() => setIsSidebarOpen(true)}
               aria-label="Abrir menú lateral"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '28px' }}>
-                menu
-              </span>
+              <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                <path d="M1 1H21M1 8H21M1 15H21" stroke="#d4a72c" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
             </button>
 
             <div className="header-logo">
@@ -1875,19 +1814,51 @@ const LandingPage = ({ cart, setCart }) => {
                 role="button"
                 tabIndex={0}
                 aria-label="Abrir carrito"
+                style={{
+                  borderRadius: '12px',
+                  background: 'white',
+                  border: '1.5px solid var(--color-gold)',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '46px',
+                  height: '46px',
+                  cursor: 'pointer'
+                }}
               >
-                <span
-                  className="material-symbols-outlined"
+                <img
+                  src="/img/shopping_cart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (1).svg"
+                  alt="Carrito"
                   style={{
-                    fontSize: '28px',
-                    color: '#d4a72c',
+                    width: '26px',
+                    height: '26px',
+                    display: 'block',
+                    filter: 'brightness(0) saturate(100%) invert(73%) sepia(34%) saturate(1039%) hue-rotate(358deg) brightness(91%) contrast(92%)'
                   }}
-                >
-                  shopping_cart
-                </span>
+                />
 
                 {cart.length > 0 && (
-                  <span className="cart-count">
+                  <span
+                    className="cart-count"
+                    style={{
+                      position: 'absolute',
+                      top: '-6px',
+                      right: '-6px',
+                      background: 'var(--color-coral)',
+                      color: 'white',
+                      fontSize: '0.75rem',
+                      minWidth: '22px',
+                      height: '22px',
+                      padding: '0 4px',
+                      borderRadius: '50%',
+                      fontWeight: 'bold',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                    }}
+                  >
                     {cart.length}
                   </span>
                 )}
@@ -1932,17 +1903,13 @@ const LandingPage = ({ cart, setCart }) => {
                 className="hero-img"
               />
 
-              <div className="promo-tag">
-                Promo{' '}
-                <span
-                  className="material-symbols-outlined"
-                  style={{
-                    fontSize: '14px',
-                    verticalAlign: 'middle',
-                  }}
-                >
-                  settings
-                </span>
+             <div className="promo-tag" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span>Promo</span>
+                <img 
+                  src="/img/percent_discount_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (1).svg" 
+                  alt="Descuento" 
+                  style={{ width: '16px', height: '16px', display: 'block' }}
+                />
               </div>
 
               <div className="hero-title">
@@ -1982,7 +1949,7 @@ const LandingPage = ({ cart, setCart }) => {
           )}
 
           {/* ===================================================
-              CAJA DE ESTADO VERSIÓN MÓVIL (Debajo del botón, centrada)
+              CAJA DE ESTADO VERSIÓN MÓVIL
               =================================================== */}
 
           {!showMenu && (
@@ -1997,7 +1964,7 @@ const LandingPage = ({ cart, setCart }) => {
           )}
 
           {/* ===================================================
-              MENÚ COMPLETO (Se muestra si se hace click)
+              MENÚ COMPLETO
               =================================================== */}
 
           {showMenu && (
@@ -2101,10 +2068,7 @@ const LandingPage = ({ cart, setCart }) => {
 
               </div>
 
-              {/* =================================================
-                  PAGINACIÓN
-                  ================================================= */}
-
+              {/* PAGINACIÓN */}
               <div className="pagination">
 
                 {Array.from(
@@ -2274,93 +2238,73 @@ const LandingPage = ({ cart, setCart }) => {
 
           <section className="reviews-section">
 
-  <h2>
-    ¿Qué dicen nuestros clientes?
-  </h2>
+            <h2>
+              ¿Qué dicen nuestros clientes?
+            </h2>
 
-  <div className="reviews-grid">
+            <div className="reviews-grid">
 
-    {/* RESEÑA 1 */}
-    <div className="review-card">
-      <p>
-        Pedí por primera vez hoy y la verdad es que está muy rico y fresco. 
-        Me olvidé de sacar foto, pero las piezas tienen un buen tamaño y vienen con una buena cantidad de salmón. 
-        Recomiendo
-      </p>
+              <div className="review-card">
+                <p>
+                  Pedí por primera vez hoy y la verdad es que está muy rico y fresco. 
+                  Me olvidé de sacar foto, pero las piezas tienen un buen tamaño y vienen con una buena cantidad de salmón. 
+                  Recomiendo
+                </p>
 
-      <p
-        style={{
-          fontWeight: 'normal',
-        }}
-      >
-        Vitória Monteiro
+                <p style={{ fontWeight: 'normal' }}>
+                  Vitória Monteiro
+                  <span style={{ float: 'right' }}>
+                    5.0 <span className="review-star">★</span>
+                  </span>
+                </p>
+              </div>
 
-        <span style={{ float: 'right' }}>
-          5.0 <span className="review-star">★</span>
-        </span>
-      </p>
-    </div>
+              <div className="review-card">
+                <p>
+                  Siempre pido a domicilio, es el sushi más rico y más económico de Buenos Aires. 
+                  Siempre todo impecable!
+                </p>
 
+                <p style={{ fontWeight: 'normal' }}>
+                  Fabiana Mata
+                  <span style={{ float: 'right' }}>
+                    5.0 <span className="review-star">★</span>
+                  </span>
+                </p>
+              </div>
 
-    {/* RESEÑA 2 */}
-    <div className="review-card">
-      <p>
-        Siempre pido a domicilio, es el sushi más rico y más económico de Buenos Aires. 
-        Siempre todo impecable!
-      </p>
+              <div className="review-card">
+                <p>
+                  Es EXCELENTE. Porque combina buena calidad, buen precio y entrega rápida y prolija.
+                  Lo vengo pidiendo todos los domingos con mis compañeros de guardia hace ya tres meses y han cambiado de nombre pero nunca de calidad. Yo pido combos premium selection y full salmon y la verdad es que le ponen muy buena cantidad de salmón.
+                  Consumo y realmente recomiendo
+                </p>
 
-      <p
-        style={{
-          fontWeight: 'normal',
-        }}
-      >
-        Fabiana Mata
+                <p style={{ fontWeight: 'normal' }}>
+                  Juli Perin
+                  <span style={{ float: 'right' }}>
+                    5.0 <span className="review-star">★</span>
+                  </span>
+                </p>
+              </div>
 
-        <span style={{ float: 'right' }}>
-          5.0 <span className="review-star">★</span>
-        </span>
-      </p>
-    </div>
+            </div>
 
+            <a
+              className="reviews-button"
+              href={reviewLink}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(e) => {
+                if (reviewLink === '#') {
+                  e.preventDefault();
+                }
+              }}
+            >
+              Dejar mi reseña
+            </a>
 
-    {/* RESEÑA 3 */}
-    <div className="review-card">
-      <p>
-        Es EXCELENTE. Porque combina buena calidad, buen precio y entrega rápida y prolija.
-Lo vengo pidiendo todos los domingos con mis compañeros de guardia hace ya tres meses y han cambiado de nombre pero nunca de calidad. Yo pido combos premium selection y full salmon y la verdad es que le ponen muy buena cantidad de salmón.
-Consumo y realmente recomiendo
-      </p>
-
-      <p
-        style={{
-          fontWeight: 'normal',
-        }}
-      >
-        Juli Perin
-
-        <span style={{ float: 'right' }}>
-          5.0 <span className="review-star">★</span>
-        </span>
-      </p>
-    </div>
-
-  </div>
-
-  <a
-    className="reviews-button"
-    href={reviewLink}
-    target="_blank"
-    rel="noreferrer"
-    onClick={(e) => {
-      if (reviewLink === '#') {
-        e.preventDefault();
-      }
-    }}
-  >
-    Dejar mi reseña
-  </a>
-
-</section>
+          </section>
 
           {/* ===================================================
               UBICACIÓN
@@ -2387,48 +2331,29 @@ Consumo y realmente recomiendo
 
             <div className="location-card">
 
-              <div
-                className="location-icon"
-                aria-hidden="true"
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-
-                  <path
-                    d="M20 10.2C20 15.2 12 21 12 21S4 15.2 4 10.2C4 6.22 7.58 3 12 3s8 3.22 8 7.2Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-
-                  <circle
-                    cx="12"
-                    cy="10"
-                    r="3"
-                    fill="currentColor"
-                  />
-
-                </svg>
-
+              <div className="location-icon" aria-hidden="true">
+                <img
+                  src="/img/location_on_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (2) (1).svg"
+                  alt="Ubicación"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    display: 'block',
+                    filter: 'brightness(0) saturate(100%) invert(73%) sepia(34%) saturate(1039%) hue-rotate(358deg) brightness(91%) contrast(92%)'
+                  }}
+                />
               </div>
 
               <div className="location-divider" />
 
               <div className="location-info">
-
                 <strong>
                   Gorriti 3440, C1172 ACB,
                 </strong>
-
                 <span>
                   Cdad. Autónoma de Buenos Aires, Argentina
                 </span>
-
               </div>
 
             </div>
@@ -2444,45 +2369,29 @@ Consumo y realmente recomiendo
             <div className="footer-content">
 
               <div className="footer-col">
-
                 <h4>Contacto</h4>
-
-                <p>
-                  Tlf: 0200202003
-                </p>
-
-                <p>
-                  Correo: correo@gmail.com
-                </p>
-
+                <p>Tlf: 0200202003</p>
+                <p>Correo: correo@gmail.com</p>
               </div>
 
               <div className="footer-col">
-
                 <h4>Dirección</h4>
-
                 <p>
                   Gorriti 3440, C1172 ACB,
                   <br />
                   Ciudad Autónoma de Buenos Aires,
                   Argentina.
                 </p>
-
               </div>
 
               <div className="footer-col">
-
                 <h4>Diseñado por</h4>
-
                 <span className="footer-brand">
-
                   <img
                     src="/img/Logo_footer.svg"
                     alt="Logo Rollsticio"
                   />
-
                 </span>
-
               </div>
 
             </div>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -225,6 +224,10 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           font-family: 'Lato', sans-serif;
         }
 
+        .mobile-status-container {
+          display: none;
+        }
+
         .logo img {
           height: 48px;
           width: auto;
@@ -350,8 +353,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             padding: 8px 15px;
             margin: 15px auto;
             width: calc(100% - 30px);
-            grid-template-columns: 1fr auto;
-            grid-template-areas: "logo cart";
+            grid-template-columns: 46px 1fr 46px;
+            grid-template-areas: "spacer logo cart";
             gap: 12px;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
@@ -359,7 +362,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
           .header-logo {
             grid-area: logo;
-            justify-self: start;
+            justify-self: center;
           }
 
           .header-actions {
@@ -379,6 +382,36 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             padding: 0;
             min-width: auto;
             min-height: auto;
+          }
+
+          .mobile-status-container {
+            display: block;
+            width: calc(100% - 30px);
+            margin: 0 auto 15px;
+          }
+
+          .mobile-status-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 10px;
+            background: #e7f3e7;
+            border: 1px solid #7bc07f;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #4b9e4f;
+            font-weight: 500;
+            font-family: 'Lato', sans-serif;
+          }
+
+          .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4b9e4f;
+            border-radius: 50%;
+            flex-shrink: 0;
           }
 
           .site-footer {
@@ -458,6 +491,18 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             </div>
           </div>
         </header>
+
+        {/* ===================================================
+            CAJA DE ESTADO VERSIÓN MÓVIL
+        =================================================== */}
+        <div className="mobile-status-container">
+          <div className="mobile-status-box">
+            <span className="status-dot"></span>
+            {isRestaurantOpen
+              ? 'Estamos abiertos (De 5:00pm a 11:00 Pm)'
+              : 'Cerrados (Abrimos a las 5:00pm)'}
+          </div>
+        </div>
 
         {/* ==================================================
             CONTENEDOR DEL CARRITO

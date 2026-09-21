@@ -349,8 +349,8 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             padding: 8px 12px;
             margin: 15px auto;
             width: calc(100% - 30px);
-            grid-template-columns: 1fr auto;
-            grid-template-areas: "logo cart";
+            grid-template-columns: auto 1fr auto;
+            grid-template-areas: "empty logo cart";
             gap: 8px;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
@@ -358,7 +358,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
           .header-logo {
             grid-area: logo;
-            justify-self: start;
+            justify-self: center;
           }
 
           .header-actions {
@@ -398,10 +398,10 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             width: 100%;
           }
 
-          /* Marco del carrito adaptado idéntico a la landing en móviles */
+          /* Marco dorado adaptado al carrito en móviles */
           .cart-box-card {
             background: #ffffff !important;
-            border: 1px solid var(--color-gold) !important;
+            border: 1.5px solid var(--color-gold) !important;
             border-radius: 12px !important;
             padding: 20px 15px !important;
             width: calc(100% - 30px) !important;
@@ -418,7 +418,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         <header className="main-header">
           <div className="header-status desktop-status">
             <div className="status-box">
-              {isRestaurantOpen ? '🟢 Abiertos (5:00 PM - 11:00 PM)' : '🔴 Cerrados (Abrimos a las 5:00 PM)'}
+              {isRestaurantOpen ? ' Abiertos (5:00 PM - 11:00pm)' : ' Cerrados (Abrimos a las 5:00pm)'}
             </div>
           </div>
 
@@ -490,7 +490,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
               padding: '30px',
               borderRadius: '20px',
               boxShadow: '0 8px 25px rgba(26,43,44,0.08)',
-              border: '1px solid rgba(212,175,55,0.20)',
+              border: '1.5px solid var(--color-gold)',
               boxSizing: 'border-box',
             }}
           >

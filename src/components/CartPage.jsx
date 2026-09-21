@@ -400,13 +400,13 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
           /* Marco dorado adaptado al carrito en móviles */
           .cart-box-card {
-            background: #ffffff !important;
-            border: 1.5px solid var(--color-gold) !important;
-            border-radius: 12px !important;
-            padding: 20px 15px !important;
-            width: calc(100% - 30px) !important;
-            margin: 0 auto !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    background: #ffffff !important;
+    border: 1.5px solid var(--color-gold) !important;
+    border-radius: 16px !important;
+    padding: 20px 15px !important;
+    width: calc(100% - 30px) !important;
+    margin: 0 auto !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
           }
         }
       `}</style>

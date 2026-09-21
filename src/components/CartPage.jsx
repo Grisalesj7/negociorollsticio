@@ -343,18 +343,18 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           }
 
           .main-header {
-            background: white;
-            border: 1px solid var(--color-gold);
-            border-radius: 6px;
-            padding: 8px 12px;
-            margin: 15px auto;
-            width: calc(100% - 30px);
-            grid-template-columns: auto 1fr auto;
-            grid-template-areas: "empty logo cart";
-            gap: 8px;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-          }
+  background: white;
+  border: 1px solid var(--color-gold);
+  border-radius: 6px;
+  padding: 8px 15px;
+  margin: 15px auto;
+  width: calc(100% - 30px);
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: ". logo cart";
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
 
           .header-logo {
             grid-area: logo;
@@ -367,18 +367,21 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           }
 
           .logo img {
-            height: 22px;
-            max-width: 110px;
+            height: 24px;
+            max-width: 145px;
           }
 
           .cart-box {
-            border: none;
-            background: transparent;
-            box-shadow: none;
-            padding: 0;
-            min-width: auto;
-            min-height: auto;
-          }
+  border: 1.5px solid var(--color-gold);
+  background: white;
+  box-shadow: none;
+  padding: 0;
+  min-width: 46px;
+  min-height: 46px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+}
 
           .site-footer {
             width: 100% !important;
@@ -400,13 +403,13 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
           /* Marco dorado adaptado al carrito en móviles */
           .cart-box-card {
-    background: #ffffff !important;
-    border: 1.5px solid var(--color-gold) !important;
-    border-radius: 16px !important;
-    padding: 20px 15px !important;
-    width: calc(100% - 30px) !important;
-    margin: 0 auto !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+            background: #ffffff !important;
+            border: 1.5px solid var(--color-gold) !important;
+            border-radius: 12px !important;
+            padding: 20px 15px !important;
+            width: calc(100% - 30px) !important;
+            margin: 0 auto !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
           }
         }
       `}</style>
@@ -454,7 +457,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
                   width: '26px',
                   height: '26px',
                   display: 'block',
-                  filter: 'brightness(0) saturate(100%) invert(73%) sepia(34%) saturate(1039%) hue-rotate(358deg) brightness(91%) contrast(92%)'
+                  filter: 'brightness(0) saturate(100%) invert(76%) sepia(47%) saturate(600%) hue-rotate(351deg) brightness(87%) contrast(87%)'
                 }}
               />
 

@@ -641,31 +641,26 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .menu-btn {
-    display: block;
-    width: 85%;
-    max-width: 320px;
-    margin: -24px auto 25px auto; /* Sube el botón para que encaje perfecto en el borde inferior del carrusel */
-    padding: 12px 20px;
-    background: #f7f2ea;
-    border: 1.5px solid var(--color-gold);
-    border-radius: 30px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-    font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text);
+    width: min(360px, 100%);
+    max-width: 360px;
+    margin: 20px auto;
+    padding: 11px 28px;
+    background: white;
+    border: 1px solid var(--color-gold);
+    border-radius: 24px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.10);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: 0.3s ease;
-    position: relative;
-    z-index: 10;
-    text-align: center;
+    transition: 0.3s;
+    box-sizing: border-box;
   }
 
   .menu-btn:hover {
-    background: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background: #d4c1a0;
+    color: white;
   }
+
   .menu-list {
     margin: 0 auto 30px;
     display: grid;

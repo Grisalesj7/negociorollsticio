@@ -224,10 +224,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           font-family: 'Lato', sans-serif;
         }
 
-        .mobile-status-badge {
-          display: none;
-        }
-
         .logo img {
           height: 48px;
           width: auto;
@@ -353,39 +349,16 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             padding: 8px 12px;
             margin: 15px auto;
             width: calc(100% - 30px);
-            grid-template-columns: auto 1fr auto;
-            grid-template-areas: "status logo cart";
+            grid-template-columns: 1fr auto;
+            grid-template-areas: "logo cart";
             gap: 8px;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
           }
 
-          .mobile-status-badge {
-            display: flex;
-            grid-area: status;
-            align-items: center;
-            gap: 4px;
-            background: #e7f6e7;
-            border: 1px solid #8bcf8b;
-            color: #3f7143;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            white-space: nowrap;
-          }
-
-          .mobile-status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #3f7143;
-            border-radius: 50%;
-            display: inline-block;
-          }
-
           .header-logo {
             grid-area: logo;
-            justify-self: center;
+            justify-self: start;
           }
 
           .header-actions {
@@ -424,6 +397,17 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
             grid-column: 1 / -1;
             width: 100%;
           }
+
+          /* Marco del carrito adaptado idéntico a la landing en móviles */
+          .cart-box-card {
+            background: #ffffff !important;
+            border: 1px solid var(--color-gold) !important;
+            border-radius: 12px !important;
+            padding: 20px 15px !important;
+            width: calc(100% - 30px) !important;
+            margin: 0 auto !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+          }
         }
       `}</style>
 
@@ -433,11 +417,9 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         ================================================== */}
         <header className="main-header">
           <div className="header-status desktop-status">
-          </div>
-
-          <div className="mobile-status-badge">
-            <span className="mobile-status-dot"></span>
-            {isRestaurantOpen ? 'Abiertos' : 'Cerrados'}
+            <div className="status-box">
+              {isRestaurantOpen ? '🟢 Abiertos (5:00 PM - 11:00 PM)' : '🔴 Cerrados (Abrimos a las 5:00 PM)'}
+            </div>
           </div>
 
           <div className="header-logo">
@@ -500,6 +482,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           }}
         >
           <div
+            className="cart-box-card"
             style={{
               background: '#ffffff',
               width: 'calc(100% - (var(--page-side-space) * 2))',

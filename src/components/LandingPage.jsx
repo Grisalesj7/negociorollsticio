@@ -641,26 +641,31 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .menu-btn {
-    width: min(360px, 100%);
-    max-width: 360px;
-    margin: 20px auto;
-    padding: 11px 28px;
-    background: white;
-    border: 1px solid var(--color-gold);
-    border-radius: 24px;
-    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.10);
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    display: block;
+    width: 85%;
+    max-width: 320px;
+    margin: -24px auto 25px auto; /* Sube el botón para que encaje perfecto en el borde inferior del carrusel */
+    padding: 12px 20px;
+    background: #f7f2ea;
+    border: 1.5px solid var(--color-gold);
+    border-radius: 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
     cursor: pointer;
-    transition: 0.3s;
-    box-sizing: border-box;
+    transition: 0.3s ease;
+    position: relative;
+    z-index: 10;
+    text-align: center;
   }
 
   .menu-btn:hover {
-    background: #d4c1a0;
-    color: white;
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
-
   .menu-list {
     margin: 0 auto 30px;
     display: grid;
@@ -1141,7 +1146,7 @@ const LandingPage = ({ cart, setCart }) => {
     width: 1.5px;
     height: 52px;
     background: #d2a735;
-    margin: 0 25px;
+    margin: 0 25px 0 50px;
     flex-shrink: 0;
   }
 
@@ -1396,8 +1401,9 @@ const LandingPage = ({ cart, setCart }) => {
       padding: 8px 15px;
       margin: 15px auto;
       width: calc(100% - 30px);
-      grid-template-columns: auto 1fr auto;
-      grid-template-areas: "menu logo cart";
+      /* Grid ajustado a petición: remueve columna de hamburguesa, centra logo */
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas: ". logo cart";
       gap: 12px;
       align-items: center;
       box-shadow: 0 2px 4px rgba(0,0,0,0.03);
@@ -1819,16 +1825,7 @@ const LandingPage = ({ cart, setCart }) => {
               </div>
             </div>
             
-            {/* BOTÓN HAMBURGUESA MÓVIL ESTILIZADO */}
-            <button 
-              className="mobile-menu-toggle"
-              onClick={() => setIsSidebarOpen(true)}
-              aria-label="Abrir menú lateral"
-            >
-              <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
-                <path d="M1 1H21M1 8H21M1 15H21" stroke="#d4a72c" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
+            {/* Botón hamburguesa móvil eliminado a petición */}
 
             <div className="header-logo">
               <button
@@ -1875,7 +1872,8 @@ const LandingPage = ({ cart, setCart }) => {
                     width: '26px',
                     height: '26px',
                     display: 'block',
-                    filter: 'brightness(0) saturate(100%) invert(73%) sepia(34%) saturate(1039%) hue-rotate(358deg) brightness(91%) contrast(92%)'
+                    /* Filtro CSS ajustado para dar un color muy similar a #d4a72c (Dorado de la línea) */
+                    filter: 'brightness(0) saturate(100%) invert(76%) sepia(47%) saturate(600%) hue-rotate(351deg) brightness(87%) contrast(87%)'
                   }}
                 />
 

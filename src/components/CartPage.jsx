@@ -433,11 +433,6 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         ================================================== */}
         <header className="main-header">
           <div className="header-status desktop-status">
-            <div className="status-box">
-              {isRestaurantOpen
-                ? 'Abiertos (De 5:00pm a 11:00pm)'
-                : 'Cerrados (Abrimos a las 5:00pm)'}
-            </div>
           </div>
 
           <div className="mobile-status-badge">

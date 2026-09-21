@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // ======================================================
@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom';
 
 const CartPage = ({ cart, setCart, userData, setUserData }) => {
   const navigate = useNavigate();
+
+  // ======================================================
+  // MODAL DE CARGA (redirección a WhatsApp)
+  // ======================================================
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   // ======================================================
   // HORARIO DEL RESTAURANTE
@@ -71,9 +76,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
   // ENVIAR PEDIDO A WHATSAPP
   // ======================================================
 
-  const sendToWhatsApp = (e) => {
-    e.preventDefault();
-
+  const sendToWhatsApp = () => {
     const itemsText = cart
       .map((i) => `${i.name} (x${i.quantity || 1})`)
       .join(', ');
@@ -90,13 +93,21 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
 
   // ======================================================
   // VALIDAR HORARIO ANTES DE IR A WHATSAPP
+  // Muestra un modal de carga y luego redirige
   // ======================================================
 
   const handleCheckout = (e) => {
     e.preventDefault();
 
     if (isRestaurantOpen) {
-      sendToWhatsApp(e);
+      setIsRedirecting(true);
+
+      // Pequeño delay para mostrar el modal antes de abrir WhatsApp
+      setTimeout(() => {
+        sendToWhatsApp();
+        // Ocultamos el modal un momento después de disparar la redirección
+        setTimeout(() => setIsRedirecting(false), 800);
+      }, 1400);
     } else {
       alert(
         '❌ Estamos cerrados.\n\nNuestro horario de atención es de 5:00 PM a 11:00 PM.'
@@ -320,6 +331,117 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           height: 22px;
           width: auto;
           display: block;
+        }
+
+        /* ==================================================
+            MODAL DE REDIRECCIÓN A WHATSAPP
+        ================================================== */
+        .redirect-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(26, 43, 44, 0.55);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          padding: 20px;
+          animation: overlayFadeIn 0.25s ease;
+        }
+
+        .redirect-modal {
+          background: #ffffff;
+          border-radius: 20px;
+          border: 1.5px solid var(--color-gold);
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+          padding: 40px 35px;
+          width: 100%;
+          max-width: 360px;
+          text-align: center;
+          font-family: 'Lato', sans-serif;
+          animation: modalPopIn 0.3s ease;
+        }
+
+        .redirect-spinner-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 22px;
+          width: 72px;
+          height: 72px;
+          position: relative;
+        }
+
+        .redirect-spinner {
+          width: 72px;
+          height: 72px;
+          border-radius: 50%;
+          border: 5px solid #f1e6c8;
+          border-top-color: var(--color-gold);
+          animation: redirectSpin 0.9s linear infinite;
+        }
+
+        .redirect-wa-icon {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+        }
+
+        .redirect-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #1a2b2c;
+          margin: 0 0 8px;
+        }
+
+        .redirect-subtitle {
+          font-size: 0.9rem;
+          color: #6b6b6b;
+          margin: 0;
+          line-height: 1.5;
+        }
+
+        @keyframes redirectSpin {
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes overlayFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes modalPopIn {
+          from { opacity: 0; transform: scale(0.92) translateY(10px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+          .redirect-modal {
+            max-width: 88vw;
+            padding: 32px 22px;
+            border-radius: 16px;
+          }
+
+          .redirect-spinner-wrap,
+          .redirect-spinner {
+            width: 60px;
+            height: 60px;
+          }
+
+          .redirect-wa-icon {
+            width: 26px;
+            height: 26px;
+          }
+
+          .redirect-title {
+            font-size: 1.1rem;
+          }
+
+          .redirect-subtitle {
+            font-size: 0.85rem;
+          }
         }
 
         @media (max-width: 1100px) {
@@ -853,6 +975,28 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           </div>
         </footer>
       </div>
+
+      {/* ==================================================
+          MODAL DE REDIRECCIÓN A WHATSAPP
+      ================================================== */}
+      {isRedirecting && (
+        <div className="redirect-overlay">
+          <div className="redirect-modal">
+            <div className="redirect-spinner-wrap">
+              <div className="redirect-spinner" />
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                alt="WhatsApp"
+                className="redirect-wa-icon"
+              />
+            </div>
+            <h3 className="redirect-title">Redirigiendo a WhatsApp</h3>
+            <p className="redirect-subtitle">
+              Estamos preparando tu pedido, en un momento te llevaremos al chat para confirmarlo.
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

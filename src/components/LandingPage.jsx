@@ -857,6 +857,10 @@ const LandingPage = ({ cart, setCart }) => {
     border-color: var(--color-gold);
   }
 
+  .mobile-filters-wrapper {
+    display: none;
+  }
+
   .specialties-section {
     font-family: 'Lato', sans-serif;
     padding: 40px 30px;
@@ -1473,45 +1477,45 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .hero-container {
-  width: calc(100% - 30px);
-  margin: 0 auto 0;
-  aspect-ratio: 4 / 3;
-  min-height: 230px;
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
+      width: calc(100% - 30px);
+      margin: 0 auto 0;
+      aspect-ratio: 4 / 3;
+      min-height: 230px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
 
-.hero-container::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    .hero-container::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
 
-  height: 42%;
+      height: 42%;
 
-  z-index: 2;
-  pointer-events: none;
+      z-index: 2;
+      pointer-events: none;
 
-  background: linear-gradient(
-    to bottom,
-    rgba(242, 236, 227, 0) 0%,
-    rgba(242, 236, 227, 0.10) 20%,
-    rgba(242, 236, 227, 0.45) 50%,
-    rgba(242, 236, 227, 0.85) 78%,
-    #F2ECE3 100%
-  );
-}
+      background: linear-gradient(
+        to bottom,
+        rgba(242, 236, 227, 0) 0%,
+        rgba(242, 236, 227, 0.10) 20%,
+        rgba(242, 236, 227, 0.45) 50%,
+        rgba(242, 236, 227, 0.85) 78%,
+        #F2ECE3 100%
+      );
+    }
 
     .hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
 
     .promo-tag {
       top: 10px;
@@ -1521,63 +1525,63 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .hero-title {
-  bottom: 14px;
-  font-size: 1.05rem;
-  width: 88%;
-  max-width: 88%;
-  z-index: 4;
-}
+      bottom: 14px;
+      font-size: 1.05rem;
+      width: 88%;
+      max-width: 88%;
+      z-index: 4;
+    }
 
     .carousel-dots {
-  bottom: 13px;
-  right: 10px;
-  z-index: 5;
-}
+      bottom: 13px;
+      right: 10px;
+      z-index: 5;
+    }
 
     .menu-btn {
-  display: block;
+      display: block;
 
-  width: calc(100% - 110px);
-  max-width: 305px;
-  min-width: 250px;
+      width: calc(100% - 110px);
+      max-width: 305px;
+      min-width: 250px;
 
-  height: 60px;
+      height: 60px;
 
-  margin: -30px auto 22px;
+      margin: -30px auto 22px;
 
-  padding: 0 24px;
+      padding: 0 24px;
 
-  border-radius: 32px;
+      border-radius: 32px;
 
-  background: #F2ECE3;
+      background: #F2ECE3;
 
-  border: 1.5px solid var(--color-gold);
+      border: 1.5px solid var(--color-gold);
 
-  box-shadow:
-    0 4px 7px rgba(0, 0, 0, 0.18),
-    0 1px 2px rgba(212, 167, 44, 0.25);
+      box-shadow:
+        0 4px 7px rgba(0, 0, 0, 0.18),
+        0 1px 2px rgba(212, 167, 44, 0.25);
 
-  position: relative;
-  z-index: 10;
+      position: relative;
+      z-index: 10;
 
-  font-family: 'Lato', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 500;
+      font-family: 'Lato', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
 
-  color: #1a1a1a;
+      color: #1a1a1a;
 
-  cursor: pointer;
+      cursor: pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-.menu-btn:active {
-  transform: scale(0.98);
-}
+    .menu-btn:active {
+      transform: scale(0.98);
+    }
 
     .mobile-status-container {
       display: block;
@@ -1609,15 +1613,62 @@ const LandingPage = ({ cart, setCart }) => {
       flex-shrink: 0;
     }
 
-    .filtros-container {
-      gap: 6px;
-      margin-bottom: 20px;
-    }
-    .btn-filtro {
-      padding: 6px 12px;
-      font-size: 0.8rem;
+    /* ESTILOS DE FILTROS MÓVIL (SELECT Y PASTILLAS) */
+    .desktop-filters {
+      display: none !important;
     }
 
+    .mobile-filters-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: calc(100% - 30px);
+      max-width: 320px;
+      margin: 0 auto 25px;
+      gap: 12px;
+      position: relative;
+    }
+
+    .mobile-select-pill {
+      flex: 1;
+      border: 1px solid var(--color-gold);
+      border-radius: 25px;
+      padding: 12px 15px;
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-text);
+      background: transparent;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mobile-select-circle {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      flex-shrink: 0;
+    }
+
+    .mobile-real-select {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    
     .menu-list {
       grid-template-columns: 1fr;
       gap: 16px;
@@ -2110,8 +2161,8 @@ const LandingPage = ({ cart, setCart }) => {
                 Menú Completo
               </h2>
 
-              {/* BARRA DE FILTROS */}
-              <div className="filtros-container">
+              {/* BARRA DE FILTROS DESKTOP */}
+              <div className="filtros-container desktop-filters">
                 {categorias.map((cat) => (
                   <button
                     key={cat}
@@ -2121,6 +2172,31 @@ const LandingPage = ({ cart, setCart }) => {
                     {cat}
                   </button>
                 ))}
+              </div>
+
+              {/* BARRA DE FILTROS MÓVIL (NUEVO DESPLEGABLE) */}
+              <div className="mobile-filters-wrapper">
+                <div className="mobile-select-pill">
+                  {categoriaActiva}
+                </div>
+                <div className="mobile-select-circle">
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L6 6L11 1" stroke="#2b3a3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                
+                {/* Select transparente superpuesto */}
+                <select
+                  className="mobile-real-select"
+                  value={categoriaActiva}
+                  onChange={(e) => handleCategoriaChange(e.target.value)}
+                >
+                  {categorias.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="menu-list">

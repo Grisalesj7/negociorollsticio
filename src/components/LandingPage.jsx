@@ -824,41 +824,66 @@ const LandingPage = ({ cart, setCart }) => {
     background: #1c4a50;
   }
 
-  .filtros-container {
+  /* ESTILOS DE FILTROS UNIFICADOS (PC Y MÓVIL) */
+  .filters-wrapper {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 25px;
+    align-items: center;
     width: 100%;
+    max-width: 450px;
+    margin: 0 auto 35px;
+    gap: 12px;
+    position: relative;
     padding: 0 15px;
   }
 
-  .btn-filtro {
-    background: transparent;
-    border: 1px solid var(--color-gold);
-    color: var(--color-text);
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
+  .select-pill {
+    flex: 1;
+    border: 1.5px solid var(--color-gold);
+    border-radius: 25px;
+    padding: 12px 20px;
+    text-align: center;
     font-family: 'Lato', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    transition: all 0.2s ease;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: var(--color-text);
+    background: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s ease;
   }
 
-  .btn-filtro:hover {
+  .select-circle {
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--color-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: background 0.2s ease;
+  }
+
+  .real-select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  
+  .filters-wrapper:hover .select-pill,
+  .filters-wrapper:hover .select-circle {
     background: #fdfaf5;
-  }
-
-  .btn-filtro.activo {
-    background: var(--color-gold);
-    color: white;
-    border-color: var(--color-gold);
-  }
-
-  .mobile-filters-wrapper {
-    display: none;
   }
 
   .specialties-section {
@@ -1613,60 +1638,24 @@ const LandingPage = ({ cart, setCart }) => {
       flex-shrink: 0;
     }
 
-    /* ESTILOS DE FILTROS MÓVIL (SELECT Y PASTILLAS) */
-    .desktop-filters {
-      display: none !important;
-    }
-
-    .mobile-filters-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    /* AJUSTE FILTROS MÓVIL */
+    .filters-wrapper {
       width: calc(100% - 30px);
       max-width: 320px;
       margin: 0 auto 25px;
-      gap: 12px;
-      position: relative;
     }
 
-    .mobile-select-pill {
-      flex: 1;
-      border: 1px solid var(--color-gold);
-      border-radius: 25px;
+    .select-pill {
       padding: 12px 15px;
-      text-align: center;
-      font-family: 'Lato', sans-serif;
       font-size: 1rem;
       font-weight: 500;
-      color: var(--color-text);
       background: transparent;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    .mobile-select-circle {
+    .select-circle {
       width: 44px;
       height: 44px;
-      border: 1px solid var(--color-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background: transparent;
-      flex-shrink: 0;
-    }
-
-    .mobile-real-select {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
     }
     
     .menu-list {
@@ -2152,7 +2141,7 @@ const LandingPage = ({ cart, setCart }) => {
               <h2
                 style={{
                   textAlign: 'center',
-                  margin: '20px 0 10px',
+                  margin: '20px 0 20px',
                   padding: '0 10px',
                   fontSize: '1.4rem',
                   fontFamily: "'Lato', sans-serif",
@@ -2161,25 +2150,12 @@ const LandingPage = ({ cart, setCart }) => {
                 Menú Completo
               </h2>
 
-              {/* BARRA DE FILTROS DESKTOP */}
-              <div className="filtros-container desktop-filters">
-                {categorias.map((cat) => (
-                  <button
-                    key={cat}
-                    className={`btn-filtro ${categoriaActiva === cat ? 'activo' : ''}`}
-                    onClick={() => handleCategoriaChange(cat)}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-
-              {/* BARRA DE FILTROS MÓVIL (NUEVO DESPLEGABLE) */}
-              <div className="mobile-filters-wrapper">
-                <div className="mobile-select-pill">
+              {/* BARRA DE FILTROS (DESPLEGABLE PARA PC Y MÓVIL) */}
+              <div className="filters-wrapper">
+                <div className="select-pill">
                   {categoriaActiva}
                 </div>
-                <div className="mobile-select-circle">
+                <div className="select-circle">
                   <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L6 6L11 1" stroke="#2b3a3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -2187,7 +2163,7 @@ const LandingPage = ({ cart, setCart }) => {
                 
                 {/* Select transparente superpuesto */}
                 <select
-                  className="mobile-real-select"
+                  className="real-select"
                   value={categoriaActiva}
                   onChange={(e) => handleCategoriaChange(e.target.value)}
                 >

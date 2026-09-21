@@ -584,17 +584,26 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .promo-tag {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: var(--color-coral);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    z-index: 2;
-  }
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background: var(--color-coral);
+  color: white;
+
+  padding: 8px 16px;
+
+  border-radius: 24px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  z-index: 6;
+}
 
   .hero-title {
   position: absolute;

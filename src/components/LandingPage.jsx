@@ -1446,16 +1446,43 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .hero-container {
-      width: calc(100% - 30px);
-      margin: 0 auto 10px;
-      aspect-ratio: 4 / 3;
-      min-height: 230px;
-      border-radius: 12px;
-    }
+  width: calc(100% - 30px);
+  margin: 0 auto 0;
+  aspect-ratio: 4 / 3;
+  min-height: 230px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  z-index: 2;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(242, 236, 227, 0) 0%,
+    rgba(242, 236, 227, 0.15) 20%,
+    rgba(242, 236, 227, 0.60) 55%,
+    rgba(242, 236, 227, 0.96) 82%,
+    #F2ECE3 100%
+  );
+}
 
     .hero-img {
-      object-position: center;
-    }
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 
     .promo-tag {
       top: 10px;
@@ -1465,32 +1492,63 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .hero-title {
-      bottom: 14px;
-      font-size: 1.05rem;
-      width: 88%;
-      max-width: 88%;
-    }
+  bottom: 14px;
+  font-size: 1.05rem;
+  width: 88%;
+  max-width: 88%;
+  z-index: 4;
+}
 
     .carousel-dots {
-      bottom: 13px;
-      right: 10px;
-    }
+  bottom: 13px;
+  right: 10px;
+  z-index: 5;
+}
 
     .menu-btn {
-      display: block;
-      width: auto;
-      margin: -20px auto 20px; 
-      padding: 8px 24px;
-      border-radius: 20px;
-      background: #f1e7da;
-      border: 1px solid var(--color-gold);
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      position: relative;
-      z-index: 10;
-      font-size: 0.9rem;
-      color: #1a1a1a;
-      font-weight: 500;
-    }
+  display: block;
+
+  width: calc(100% - 110px);
+  max-width: 305px;
+  min-width: 250px;
+
+  height: 60px;
+
+  margin: -30px auto 22px;
+
+  padding: 0 24px;
+
+  border-radius: 32px;
+
+  background: #F2ECE3;
+
+  border: 1.5px solid var(--color-gold);
+
+  box-shadow:
+    0 4px 7px rgba(0, 0, 0, 0.18),
+    0 1px 2px rgba(212, 167, 44, 0.25);
+
+  position: relative;
+  z-index: 10;
+
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+
+  color: #1a1a1a;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-btn:active {
+  transform: scale(0.98);
+}
 
     .mobile-status-container {
       display: block;

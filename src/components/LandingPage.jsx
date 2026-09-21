@@ -597,33 +597,51 @@ const LandingPage = ({ cart, setCart }) => {
   }
 
   .hero-title {
-    position: absolute;
-    left: 50%;
-    bottom: 22px;
-    transform: translateX(-50%);
-    color: white;
-    padding: 0;
-    font-size: clamp(1.2rem, 2.2vw, 2rem);
-    font-weight: 700;
-    line-height: 1.1;
-    text-align: center;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
-    z-index: 2;
-    width: min(90%, 800px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+
+  color: white;
+
+  padding: 0;
+
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+
+  text-align: center;
+
+  text-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.85),
+    0 3px 10px rgba(0, 0, 0, 0.55);
+
+  width: 90%;
+  max-width: 90%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  /* IMPORTANTE: queda encima del degradado */
+  z-index: 4;
+}
 
   .carousel-dots {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    z-index: 2;
-  }
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  z-index: 5;
+}
 
   .dot {
     width: 8px;
@@ -1462,16 +1480,18 @@ const LandingPage = ({ cart, setCart }) => {
   left: 0;
   right: 0;
   bottom: 0;
+
   height: 42%;
+
   z-index: 2;
   pointer-events: none;
 
   background: linear-gradient(
     to bottom,
     rgba(242, 236, 227, 0) 0%,
-    rgba(242, 236, 227, 0.15) 20%,
-    rgba(242, 236, 227, 0.60) 55%,
-    rgba(242, 236, 227, 0.96) 82%,
+    rgba(242, 236, 227, 0.10) 20%,
+    rgba(242, 236, 227, 0.45) 50%,
+    rgba(242, 236, 227, 0.85) 78%,
     #F2ECE3 100%
   );
 }

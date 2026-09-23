@@ -223,16 +223,27 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         }
 
         .status-box {
-          border: 1px solid var(--color-green-border);
-          color: #3f7143;
-          background: var(--color-green-light);
           padding: 8px 15px;
           border-radius: 8px;
           font-size: 0.85rem;
           font-weight: bold;
           white-space: nowrap;
-          box-shadow: 0 2px 6px rgba(91, 145, 91, 0.08);
           font-family: 'Lato', sans-serif;
+          transition: all 0.3s ease;
+        }
+
+        .status-open {
+          border: 1px solid var(--color-green-border);
+          color: #3f7143;
+          background: var(--color-green-light);
+          box-shadow: 0 2px 6px rgba(91, 145, 91, 0.08);
+        }
+
+        .status-closed {
+          border: 1px solid var(--color-coral);
+          color: #c93a30;
+          background: #fdf2f1;
+          box-shadow: 0 2px 6px rgba(233, 93, 83, 0.15);
         }
 
         .logo img {
@@ -243,22 +254,21 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           display: block;
         }
 
-        .cart-box {
-          font-size: 1.5rem;
-          cursor: pointer;
-          position: relative;
-          padding: 7px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-width: 46px;
-          min-height: 46px;
-          border: 1.5px solid var(--color-gold);
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-          transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-        }
+   .cart-box {
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 46px;
+    min-height: 46px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    transition: transform 0.2s ease;
+  }
 
         .cart-count {
           position: absolute;
@@ -494,16 +504,15 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           }
 
           .cart-box {
-  border: 1.5px solid var(--color-gold);
-  background: white;
-  box-shadow: none;
-  padding: 0;
-  min-width: 46px;
-  min-height: 46px;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-}
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    min-width: 46px;
+    min-height: 46px;
+    width: 46px;
+    height: 46px;
+  }
 
           .site-footer {
             width: 100% !important;
@@ -542,7 +551,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         ================================================== */}
         <header className="main-header">
           <div className="header-status desktop-status">
-            <div className="status-box">
+            <div className={`status-box ${isRestaurantOpen ? 'status-open' : 'status-closed'}`}>
               {isRestaurantOpen ? ' Abiertos (5:00 PM - 11:00pm)' : ' Cerrados (Abrimos a las 5:00pm)'}
             </div>
           </div>
@@ -906,7 +915,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           >
             <button
               type="button"
-              onClick={() => navigate('/')}
+             onClick={() => navigate('/', { state: { abrirMenuCompleto: true } })}
               style={{
                 flex: '1 1 200px',
                 background: '#1a2b2c',

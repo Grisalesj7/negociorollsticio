@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const LandingPage = ({ cart, setCart }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* =========================================================
      ESTADOS PRINCIPALES
@@ -19,6 +20,11 @@ const LandingPage = ({ cart, setCart }) => {
     notes: '',
   });
 
+  useEffect(() => {
+    if (location.state?.abrirMenuCompleto) {
+      setShowMenu(true);
+    }
+  }, [location.state]);
   /* =========================================================
      CARRUSEL PRINCIPAL
      ========================================================= */
@@ -463,20 +469,17 @@ const LandingPage = ({ cart, setCart }) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 42px;
-    min-height: 42px;
-    border: 1.5px solid var(--color-gold);
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    width: 46px;
+    height: 46px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    transition: transform 0.2s ease;
     font-family: 'Lato', sans-serif !important;
   }
 
   .cart-box:hover {
-    background: #fffdf8;
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   }
 
   .cart-count {
@@ -1183,7 +1186,7 @@ const LandingPage = ({ cart, setCart }) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #d2a735;
+    color: #C8A74D;
     flex-shrink: 0;
   }
 
@@ -1196,7 +1199,7 @@ const LandingPage = ({ cart, setCart }) => {
   .location-divider {
     width: 1.5px;
     height: 52px;
-    background: #d2a735;
+    background: #C8A74D;
     margin: 0 25px 0 50px;
     flex-shrink: 0;
   }
@@ -1503,10 +1506,10 @@ const LandingPage = ({ cart, setCart }) => {
 
     .hero-container {
       width: calc(100% - 30px);
-      margin: 0 auto 0;
-      aspect-ratio: 4 / 3;
-      min-height: 230px;
-      border-radius: 8px;
+      margin: 0 auto;
+      aspect-ratio: 1 / 1; /* Lo hace cuadrado como en la imagen */
+      min-height: 320px;
+      border-radius: 12px;
       position: relative;
       overflow: hidden;
       isolation: isolate;
@@ -1518,18 +1521,15 @@ const LandingPage = ({ cart, setCart }) => {
       left: 0;
       right: 0;
       bottom: 0;
-
-      height: 42%;
-
+      height: 45%;
       z-index: 2;
       pointer-events: none;
-
       background: linear-gradient(
         to bottom,
         rgba(242, 236, 227, 0) 0%,
-        rgba(242, 236, 227, 0.10) 20%,
-        rgba(242, 236, 227, 0.45) 50%,
-        rgba(242, 236, 227, 0.85) 78%,
+        rgba(242, 236, 227, 0.2) 30%,
+        rgba(242, 236, 227, 0.6) 60%,
+        rgba(242, 236, 227, 0.9) 85%,
         #F2ECE3 100%
       );
     }
@@ -1543,67 +1543,54 @@ const LandingPage = ({ cart, setCart }) => {
     }
 
     .promo-tag {
-      top: 10px;
-      right: 10px;
-      padding: 5px 10px;
-      font-size: 0.7rem;
+      top: 15px;
+      right: 15px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      background: #e44243; /* Ajustado al rojo de la imagen */
+      border-radius: 20px;
     }
 
     .hero-title {
-      bottom: 14px;
-      font-size: 1.05rem;
-      width: 88%;
-      max-width: 88%;
+      bottom: 40px; /* Sube el título para dejar espacio a los puntos */
+      font-size: 2.2rem; /* Letra más grande como en la imagen */
+      width: 100%;
+      max-width: 100%;
       z-index: 4;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     }
 
     .carousel-dots {
-      bottom: 13px;
-      right: 10px;
+      bottom: 22px; /* Puntos justo debajo del título */
+      left: 50%;
+      transform: translateX(-50%);
+      right: auto;
       z-index: 5;
     }
 
     .menu-btn {
-      display: block;
-
-      width: calc(100% - 110px);
-      max-width: 305px;
-      min-width: 250px;
-
-      height: 60px;
-
-      margin: -30px auto 22px;
-
-      padding: 0 24px;
-
-      border-radius: 32px;
-
+      display: flex;
+      width: 80%;
+      max-width: 280px;
+      height: 48px;
+      margin: -24px auto 25px; /* Margen negativo para que se superponga a la imagen */
+      padding: 0 20px;
+      border-radius: 24px;
       background: #F2ECE3;
-
       border: 1.5px solid var(--color-gold);
-
-      box-shadow:
-        0 4px 7px rgba(0, 0, 0, 0.18),
-        0 1px 2px rgba(212, 167, 44, 0.25);
-
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Sombra para dar relieve */
       position: relative;
       z-index: 10;
-
       font-family: 'Lato', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 500;
-
       color: #1a1a1a;
-
       cursor: pointer;
-
-      display: flex;
       align-items: center;
       justify-content: center;
-
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
+      
     .menu-btn:active {
       transform: scale(0.98);
     }
@@ -1968,26 +1955,13 @@ const LandingPage = ({ cart, setCart }) => {
 
             <div className="header-actions">
 
-              <div
-                className="cart-box"
-                onClick={handleCartClick}
-                role="button"
-                tabIndex={0}
-                aria-label="Abrir carrito"
-                style={{
-                  borderRadius: '12px',
-                  background: 'white',
-                  border: '1.5px solid var(--color-gold)',
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '46px',
-                  height: '46px',
-                  cursor: 'pointer'
-                }}
-              >
-                <img
+            <div
+  className="cart-box"
+  onClick={handleCartClick}
+  role="button"
+  tabIndex={0}
+  aria-label="Abrir carrito"
+>    <img
                   src="/img/shopping_cart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (1).svg"
                   alt="Carrito"
                   style={{
@@ -2505,18 +2479,19 @@ const LandingPage = ({ cart, setCart }) => {
             <div className="location-card">
 
               <div className="location-icon" aria-hidden="true">
-                <img
-                  src="/img/location_on_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (2) (1).svg"
-                  alt="Ubicación"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    display: 'block',
-                    filter: 'brightness(0) saturate(100%) invert(73%) sepia(34%) saturate(1039%) hue-rotate(358deg) brightness(91%) contrast(92%)'
-                  }}
-                />
-              </div>
+  <img
+    src="/img/location_on_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (2) (1).svg"
+    alt="Ubicación"
+    style={{
+      width: '100%',
+      height: '100%',
+      objectFit: 'contain',
+      display: 'block',
+      /* Nuevo filtro calculado para el color #C8A74D */
+      filter: 'brightness(0) saturate(100%) invert(69%) sepia(34%) saturate(601%) hue-rotate(5deg) brightness(92%) contrast(88%)'
+    }}
+  />
+</div>
 
               <div className="location-divider" />
 

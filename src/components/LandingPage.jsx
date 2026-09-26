@@ -449,6 +449,16 @@ const LandingPage = ({ cart, setCart }) => {
     font-family: 'Lato', sans-serif;
   }
 
+  .status-closed {
+    color: #a03232 !important;
+    background-color: #fdeaea !important;
+    border-color: #df8a8a !important;
+  }
+
+  .dot-closed {
+    background-color: #a03232 !important;
+  }
+
   .mobile-status-container {
     display: none;
   }
@@ -2088,15 +2098,15 @@ const LandingPage = ({ cart, setCart }) => {
               =================================================== */}
 
           {!showMenu && (
-            <div className="mobile-status-container">
-              <div className="mobile-status-box">
-                <span className="status-dot"></span>
-                {isShopOpen
-                  ? 'Estamos abiertos (De 5:00pm a 11:00 Pm)'
-                  : 'Cerrados (Abrimos a las 5:00pm)'}
-              </div>
-            </div>
-          )}
+  <div className="mobile-status-container">
+    <div className={`mobile-status-box ${!isShopOpen ? 'status-closed' : ''}`}>
+      <span className={`status-dot ${!isShopOpen ? 'dot-closed' : ''}`}></span>
+      {isShopOpen
+        ? 'abiertos (De 5:00pm a 11:00 Pm)'
+        : 'Cerrados (Abrimos a las 5:00pm)'}
+    </div>
+  </div>
+)}
 
           {/* ===================================================
               MENÚ COMPLETO

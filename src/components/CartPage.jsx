@@ -14,17 +14,65 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   // ======================================================
-  // HORARIO DEL RESTAURANTE
-  // Abierto todos los días de 5:00 PM a 11:00 PM
+  // HORARIO Y TEXTO DINÁMICO
+  // MISMO HORARIO QUE LA LANDING PAGE
   // ======================================================
 
   const getRestaurantStatus = () => {
     const now = new Date();
+    const currentDay = now.getDay(); // 0 = Domingo, 1 a 6 = Lunes a Sábado
     const currentHour = now.getHours();
-    return currentHour >= 17 && currentHour < 23;
+    const currentMinutes = now.getMinutes();
+
+    // Convertimos la hora actual a formato decimal
+    // (ej: 10:30 = 10.5, 19:30 = 19.5)
+    const currentTime = currentHour + (currentMinutes / 60);
+
+    let isShopOpen = false;
+
+    if (currentDay >= 1 && currentDay <= 6) {
+      // Lunes a Sábado: De 10:30am a 11:30pm
+      isShopOpen = currentTime >= 10.5 && currentTime < 23.5;
+    } else if (currentDay === 0) {
+      // Domingo: De 7:30pm a 11:30pm
+      isShopOpen = currentTime >= 19.5 && currentTime < 23.5;
+    }
+
+    return isShopOpen;
+  };
+
+  const getRestaurantStatusText = () => {
+    const now = new Date();
+    const currentDay = now.getDay();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const currentTime = currentHour + (currentMinutes / 60);
+
+    if (currentDay >= 1 && currentDay <= 6) {
+      if (currentTime >= 10.5 && currentTime < 23.5) {
+        return ' Abiertos (Cerramos a las 11:30pm)';
+      }
+
+      if (currentTime < 10.5) {
+        return ' Cerrados (Abrimos a las 10:30am)';
+      }
+
+      if (currentDay === 6) {
+        return ' Cerrados (Abrimos mañana a las 7:30pm)';
+      }
+
+      return ' Cerrados (Abrimos mañana a las 10:30am)';
+    }
+
+    if (currentTime < 19.5) {
+      return ' Cerrados (Abrimos a las 7:30pm)';
+    }
+
+    return ' Cerrados (Abrimos mañana a las 10:30am)';
   };
 
   const isRestaurantOpen = getRestaurantStatus();
+  const restaurantStatusText = getRestaurantStatusText();
 
   // ======================================================
   // AUMENTAR O DISMINUIR CANTIDAD
@@ -110,7 +158,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
       }, 1400);
     } else {
       alert(
-        '❌ Estamos cerrados.\n\nNuestro horario de atención es de 5:00 PM a 11:00 PM.'
+        `❌ Estamos cerrados.\n\n${restaurantStatusText.trim()}`
       );
     }
   };
@@ -552,7 +600,7 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
         <header className="main-header">
           <div className="header-status desktop-status">
             <div className={`status-box ${isRestaurantOpen ? 'status-open' : 'status-closed'}`}>
-              {isRestaurantOpen ? ' Abiertos (5:00 PM - 11:00pm)' : ' Cerrados (Abrimos a las 5:00pm)'}
+              {restaurantStatusText}
             </div>
           </div>
 
@@ -959,14 +1007,14 @@ const CartPage = ({ cart, setCart, userData, setUserData }) => {
           <div className="footer-content">
             <div className="footer-col">
               <h4>Contacto</h4>
-              <p>Tlf: 0200202003</p>
-              <p>Correo: correo@gmail.com</p>
+              <p>Whatssap: +54 911 2405 3953</p>
+              <p>Instagram: @Rollsticiosushi</p>
             </div>
 
             <div className="footer-col">
               <h4>Dirección</h4>
               <p>
-                Gorriti 3440, C1172 ACB,
+                Gorriti 3440, CABA
                 <br />
                 Ciudad Autónoma de Buenos Aires, Argentina.
               </p>

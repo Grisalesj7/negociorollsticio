@@ -104,7 +104,8 @@ const LandingPage = ({ cart, setCart }) => {
 
   const baseItems = [
     // ---------------- ENTRADAS ----------------
-    { id: 1, categoria: 'Entradas', name: 'Nigiris de salmón rosado', price: 5000, image: '/img/Niguiris.png', ingredientes: '4 unidades de niguiris de arroz con topping de salmón rosado fresco.' },
+    { id: 1, categoria: 'Entradas', name: 'Niguiris de salmón rosado', price: 5000, image: '/img/Niguiris.png', ingredientes: '4 unidades de niguiris de arroz con topping de salmón rosado fresco.' },
+    { id: 69, categoria: 'Entradas', name: 'Niguiris de salmón ahumado', price: 5000, image: '/img/Niguiris.png', ingredientes: '4 unidades de niguiris de arroz con topping de salmón rosado fresco.' },
     { id: 2, categoria: 'Entradas', name: 'Sashimis de salmón rosado', price: 9000, image: '/img/Sashimis.png', ingredientes: '4 unidades de rodajas únicas de salmón rosado.' },
     { id: 3, categoria: 'Entradas', name: 'Geishas de salmón rosado', price: 7000, image: '/img/Geishas.png', ingredientes: '4 unidades rellenas de queso crema y palta.' },
 
@@ -275,11 +276,50 @@ const LandingPage = ({ cart, setCart }) => {
   };
 
   /* =========================================================
-     HORARIO
+     HORARIO Y TEXTO DINÁMICO
      ========================================================= */
 
-  const currentHour = new Date().getHours();
-  const isShopOpen = currentHour >= 17 && currentHour < 23;
+  const now = new Date();
+  const currentDay = now.getDay(); // 0 = Domingo, 1 a 6 = Lunes a Sábado
+  const currentHour = now.getHours();
+  const currentMinutes = now.getMinutes();
+
+  // Convertimos la hora actual a formato decimal (ej: 10:30 = 10.5, 19:30 = 19.5)
+  const currentTime = currentHour + (currentMinutes / 60);
+
+  let isShopOpen = false;
+  let statusText = '';
+
+  if (currentDay >= 1 && currentDay <= 6) {
+    // Lunes a Sábado: De 10:30 (10.5) a 23:30 (23.5)
+    isShopOpen = currentTime >= 10.5 && currentTime < 23.5;
+  } else if (currentDay === 0) {
+    // Domingo: De 19:30 (19.5) a 23:30 (23.5)
+    isShopOpen = currentTime >= 19.5 && currentTime < 23.5;
+  }
+
+  // Generar el texto exacto según la situación
+  if (isShopOpen) {
+    statusText = 'Abiertos (Cerramos a las 11:30pm)';
+  } else {
+    if (currentDay >= 1 && currentDay <= 6) { // Si es de Lunes a Sábado
+      if (currentTime < 10.5) {
+        statusText = 'Cerrados (Abrimos a las 10:30am)';
+      } else { // Ya cerró hoy (pasadas las 11:30pm)
+        if (currentDay === 6) { // Si es sábado en la noche
+          statusText = 'Cerrados (Abrimos mañana a las 7:30pm)';
+        } else {
+          statusText = 'Cerrados (Abrimos mañana a las 10:30am)';
+        }
+      }
+    } else if (currentDay === 0) { // Si es Domingo
+      if (currentTime < 19.5) {
+        statusText = 'Cerrados (Abrimos a las 7:30pm)';
+      } else { // Ya cerró el domingo en la noche
+        statusText = 'Cerrados (Abrimos mañana a las 10:30am)';
+      }
+    }
+  }
 
   /* =========================================================
      FUNCIONES AUXILIARES PARA EL RENDER
@@ -1938,9 +1978,7 @@ const LandingPage = ({ cart, setCart }) => {
 
             <div className="header-status desktop-status">
               <div className="status-box">
-                {isShopOpen
-                  ? 'Abiertos (De 5:00pm a 11:00pm)'
-                  : 'Cerrados (Abrimos a las 5:00pm)'}
+                {statusText}
               </div>
             </div>
             
@@ -2101,9 +2139,7 @@ const LandingPage = ({ cart, setCart }) => {
   <div className="mobile-status-container">
     <div className={`mobile-status-box ${!isShopOpen ? 'status-closed' : ''}`}>
       <span className={`status-dot ${!isShopOpen ? 'dot-closed' : ''}`}></span>
-      {isShopOpen
-        ? 'abiertos (De 5:00pm a 11:00 Pm)'
-        : 'Cerrados (Abrimos a las 5:00pm)'}
+      {statusText}
     </div>
   </div>
 )}
@@ -2403,13 +2439,11 @@ const LandingPage = ({ cart, setCart }) => {
 
               <div className="review-card">
                 <p>
-                  Pedí por primera vez hoy y la verdad es que está muy rico y fresco. 
-                  Me olvidé de sacar foto, pero las piezas tienen un buen tamaño y vienen con una buena cantidad de salmón. 
-                  Recomiendo
+                  Pedí por primera vez hoy y la verdad es que está muy rico y fresco. Las piezas tienen un buen tamaño y vienen con una muy buena cantidad de salmón. Me olvidé de sacar foto, pero sin dudas lo recomiendo. ¡Todo muy rico!
                 </p>
 
                 <p style={{ fontWeight: 'normal' }}>
-                  Vitória Monteiro
+                  Reseña 1
                   <span style={{ float: 'right' }}>
                     5.0 <span className="review-star">★</span>
                   </span>
@@ -2418,12 +2452,11 @@ const LandingPage = ({ cart, setCart }) => {
 
               <div className="review-card">
                 <p>
-                  Siempre pido a domicilio, es el sushi más rico y más económico de Buenos Aires. 
-                  Siempre todo impecable!
+                  Siempre pido a domicilio y la verdad es que es de los sushis más ricos y económicos de Buenos Aires. Los pedidos llegan siempre impecables, con buena calidad y muy bien preparados. Sin dudas, un lugar al que siempre dan ganas de volver.
                 </p>
 
                 <p style={{ fontWeight: 'normal' }}>
-                  Fabiana Mata
+                  Reseña 2
                   <span style={{ float: 'right' }}>
                     5.0 <span className="review-star">★</span>
                   </span>
@@ -2432,13 +2465,11 @@ const LandingPage = ({ cart, setCart }) => {
 
               <div className="review-card">
                 <p>
-                  Es EXCELENTE. Porque combina buena calidad, buen precio y entrega rápida y prolija.
-                  Lo vengo pidiendo todos los domingos con mis compañeros de guardia hace ya tres meses y han cambiado de nombre pero nunca de calidad. Yo pido combos premium selection y full salmon y la verdad es que le ponen muy buena cantidad de salmón.
-                  Consumo y realmente recomiendo
+                  Es EXCELENTE porque combina buena calidad, buen precio y una entrega rápida y prolija. Lo pido todos los domingos con mis compañeros de guardia desde hace tres meses. Probamos los combos Premium Selection y Full Salmón, y siempre tienen muy buena cantidad de salmón. ¡Realmente lo recomiendo!
                 </p>
 
                 <p style={{ fontWeight: 'normal' }}>
-                  Juli Perin
+                  Reseña 3
                   <span style={{ float: 'right' }}>
                     5.0 <span className="review-star">★</span>
                   </span>
@@ -2478,7 +2509,7 @@ const LandingPage = ({ cart, setCart }) => {
 
             <div className="map-container">
               <iframe
-                src="https://www.google.com/maps?q=Gorriti+3440,+C1172+ACB,+Buenos+Aires,+Argentina&output=embed"
+                src="https://www.google.com/maps?q=Gorriti+3440,+CABA,+Buenos+Aires&output=embed"
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
@@ -2507,7 +2538,7 @@ const LandingPage = ({ cart, setCart }) => {
 
               <div className="location-info">
                 <strong>
-                  Gorriti 3440, C1172 ACB,
+                  Gorriti 3440, CABA
                 </strong>
                 <span>
                   Cdad. Autónoma de Buenos Aires, Argentina
@@ -2528,14 +2559,14 @@ const LandingPage = ({ cart, setCart }) => {
 
               <div className="footer-col">
                 <h4>Contacto</h4>
-                <p>Tlf: 0200202003</p>
-                <p>Correo: correo@gmail.com</p>
+                <p>Whatssap: +54 911 2405 3953</p>
+                <p>Instagram: @Rollsticiosushi</p>
               </div>
 
               <div className="footer-col">
                 <h4>Dirección</h4>
                 <p>
-                  Gorriti 3440, C1172 ACB,
+                  Buenos Aires. Gorriti 3440, CABA,
                   <br />
                   Ciudad Autónoma de Buenos Aires,
                   Argentina.

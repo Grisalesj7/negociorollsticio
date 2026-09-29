@@ -71,7 +71,7 @@ const LandingPage = ({ cart, setCart }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const reviewLink = '#';
+  const reviewLink = 'https://share.google/ZwaIf1r35lR7j8Gbl';
 
   /* =========================================================
      PAGINACIÓN Y FILTROS
@@ -1121,11 +1121,11 @@ const LandingPage = ({ cart, setCart }) => {
   .review-card {
     grid-column: span 4;
     background: #193c46;
-    padding: 10px 9px 9px;
+    padding: 12px 12px 10px; /* Un pequeño ajuste opcional de padding */
     border-radius: 5px;
     text-align: left;
     min-width: 0;
-    min-height: 180px;
+    min-height: auto;
     box-sizing: border-box;
     border: 1px solid #2b5964;
     display: flex;
@@ -1133,18 +1133,18 @@ const LandingPage = ({ cart, setCart }) => {
     justify-content: space-between;
   }
 
-  .review-card p:first-child {
+ .review-card p:first-child {
     margin: 0;
-    font-size: 0.72rem;
-    line-height: 1.16;
+    font-size: 0.88rem; /* <--- Aumentamos de 0.72rem a 0.88rem para que el texto sea más grande */
+    line-height: 1.4;   /* <--- Mejoramos la separación entre líneas para que sea más legible */
     color: white;
   }
 
   .review-card p:last-child {
-    margin: 10px 0 0 !important;
-    padding-top: 7px;
+    margin: 15px 0 0 !important; /* <--- Un poco más de margen superior para separar del texto */
+    padding-top: 10px;
     border-top: 1px solid #2b5964;
-    font-size: 0.72rem;
+    font-size: 0.82rem;         /* <--- Aumentamos ligeramente el nombre y las estrellas */
     line-height: 1;
     color: white;
   }
@@ -2443,8 +2443,8 @@ const LandingPage = ({ cart, setCart }) => {
                 </p>
 
                 <p style={{ fontWeight: 'normal' }}>
-                  Reseña 1
-                  <span style={{ float: 'right' }}>
+                  Vitória Monteiro
+                  <span style={{ float: 'right'}}>
                     5.0 <span className="review-star">★</span>
                   </span>
                 </p>
@@ -2456,7 +2456,7 @@ const LandingPage = ({ cart, setCart }) => {
                 </p>
 
                 <p style={{ fontWeight: 'normal' }}>
-                  Reseña 2
+                  Fabiana Mata
                   <span style={{ float: 'right' }}>
                     5.0 <span className="review-star">★</span>
                   </span>
@@ -2469,7 +2469,7 @@ const LandingPage = ({ cart, setCart }) => {
                 </p>
 
                 <p style={{ fontWeight: 'normal' }}>
-                  Reseña 3
+                  Juli Perin
                   <span style={{ float: 'right' }}>
                     5.0 <span className="review-star">★</span>
                   </span>
@@ -2483,11 +2483,6 @@ const LandingPage = ({ cart, setCart }) => {
               href={reviewLink}
               target="_blank"
               rel="noreferrer"
-              onClick={(e) => {
-                if (reviewLink === '#') {
-                  e.preventDefault();
-                }
-              }}
             >
               Dejar mi reseña
             </a>

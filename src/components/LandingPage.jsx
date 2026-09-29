@@ -158,7 +158,7 @@ const LandingPage = ({ cart, setCart }) => {
     { id: 38, categoria: 'Salads & Pokes', name: 'Paté de Salmón Jet Poke', price: 9000, image: '/img/Paté.jpeg', ingredientes: 'Paté de salmón cocido con queso crema, maíz crocante, palta, pepinos marinados y bañado en semillas de sésamo, con base de arroz.' },
 
     // ---------------- NUESTROS ROLLS ----------------
-    { id: 39, categoria: 'Nuestros Rolls', name: 'Queen Roll', price: 12000, image: '/img/faltante', ingredientes: '10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado, bañado en crocante de batata, sésamo tostado y salsa delimiel.' },
+    { id: 39, categoria: 'Nuestros Rolls', name: 'Queen Roll', price: 12000, image: '/img/Queen.png', ingredientes: '10 piezas rellenas de langostinos rebozados con queso crema, palta y topping de salmón ahumado, bañado en crocante de batata, sésamo tostado y salsa delimiel.' },
     { id: 40, categoria: 'Nuestros Rolls', name: 'Buenos Aires Roll', price: 10000, image: '/img/Buenosaires.JPG', ingredientes: '10 piezas rellenas de langostinos rebozados, queso crema, palta y topping de salmón con sésamo.' },
     { id: 41, categoria: 'Nuestros Rolls', name: 'Miami Roll', price: 10000, image: '/img/Miami.JPG', ingredientes: '10 piezas rellenas de salmón, queso crema y topping de palta con sésamo.', glutenfree: true },
     { id: 42, categoria: 'Nuestros Rolls', name: 'Hanko Roll', price: 11000, image: '/img/Hanko.jpeg', ingredientes: '10 piezas rellenas de salmón rosado, queso crema, topping de mango y tiras de pepino marinadas en aceite de sésamo, bañado en sésamo tostado.', glutenfree: true },
